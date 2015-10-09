@@ -22,7 +22,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
 
-        // Storing the returned string in variable found
+        // Storing the returned User class in variable found
         User found = friendsList.findUser(userone);
         // Check if found is equal to what findUser gets
         assertTrue(found.equalTo(userone));
@@ -81,13 +81,14 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User user = new User();
 
         user.addUser("camclean");
-
         user.addUserName("Carson Mclean");
 
         friendsList.addFriend(user);
 
+        // Storing the returned User class in variable found
         User found = friendsList.findUser(user);
 
+        // Making sure that User is populated
         assertTrue(found.hasUserName("Carson Mclean"));
     }
 

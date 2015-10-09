@@ -74,7 +74,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Trade trade = new Trade(userOne, userTwo);
         trade.addOwnerItem(itemOne);
         trade.addBorrowerItem(itemTwo);
-        trade.send()
+        trade.send();
         tradeList.add(trade);
 
         assertFalse(trade.isAccepted);

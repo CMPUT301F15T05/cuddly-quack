@@ -24,19 +24,19 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
 
     public void testEditProfile(){
         User user = new User();
-        user.setUserName("gbullock");
-        user.setName("Garry");
-        user.setEmail("gbull@whatever.com");
-        user.setAddress("123 123st");
+        user.addUser("gbullock");
+        user.addUserName("Garry");
+        user.addUserEmail("gbull@whatever.com");
+        user.addUserAddress("123 123st");
 
         //check all user info was set properly
         assertTrue(user.getName().equals("Garry"));
         assertTrue(user.getEmail().equals("gbull@whatever.com"));
         assertTrue(user.getAddress().equals("123 123st"));
 
-        user.setName("Jake");
-        user.setEmail("Jake@whatever.com");
-        user.setAddress("111 101st");
+        user.AddUser("Jake");
+        user.addUserEmail("Jake@whatever.com");
+        user.addUserAddress("111 101st");
 
         //check overwriting previous works properly
         assertTrue(user.getName().equals("Jake"));
