@@ -11,9 +11,12 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
     }
 
     public void testFindUser() {
-        FriendsList friendsList = new FriendsList();
-        friendsList.addFriend("camclean");
-        friendsList.addFriend("ccdunn");
+        User userone = new Users();
+        User usertwo = new Users();
+        userone.addUser("camclean");
+        usertwo.addUser("ccdunn");
+
+
         // Storing the returned string in variable found
         String found = friendsList.findUser("camclean");
         // Check if found is equal to what findUser gets
@@ -24,10 +27,16 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         FriendsList friendsList = new FriendsList();
         friendsList.addFriend("camclean");
         friendsList.addFriend("ccdunn");
-
+        // Making sure that friendslist has camclean
+        assertTrue(friendsList.hasFriend("camclean"));
     }
 
     public void testRemoveFriend() {
+        FriendsList friendsList = new FriendsList();
+        friendsList.addFriend("camclean");
+        friendsList.addFriend("ccdunn");
+        // Making sure that friendslist has camclean
+        assertFalse(friendsList.hasFriend("camclean"));
 
     }
 
