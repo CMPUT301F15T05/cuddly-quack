@@ -49,7 +49,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(tradeList.getSize() = 1);
         assertTrue(tradeList.get(0) = trade);
         assertTrue(trade.getOwnerItem() = itemOne);
-        assertTrue(trade.getBorrowerItem() = itemTwo)m;
+        assertTrue(trade.getBorrowerItem() = itemTwo);
     }
 
     // Use Case 16: Notify
