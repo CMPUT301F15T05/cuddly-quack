@@ -35,7 +35,20 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testViewItem(){
+        Item item = new Item();
+        item.setPhoto(picture);
+        item.setName("Cadillac");
+        item.setCategory("Sedan");
+        item.setQuality("Good");
+        item.setQuantity(1);
+        item.setComments("1995 Cadillac");
 
+        assertTrue(item.getPhoto().equals(photo));
+        assertTrue(item.getName().equals("Cadillac"));
+        assertTrue(item.getCategory().equals("Sedan"));
+        assertTrue(item.getQuality().equals("Good"));
+        assertTrue(item.getQuantity().equals(1));
+        assertTrue(item.getComments().equals("1995 Cadillac"));
     }
 
     public void testSetPublic(){
