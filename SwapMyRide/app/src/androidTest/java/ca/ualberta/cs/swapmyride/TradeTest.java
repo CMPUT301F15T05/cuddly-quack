@@ -8,6 +8,7 @@ import android.test.ActivityInstrumentationTestCase2;
 public class TradeTest extends ActivityInstrumentationTestCase2 {
     public TradeTest(){super(MainMenu.class);}
 
+    // Use Case 15: Trade with Friend
     //testing if create trade works
     public void testCreateTrade(){
         //create users and their inventories
@@ -51,6 +52,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(trade.getBorrowerItem() = itemTwo)m;
     }
 
+    // Use Case 16: Notify
     //Test if trade notifications work
     public void testNotifyTrade(){
         //create users and inventories
@@ -93,6 +95,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(trade.borrowerNotified);
     }
 
+    // Use Case 17: Respond to Trade
     //test if accepting a trade works
     public void testAcceptTrade(){
         //create users, inventories, and items
@@ -136,6 +139,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(trade.isAccepted);
     }
 
+    // Use Case 17: Respond to Trade
     public void testDeclineTrade(){
         //create users, inventories, and items
         //add items to inventory
@@ -178,6 +182,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(trade.isDeclined);
     }
 
+    // Use Case 18: Counter a Trade
     //test if a counter trade works
     public void testCounterTrade(){
         //create users, items, inventories, and add items to inventories
@@ -228,6 +233,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(counterTrade.getBorrowerItem = itemTwo);
     }
 
+    // Use Case 19: Edit Trade
     //testing edit functionality
     public void testEditTrade(){
         //create users, items, and the inventories
@@ -293,6 +299,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+    // Use Case 20: Delete Trade
     public void testDeleteTrade(){
         //create users, items, and inventories
         //add items to inventory
@@ -332,10 +339,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(tradeList.size() = 0);
     }
 
+    // Use Case 21: Email Parties
     public void testSendEmail(){
         //no possible things to do there at the moment
     }
 
+    // Use Case 22: See Trades
     public void testBrowseTrades() {\
         //create users, items, and inventories, add items to inventory
         User userOne = new User();

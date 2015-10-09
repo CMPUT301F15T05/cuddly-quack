@@ -10,6 +10,7 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
         super(MainMenu.class);
     }
 
+    // Use Case 31: Download Image Preference
     public void testImagePreferance(){
         User user = new User();
         user.setDownloadImages(false);
@@ -22,6 +23,7 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
         assertTrue(downloaded);
     }
 
+    // Use Case 32: Edit Profile
     public void testEditProfile(){
         User user = new User();
         user.addUser("gbullock");
