@@ -109,6 +109,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(trade.isDeclined);
 
         
+
     }
 
     public void testEditTrade(){
