@@ -10,6 +10,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         super(MainMenu.class);
     }
 
+    // Use Case 8: Find User
     public void testFindUser() {
         FriendsList friendsList = new FriendsList();
 
@@ -28,6 +29,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         assertTrue(found.equalTo(userone));
     }
 
+    // Use Case 9: Add Friend
     public void testAddFriend() {
         FriendsList friendsList = new FriendsList();
 
@@ -44,6 +46,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         assertTrue(friendsList.hasUser(userone));
     }
 
+    // Use Case 10: Remove Friend
     public void testRemoveFriend() {
         FriendsList friendsList = new FriendsList();
 
@@ -62,6 +65,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         assertFalse(friendsList.hasUser(userone));
     }
 
+    // Use Case 11: User Profile
     public void testUserProfile() {
         User user = new User();
         user.addUser("camclean");
@@ -75,6 +79,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         asserTrue(user.hasUserAddress("300 Shirley Street"));
     }
 
+    // Use Case 12: View Profiles
     public void testViewProfiles() {
         FriendsList friendsList = new FriendsList();
 
