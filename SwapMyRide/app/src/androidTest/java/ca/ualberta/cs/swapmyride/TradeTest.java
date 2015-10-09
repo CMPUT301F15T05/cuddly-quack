@@ -21,7 +21,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemTwo = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
@@ -49,7 +63,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemTwo = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
 
         //create and send the trade
         TradeList tradeList = new TradeList();
@@ -78,7 +106,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemTwo = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -106,7 +148,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemTwo = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -134,7 +190,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemTwo = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -173,7 +243,38 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemFour = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
+
+        userOneInventory.add(itemThree);
+        itemThree.setPhoto(picture);
+        itemThree.setName("Chrysler");
+        itemThree.setCategory("Sedan");
+        itemThree.setQuality("Good");
+        itemThree.setQuantity(1);
+        itemThree.setComments("2001 Cadillac");
+        itemThree.setVisibility("Public");
+        userTwoInventory.add(itemFour);
+        itemFour.setPhoto(picture);
+        itemFour.setName("Jeep");
+        itemFour.setCategory("SUV");
+        itemFour.setQuality("Good");
+        itemFour.setQuantity(1);
+        itemFour.setComments("2014 Jeep");
+        itemFour.setVisibility("Public");
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -204,7 +305,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemTwo = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
 
         //create trade and then delete it
         TradeList tradeList = new TradeList();
@@ -235,8 +350,29 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Item itemThree = new Item();
 
         userOneInventory.add(itemOne);
+        itemOne.setPhoto(picture);
+        itemOne.setName("Cadillac");
+        itemOne.setCategory("Sedan");
+        itemOne.setQuality("Good");
+        itemOne.setQuantity(1);
+        itemOne.setComments("1995 Cadillac");
+        itemOne.setVisibility("Public");
         userTwoInventory.add(itemTwo);
-        userThreeInventory.add(itemThree);
+        itemTwo.setPhoto(picture);
+        itemTwo.setName("Jeep");
+        itemTwo.setCategory("SUV");
+        itemTwo.setQuality("Good");
+        itemTwo.setQuantity(1);
+        itemTwo.setComments("1994 Jeep");
+        itemTwo.setVisibility("Public");
+        userOneInventory.add(itemThree);
+        itemThree.setPhoto(picture);
+        itemThree.setName("Chrysler");
+        itemThree.setCategory("Sedan");
+        itemThree.setQuality("Good");
+        itemThree.setQuantity(1);
+        itemThree.setComments("2001 Cadillac");
+        itemThree.setVisibility("Public");
 
         //create some trades
         TradeList tradeList = new TradeList();
