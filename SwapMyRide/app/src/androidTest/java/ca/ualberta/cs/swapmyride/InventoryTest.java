@@ -87,5 +87,20 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
         assertTrue(inventoryList.getList().contains(item));
     }
 
+    public void testAddPhotoToItem(){
+        Item item = new Item();
+        Item newItem = new Item();
+        item.setPhoto(picture);
+        assertTrue(item.getPhoto().equals(photo));
+
+        Boolean thrown = false;
+        try {
+            item.setPhoto(tooLargePicture);
+        } catch (Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
 
 }
