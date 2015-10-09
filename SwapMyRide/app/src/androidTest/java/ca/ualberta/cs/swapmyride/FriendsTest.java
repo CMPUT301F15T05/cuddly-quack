@@ -11,41 +11,84 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
     }
 
     public void testFindUser() {
-        User userone = new Users();
-        User usertwo = new Users();
+        FriendsList friendsList = new FriendsList();
+
+        User userone = new User();
+        User usertwo = new User();
+
         userone.addUser("camclean");
         usertwo.addUser("ccdunn");
 
+        friendsList.addFriend(userone);
+        friendsList.addFriend(usertwo);
 
         // Storing the returned string in variable found
-        String found = friendsList.findUser("camclean");
+        User found = friendsList.findUser(userone);
         // Check if found is equal to what findUser gets
-        assertEquals(found,"camclean");
+        assertTrue(found.equalTo(userone));
     }
 
     public void testAddFriend() {
         FriendsList friendsList = new FriendsList();
-        friendsList.addFriend("camclean");
-        friendsList.addFriend("ccdunn");
+
+        User userone = new User();
+        User usertwo = new User();
+
+        userone.addUser("camclean");
+        usertwo.addUser("ccdunn");
+
+        friendsList.addFriend(userone);
+        friendsList.addFriend(usertwo);
+
         // Making sure that friendslist has camclean
-        assertTrue(friendsList.hasFriend("camclean"));
+        assertTrue(friendsList.hasUser(userone));
     }
 
     public void testRemoveFriend() {
         FriendsList friendsList = new FriendsList();
-        friendsList.addFriend("camclean");
-        friendsList.addFriend("ccdunn");
-        // Making sure that friendslist has camclean
-        assertFalse(friendsList.hasFriend("camclean"));
 
+        User userone = new User();
+        User usertwo = new User();
+
+        userone.addUser("camclean");
+        usertwo.addUser("ccdunn");
+
+        friendsList.addFriend(userone);
+        friendsList.addFriend(usertwo);
+
+        friendsList.removeFriend(userone);
+
+        // Making sure that friendslist has camclean
+        assertFalse(friendsList.hasUser(userone));
     }
 
     public void testUserProfile() {
+        User user = new User();
+        user.addUser("camclean");
+        user.addUserName("Carson Mclean");
+        user.addUserEmail("camclean@ualberta.ca");
+        user.addUserAddress("300 Shirley Street");
 
+        // Making sure that user has these attributes
+        asserTrue(user.hasUserName("Carson Mclean"));
+        asserTrue(user.hasUserEmail("camclean@ualberta.ca"));
+        asserTrue(user.hasUserAddress("300 Shirley Street"));
     }
 
     public void testViewProfiles() {
+        FriendsList friendsList = new FriendsList();
 
+        User user = new User();
+
+        user.addUser("camclean");
+
+        user.addUserName("Carson Mclean");
+
+        friendsList.addFriend(user);
+
+        User found = friendsList.findUser(user);
+
+        assertTrue(found.hasUserName("Carson Mclean"));
     }
 
 
