@@ -108,6 +108,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.decline();
         assertTrue(trade.isDeclined);
 
+        Trade counterTrade = new Trade(userOne, userTwo);
         
 
     }
@@ -124,7 +125,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testBrowseThemes(){
+    public void testBrowseTrades(){
 
     }
 
