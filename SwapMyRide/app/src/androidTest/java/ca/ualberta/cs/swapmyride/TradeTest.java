@@ -108,16 +108,44 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.decline();
         assertTrue(trade.isDeclined);
 
-        Trade counterTrade = new Trade(userOne, userTwo);
-        
+        Trade counterTrade = trade.makeCounterTrade();
 
+        assertTrue(tradeList.size() = 2);
+        assertTrue(counterTrade.getOwnerItem = itemOne);
+        assertTrue(counterTrade.getBorrowerItem = itemTwo);
     }
 
     public void testEditTrade(){
 
+        User userOne = new User();
+        User userTwo = new User();
+        InventoryList userOneInventory = new InventoryList();
+        InventoryList userTwoInventory = new InventoryList();
+
+        Item itemOne = new Item();
+        Item itemTwo = new Item();
+        Item itemThree = new Item();
+        Item itemFour = new Item();
+
+        userOneInventory.add(itemOne);
+        userTwoInventory.add(itemTwo);
+
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade(userOne, userTwo);
+        trade.addOwnerItem(itemOne);
+        trade.addBorrowerItem(itemTwo);
+        trade.changeOwnerItem(itemOne, itemThree);
+        trade.changeOwnerItem(itemTwo, itemFour);
+
+        tradeList.add(trade);
+
+        assertTrue(trade.getOwnerItem = itemThree);
+        assertTrue(trade.getBorrowerItem = itemFour);
+        
     }
 
     public void testDeleteTrade(){
+
 
     }
 
