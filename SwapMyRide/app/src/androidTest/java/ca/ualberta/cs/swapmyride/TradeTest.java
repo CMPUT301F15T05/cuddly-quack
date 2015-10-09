@@ -9,7 +9,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
     public TradeTest(){super(MainMenu.class);}
 
     public void testCreateTrade(){
-
+        
     }
 
     public void testNotifyTrade(){
@@ -28,5 +28,20 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    
+    public void testEditTrade(){
+
+    }
+
+    public void testDeleteTrade(){
+
+    }
+
+    public void testSendEmail(){
+
+    }
+
+    public void testBrowseThemes(){
+
+    }
+
 }
