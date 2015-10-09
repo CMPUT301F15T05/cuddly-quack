@@ -15,13 +15,6 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         item.setPhoto(picture);
         assertTrue(item.getPhoto().equals(photo));
 
-        Boolean thrown = false;
-        try {
-            item.setPhoto(tooLargePicture);
-        } catch (Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
     }
 
     public void testViewPhoto(){
@@ -66,6 +59,18 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         }
         assertFalse(thrown2);
 
+    }
+
+    public void testTooLargePhoto(){
+        Item item = new Item();
+
+        Boolean thrown = false;
+        try {
+            item.setPhoto(tooLargePicture);
+        } catch (Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 }
 
