@@ -44,4 +44,28 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         }
         assertFalse(thrown2);
     }
+
+    public void testDeletePhoto(){
+        Item item = new Item();
+
+        Boolean thrown = false;
+        try {
+            item.deletePhoto();  // no photo, error
+        } catch (Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        item.setPhoto(picture);
+        assertTrue(item.getPhoto().equals(photo));
+        Boolean thrown2 = false;
+        try {
+            item.deletePhoto();  // shouldn't throw an error, photo is added
+        } catch (Exception e){
+            thrown2 = true;
+        }
+        assertFalse(thrown2);
+
+    }
 }
+
