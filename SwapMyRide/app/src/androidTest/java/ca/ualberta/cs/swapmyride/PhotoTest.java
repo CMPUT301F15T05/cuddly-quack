@@ -72,5 +72,20 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         }
         assertTrue(thrown);
     }
+
+    public void testDownloadPhoto(){
+        // I'll be honest, not really sure how to test this one!
+
+        Network.off(); // turn network off here some how
+        Item item = new Item();  // need to be an item stored on remote
+
+        Boolean thrown = false;
+        try {
+            item.downloadPhoto();
+        } catch (Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
 }
 
