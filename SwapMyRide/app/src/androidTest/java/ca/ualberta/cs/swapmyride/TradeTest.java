@@ -336,7 +336,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         //no possible things to do there at the moment
     }
 
-    public void testBrowseTrades() {\
+    public void testBrowseTrades() {
         //create users, items, and inventories, add items to inventory
         User userOne = new User();
         User userTwo = new User();
