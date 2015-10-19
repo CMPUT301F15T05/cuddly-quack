@@ -10,6 +10,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         super(MainMenu.class);
     }
 
+    // Use Case 23: Add Photo
     public void testAddPhotoToItem(){
         Item item = new Item();
         item.setPhoto(picture);
@@ -17,6 +18,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+    // Use Case 24: View Photo
     public void testViewPhoto(){
         Item item = new Item();
 
@@ -38,6 +40,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         assertFalse(thrown2);
     }
 
+    // Use Case 25: Delete Photo
     public void testDeletePhoto(){
         Item item = new Item();
 
@@ -61,6 +64,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+    // Use Case 26: Restrict Image Size
     public void testTooLargePhoto(){
         Item item = new Item();
 
@@ -73,6 +77,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         assertTrue(thrown);
     }
 
+    // Use Case 27: Download Photo
     public void testDownloadPhoto(){
         // I'll be honest, not really sure how to test this one!
 

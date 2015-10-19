@@ -9,6 +9,7 @@ import android.test.ApplicationTestCase;
 public class FriendsInventoryTest extends ApplicationTestCase {
     public FriendsInventoryTest() {super(MainMenu.class); }
 
+    // Use Case 13: Search Friends Inventory
     public void testSearchFriendsInventory() {
         FriendsList friendsList = new FriendsList();
         User user = new User();
@@ -33,6 +34,7 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         assertTrue(user.getInventory().getCategory("Sedan").size() == 1);
     }
 
+    // Use Case 14: Make Items Visible
     public void testMakeItemsVisible() {
         FriendsList friendsList = new FriendsList();
         User user = new User();

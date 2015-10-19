@@ -1,2 +1,2 @@
 # cuddly-quack
-dhaberst camclean ccdunn gbullock aalghamd marini
+dhaberst camclean ccdunn gbullock marini
