@@ -1,6 +1,5 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.app.Application;
 import android.test.ApplicationTestCase;
 
 /**
@@ -10,22 +9,22 @@ import android.test.ApplicationTestCase;
 public class OfflineTest extends ApplicationTestCase {
     public OfflineTest() {super(MainMenu.class); }
 
-    // Use Case 28: Add Item Offline
+    // Use Case 28: Add Vehicle Offline
     public void testAddItemOffline() {
         android.turnOffData();
 
         InventoryList inventoryList = new InventoryList();
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
         //list should be empty
         assertTrue(inventoryList.getList() = null);
-        inventoryList.add(item);
+        inventoryList.add(vehicle);
 
         android.turnOnData();
 
-        //make sure an item was added
+        //make sure an vehicle was added
         assetTrue(inventoryList.size() == 1);
-        //make sure it is the correct item
-        assertTrue(inventoryList.getList().get(0) == item);
+        //make sure it is the correct vehicle
+        assertTrue(inventoryList.getList().get(0) == vehicle);
     }
 
     // Use Case 29: Make Trades Offline
@@ -39,31 +38,31 @@ public class OfflineTest extends ApplicationTestCase {
         InventoryList userTwoInventory = new InventoryList();
 
         //create items and add to inventories
-        Item itemOne = new Item();
-        Item itemTwo = new Item();
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
 
-        userOneInventory.add(itemOne);
-        itemOne.setPhoto(picture);
-        itemOne.setName("Cadillac");
-        itemOne.setCategory("Sedan");
-        itemOne.setQuality("Good");
-        itemOne.setQuantity(1);
-        itemOne.setComments("1995 Cadillac");
-        itemOne.setVisibility("Public");
-        userTwoInventory.add(itemTwo);
-        itemTwo.setPhoto(picture);
-        itemTwo.setName("Jeep");
-        itemTwo.setCategory("SUV");
-        itemTwo.setQuality("Good");
-        itemTwo.setQuantity(1);
-        itemTwo.setComments("1994 Jeep");
-        itemTwo.setVisibility("Public");
+        userOneInventory.add(vehicleOne);
+        vehicleOne.setPhoto(picture);
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory("Sedan");
+        vehicleOne.setQuality("Good");
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setVisibility("Public");
+        userTwoInventory.add(vehicleTwo);
+        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory("SUV");
+        vehicleTwo.setQuality("Good");
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setVisibility("Public");
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
         Trade trade = new Trade(userOne, userTwo);
-        trade.addOwnerItem(itemOne);
-        trade.addBorrowerItem(itemTwo);
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
 
         android.turnOnData();
 
@@ -71,8 +70,8 @@ public class OfflineTest extends ApplicationTestCase {
         tradeList.add(trade);
         assertTrue(tradeList.getSize() = 1);
         assertTrue(tradeList.get(0) = trade);
-        assertTrue(trade.getOwnerItem() = itemOne);
-        assertTrue(trade.getBorrowerItem() = itemTwo)m;
+        assertTrue(trade.getOwnerItem() = vehicleOne);
+        assertTrue(trade.getBorrowerItem() = vehicleTwo)m;
     }
 
     // Use Case 30: Browse Friends Offline

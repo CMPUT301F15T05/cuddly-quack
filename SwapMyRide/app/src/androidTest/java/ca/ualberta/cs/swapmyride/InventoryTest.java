@@ -10,87 +10,87 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
         super(MainMenu.class);
     }
 
-    // Use Case 1: Add Item
+    // Use Case 1: Add Vehicle
     public void testAddItem(){
         InventoryList inventoryList = new InventoryList();
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
         //list should be empty
         assertTrue(inventoryList.getList() = null);
-        inventoryList.add(item);
-        //make sure an item was added
+        inventoryList.add(vehicle);
+        //make sure an vehicle was added
         assetTrue(inventoryList.size() == 1);
-        //make sure it is the correct item
-        assertTrue(inventoryList.getList().get(0) == item);
+        //make sure it is the correct vehicle
+        assertTrue(inventoryList.getList().get(0) == vehicle);
     }
 
     // Use Case 2: Browse Inventory
     public void testBrowseInventory(){
         InventoryList inventoryList = new InventoryList();
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
         //list should be empty
         assertTrue(inventoryList.getList() = null);
-        inventoryList.add(item);
-        //check there is an item in the list
+        inventoryList.add(vehicle);
+        //check there is an vehicle in the list
         assertFalse(inventoryList.getList().size() == 0);
-        //check the item is the item we put into the list
-        assertTrue(inventoryList.getList().get(0) == item);
+        //check the vehicle is the vehicle we put into the list
+        assertTrue(inventoryList.getList().get(0) == vehicle);
     }
 
-    // Use Case 3: View Item
+    // Use Case 3: View Vehicle
     public void testViewItem(){
-        Item item = new Item();
-        item.setPhoto(picture);
-        item.setName("Cadillac");
-        item.setCategory("Sedan");
-        item.setQuality("Good");
-        item.setQuantity(1);
-        item.setComments("1995 Cadillac");
+        Vehicle vehicle = new Vehicle();
+        vehicle.setPhoto(picture);
+        vehicle.setName("Cadillac");
+        vehicle.setCategory("Sedan");
+        vehicle.setQuality("Good");
+        vehicle.setQuantity(1);
+        vehicle.setComments("1995 Cadillac");
 
-        assertTrue(item.getPhoto().equals(photo));
-        assertTrue(item.getName().equals("Cadillac"));
-        assertTrue(item.getCategory().equals("Sedan"));
-        assertTrue(item.getQuality().equals("Good"));
-        assertTrue(item.getQuantity().equals(1));
-        assertTrue(item.getComments().equals("1995 Cadillac"));
+        assertTrue(vehicle.getPhoto().equals(photo));
+        assertTrue(vehicle.getName().equals("Cadillac"));
+        assertTrue(vehicle.getCategory().equals("Sedan"));
+        assertTrue(vehicle.getQuality().equals("Good"));
+        assertTrue(vehicle.getQuantity().equals(1));
+        assertTrue(vehicle.getComments().equals("1995 Cadillac"));
     }
 
     // Use Case 4: Set Public
     public void testSetPublic(){
         InventoryList inventoryList = new InventoryList();
-        Item item = new Item();
-        item.setPublic(false);
-        inventoryList.add(item);
-        //check the item does not appear in the public return
+        Vehicle vehicle = new Vehicle();
+        vehicle.setPublic(false);
+        inventoryList.add(vehicle);
+        //check the vehicle does not appear in the public return
         assertTrue(inventoryList.getPublic().size() == 0);
-        //check the item does appear in the private list
+        //check the vehicle does appear in the private list
         assertTrue(inventoryList.getPrivate().size() == 1);
     }
 
     // Use Case 5: Modify Items
     public void testModifyItems(){
-        Item item = new Item();
-        item.setName("Vehicle");
-        assertTrue(item.name == "Vehicle");
-        item.setName("Car");
-        assertTrue(item.name == "Car");
+        Vehicle vehicle = new Vehicle();
+        vehicle.setName("Vehicle");
+        assertTrue(vehicle.name == "Vehicle");
+        vehicle.setName("Car");
+        assertTrue(vehicle.name == "Car");
     }
 
-    // Use Case 6: Delete Item
+    // Use Case 6: Delete Vehicle
     public void testDeleteItem() {
         InventoryList inventoryList = new InventoryList();
-        Item item = new Item();
-        Item newItem = new Item();
+        Vehicle vehicle = new Vehicle();
+        Vehicle newVehicle = new Vehicle();
         //list should be empty
         assertTrue(inventoryList.getList() = null);
-        inventoryList.add(item);
-        inventoryList.add(newItem);
-        //check there is an item in the list
+        inventoryList.add(vehicle);
+        inventoryList.add(newVehicle);
+        //check there is an vehicle in the list
         assertFalse(inventoryList.getList().size() == 0);
-        inventoryList.delete(newItem);
+        inventoryList.delete(newVehicle);
         //check the size is correct
         assertTrue(inventoryList.getList().size() == 1);
-        //check the item left is the correct item
-        assertTrue(inventoryList.getList().contains(item));
+        //check the vehicle left is the correct vehicle
+        assertTrue(inventoryList.getList().contains(vehicle));
     }
 
     // Use Case 7: Minimum Navigation

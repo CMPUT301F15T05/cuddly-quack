@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <vehicle name="colorPrimary">@color/colorPrimary</vehicle>
+        <vehicle name="colorPrimaryDark">@color/colorPrimaryDark</vehicle>
+        <vehicle name="colorAccent">@color/colorAccent</vehicle>
     </style>
     <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <vehicle name="windowActionBar">false</vehicle>
+        <vehicle name="windowNoTitle">true</vehicle>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

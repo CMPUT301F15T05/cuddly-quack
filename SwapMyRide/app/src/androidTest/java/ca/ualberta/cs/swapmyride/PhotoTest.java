@@ -12,28 +12,28 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
 
     // Use Case 23: Add Photo
     public void testAddPhotoToItem(){
-        Item item = new Item();
-        item.setPhoto(picture);
-        assertTrue(item.getPhoto().equals(photo));
+        Vehicle vehicle = new Vehicle();
+        vehicle.setPhoto(picture);
+        assertTrue(vehicle.getPhoto().equals(photo));
 
     }
 
     // Use Case 24: View Photo
     public void testViewPhoto(){
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
 
         Boolean thrown = false;
         try {
-            item.getPhoto();  // no photo set yet
+            vehicle.getPhoto();  // no photo set yet
         } catch (Exception e){
             thrown = true;
         }
         assertTrue(thrown);
 
-        item.setPhoto(picture);
+        vehicle.setPhoto(picture);
         Boolean thrown2 = false;
         try {
-            item.getPhoto();  // shouldn't throw an error, photo is added
+            vehicle.getPhoto();  // shouldn't throw an error, photo is added
         } catch (Exception e){
             thrown2 = true;
         }
@@ -42,21 +42,21 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
 
     // Use Case 25: Delete Photo
     public void testDeletePhoto(){
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
 
         Boolean thrown = false;
         try {
-            item.deletePhoto();  // no photo, error
+            vehicle.deletePhoto();  // no photo, error
         } catch (Exception e){
             thrown = true;
         }
         assertTrue(thrown);
 
-        item.setPhoto(picture);
-        assertTrue(item.getPhoto().equals(photo));
+        vehicle.setPhoto(picture);
+        assertTrue(vehicle.getPhoto().equals(photo));
         Boolean thrown2 = false;
         try {
-            item.deletePhoto();  // shouldn't throw an error, photo is added
+            vehicle.deletePhoto();  // shouldn't throw an error, photo is added
         } catch (Exception e){
             thrown2 = true;
         }
@@ -66,11 +66,11 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
 
     // Use Case 26: Restrict Image Size
     public void testTooLargePhoto(){
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
 
         Boolean thrown = false;
         try {
-            item.setPhoto(tooLargePicture);
+            vehicle.setPhoto(tooLargePicture);
         } catch (Exception e){
             thrown = true;
         }
@@ -82,11 +82,11 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         // I'll be honest, not really sure how to test this one!
 
         Network.off(); // turn network off here some how
-        Item item = new Item();  // need to be an item stored on remote
+        Vehicle vehicle = new Vehicle();  // need to be an vehicle stored on remote
 
         Boolean thrown = false;
         try {
-            item.downloadPhoto();
+            vehicle.downloadPhoto();
         } catch (Exception e){
             thrown = true;
         }

@@ -1,6 +1,5 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.app.Application;
 import android.test.ApplicationTestCase;
 
 /**
@@ -19,16 +18,16 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         user.addUserEmail("camclean@ualberta.ca");
         user.addUserAddress("300 Shirley Street");
 
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
 
-        item.setPhoto(picture);
-        item.setName("Cadillac");
-        item.setCategory("Sedan");
-        item.setQuality("Good");
-        item.setQuantity(1);
-        item.setComments("1995 Cadillac");
+        vehicle.setPhoto(picture);
+        vehicle.setName("Cadillac");
+        vehicle.setCategory("Sedan");
+        vehicle.setQuality("Good");
+        vehicle.setQuantity(1);
+        vehicle.setComments("1995 Cadillac");
 
-        user.addItem(item);
+        user.addItem(vehicle);
 
         assertTrue(user.getInventory().search("Cadillac"));
         assertTrue(user.getInventory().getCategory("Sedan").size() == 1);
@@ -44,19 +43,19 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         user.addUserEmail("camclean@ualberta.ca");
         user.addUserAddress("300 Shirley Street");
 
-        Item item = new Item();
+        Vehicle vehicle = new Vehicle();
 
-        item.setPhoto(picture);
-        item.setName("Cadillac");
-        item.setCategory("Sedan");
-        item.setQuality("Good");
-        item.setQuantity(1);
-        item.setComments("1995 Cadillac");
-        item.setVisibility("Private");
+        vehicle.setPhoto(picture);
+        vehicle.setName("Cadillac");
+        vehicle.setCategory("Sedan");
+        vehicle.setQuality("Good");
+        vehicle.setQuantity(1);
+        vehicle.setComments("1995 Cadillac");
+        vehicle.setVisibility("Private");
 
         assertTrue(user.getInventory().search("Cadillac".size == 0));
 
-        item.setVisibility("Public");
+        vehicle.setVisibility("Public");
 
         assertTrue(user.getInventory().search("Cadillac".size == 1));
     }
