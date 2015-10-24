@@ -1,8 +1,8 @@
 <resources>>
     <style name="AppTheme.NoActionBar">
-        <vehicle name="windowActionBar">false</vehicle>
-        <vehicle name="windowNoTitle">true</vehicle>
-        <vehicle name="android:windowDrawsSystemBarBackgrounds">true</vehicle>
-        <vehicle name="android:statusBarColor">@android:color/transparent</vehicle>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 </resources>
