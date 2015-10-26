@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -14,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameField;
     EditText passwordField;
     Button signIn;
+    TextView signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,21 @@ public class LoginActivity extends AppCompatActivity {
 
         signIn = (Button) findViewById(R.id.signIn);
 
+        signUp = (TextView) findViewById(R.id.signUp);
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 finish();
             }

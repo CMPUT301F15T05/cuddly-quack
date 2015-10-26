@@ -71,7 +71,7 @@ public class OfflineTest extends ApplicationTestCase {
         assertTrue(tradeList.getSize() = 1);
         assertTrue(tradeList.get(0) = trade);
         assertTrue(trade.getOwnerItem() = vehicleOne);
-        assertTrue(trade.getBorrowerItem() = vehicleTwo)m;
+        assertTrue(trade.getBorrowerItem() = vehicleTwo);
     }
 
     // Use Case 30: Browse Friends Offline
