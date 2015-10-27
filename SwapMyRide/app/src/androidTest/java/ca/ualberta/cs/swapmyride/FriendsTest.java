@@ -74,9 +74,9 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         user.addUserAddress("300 Shirley Street");
 
         // Making sure that user has these attributes
-        asserTrue(user.hasUserName("Carson Mclean"));
-        asserTrue(user.hasUserEmail("camclean@ualberta.ca"));
-        asserTrue(user.hasUserAddress("300 Shirley Street"));
+        assertTrue(user.hasUserName("Carson Mclean"));
+        assertTrue(user.hasUserEmail("camclean@ualberta.ca"));
+        assertTrue(user.hasUserAddress("300 Shirley Street"));
     }
 
     // Use Case 12: View Profiles
