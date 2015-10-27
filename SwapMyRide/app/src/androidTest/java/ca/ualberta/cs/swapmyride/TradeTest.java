@@ -2,6 +2,9 @@ package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+
 /**
  * Created by adrianomarini on 2015-10-08.
  */
@@ -28,7 +31,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -36,7 +39,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
@@ -44,12 +47,16 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
-        assertTrue(tradeList.getList() = null);
+        assertTrue(tradeList.getTrades() == null);
         tradeList.add(trade);
-        assertTrue(tradeList.getSize() = 1);
-        assertTrue(tradeList.get(0) = trade);
-        assertTrue(trade.getOwnerItem() = vehicleOne);
-        assertTrue(trade.getBorrowerItem() = vehicleTwo);
+        assertTrue(tradeList.getSize() == 1);
+        assertTrue(tradeList.get(0) == trade);
+
+        ArrayList<Vehicle> testOne = trade.getOwnerItems();
+        ArrayList<Vehicle> testTwo = trade.getBorrowerItems();
+
+        assertTrue(testOne.get(0) == vehicleOne);
+        assertTrue(testTwo.get(0) == vehicleTwo);
     }
 
     // Use Case 16: Notify
@@ -71,7 +78,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -79,7 +86,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create and send the trade
         TradeList tradeList = new TradeList();
@@ -91,8 +98,8 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.send(); //trade.send() should have the functionality to notify
 
         //check that notification was done
-        assertTrue(trade.ownerNotified);
-        assertTrue(trade.borrowerNotified);
+        assertTrue(trade.getOwnerNotified());
+        assertTrue(trade.getBorrowerNotified());
     }
 
     // Use Case 17: Respond to Trade
@@ -115,7 +122,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -123,7 +130,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -134,9 +141,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         tradeList.add(trade);
 
         //check if accept works
-        assertFalse(trade.isAccepted);
+        assertFalse(trade.getIsAccepted());
         trade.accept();
-        assertTrue(trade.isAccepted);
+        assertTrue(trade.getIsAccepted());
     }
 
     // Use Case 17: Respond to Trade
@@ -158,7 +165,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -166,7 +173,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -177,9 +184,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         tradeList.add(trade);
 
         //check if decline works
-        assertFalse(trade.isDeclined);
+        assertFalse(trade.getIsDeclined());
         trade.decline();
-        assertTrue(trade.isDeclined);
+        assertTrue(trade.getIsDeclined());
     }
 
     // Use Case 18: Counter a Trade
@@ -201,7 +208,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -209,7 +216,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -220,17 +227,21 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         tradeList.add(trade);
 
         //decline the trade
-        assertFalse(trade.isDeclined);
+        assertFalse(trade.getIsDeclined());
         trade.decline();
-        assertTrue(trade.isDeclined);
+        assertTrue(trade.getIsDeclined());
 
         //test counter trade by creating one and ensuring that
         //  items are initialized properly
-        Trade counterTrade = trade.makeCounterTrade();
+        Trade counterTrade = trade.makeCounterTrade(trade);
 
-        assertTrue(tradeList.size() = 2);
-        assertTrue(counterTrade.getOwnerItem = vehicleOne);
-        assertTrue(counterTrade.getBorrowerItem = vehicleTwo);
+        assertTrue(tradeList.getSize() == 2);
+
+        ArrayList<Vehicle> testOne = counterTrade.getOwnerItems();
+        ArrayList<Vehicle> testTwo = counterTrade.getBorrowerItems();
+
+        assertTrue(testOne.get(0) == vehicleOne);
+        assertTrue(testTwo.get(0) == vehicleTwo);
     }
 
     // Use Case 19: Edit Trade
@@ -255,7 +266,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -263,7 +274,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         userOneInventory.add(vehicleThree);
         vehicleThree.setPhoto(picture);
@@ -272,7 +283,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleThree.setQuality("Good");
         vehicleThree.setQuantity(1);
         vehicleThree.setComments("2001 Cadillac");
-        vehicleThree.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleFour);
         vehicleFour.setPhoto(picture);
         vehicleFour.setName("Jeep");
@@ -280,7 +291,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleFour.setQuality("Good");
         vehicleFour.setQuantity(1);
         vehicleFour.setComments("2014 Jeep");
-        vehicleFour.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -289,13 +300,17 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.addBorrowerItem(vehicleTwo);
 
         //swap items
-        trade.changeOwnerItem(vehicleOne, vehicleThree);
-        trade.changeOwnerItem(vehicleTwo, vehicleFour);
+        trade.changeOwnerVehicle(vehicleOne, vehicleThree);
+        trade.changeBorrowerVehicle(vehicleTwo, vehicleFour);
 
         tradeList.add(trade);
         //check if the swap worked.
-        assertTrue(trade.getOwnerItem = vehicleThree);
-        assertTrue(trade.getBorrowerItem = vehicleFour);
+
+        ArrayList<Vehicle> testOne = trade.getOwnerItems();
+        ArrayList<Vehicle> testTwo = trade.getBorrowerItems();
+
+        assertTrue(testOne.get(0) == vehicleThree);
+        assertTrue(testTwo.get(0) == vehicleFour);
 
     }
 
@@ -318,7 +333,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -326,7 +341,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create trade and then delete it
         TradeList tradeList = new TradeList();
@@ -334,9 +349,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         tradeList.add(trade);
-        trade.delete();
+        tradeList.delete(trade);
         //make sure delete was effective
-        assertTrue(tradeList.size() = 0);
+        assertTrue(tradeList.getSize() == 0);
     }
 
     // Use Case 21: Email Parties
@@ -365,7 +380,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setQuality("Good");
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
         vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
@@ -373,7 +388,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setQuality("Good");
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userOneInventory.add(vehicleThree);
         vehicleThree.setPhoto(picture);
         vehicleThree.setName("Chrysler");
@@ -381,7 +396,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleThree.setQuality("Good");
         vehicleThree.setQuantity(1);
         vehicleThree.setComments("2001 Cadillac");
-        vehicleThree.setVisibility("Public");
+        vehicleOne.setPublic(true);
 
         //create some trades
         TradeList tradeList = new TradeList();
@@ -407,13 +422,13 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //test to make sure that the function ensures that only trades
         //  involving a certain person are collected and displayed.
-        TradeList userOneTrades = TradeList.getUserTrades(userOne);
-        TradeList userTwoTrades = TradeList.getUserTrades(userTwo);
+        TradeList userOneTrades = tradeList.getUserTrades(userOne);
+        TradeList userTwoTrades = tradeList.getUserTrades(userTwo);
 
-        assertTrue(userOneTrades.size() = 4);
-        assertTrue(userTwoTrades.size() = 4);
+        assertTrue(userOneTrades.getSize() == 4);
+        assertTrue(userTwoTrades.getSize() == 4);
 
-        assertTrue(userOneTrades.get(0) = trade);
-        assertTrue(userTwoTrades.get(0) = trade2);
+        assertTrue(userOneTrades.get(0) == trade);
+        assertTrue(userTwoTrades.get(0) == trade2);
     }
 }
