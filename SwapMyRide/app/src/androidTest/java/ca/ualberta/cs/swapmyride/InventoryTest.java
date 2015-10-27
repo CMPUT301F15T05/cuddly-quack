@@ -39,17 +39,17 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     // Use Case 3: View Vehicle
     public void testViewItem(){
         Vehicle vehicle = new Vehicle();
-        vehicle.setPhoto(picture);
+        //vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
-        vehicle.setCategory("Sedan");
-        vehicle.setQuality("Good");
+        vehicle.setCategory(VehicleCategory.COUPE);
+        vehicle.setQuality(VehicleQuality.GOOD);
         vehicle.setQuantity(1);
         vehicle.setComments("1995 Cadillac");
 
-        assertTrue(vehicle.getPhoto().equals(photo));
+        //assertTrue(vehicle.getPhoto().equals(photo));
         assertTrue(vehicle.getName().equals("Cadillac"));
-        assertTrue(vehicle.getCategory().equals("Sedan"));
-        assertTrue(vehicle.getQuality().equals("Good"));
+        assertTrue(vehicle.getCategory().equals(VehicleCategory.COUPE));
+        assertTrue(vehicle.getQuality().equals(VehicleQuality.GOOD));
         assertTrue(vehicle.getQuantity().equals(1));
         assertTrue(vehicle.getComments().equals("1995 Cadillac"));
     }
@@ -70,9 +70,9 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     public void testModifyItems(){
         Vehicle vehicle = new Vehicle();
         vehicle.setName("Vehicle");
-        assertTrue(vehicle.name == "Vehicle");
+        assertTrue(vehicle.getName().equals("Vehicle"));
         vehicle.setName("Car");
-        assertTrue(vehicle.name == "Car");
+        assertTrue(vehicle.getName().equals("Car"));
     }
 
     // Use Case 6: Delete Vehicle
@@ -81,7 +81,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicle = new Vehicle();
         Vehicle newVehicle = new Vehicle();
         //list should be empty
-        assertTrue(inventoryList.getList() = null);
+        assertTrue(inventoryList.getList() == null);
         inventoryList.add(vehicle);
         inventoryList.add(newVehicle);
         //check there is an vehicle in the list

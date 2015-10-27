@@ -9,6 +9,7 @@ public class Vehicle {
     private String comments;
     private VehicleCategory category;
     private VehicleQuality quality;
+    private Boolean isPublic;
 
     public Vehicle(){
         //add default constructor for photo
@@ -17,9 +18,12 @@ public class Vehicle {
         comments = "";
         category = VehicleCategory.NONE;
         quality = VehicleQuality.NONE;
+        isPublic = Boolean.TRUE;
     }
 
+
     public String getName() {
+
         return name;
     }
 
@@ -57,5 +61,14 @@ public class Vehicle {
 
     public void setQuality(VehicleQuality quality) {
         this.quality = quality;
+    }
+
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean isPublic) {
+        this.isPublic = isPublic;
     }
 }
