@@ -10,18 +10,18 @@ public class User {
     private String userAddress;
     private InventoryList inventory;
     private FriendsList friends;
-    private TradeList pastTrades;
-    private TradeList pendingTrades;
-    private Setting settings;
+    //private TradeList pastTrades;
+    //private TradeList pendingTrades;
+    //private Setting settings;
 
     //this constructor is used for creating a new user
     public User(){
         userName = "";
         inventory = new InventoryList();
         friends = new FriendsList();
-        pastTrades = new TradeList();
-        pendingTrades = new TradeList();
-        settings = new Setting();
+        //pastTrades = new TradeList();
+        //pendingTrades = new TradeList();
+        //settings = new Setting();
     }
 
     public String getUser() {
@@ -54,5 +54,13 @@ public class User {
 
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
+    }
+
+    public void addItem(Vehicle vehicle){
+        inventory.add(vehicle);
+    }
+
+    public InventoryList getInventory(){
+        return inventory;
     }
 }

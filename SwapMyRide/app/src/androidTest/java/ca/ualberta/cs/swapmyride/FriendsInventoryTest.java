@@ -13,24 +13,27 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         FriendsList friendsList = new FriendsList();
         User user = new User();
 
-        user.addUser("camclean");
-        user.addUserName("Carson Mclean");
-        user.addUserEmail("camclean@ualberta.ca");
-        user.addUserAddress("300 Shirley Street");
+        user.setUser("camclean");
+        user.setUserName("Carson Mclean");
+        user.setUserEmail("camclean@ualberta.ca");
+        user.setUserAddress("300 Shirley Street");
 
         Vehicle vehicle = new Vehicle();
 
         vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
-        vehicle.setCategory("Sedan");
-        vehicle.setQuality("Good");
+        vehicle.setCategory(VehicleCategory.COUPE);
+        vehicle.setQuality(VehicleQuality.GOOD);
         vehicle.setQuantity(1);
         vehicle.setComments("1995 Cadillac");
 
         user.addItem(vehicle);
 
+        //check that a given vehicle exists by name
         assertTrue(user.getInventory().search("Cadillac"));
-        assertTrue(user.getInventory().getCategory("Sedan").size() == 1);
+
+        //get a list of all vehicles of a category
+        assertTrue(user.getInventory().getCategory(VehicleCategory.COUPE).size() == 1);
     }
 
     // Use Case 14: Make Items Visible
@@ -38,10 +41,10 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         FriendsList friendsList = new FriendsList();
         User user = new User();
 
-        user.addUser("camclean");
-        user.addUserName("Carson Mclean");
-        user.addUserEmail("camclean@ualberta.ca");
-        user.addUserAddress("300 Shirley Street");
+        user.setUser("camclean");
+        user.setUserName("Carson Mclean");
+        user.setUserEmail("camclean@ualberta.ca");
+        user.setUserAddress("300 Shirley Street");
 
         Vehicle vehicle = new Vehicle();
 

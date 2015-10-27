@@ -50,5 +50,25 @@ public class InventoryList {
         return publicVehicles;
     }
 
+    public boolean search(String vehicleName){
+        for (Vehicle vehicle: vehicleList) {
+            if(vehicle.getName().equals(vehicleName)) {
+                return true;
+            }
+        }
+        //default to return false
+        return false;
+    }
+    
+    public InventoryList getCategory(VehicleCategory category){
+        InventoryList newInventory = new InventoryList();
+        for (Vehicle vehicle: vehicleList){
+            if(vehicle.getCategory().equals(category)){
+                newInventory.add(vehicle);
+            }
+        }
+        return newInventory;
+    }
+
 
 }
