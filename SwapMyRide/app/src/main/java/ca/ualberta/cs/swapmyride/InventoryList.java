@@ -59,7 +59,7 @@ public class InventoryList {
         //default to return false
         return false;
     }
-    
+
     public InventoryList getCategory(VehicleCategory category){
         InventoryList newInventory = new InventoryList();
         for (Vehicle vehicle: vehicleList){

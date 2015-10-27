@@ -50,16 +50,19 @@ public class FriendsInventoryTest extends ApplicationTestCase {
 
         vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
-        vehicle.setCategory("Sedan");
-        vehicle.setQuality("Good");
+        vehicle.setCategory(VehicleCategory.COUPE);
+        vehicle.setQuality(VehicleQuality.GOOD);
         vehicle.setQuantity(1);
         vehicle.setComments("1995 Cadillac");
-        vehicle.setVisibility("Private");
+        vehicle.setPublic(false);
 
-        assertTrue(user.getInventory().search("Cadillac".size == 0));
+        //add the vehicle
+        user.addItem(vehicle);
 
-        vehicle.setVisibility("Public");
+        assertTrue(user.getInventory().getPublic().size() == 0);
 
-        assertTrue(user.getInventory().search("Cadillac".size == 1));
+        vehicle.setPublic(true);
+
+        assertTrue(user.getInventory().getPublic().size() == 1);
     }
 }
