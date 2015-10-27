@@ -17,8 +17,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User userone = new User();
         User usertwo = new User();
 
-        userone.addUser("camclean");
-        usertwo.addUser("ccdunn");
+        userone.setUser("camclean");
+        usertwo.setUser("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
@@ -36,8 +36,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User userone = new User();
         User usertwo = new User();
 
-        userone.addUser("camclean");
-        usertwo.addUser("ccdunn");
+        userone.setUser("camclean");
+        usertwo.setUser("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
@@ -53,8 +53,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User userone = new User();
         User usertwo = new User();
 
-        userone.addUser("camclean");
-        usertwo.addUser("ccdunn");
+        userone.setUser("camclean");
+        usertwo.setUser("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
@@ -68,15 +68,15 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
     // Use Case 11: User Profile
     public void testUserProfile() {
         User user = new User();
-        user.addUser("camclean");
-        user.addUserName("Carson Mclean");
-        user.addUserEmail("camclean@ualberta.ca");
-        user.addUserAddress("300 Shirley Street");
+        user.setUser("camclean");
+        user.setUserName("Carson Mclean");
+        user.setUserEmail("camclean@ualberta.ca");
+        user.setUserAddress("300 Shirley Street");
 
         // Making sure that user has these attributes
-        assertTrue(user.hasUserName("Carson Mclean"));
-        assertTrue(user.hasUserEmail("camclean@ualberta.ca"));
-        assertTrue(user.hasUserAddress("300 Shirley Street"));
+        assertTrue(user.getUserName().equals("Carson Mclean"));
+        assertTrue(user.getUserEmail().equals("camclean@ualberta.ca"));
+        assertTrue(user.getUserAddress().equals("300 Shirley Street"));
     }
 
     // Use Case 12: View Profiles
@@ -85,8 +85,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
 
         User user = new User();
 
-        user.addUser("camclean");
-        user.addUserName("Carson Mclean");
+        user.setUser("camclean");
+        user.setUserName("Carson Mclean");
 
         friendsList.addFriend(user);
 
@@ -94,7 +94,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User found = friendsList.findUser(user);
 
         // Making sure that User is populated
-        assertTrue(found.hasUserName("Carson Mclean"));
+        assertTrue(found.getUserName().equals("Carson Mclean"));
     }
 
 

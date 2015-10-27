@@ -4,7 +4,10 @@ package ca.ualberta.cs.swapmyride;
  * Created by Garry on 2015-10-26.
  */
 public class User {
+    private String user;
     private String userName;
+    private String userEmail;
+    private String userAddress;
     private InventoryList inventory;
     private FriendsList friends;
     private TradeList pastTrades;
@@ -21,10 +24,35 @@ public class User {
         settings = new Setting();
     }
 
-    public void addUser(String name){
-        userName = name;
+    public String getUser() {
+        return user;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
 }
