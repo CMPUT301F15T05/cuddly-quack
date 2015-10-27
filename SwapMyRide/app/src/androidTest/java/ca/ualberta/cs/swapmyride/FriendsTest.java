@@ -26,7 +26,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         // Storing the returned User class in variable found
         User found = friendsList.findUser(userone);
         // Check if found is equal to what findUser gets
-        assertTrue(found.equalTo(userone));
+        assertTrue(found.equals(userone));
     }
 
     // Use Case 9: Add Friend
