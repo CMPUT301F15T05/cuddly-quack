@@ -6,4 +6,6 @@
     <color name="colorAccent">#ffdb05</color>
     <color name="tabsScrollColor">#ffdb05</color>
     <color name="textColorPrimary">#ffdb05</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>

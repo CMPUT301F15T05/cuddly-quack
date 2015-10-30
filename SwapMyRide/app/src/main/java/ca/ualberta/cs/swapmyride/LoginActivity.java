@@ -13,7 +13,6 @@ public class LoginActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     EditText usernameField;
-    EditText passwordField;
     Button signIn;
     TextView signUp;
 
@@ -26,8 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         usernameField = (EditText) findViewById(R.id.usernameField);
-
-        passwordField = (EditText) findViewById(R.id.passwordField);
 
         signIn = (Button) findViewById(R.id.signIn);
 
