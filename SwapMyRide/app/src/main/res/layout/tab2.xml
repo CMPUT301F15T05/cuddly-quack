@@ -3,14 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Inventory"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/inventoryView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="+"
+        android:id="@+id/addInventory"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/roundbutton"
+        android:textSize="45sp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp" />
 
 </RelativeLayout>
