@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.graphics.Picture;
+
 import java.util.ArrayList;
 
 /**
@@ -96,9 +98,11 @@ public class Trade {
         this.isDeclined = true;
     }
 
-    public Trade makeCounterTrade(Trade trade){
+    public Trade makeCounterTrade(){
         Trade counterTrade = new Trade(this.borrower, this.owner);
-        // don't know what goes here yet
+        counterTrade.setBorrowerItems(this.getOwnerItems());
+        counterTrade.setOwnerItems(this.getBorrowerItems());
+        counterTrade.send();
         return counterTrade;
     }
 
