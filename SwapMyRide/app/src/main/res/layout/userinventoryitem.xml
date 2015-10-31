@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/vehiclePicture"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Default Title"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/vehicleTitle"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignTop="@+id/vehiclePicture"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/vehiclePicture"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity:"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/vehicleTitle"
+        android:layout_alignStart="@+id/vehicleTitle"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:text="Public:"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/vehiclePicture"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/quantity"
+        android:layout_above="@+id/textView3"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView5"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignStart="@+id/quantity" />
+</RelativeLayout>
