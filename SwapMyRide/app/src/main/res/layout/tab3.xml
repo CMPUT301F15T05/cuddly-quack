@@ -3,4 +3,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="View Friends"
+        android:id="@+id/viewFriends"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/viewFriends"
+        android:layout_marginTop="20dp"
+        android:id="@+id/divider1"
+        android:layout_alignStart="@+id/viewFriends"
+        android:layout_marginRight="25dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Past Trades"
+        android:id="@+id/pastTrades"
+        android:layout_below="@+id/divider1"
+        android:layout_alignStart="@+id/viewFriends"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/pastTrades"
+        android:layout_marginTop="20dp"
+        android:id="@+id/divider2"
+        android:layout_alignStart="@+id/viewFriends"
+        android:layout_marginRight="25dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Active Trades"
+        android:id="@+id/activeTrades"
+        android:layout_below="@+id/divider2"
+        android:layout_alignStart="@+id/pastTrades"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/activeTrades"
+        android:layout_marginTop="20dp"
+        android:id="@+id/divider3"
+        android:layout_alignStart="@+id/viewFriends"
+        android:layout_marginRight="25dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Edit Profile"
+        android:id="@+id/editeProfile"
+        android:layout_below="@+id/divider3"
+        android:layout_alignStart="@+id/activeTrades"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"/>
+
+
 </RelativeLayout>
