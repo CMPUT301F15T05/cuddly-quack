@@ -25,9 +25,9 @@ public class UserController {
         return inventory;
     }
 
-    public void changeDownloadPreferance(boolean preferance){
+    public void changeDownloadPreferance(boolean preference){
         //TODO:Switch the prefrance of the current user
-        UserSingleton.getCurrentUser().setDownloadImages(preferance);
+        UserSingleton.getCurrentUser().setDownloadImages(preference);
     }
 
     public FriendsList getFriends(User user){

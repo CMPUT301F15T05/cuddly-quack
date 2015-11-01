@@ -11,8 +11,8 @@ public class User {
     private InventoryList inventory;
     private FriendsList friends;
     private boolean downloadImages;
-    //private TradeList pastTrades;
-    //private TradeList pendingTrades;
+    private TradeList pastTrades;
+    private TradeList pendingTrades;
     //private Setting settings;
 
     //this constructor is used for creating a new user
@@ -20,8 +20,8 @@ public class User {
         userName = "";
         inventory = new InventoryList();
         friends = new FriendsList();
-        //pastTrades = new TradeList();
-        //pendingTrades = new TradeList();
+        pastTrades = new TradeList();
+        pendingTrades = new TradeList();
         //settings = new Setting();
     }
 
@@ -83,5 +83,21 @@ public class User {
 
     public void removeFriend(User user){
         friends.removeFriend(user);
+    }
+
+    public TradeList getPastTrades() {
+        return pastTrades;
+    }
+
+    public void addPastTrade(Trade pastTrade) {
+        pastTrades.add(pastTrade);
+    }
+
+    public TradeList getPendingTrades() {
+        return pendingTrades;
+    }
+
+    public void addPendingTrade(Trade pendingTrade) {
+        pendingTrades.add(pendingTrade);
     }
 }
