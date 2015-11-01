@@ -28,6 +28,6 @@ public class VehicleController {
     }
 
     public void addPhoto(Drawable photo){
-        
+
     }
 }
