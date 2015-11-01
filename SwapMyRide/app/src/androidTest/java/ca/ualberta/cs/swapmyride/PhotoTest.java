@@ -1,7 +1,10 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.io.File;
