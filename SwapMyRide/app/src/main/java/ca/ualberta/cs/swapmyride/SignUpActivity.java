@@ -37,6 +37,8 @@ public class SignUpActivity extends AppCompatActivity {
         String myEmail = email.getText().toString();
         String myAddress = address.getText().toString();
 
+        final Boolean found = thisSingleton.userExists(myUsername);
+
         User newUser = new User();
         newUser.setUser(myUsername);
         newUser.setUserName(myName);
@@ -50,6 +52,9 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(found){
+                    Toast.makeText(getApplicationContext(),"Username Exists", Toast.LENGTH_LONG).show();
+                }
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
