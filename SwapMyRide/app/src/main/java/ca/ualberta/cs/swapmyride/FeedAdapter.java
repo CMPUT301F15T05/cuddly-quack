@@ -36,8 +36,8 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
         quantity.setText(String.format("%d", vehicle.getQuantity()));
-        category.setText(vehicle.getCategory().toString());
-        quality.setText(vehicle.getQuality().toString());
+        category.setText(vehicle.getCategory().getCategory());
+        quality.setText(vehicle.getQuality().getQuality());
         // Return the completed view to render on screen
         return convertView;
     }
