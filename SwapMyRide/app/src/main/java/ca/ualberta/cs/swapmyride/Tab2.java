@@ -39,7 +39,7 @@ public class Tab2 extends Fragment {
         inventoryList.add(vehicle2);
 
         Vehicle vehicle3 = new Vehicle();
-        vehicle3.setName("CoolCar3");
+        vehicle3.setName("CoolCar3aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         vehicle3.setPublic(true);
         vehicle3.setQuantity(2);
         inventoryList.add(vehicle3);
