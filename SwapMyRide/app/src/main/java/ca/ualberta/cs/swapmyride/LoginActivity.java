@@ -15,11 +15,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameField;
     Button signIn;
     TextView signUp;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginscreen);
+        final UserSingleton thisSingleton = UserSingleton.getInstance();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_login);
 
         usernameField = (EditText) findViewById(R.id.usernameField);
+        username = usernameField.getText().toString();
 
         signIn = (Button) findViewById(R.id.signIn);
 
@@ -35,9 +38,19 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainMenu.class);
-                startActivity(intent);
-                finish();
+                Boolean found = thisSingleton.userExists(username);
+                if(found){
+                    thisSingleton.addCurrentUser(username);
+                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                if(!found){
+                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -46,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
