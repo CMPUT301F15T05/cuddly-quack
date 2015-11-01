@@ -15,5 +15,5 @@ public class SearchController {
         return new Vehicle();
     }
 
-    
+
 }
