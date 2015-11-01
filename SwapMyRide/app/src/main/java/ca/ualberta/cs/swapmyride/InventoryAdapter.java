@@ -36,7 +36,7 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         vehicleTitle.setText(vehicle.getName());
 
         // ? is a conditional operator, the first statement following the ? is what happens when the
-        // condition evalusates to true, the statement following the : is what happens when it
+        // condition evaluates to true, the statement following the : is what happens when it
         //evaluates to false.
         ispublic.setText(vehicle.getPublic()? "Yes":"No");
         quantity.setText(String.format("%d", vehicle.getQuantity()));
