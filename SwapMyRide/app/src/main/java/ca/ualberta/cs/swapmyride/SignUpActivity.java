@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -35,14 +36,6 @@ public class SignUpActivity extends AppCompatActivity {
         String myUsername = username.getText().toString();
         String myEmail = email.getText().toString();
         String myAddress = address.getText().toString();
-
-        Boolean found = thisSingleton.userExists(myUsername);
-        if(found){
-            thisSingleton.addCurrentUser(myUsername);
-            Intent intent = new Intent(SignUpActivity.this, MainMenu.class);
-            startActivity(intent);
-            finish();
-        }
 
         User newUser = new User();
         newUser.setUser(myUsername);
