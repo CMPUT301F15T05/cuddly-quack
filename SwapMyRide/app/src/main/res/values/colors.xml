@@ -8,4 +8,7 @@
     <color name="textColorPrimary">#ffdb05</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="colorPrimarySettings">#5d5d5d</color>
+    <color name="colorPrimaryDarkSettings">#444444</color>
+    <color name="textColorPrimarySettings">#5d5d5d</color>
 </resources>
