@@ -1,11 +1,18 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.graphics.Bitmap;
+import android.graphics.Picture;
 import android.test.ActivityInstrumentationTestCase2;
+
+import java.io.File;
 
 /**
  * Created by Conner on 15-10-08.
  */
 public class PhotoTest extends ActivityInstrumentationTestCase2 {
+    public Picture picture = new Picture();
+    public Picture tooLargePicture = new Picture();
+
     public PhotoTest(){
         super(MainMenu.class);
     }
@@ -14,8 +21,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
     public void testAddPhotoToItem(){
         Vehicle vehicle = new Vehicle();
         vehicle.setPhoto(picture);
-        assertTrue(vehicle.getPhoto().equals(photo));
-
+        assertTrue(vehicle.getPhoto().equals(picture));
     }
 
     // Use Case 24: View Photo
@@ -53,7 +59,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         assertTrue(thrown);
 
         vehicle.setPhoto(picture);
-        assertTrue(vehicle.getPhoto().equals(photo));
+        assertTrue(vehicle.getPhoto().equals(picture));
         Boolean thrown2 = false;
         try {
             vehicle.deletePhoto();  // shouldn't throw an error, photo is added
@@ -81,12 +87,12 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
     public void testDownloadPhoto(){
         // I'll be honest, not really sure how to test this one!
 
-        Network.off(); // turn network off here some how
+        // turn network off here some how
         Vehicle vehicle = new Vehicle();  // need to be an vehicle stored on remote
 
         Boolean thrown = false;
         try {
-            vehicle.downloadPhoto();
+            vehicle.getPhoto();
         } catch (Exception e){
             thrown = true;
         }

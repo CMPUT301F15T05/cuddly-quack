@@ -52,7 +52,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(tradeList.getTrades() == null);
         tradeList.add(trade);
         assertTrue(tradeList.getSize() == 1);
-        assertTrue(tradeList.get(0) == trade);
+        assertTrue(tradeList.get(0).equals(trade));
 
         ArrayList<Vehicle> testOne = trade.getOwnerItems();
         ArrayList<Vehicle> testTwo = trade.getBorrowerItems();
@@ -242,8 +242,8 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         ArrayList<Vehicle> testOne = counterTrade.getOwnerItems();
         ArrayList<Vehicle> testTwo = counterTrade.getBorrowerItems();
 
-        assertTrue(testOne.get(0) == vehicleOne);
-        assertTrue(testTwo.get(0) == vehicleTwo);
+        assertTrue(testOne.get(0).equals(vehicleOne));
+        assertTrue(testTwo.get(0).equals(vehicleTwo));
     }
 
     // Use Case 19: Edit Trade
@@ -311,8 +311,8 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         ArrayList<Vehicle> testOne = trade.getOwnerItems();
         ArrayList<Vehicle> testTwo = trade.getBorrowerItems();
 
-        assertTrue(testOne.get(0) == vehicleThree);
-        assertTrue(testTwo.get(0) == vehicleFour);
+        assertTrue(testOne.get(0).equals(vehicleThree));
+        assertTrue(testTwo.get(0).equals(vehicleFour));
 
     }
 
@@ -430,7 +430,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(userOneTrades.getSize() == 4);
         assertTrue(userTwoTrades.getSize() == 4);
 
-        assertTrue(userOneTrades.get(0) == trade);
-        assertTrue(userTwoTrades.get(0) == trade2);
+        assertTrue(userOneTrades.get(0).equals(trade));
+        assertTrue(userTwoTrades.get(0).equals(trade2));
     }
 }

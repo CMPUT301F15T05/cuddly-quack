@@ -3,16 +3,16 @@ package ca.ualberta.cs.swapmyride;
 /**
  * Created by adrianomarini on 2015-11-01.
  */
-public class Singleton {
+public class UserSingleton {
     private static User currentUser;
 
-    private static Singleton ourInstance = new Singleton();
+    private static UserSingleton ourInstance = new UserSingleton();
 
-    public static Singleton getInstance() {
+    public static UserSingleton getInstance() {
         return ourInstance;
     }
 
-    private Singleton() {
+    private UserSingleton() {
     }
 
     public static void addUser(User user){
