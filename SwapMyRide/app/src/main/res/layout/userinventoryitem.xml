@@ -14,7 +14,8 @@
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:id="@+id/vehiclePicture" />
+        android:id="@+id/vehiclePicture"
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,8 +64,9 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/quantity"
         android:layout_above="@+id/textView3"
+        android:layout_alignEnd="@+id/vehicleTitle"
         android:layout_toEndOf="@+id/textView2"
-        android:layout_marginStart="15dp" />
+        android:layout_marginStart="15dp"/>
 
     <TextView
         android:layout_width="wrap_content"

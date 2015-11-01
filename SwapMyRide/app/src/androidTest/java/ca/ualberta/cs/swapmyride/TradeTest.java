@@ -57,8 +57,8 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         ArrayList<Vehicle> testOne = trade.getOwnerItems();
         ArrayList<Vehicle> testTwo = trade.getBorrowerItems();
 
-        assertTrue(testOne.get(0) == vehicleOne);
-        assertTrue(testTwo.get(0) == vehicleTwo);
+        assertTrue(testOne.get(0).equals(vehicleOne));
+        assertTrue(testTwo.get(0).equals(vehicleTwo));
     }
 
     // Use Case 16: Notify
