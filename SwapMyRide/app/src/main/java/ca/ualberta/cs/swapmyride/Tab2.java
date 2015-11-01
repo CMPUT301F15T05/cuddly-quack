@@ -29,10 +29,35 @@ public class Tab2 extends Fragment {
 
         // Testing
         Vehicle vehicle = new Vehicle();
-        vehicle.setName("CoolCar");
+        vehicle.setName("The Very Very Very Very Cool Car");
         vehicle.setPublic(true);
         vehicle.setQuantity(2);
         inventoryList.add(vehicle);
+
+        Vehicle vehicle2 = new Vehicle();
+        vehicle2.setName("The Very Very Very Very Cool Car");
+        vehicle2.setPublic(true);
+        vehicle2.setQuantity(2);
+        inventoryList.add(vehicle2);
+
+
+        Vehicle vehicle3 = new Vehicle();
+        vehicle3.setName("The Very Very Very Very Cool Car");
+        vehicle3.setPublic(true);
+        vehicle3.setQuantity(2);
+        inventoryList.add(vehicle3);
+
+        Vehicle vehicle4 = new Vehicle();
+        vehicle4.setName("The Very Very Very Very Cool Car");
+        vehicle4.setPublic(true);
+        vehicle4.setQuantity(2);
+        inventoryList.add(vehicle4);
+
+        Vehicle vehicle5 = new Vehicle();
+        vehicle5.setName("The Very Very Very Very Cool Car");
+        vehicle5.setPublic(true);
+        vehicle5.setQuantity(2);
+        inventoryList.add(vehicle5);
         // End Testing
 
         arrayOfVehicle = inventoryList.getList();
