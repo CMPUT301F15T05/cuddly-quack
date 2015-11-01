@@ -1,9 +1,10 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.graphics.Picture;
 import android.provider.ContactsContract;
 
 public class Vehicle {
-    //private Photo photo;
+    private Picture photo;
     private String name;
     private Integer quantity;
     private String comments;
@@ -71,4 +72,17 @@ public class Vehicle {
     public void setPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
+
+    public void setPhoto(Picture photo){
+        this.photo = photo;
+    }
+
+    public Picture getPhoto(){
+        return this.photo;
+    }
+
+    public void deletePhoto(){
+        this.photo = null;
+    }
+
 }

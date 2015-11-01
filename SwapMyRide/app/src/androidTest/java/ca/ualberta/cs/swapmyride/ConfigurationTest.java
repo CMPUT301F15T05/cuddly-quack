@@ -8,17 +8,17 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
     }
 
     // Use Case 31: Download Image Preference
-    public void testImagePreferance(){
-        User user = new User();
-        user.setDownloadImages(false);
-        Image image = new Image();
+    //public void testImagePreference(){
+        //User user = new User();
+        //user.setDownloadImages(false);
+        //Image image = new Image();
         //autoDownloadImage should return true if the image downloads
-        boolean downloaded = autoDownloadImage(image);
-        assertFalse(downloaded);
+        //boolean downloaded = autoDownloadImage(image);
+        //assertFalse(downloaded);
         //when the user selects to download an image, it should download
-        downloaded = manualDownloadImage(image);
-        assertTrue(downloaded);
-    }
+        //downloaded = manualDownloadImage(image);
+        //assertTrue(downloaded);
+   // }
 
     // Use Case 32: Edit Profile
     public void testEditProfile(){
