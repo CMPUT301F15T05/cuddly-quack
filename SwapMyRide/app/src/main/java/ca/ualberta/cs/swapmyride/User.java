@@ -10,6 +10,7 @@ public class User {
     private String userAddress;
     private InventoryList inventory;
     private FriendsList friends;
+    private boolean downloadImages;
     //private TradeList pastTrades;
     //private TradeList pendingTrades;
     //private Setting settings;
@@ -62,5 +63,13 @@ public class User {
 
     public InventoryList getInventory(){
         return inventory;
+    }
+
+    public Boolean getDownloadImages() {
+        return downloadImages;
+    }
+
+    public void setDownloadImages(boolean downloadImages) {
+        this.downloadImages = downloadImages;
     }
 }
