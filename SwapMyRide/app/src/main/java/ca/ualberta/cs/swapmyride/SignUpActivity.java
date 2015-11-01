@@ -36,6 +36,14 @@ public class SignUpActivity extends AppCompatActivity {
         String myEmail = email.getText().toString();
         String myAddress = address.getText().toString();
 
+        Boolean found = thisSingleton.userExists(myUsername);
+        if(found){
+            thisSingleton.addCurrentUser(myUsername);
+            Intent intent = new Intent(SignUpActivity.this, MainMenu.class);
+            startActivity(intent);
+            finish();
+        }
+
         User newUser = new User();
         newUser.setUser(myUsername);
         newUser.setUserName(myName);

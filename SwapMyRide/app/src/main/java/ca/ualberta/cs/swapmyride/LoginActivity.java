@@ -16,12 +16,15 @@ public class LoginActivity extends AppCompatActivity {
     Button signIn;
     TextView signUp;
     String username;
+    TextView notExist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginscreen);
         final UserSingleton thisSingleton = UserSingleton.getInstance();
+        notExist = (TextView) findViewById(R.id.notExist);
+        notExist.setVisibility(View.INVISIBLE);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -47,9 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(!found){
-                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                    startActivity(intent);
-                    finish();
+                    notExist.setVisibility(View.VISIBLE);
                 }
             }
         });
