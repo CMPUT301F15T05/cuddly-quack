@@ -36,6 +36,11 @@
             android:label="@string/title_activity_view_friends"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".ViewVehicleActivity"
+            android:label="@string/title_activity_view_vehicle"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
