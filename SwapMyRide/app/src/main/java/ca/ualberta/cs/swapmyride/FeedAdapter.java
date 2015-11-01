@@ -30,12 +30,12 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         // Lookup view for data population
         TextView vehicleTitle = (TextView) convertView.findViewById(R.id.vehicleTitle);
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
-        TextView category = (TextView) convertView.findViewById(R.id.category);
+        TextView category = (TextView) convertView.findViewById(R.id.ispublic);
         TextView quality = (TextView) convertView.findViewById(R.id.quality);
 
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
-        quantity.setText(String.format("%d",vehicle.getQuantity()));
+        quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().toString());
         quality.setText(vehicle.getQuality().toString());
         // Return the completed view to render on screen

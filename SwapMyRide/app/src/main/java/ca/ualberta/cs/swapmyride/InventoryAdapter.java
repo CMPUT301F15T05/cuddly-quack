@@ -30,12 +30,13 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         // Lookup view for data population
         TextView vehicleTitle = (TextView) convertView.findViewById(R.id.vehicleTitle);
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
-        TextView ispublic = (TextView) convertView.findViewById(R.id.category);
+        TextView ispublic = (TextView) convertView.findViewById(R.id.ispublic);
 
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
         quantity.setText(String.format("%d", vehicle.getQuantity()));
         ispublic.setText(vehicle.getPublic().toString());
+
         // Return the completed view to render on screen
         return convertView;
     }
