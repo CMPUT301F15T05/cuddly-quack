@@ -16,13 +16,13 @@ public class OfflineTest extends ApplicationTestCase {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         //list should be empty
-        assertTrue(inventoryList.getList() = null);
+        assertTrue(inventoryList.getList() == null);
         inventoryList.add(vehicle);
 
         android.turnOnData();
 
         //make sure an vehicle was added
-        assetTrue(inventoryList.size() == 1);
+        assertTrue(inventoryList.size() == 1);
         //make sure it is the correct vehicle
         assertTrue(inventoryList.getList().get(0) == vehicle);
     }
