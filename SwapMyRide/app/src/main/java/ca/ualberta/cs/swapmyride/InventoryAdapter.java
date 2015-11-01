@@ -34,8 +34,12 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
 
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
+
+        // ? is a conditional operator, the first statement following the ? is what happens when the
+        // condition evalusates to true, the statement following the : is what happens when it
+        //evaluates to false.
+        ispublic.setText(vehicle.getPublic()? "Yes":"No");
         quantity.setText(String.format("%d", vehicle.getQuantity()));
-        ispublic.setText(vehicle.getPublic().toString());
 
         // Return the completed view to render on screen
         return convertView;
