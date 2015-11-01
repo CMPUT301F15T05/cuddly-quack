@@ -1,40 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_below="@+id/tool_bar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" >
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/tool_bar"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/vehicleImage"/>
 
-    </ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vehicleImage"
+            android:text="Name:"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/vehicleName"
+            android:paddingTop="10dp"/>
 
-    <ImageButton
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/takePhoto"
-        android:layout_alignTop="@+id/scrollView"
-        android:layout_centerHorizontal="true" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vehicleField"
+            android:layout_alignTop="@+id/vehicleName"
+            android:layout_alignEnd="@+id/tool_bar"
+            android:layout_toEndOf="@+id/vehicleName"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Vehicle Name"
+            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorAccent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quantity:"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/takePhoto"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity:"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView4"
+            android:layout_below="@+id/vehicleField"
+            android:layout_alignStart="@+id/vehicleName"
+            android:layout_marginTop="35dp"/>
 
-</RelativeLayout>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_below="@+id/vehicleField"
+            android:layout_alignStart="@+id/vehicleField"
+            android:layout_alignEnd="@+id/vehicleField"
+            android:layout_marginTop="20dp"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>

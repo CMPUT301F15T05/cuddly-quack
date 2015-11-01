@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,9 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(!found){
-                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Toast.makeText(getApplicationContext(), "Username does not Exist, Please Sign Up!", Toast.LENGTH_LONG).show();
                 }
             }
         });
