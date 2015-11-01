@@ -35,7 +35,8 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
         quantity.setText(vehicle.getQuantity().toString());
-        ispublic.setText(vehicle.getPublic().toString());
+        //String.valueOf(boolean)
+        ispublic.setText(vehicle.getPublic()? "Yes":"No");
         // Return the completed view to render on screen
         return convertView;
     }
