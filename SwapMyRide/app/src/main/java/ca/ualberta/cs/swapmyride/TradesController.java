@@ -13,5 +13,5 @@ public class TradesController {
         return UserSingleton.getCurrentUser().getPastTrades();
     }
 
-    
+
 }
