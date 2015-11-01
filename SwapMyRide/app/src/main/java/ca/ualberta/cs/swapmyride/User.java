@@ -72,4 +72,16 @@ public class User {
     public void setDownloadImages(boolean downloadImages) {
         this.downloadImages = downloadImages;
     }
+
+    public FriendsList getFriends() {
+        return friends;
+    }
+
+    public void addFriend(User user){
+        friends.addFriend(user);
+    }
+
+    public void removeFriend(User user){
+        friends.removeFriend(user);
+    }
 }
