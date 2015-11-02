@@ -71,6 +71,13 @@ public class MainMenu extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_search) {
+            Intent intent = new Intent(MainMenu.this, SearchInventoryActivity.class);
+            startActivity(intent);
+            return true;
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
