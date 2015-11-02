@@ -74,6 +74,7 @@ public class MainMenu extends AppCompatActivity {
         if (id == R.id.action_search) {
             Intent intent = new Intent(MainMenu.this, SearchInventoryActivity.class);
             startActivity(intent);
+            finish();
             return true;
 
         }
