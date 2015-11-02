@@ -19,4 +19,5 @@
     <string name="title_activity_view_friends">Friends</string>
     <string name="title_activity_view_vehicle">Inventory</string>
     <string name="title_activity_add_inventory">Add Vehicle</string>
+    <string name="title_activity_search_inventory">Search Inventory</string>
 </resources>
