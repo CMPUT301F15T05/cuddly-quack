@@ -40,6 +40,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         final Boolean found = UserController.userExists(myUsername);
 
+        User newUser = new User();
+        newUser.setName(myName);
+        newUser.setUserName(myUsername);
+        newUser.setUserAddress(myAddress);
+        newUser.setUserEmail(myEmail);
+
+        Log.i("newUser User", newUser.getName());
+        Log.i("newUser UserName", newUser.getUserName());
+
+        thisSingleton.addUser(newUser);
+
         signUp = (Button) findViewById(R.id.signUp);
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(!found){
                     User newUser = new User();
-                    newUser.setUserName(myName);
-                    newUser.setUser(myUsername);
+                    newUser.setName(myName);
+                    newUser.setUserName(myUsername);
                     newUser.setUserAddress(myAddress);
                     newUser.setUserEmail(myEmail);
                     UserController.addUser(newUser);
