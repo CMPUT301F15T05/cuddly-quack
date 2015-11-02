@@ -2,6 +2,7 @@ package ca.ualberta.cs.swapmyride;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -16,7 +17,7 @@ import java.io.InputStreamReader;
  * Created by Garry on 2015-11-02.
  */
 public class DataManager {
-    private String userFilePath = "user/";
+    private String userFilePath = "";
     private Gson gson = new Gson();
     private FileOutputStream outputStream;
     private Context context;
@@ -28,6 +29,7 @@ public class DataManager {
     public void saveUser(User user){
         String userJson = gson.toJson(user);
         try{
+            Log.i("USERFILEPATH",userFilePath+user.getUserName());
             outputStream = context.openFileOutput(userFilePath + user.getUserName(),
                     Context.MODE_PRIVATE);
             outputStream.write(userJson.getBytes());
