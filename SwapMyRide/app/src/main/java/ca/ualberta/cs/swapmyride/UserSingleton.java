@@ -18,16 +18,11 @@ public class UserSingleton {
     }
 
     private UserSingleton() {
+
     }
 
-    public static void addCurrentUser(String username){
-        String tempString;
-        for(User user : users) {
-            tempString = user.getName();
-            if (tempString.equals(username)) {
-                currentUser = user;
-            }
-        }
+    public static void addCurrentUser(User user){
+        currentUser = user;
     }
 
     public static User getCurrentUser(){
@@ -38,16 +33,8 @@ public class UserSingleton {
         users.add(user);
     }
 
-    public static boolean userExists(String username){
-        String tempString;
-        for(User user : users){
-            tempString = user.getUserName();
-            Log.i("userExits", tempString);
-            if(tempString.equals(username)){
-                return true;
-            }
-        }
-        return false;
+    public static ArrayList<User> getUsers(){
+        return users;
     }
 
 }

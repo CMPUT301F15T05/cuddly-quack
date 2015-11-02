@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginscreen);
-        final UserSingleton thisSingleton = UserSingleton.getInstance();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -39,11 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = usernameField.getText().toString();
-                Log.i("onClick", username);
-                Boolean found = thisSingleton.userExists(username);
+               /* username = "adrianomarini"; //usernameField.getText().toString();
+                //Log.i("onClick", username);
+                Boolean found;
+                found = true;//UserController.userExists(username);
                 if(found){
-                    thisSingleton.addCurrentUser(username);
+                    //UserController.addCurrentUser(username);
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
@@ -51,7 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(!found){
                     Toast.makeText(getApplicationContext(), "Invalid Username!", Toast.LENGTH_LONG).show();
-                }
+                }*/
+                Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                startActivity(intent);
+                finish();
             }
         });
 

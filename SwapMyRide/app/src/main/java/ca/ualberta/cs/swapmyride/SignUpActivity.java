@@ -33,12 +33,12 @@ public class SignUpActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
 
-        String myName = name.getText().toString();
-        String myUsername = username.getText().toString();
-        String myEmail = email.getText().toString();
-        String myAddress = address.getText().toString();
+        final String myName = name.getText().toString();
+        final String myUsername = username.getText().toString();
+        final String myEmail = email.getText().toString();
+        final String myAddress = address.getText().toString();
 
-        final Boolean found = thisSingleton.userExists(myUsername);
+        final Boolean found = UserController.userExists(myUsername);
 
         User newUser = new User();
         newUser.setName(myName);
@@ -51,7 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         thisSingleton.addUser(newUser);
 
-
         signUp = (Button) findViewById(R.id.signUp);
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +59,15 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(found){
                     Toast.makeText(getApplicationContext(),"Username Exists", Toast.LENGTH_LONG).show();
+                }
+
+                if(!found){
+                    User newUser = new User();
+                    newUser.setName(myName);
+                    newUser.setUserName(myUsername);
+                    newUser.setUserAddress(myAddress);
+                    newUser.setUserEmail(myEmail);
+                    UserController.addUser(newUser);
                 }
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
