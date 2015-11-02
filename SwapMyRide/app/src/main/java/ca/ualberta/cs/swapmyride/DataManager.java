@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,6 +27,9 @@ public class DataManager {
         this.context = context;
     }
 
+    //edited from user 'giampaolo'
+    //http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson
+    //Nov. 1/2015
     public void saveUser(User user){
         String userJson = gson.toJson(user);
         try{
@@ -43,6 +47,9 @@ public class DataManager {
         }
     }
 
+    //edited from user 'giampaolo'
+    //http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson
+    //Nov. 1/2015
     public User loadUser(String userName){
         User user;
         try {
@@ -66,5 +73,14 @@ public class DataManager {
         }
 
         return user;
+    }
+
+    //edited from user 'hardartcore'
+    //http://stackoverflow.com/questions/14737996/android-deleting-a-file-from-internal-storage
+    //Nov 1, 2015
+    public void deleteUser(String username){
+        File dir = context.getFilesDir();
+        File file = new File(dir, username);
+        file.delete();
     }
 }

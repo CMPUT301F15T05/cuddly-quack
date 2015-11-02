@@ -28,5 +28,22 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         assertTrue(loadTo.getUserName().equals(user.getUserName()));
     }
 
-    
+    public void testDeleteUser(){
+        DataManager dm = new DataManager(getActivity());
+        User user = new User();
+        user.setName("Garry");
+        user.setUserAddress("4465");
+        user.setUserName("gbullock");
+        user.setUserEmail("gbullock@ualbert.ca");
+
+        dm.saveUser(user);
+
+        //check that the file exists
+        assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
+
+        dm.deleteUser("gbullock");
+
+        //check that the file no longer exists
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
+    }
 }
