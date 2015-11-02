@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginscreen);
-        final UserSingleton thisSingleton = UserSingleton.getInstance();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -41,9 +40,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 username = usernameField.getText().toString();
                 Log.i("onClick", username);
-                Boolean found = thisSingleton.userExists(username);
+                Boolean found;
+                found = UserController.userExists(username);
                 if(found){
-                    thisSingleton.addCurrentUser(username);
+                    UserController.addCurrentUser(username);
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
