@@ -13,14 +13,15 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         FriendsList friendsList = new FriendsList();
         User user = new User();
 
-        user.setUser("camclean");
+        user.setName("camclean");
         user.setUserName("Carson Mclean");
         user.setUserEmail("camclean@ualberta.ca");
         user.setUserAddress("300 Shirley Street");
 
         Vehicle vehicle = new Vehicle();
 
-        vehicle.setPhoto(picture);
+        //TODO: Add photos back into test
+        //vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
         vehicle.setCategory(VehicleCategory.COUPE);
         vehicle.setQuality(VehicleQuality.GOOD);
@@ -41,14 +42,15 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         FriendsList friendsList = new FriendsList();
         User user = new User();
 
-        user.setUser("camclean");
+        user.setName("camclean");
         user.setUserName("Carson Mclean");
         user.setUserEmail("camclean@ualberta.ca");
         user.setUserAddress("300 Shirley Street");
 
         Vehicle vehicle = new Vehicle();
 
-        vehicle.setPhoto(picture);
+        //TODO: Add photos back into test
+        //vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
         vehicle.setCategory(VehicleCategory.COUPE);
         vehicle.setQuality(VehicleQuality.GOOD);

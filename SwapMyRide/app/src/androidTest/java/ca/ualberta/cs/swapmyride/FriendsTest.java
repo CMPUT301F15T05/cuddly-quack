@@ -17,8 +17,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User userone = new User();
         User usertwo = new User();
 
-        userone.setUser("camclean");
-        usertwo.setUser("ccdunn");
+        userone.setName("camclean");
+        usertwo.setName("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
@@ -36,8 +36,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User userone = new User();
         User usertwo = new User();
 
-        userone.setUser("camclean");
-        usertwo.setUser("ccdunn");
+        userone.setName("camclean");
+        usertwo.setName("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
@@ -53,8 +53,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         User userone = new User();
         User usertwo = new User();
 
-        userone.setUser("camclean");
-        usertwo.setUser("ccdunn");
+        userone.setName("camclean");
+        usertwo.setName("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
@@ -68,7 +68,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
     // Use Case 11: User Profile
     public void testUserProfile() {
         User user = new User();
-        user.setUser("camclean");
+        user.setName("camclean");
         user.setUserName("Carson Mclean");
         user.setUserEmail("camclean@ualberta.ca");
         user.setUserAddress("300 Shirley Street");
@@ -85,7 +85,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
 
         User user = new User();
 
-        user.setUser("camclean");
+        user.setName("camclean");
         user.setUserName("Carson Mclean");
 
         friendsList.addFriend(user);

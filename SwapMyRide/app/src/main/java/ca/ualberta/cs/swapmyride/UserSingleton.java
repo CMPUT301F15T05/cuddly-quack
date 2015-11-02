@@ -23,7 +23,7 @@ public class UserSingleton {
     public static void addCurrentUser(String username){
         String tempString;
         for(User user : users) {
-            tempString = user.getUser();
+            tempString = user.getName();
             if (tempString.equals(username)) {
                 currentUser = user;
             }

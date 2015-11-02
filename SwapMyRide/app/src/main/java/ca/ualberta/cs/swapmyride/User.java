@@ -4,7 +4,7 @@ package ca.ualberta.cs.swapmyride;
  * Created by Garry on 2015-10-26.
  */
 public class User {
-    private String user;
+    private String name;
     private String userName;
     private String userEmail;
     private String userAddress;
@@ -15,7 +15,7 @@ public class User {
     private TradeList pendingTrades;
     //private Setting settings;
 
-    //this constructor is used for creating a new user
+    //this constructor is used for creating a new name
     public User(){
         //userName = "";
         inventory = new InventoryList();
@@ -25,12 +25,12 @@ public class User {
         //settings = new Setting();
     }
 
-    public String getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUserName() {
