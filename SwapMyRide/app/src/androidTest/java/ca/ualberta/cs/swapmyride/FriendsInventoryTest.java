@@ -13,7 +13,7 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         FriendsList friendsList = new FriendsList();
         User user = new User();
 
-        user.setUser("camclean");
+        user.setName("camclean");
         user.setUserName("Carson Mclean");
         user.setUserEmail("camclean@ualberta.ca");
         user.setUserAddress("300 Shirley Street");
@@ -41,7 +41,7 @@ public class FriendsInventoryTest extends ApplicationTestCase {
         FriendsList friendsList = new FriendsList();
         User user = new User();
 
-        user.setUser("camclean");
+        user.setName("camclean");
         user.setUserName("Carson Mclean");
         user.setUserEmail("camclean@ualberta.ca");
         user.setUserAddress("300 Shirley Street");

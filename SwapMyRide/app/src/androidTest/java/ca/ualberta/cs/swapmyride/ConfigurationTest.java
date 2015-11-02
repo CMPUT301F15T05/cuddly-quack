@@ -23,7 +23,7 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
     // Use Case 32: Edit Profile
     public void testEditProfile(){
         User user = new User();
-        user.setUser("gbullock");
+        user.setName("gbullock");
         user.setUserName("Garry");
         user.setUserEmail("gbull@whatever.com");
         user.setUserAddress("123 123st");
@@ -33,7 +33,7 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
         assertTrue(user.getUserEmail().equals("gbull@whatever.com"));
         assertTrue(user.getUserAddress().equals("123 123st"));
 
-        user.setUser("Jake");
+        user.setName("Jake");
         user.setUserEmail("Jake@whatever.com");
         user.setUserAddress("111 101st");
 
