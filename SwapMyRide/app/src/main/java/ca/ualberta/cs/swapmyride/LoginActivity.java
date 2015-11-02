@@ -38,12 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = usernameField.getText().toString();
-                Log.i("onClick", username);
+               /* username = "adrianomarini"; //usernameField.getText().toString();
+                //Log.i("onClick", username);
                 Boolean found;
-                found = UserController.userExists(username);
+                found = true;//UserController.userExists(username);
                 if(found){
-                    UserController.addCurrentUser(username);
+                    //UserController.addCurrentUser(username);
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
@@ -51,7 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(!found){
                     Toast.makeText(getApplicationContext(), "Invalid Username!", Toast.LENGTH_LONG).show();
-                }
+                }*/
+                Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                startActivity(intent);
+                finish();
             }
         });
 

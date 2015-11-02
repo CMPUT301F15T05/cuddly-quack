@@ -13,7 +13,7 @@ public class UserController {
     public static boolean userExists(String username){
         String tempString;
         for(User user : thisSingleton.getUsers()){
-            tempString = user.getUser();
+            tempString = user.getUserName();
             Log.i("userExits", tempString);
             if(tempString.equals(username) /*&& tempString.length() == username.length()*/){
                 return true;
@@ -27,7 +27,7 @@ public class UserController {
         String tempString;
         User currentUser = new User();
         for(User user : UserSingleton.getUsers()) {
-            tempString = user.getUser();
+            tempString = user.getUserName();
             if (tempString.equals(username)) {
                 currentUser = user;
             }
