@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(!found){
-                    Toast.makeText(getApplicationContext(), "Username does not Exist, Please Sign Up!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Invalid Username!", Toast.LENGTH_LONG).show();
                 }
             }
         });
