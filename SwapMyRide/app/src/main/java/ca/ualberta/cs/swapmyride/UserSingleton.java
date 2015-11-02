@@ -18,7 +18,6 @@ public class UserSingleton {
     }
 
     private UserSingleton() {
-
     }
 
     public static void addCurrentUser(User user){
