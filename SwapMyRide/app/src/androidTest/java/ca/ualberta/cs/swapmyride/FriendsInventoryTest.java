@@ -20,7 +20,8 @@ public class FriendsInventoryTest extends ApplicationTestCase {
 
         Vehicle vehicle = new Vehicle();
 
-        vehicle.setPhoto(picture);
+        //TODO: Add photos back into test
+        //vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
         vehicle.setCategory(VehicleCategory.COUPE);
         vehicle.setQuality(VehicleQuality.GOOD);
@@ -48,7 +49,8 @@ public class FriendsInventoryTest extends ApplicationTestCase {
 
         Vehicle vehicle = new Vehicle();
 
-        vehicle.setPhoto(picture);
+        //TODO: Add photos back into test
+        //vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
         vehicle.setCategory(VehicleCategory.COUPE);
         vehicle.setQuality(VehicleQuality.GOOD);
