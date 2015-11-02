@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -39,7 +41,8 @@ public class UserSingleton {
     public static boolean userExists(String username){
         String tempString;
         for(User user : users){
-            tempString = user.getUser();
+            tempString = user.getUserName();
+            Log.i("userExits", tempString);
             if(tempString.equals(username)){
                 return true;
             }

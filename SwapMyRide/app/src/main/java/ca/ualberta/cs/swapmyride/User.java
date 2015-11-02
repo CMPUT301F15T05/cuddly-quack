@@ -17,7 +17,7 @@ public class User {
 
     //this constructor is used for creating a new user
     public User(){
-        userName = "";
+        //userName = "";
         inventory = new InventoryList();
         friends = new FriendsList();
         pastTrades = new TradeList();

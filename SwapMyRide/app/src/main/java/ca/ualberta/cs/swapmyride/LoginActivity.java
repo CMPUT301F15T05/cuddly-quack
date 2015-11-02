@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 username = usernameField.getText().toString();
-                Log.i("Carson", username);
+                Log.i("onClick", username);
                 Boolean found = thisSingleton.userExists(username);
                 if(found){
                     thisSingleton.addCurrentUser(username);
