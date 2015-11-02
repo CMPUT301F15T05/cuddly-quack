@@ -31,6 +31,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testDeleteUser(){
+        Log.i("WERE Here","RIGHT HERE");
         DataManager dm = new DataManager(getActivity());
         User user = new User();
         user.setName("Garry");
