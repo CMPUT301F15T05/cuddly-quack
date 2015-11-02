@@ -30,8 +30,7 @@ public class Tab2 extends Fragment {
 
         addInventory = (Button) v.findViewById(R.id.addInventory);
 
-        inventoryList = new InventoryList();
-        //inventoryList = UserSingleton.getCurrentUser().getInventory();
+        inventoryList = UserSingleton.getCurrentUser().getInventory();
 
         arrayOfVehicle = inventoryList.getList();
 
