@@ -40,8 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
         final Boolean found = thisSingleton.userExists(myUsername);
 
         User newUser = new User();
-        newUser.setUser(myUsername);
-        newUser.setUserName(myName);
+        newUser.setUser(myName);
+        newUser.setUserName(myUsername);
         newUser.setUserAddress(myAddress);
         newUser.setUserEmail(myEmail);
 

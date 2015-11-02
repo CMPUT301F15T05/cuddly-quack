@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_login);
 
         usernameField = (EditText) findViewById(R.id.usernameField);
-        username = usernameField.getText().toString();
 
         signIn = (Button) findViewById(R.id.signIn);
 
@@ -39,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                username = usernameField.getText().toString();
+                Log.i("Carson", username);
                 Boolean found = thisSingleton.userExists(username);
                 if(found){
                     thisSingleton.addCurrentUser(username);
