@@ -1,9 +1,11 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +22,8 @@ public class AddInventoryActivity extends AppCompatActivity {
     VehicleCategory vehicleCategory;
     Spinner qualitySpinner;
     VehicleQuality vehicleQuality;
+
+    VehicleController vehicleController;
 
     ImageButton vehicleImage;
     EditText vehicleName;
@@ -75,16 +79,26 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehicleComments = (EditText) findViewById(R.id.commentsField);
         vehiclePublic = (Switch) findViewById(R.id.ispublic);
 
-        done = (Button) findViewById(R.id.done);
+        done = (Button) findViewById(R.id.button);
 
-        Vehicle vehicle = new Vehicle();
-        // vehicle.setPhoto(vehicleImage);
-        vehicle.setName(vehicleName.getText().toString());
-        vehicle.setCategory(vehicleCategory);
-        vehicle.setQuality(vehicleQuality);
-        //vehicle.setQuantity(vehicleQuantity.getText());
-        vehicle.setComments(vehicleComments.getText().toString());
-        //vehicle.setPublic();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Vehicle vehicle = new Vehicle();
+                // vehicle.setPhoto(vehicleImage);
+                vehicle.setName(vehicleName.getText().toString());
+                Log.i("Vehicle Name", vehicleName.getText().toString());
+                vehicle.setCategory(vehicleCategory);
+                vehicle.setQuality(vehicleQuality);
+                //vehicle.setQuantity(vehicleQuantity.getText());
+                vehicle.setComments(vehicleComments.getText().toString());
+                //vehicle.setPublic();
+                UserSingleton.getCurrentUser().addItem(vehicle);
+                Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
     }
