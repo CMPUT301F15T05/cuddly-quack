@@ -53,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Username!", Toast.LENGTH_LONG).show();
                 }*/
                 User user = new User();
-                user.setUserName("hello");
-                UserController.addCurrentUser("hello");
+                user.setUserName("TEAM05");
+                UserController.addCurrentUser("TEAM05");
                 Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                 startActivity(intent);
                 finish();
