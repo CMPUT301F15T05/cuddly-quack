@@ -11,7 +11,8 @@ public class OfflineTest extends ApplicationTestCase {
 
     // Use Case 28: Add Vehicle Offline
     public void testAddItemOffline() {
-        android.turnOffData();
+        //TODO: find how to turn off data
+        //android.turnOffData();
 
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
@@ -19,7 +20,8 @@ public class OfflineTest extends ApplicationTestCase {
         assertTrue(inventoryList.getList() == null);
         inventoryList.add(vehicle);
 
-        android.turnOnData();
+        //TODO: find how to turn on data
+        //android.turnOnData();
 
         //make sure an vehicle was added
         assertTrue(inventoryList.size() == 1);
@@ -29,7 +31,8 @@ public class OfflineTest extends ApplicationTestCase {
 
     // Use Case 29: Make Trades Offline
     public void testMakeTradesOffline() {
-        android.turnOffData();
+        //TODO: find how to turn off data
+        //android.turnOffData();
 
         //create users and their inventories
         User userOne = new User();
@@ -42,21 +45,23 @@ public class OfflineTest extends ApplicationTestCase {
         Vehicle vehicleTwo = new Vehicle();
 
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        //// TODO: Add picture back
+        //vehicleOne.setPhoto(picture);
         vehicleOne.setName("Cadillac");
-        vehicleOne.setCategory("Sedan");
-        vehicleOne.setQuality("Good");
+        vehicleOne.setCategory(VehicleCategory.COUPE);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
-        vehicleOne.setVisibility("Public");
+        vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        //TODO: Add photo back into test
+        //vehicleTwo.setPhoto(picture);
         vehicleTwo.setName("Jeep");
-        vehicleTwo.setCategory("SUV");
-        vehicleTwo.setQuality("Good");
+        vehicleTwo.setCategory(VehicleCategory.SUV);
+        vehicleTwo.setQuality(VehicleQuality.OKAY);
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleTwo.setVisibility("Public");
+        vehicleTwo.setPublic(true);
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
@@ -64,14 +69,15 @@ public class OfflineTest extends ApplicationTestCase {
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
-        android.turnOnData();
+        //TODO: find how to turn off data
+        //android.turnOnData();
 
-        assertTrue(tradeList.getList() = null);
+        assertTrue(tradeList.getTrades() == null);
         tradeList.add(trade);
-        assertTrue(tradeList.getSize() = 1);
-        assertTrue(tradeList.get(0) = trade);
-        assertTrue(trade.getOwnerItem() = vehicleOne);
-        assertTrue(trade.getBorrowerItem() = vehicleTwo);
+        assertTrue(tradeList.getSize() == 1);
+        assertTrue(tradeList.get(0) == trade);
+        assertTrue(trade.getOwnerItems().get(0).equals(vehicleOne));
+        assertTrue(trade.getBorrowerItems().get(0).equals(vehicleTwo));
     }
 
     // Use Case 30: Browse Friends Offline
@@ -81,19 +87,21 @@ public class OfflineTest extends ApplicationTestCase {
         User userone = new User();
         User usertwo = new User();
 
-        userone.addUser("camclean");
-        usertwo.addUser("ccdunn");
+        userone.setUserName("camclean");
+        usertwo.setUserName("ccdunn");
 
         friendsList.addFriend(userone);
         friendsList.addFriend(usertwo);
 
-        android.turnOffData();
+        ////TODO: find how to turn off data
+        //android.turnOffData();
 
         // Storing the returned User class in variable found
         User found = friendsList.findUser(userone);
         // Check if found is equal to what findUser gets
-        assertTrue(found.equalTo(userone));
+        assertTrue(found.equals(userone));
 
-        android.turnOnData();
+        //TODO: find how to turn on data
+        //android.turnOnData();
     }
 }
