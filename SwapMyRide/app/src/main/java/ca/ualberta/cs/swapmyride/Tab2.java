@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class Tab2 extends Fragment {
@@ -23,6 +25,7 @@ public class Tab2 extends Fragment {
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
     InventoryAdapter adapter;
+    Gson gson;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,8 +47,11 @@ public class Tab2 extends Fragment {
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Intent intent = new Intent(getActivity(),ViewVehicleActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(getActivity(),ViewVehicleActivity.class);
+
+                //add the vehicle that has been selected to the intent to pass
+                intent.putExtra("vehiclePosition", position);
+                startActivity(intent);
             }
         });
 
@@ -59,7 +65,6 @@ public class Tab2 extends Fragment {
 
         return v;
     }
-
     public void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
