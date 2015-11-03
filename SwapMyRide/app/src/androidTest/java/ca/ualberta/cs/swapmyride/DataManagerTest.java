@@ -28,6 +28,8 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         assertTrue(loadTo.getUserEmail().equals(user.getUserEmail()));
         assertTrue(loadTo.getUserAddress().equals(user.getUserAddress()));
         assertTrue(loadTo.getUserName().equals(user.getUserName()));
+
+        dataManager.deleteUser("gbullock");
     }
 
     public void testDeleteUser(){
@@ -58,11 +60,15 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         user.setUserAddress("4465");
         user.setUserName("gbullock");
         user.setUserEmail("gbullock@ualbert.ca");
-        UserSingleton.addUser(user);
         Log.i("FilePath", getActivity().getBaseContext().getFileStreamPath(user.getUserName()).toString());
-        assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
+
+        //ensure the file does not previously exist
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
 
         dataManager.saveUser(user);
+
+        //check the file exists
+        assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
 
         User loadTo = dataManager.loadUser("gbullock");
 
@@ -77,7 +83,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         car.setQuality(VehicleQuality.OKAY);
         car.setQuantity(1);
         car.setPublic(true);
-
+        car.setComments("These are some comments yep yep");
         user.addItem(car);
 
         dataManager.saveUser(user);
@@ -86,7 +92,24 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         //check that the list exists
         assertTrue(loadTo.getInventory().size() == 1);
+        //assert no friends have magically appeared
+        assertTrue(loadTo.getFriends().size() == 0);
+        //assert no random tradelist appeared
+        assertTrue(loadTo.getPastTrades().getSize() == 0);
+        assertTrue(loadTo.getPendingTrades().getSize() == 0);
         //check the given car is the same as the car we gave it
-        assertTrue(loadTo.getInventory().getList().get(0).equals(car));
+        Vehicle newCar = loadTo.getInventory().getList().get(0);
+
+        assertTrue(newCar.getName().equals(car.getName()));
+        assertTrue(newCar.getCategory().equals(car.getCategory()));
+        assertTrue(newCar.getQuality().equals(car.getQuality()));
+        assertTrue(newCar.getQuantity().equals(car.getQuantity()));
+        assertTrue(newCar.getPublic() == car.getPublic());
+        assertTrue(newCar.getComments().equals(car.getComments()));
+
+        dataManager.deleteUser("gbullock");
+
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
+
     }
 }
