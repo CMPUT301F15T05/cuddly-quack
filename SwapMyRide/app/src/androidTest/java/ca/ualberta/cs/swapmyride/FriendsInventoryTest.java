@@ -1,12 +1,14 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.test.ApplicationTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * Created by carsonmclean on 9/10/15.
  */
-public class FriendsInventoryTest extends ApplicationTestCase {
-    public FriendsInventoryTest() {super(MainMenu.class); }
+public class FriendsInventoryTest extends ActivityInstrumentationTestCase2 {
+    public FriendsInventoryTest() {
+        super(MainMenu.class);
+    }
 
     // Use Case 13: Search Friends Inventory
     public void testSearchFriendsInventory() {
