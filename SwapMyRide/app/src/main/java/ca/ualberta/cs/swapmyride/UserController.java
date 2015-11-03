@@ -1,9 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.content.Context;
-import android.util.Log;
-
-import java.util.ArrayList;
 
 /**
  * Created by Garry on 2015-11-01.
@@ -17,12 +14,12 @@ public class UserController {
     }
 
     //for the time being, these classes access the local user list to verify
-    //TODO: implement remote database usage for addCurrentUser, addUser
+    //TODO: implement remote database usage for setCurrentUser, addUser
     //adds current user to the contextual variables for the usage
     public void addCurrentUser(String username){
         DataManager dataManager = new DataManager(context);
         User currentUser = dataManager.loadUser(username);
-        UserSingleton.addCurrentUser(currentUser);
+        UserSingleton.setCurrentUser(currentUser);
     }
 
     //adds user to user list

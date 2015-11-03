@@ -19,5 +19,6 @@ public class ViewVehicleActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+
     }
 }

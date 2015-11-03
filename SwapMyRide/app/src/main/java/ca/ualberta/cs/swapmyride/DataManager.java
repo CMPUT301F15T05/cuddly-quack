@@ -83,6 +83,7 @@ public class DataManager {
         File file = new File(dir, username);
         file.delete();
     }
+
     /*Checks to see if a user exists. If it does, it will pass back a True Boolean*/
     public Boolean searchUser(String username){
         if(context.getFileStreamPath(userFilePath+username).exists()){

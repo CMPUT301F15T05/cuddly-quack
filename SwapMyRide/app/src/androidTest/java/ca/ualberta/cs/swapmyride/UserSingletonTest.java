@@ -13,7 +13,7 @@ public class UserSingletonTest extends ActivityInstrumentationTestCase2 {
         User user1 = new User();
         user1.setUserName("adrianomarini");
         user1.setUserEmail("marini@ualberta.ca");
-        UserSingleton.addCurrentUser(user1);
+        UserSingleton.setCurrentUser(user1);
         User testUser = UserSingleton.getCurrentUser();
         assertTrue(testUser.equals(user1));
     }

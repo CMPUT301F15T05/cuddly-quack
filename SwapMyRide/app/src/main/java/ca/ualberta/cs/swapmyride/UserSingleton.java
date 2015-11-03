@@ -20,7 +20,7 @@ public class UserSingleton {
     private UserSingleton() {
     }
 
-    public static void addCurrentUser(User user){
+    public static void setCurrentUser(User user){
         currentUser = user;
     }
 
