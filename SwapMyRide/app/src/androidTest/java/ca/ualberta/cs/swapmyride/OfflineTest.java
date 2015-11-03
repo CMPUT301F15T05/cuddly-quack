@@ -73,7 +73,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
         //TODO: find how to turn off data
         //android.turnOnData();
 
-        assertTrue(tradeList.getTrades() == null);
+        assertTrue(tradeList.getTrades().size() == 0);
         tradeList.add(trade);
         assertTrue(tradeList.getSize() == 1);
         assertTrue(tradeList.get(0) == trade);
