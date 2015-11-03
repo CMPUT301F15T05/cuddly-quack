@@ -12,7 +12,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView quanitiy = (TextView) findViewById(R.id.quality);
     TextView isPublic = (TextView) findViewById(R.id.ispublic);
     TextView quality = (TextView) findViewById(R.id.quantity);
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
