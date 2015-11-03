@@ -1,12 +1,13 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.test.ActivityInstrumentationTestCase2;
 import android.test.ApplicationTestCase;
 
 /**
  * Created by carsonmclean on 9/10/15.
  */
 
-public class OfflineTest extends ApplicationTestCase {
+public class OfflineTest extends ActivityInstrumentationTestCase2 {
     public OfflineTest() {super(MainMenu.class); }
 
     // Use Case 28: Add Vehicle Offline
