@@ -18,6 +18,8 @@ public class LoginActivity extends AppCompatActivity {
     Button signIn;
     TextView signUp;
     String username;
+    DataManager dm;
+    UserController uController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class LoginActivity extends AppCompatActivity {
         signIn = (Button) findViewById(R.id.signIn);
 
         signUp = (TextView) findViewById(R.id.signUp);
+
+        dm = new DataManager(LoginActivity.this);
+        uController = new UserController();
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,12 +57,24 @@ public class LoginActivity extends AppCompatActivity {
                 if(!found){
                     Toast.makeText(getApplicationContext(), "Invalid Username!", Toast.LENGTH_LONG).show();
                 }*/
-                User user = new User();
+                //TODO FIX THIS
+                /*User user = new User();
                 user.setUserName("hello");
                 UserController.addCurrentUser("hello");
-                Intent intent = new Intent(LoginActivity.this, MainMenu.class);
-                startActivity(intent);
-                finish();
+                */
+                dm.deleteUser("");
+                String username = usernameField.getText().toString();
+
+                if(dm.searchUser(username)) {
+                    UserSingleton.addCurrentUser(dm.loadUser(username));
+                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    //TODO TOAST TO TELL USER THAT THE USERNAME DOES NOT EXIST
+                    Toast.makeText(LoginActivity.this, username + " Not Found", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

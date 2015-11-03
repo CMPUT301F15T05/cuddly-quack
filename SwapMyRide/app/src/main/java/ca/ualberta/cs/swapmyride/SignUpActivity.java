@@ -18,12 +18,13 @@ public class SignUpActivity extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText address;
+    DataManager dm;
+    UserController uController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signupscreen);
-        UserSingleton thisSingleton = UserSingleton.getInstance();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -32,46 +33,49 @@ public class SignUpActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.usernameField);
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
-
-        final String myName = name.getText().toString();
-        final String myUsername = username.getText().toString();
-        final String myEmail = email.getText().toString();
-        final String myAddress = address.getText().toString();
-
-        final Boolean found = UserController.userExists(myUsername);
-
-        User newUser = new User();
-        newUser.setName(myName);
-        newUser.setUserName(myUsername);
-        newUser.setUserAddress(myAddress);
-        newUser.setUserEmail(myEmail);
-
-        Log.i("newUser User", newUser.getName());
-        Log.i("newUser UserName", newUser.getUserName());
-
-        thisSingleton.addUser(newUser);
+        dm = new DataManager(SignUpActivity.this);
+        uController = new UserController();
 
         signUp = (Button) findViewById(R.id.signUp);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String myName = name.getText().toString();
+                String myUsername = username.getText().toString();
+                String myEmail = email.getText().toString();
+                String myAddress = address.getText().toString();
 
-                if(found){
-                    Toast.makeText(getApplicationContext(),"Username Exists", Toast.LENGTH_LONG).show();
+                //check the username does not already exist
+                if(dm.searchUser(myUsername)){
+                    Toast.makeText(getApplicationContext(),"Username Already Exists", Toast.LENGTH_LONG).show();
+                    username.setText("");
                 }
 
-                if(!found){
+                else if(!dm.searchUser(myUsername) && !myUsername.equals("")){
                     User newUser = new User();
                     newUser.setName(myName);
                     newUser.setUserName(myUsername);
                     newUser.setUserAddress(myAddress);
                     newUser.setUserEmail(myEmail);
-                    UserController.addUser(newUser);
+
+                    //set the current user to this new user
+                    UserSingleton.addCurrentUser(newUser);
+
+                    //save the user into file so we can access it again later
+                    dm.saveUser(newUser);
+
+                    //launch back to login screen
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+
+                //Do not allow a blank username
+                else if(myUsername.equals("")){
+                    Toast.makeText(SignUpActivity.this, "Username Cannot Be Blank", Toast.LENGTH_LONG).show();
+                    username.setText("");
+                }
             }
         });
     }
