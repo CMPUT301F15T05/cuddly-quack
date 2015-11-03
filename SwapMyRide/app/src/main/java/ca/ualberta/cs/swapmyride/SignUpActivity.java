@@ -23,7 +23,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signupscreen);
-        UserSingleton thisSingleton = UserSingleton.getInstance();
+
+        UserController userController = new UserController();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -37,26 +38,14 @@ public class SignUpActivity extends AppCompatActivity {
         final String myUsername = username.getText().toString();
         final String myEmail = email.getText().toString();
         final String myAddress = address.getText().toString();
-
-        final Boolean found = UserController.userExists(myUsername);
-
-        User newUser = new User();
-        newUser.setName(myName);
-        newUser.setUserName(myUsername);
-        newUser.setUserAddress(myAddress);
-        newUser.setUserEmail(myEmail);
-
-        Log.i("newUser User", newUser.getName());
-        Log.i("newUser UserName", newUser.getUserName());
-
-        thisSingleton.addUser(newUser);
+        final Boolean found = userController.userExists(myUsername);
 
         signUp = (Button) findViewById(R.id.signUp);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                UserController userController1 = new UserController();
                 if(found){
                     Toast.makeText(getApplicationContext(),"Username Exists", Toast.LENGTH_LONG).show();
                 }
@@ -67,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                     newUser.setUserName(myUsername);
                     newUser.setUserAddress(myAddress);
                     newUser.setUserEmail(myEmail);
-                    UserController.addUser(newUser);
+                    userController1.addUser(newUser);
                 }
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);

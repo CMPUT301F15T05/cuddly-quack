@@ -1,29 +1,20 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.util.Log;
+import java.util.ArrayList;
 
 /**
  * Created by Garry on 2015-11-01.
  */
 public class UserController {
-    private static UserSingleton thisSingleton = UserSingleton.getInstance();
 
     //for the time being, these classes access the local user list to verify
-    //TODO: implenment remote database usage for userExists, addCurrentUser, addUser
-    public static boolean userExists(String username){
-        String tempString;
-        for(User user : thisSingleton.getUsers()){
-            tempString = user.getUserName();
-            Log.i("userExits", tempString);
-            if(tempString.equals(username) /*&& tempString.length() == username.length()*/){
-                return true;
-            }
-        }
-        return false;
+    //TODO: implement remote database usage for userExists, addCurrentUser, addUser
+    public boolean userExists(String username){
+        return true;
     }
 
     //adds current user to the contextual variables for the usage
-    public static void addCurrentUser(String username){
+    public void addCurrentUser(String username){
         String tempString;
         User currentUser = new User();
         for(User user : UserSingleton.getUsers()) {
@@ -36,7 +27,7 @@ public class UserController {
     }
 
     //adds user to user list
-    public static boolean addUser(User user){
+    public boolean addUser(User user){
         UserSingleton.addUser(user);
         return true;
     }
