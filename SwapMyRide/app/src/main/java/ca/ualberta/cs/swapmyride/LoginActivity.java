@@ -43,26 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* username = "adrianomarini"; //usernameField.getText().toString();
-                //Log.i("onClick", username);
-                Boolean found;
-                found = true;//UserController.userExists(username);
-                if(found){
-                    //UserController.addCurrentUser(username);
-                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
-                    startActivity(intent);
-                    finish();
-                }
-
-                if(!found){
-                    Toast.makeText(getApplicationContext(), "Invalid Username!", Toast.LENGTH_LONG).show();
-                }*/
-                //TODO FIX THIS
-                /*User user = new User();
-                user.setUserName("hello");
-                UserController.addCurrentUser("hello");
-                */
-                dm.deleteUser("");
                 String username = usernameField.getText().toString();
 
                 if(dm.searchUser(username)) {
@@ -72,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    //TODO TOAST TO TELL USER THAT THE USERNAME DOES NOT EXIST
                     Toast.makeText(LoginActivity.this, username + " Not Found", Toast.LENGTH_LONG).show();
                 }
             }
