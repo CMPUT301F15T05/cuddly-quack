@@ -17,7 +17,7 @@ public class OfflineTest extends ApplicationTestCase {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         //list should be empty
-        assertTrue(inventoryList.getList() == null);
+        assertTrue(inventoryList.getList().size() == 0);
         inventoryList.add(vehicle);
 
         //TODO: find how to turn on data
