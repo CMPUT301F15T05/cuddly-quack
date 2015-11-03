@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 
 public class SearchInventoryActivity extends AppCompatActivity {
 
@@ -16,14 +18,16 @@ public class SearchInventoryActivity extends AppCompatActivity {
     Spinner categorySpinner;
     Button inventorySearch;
     VehicleCategory vehicleCategory;
-    InventoryList inventoryList;
+    ArrayList<Vehicle> inventoryList;
+    SearchController searchController;
+    ArrayList<Vehicle> foundVehicles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchinventory);
 
-        inventoryList = UserSingleton.getCurrentUser().getInventory();
+        inventoryList = UserSingleton.getCurrentUser().getInventory().getList();
 
         searchField = (EditText) findViewById(R.id.searchField);
         inventorySearch = (Button) findViewById(R.id.inventorySearch);
@@ -48,7 +52,7 @@ public class SearchInventoryActivity extends AppCompatActivity {
         inventorySearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList);
             }
         });
 
