@@ -68,6 +68,11 @@
             android:label="@string/title_activity_search_inventory"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".ViewFeedInventory"
+            android:label="@string/title_activity_view_feed_inventory"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
