@@ -112,4 +112,34 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
 
     }
+
+    public void testSearchUser(){
+        DataManager dataManager = new DataManager(getActivity());
+
+        User user = new User();
+        user.setName("Garry");
+        user.setUserAddress("4465");
+        user.setUserName("gbullock");
+        user.setUserEmail("gbullock@ualbert.ca");
+        Log.i("FilePath", getActivity().getBaseContext().getFileStreamPath(user.getUserName()).toString());
+
+        dataManager.deleteUser(user.getUserName());
+        //ensure the file does not previously exist
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
+
+        //assert that it does not find any users
+        assertFalse(dataManager.searchUser(user.getUserName()));
+
+        dataManager.saveUser(user);
+
+        //ensure the file now exists
+        assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
+
+        assertTrue(dataManager.searchUser(user.getUserName()));
+
+        dataManager.deleteUser(user.getUserName());
+
+        //ensure the file no longer exists
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());;
+    }
 }
