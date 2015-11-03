@@ -32,12 +32,14 @@ public class AddInventoryActivity extends AppCompatActivity {
     Switch vehiclePublic;
     Button done;
 
+    DataManager dm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addinventory);
 
+        dm = new DataManager(AddInventoryActivity.this);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
@@ -102,7 +104,12 @@ public class AddInventoryActivity extends AppCompatActivity {
                 }
                 vehicle.setComments(vehicleComments.getText().toString());
                 vehicle.setPublic(vehiclePublic.isChecked());
+
+                //add the vehicle to our current user.
                 UserSingleton.getCurrentUser().addItem(vehicle);
+
+                //save the user to ensure all changes are updated
+                dm.saveUser(UserSingleton.getCurrentUser());
 
                 Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
                 startActivity(intent);
