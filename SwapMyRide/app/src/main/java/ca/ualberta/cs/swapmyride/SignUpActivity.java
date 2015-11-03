@@ -1,5 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signupscreen);
 
-        UserController userController = new UserController();
+        DataManager dataManager = new DataManager(this.getApplicationContext());
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -38,14 +39,15 @@ public class SignUpActivity extends AppCompatActivity {
         final String myUsername = username.getText().toString();
         final String myEmail = email.getText().toString();
         final String myAddress = address.getText().toString();
-        final Boolean found = userController.userExists(myUsername);
+        final Boolean found = dataManager.searchUser(myUsername);
 
         signUp = (Button) findViewById(R.id.signUp);
+
+        final UserController userController = new UserController(this.getApplicationContext());
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserController userController1 = new UserController();
                 if(found){
                     Toast.makeText(getApplicationContext(),"Username Exists", Toast.LENGTH_LONG).show();
                 }
@@ -56,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                     newUser.setUserName(myUsername);
                     newUser.setUserAddress(myAddress);
                     newUser.setUserEmail(myEmail);
-                    userController1.addUser(newUser);
+                    userController.addUser(newUser);
                 }
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);

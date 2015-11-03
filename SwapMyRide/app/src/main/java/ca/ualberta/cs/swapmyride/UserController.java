@@ -1,5 +1,8 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -7,28 +10,25 @@ import java.util.ArrayList;
  */
 public class UserController {
 
-    //for the time being, these classes access the local user list to verify
-    //TODO: implement remote database usage for userExists, addCurrentUser, addUser
-    public boolean userExists(String username){
-        return true;
+    Context context;
+
+    public UserController(Context thisContext) {
+        context = thisContext;
     }
 
+    //for the time being, these classes access the local user list to verify
+    //TODO: implement remote database usage for addCurrentUser, addUser
     //adds current user to the contextual variables for the usage
     public void addCurrentUser(String username){
-        String tempString;
-        User currentUser = new User();
-        for(User user : UserSingleton.getUsers()) {
-            tempString = user.getUserName();
-            if (tempString.equals(username)) {
-                currentUser = user;
-            }
-        }
+        DataManager dataManager = new DataManager(context);
+        User currentUser = dataManager.loadUser(username);
         UserSingleton.addCurrentUser(currentUser);
     }
 
     //adds user to user list
     public boolean addUser(User user){
-        UserSingleton.addUser(user);
+        DataManager dataManager = new DataManager(context);
+        dataManager.saveUser(user);
         return true;
     }
 

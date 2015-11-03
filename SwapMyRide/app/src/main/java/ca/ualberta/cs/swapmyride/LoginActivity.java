@@ -1,5 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,13 +36,15 @@ public class LoginActivity extends AppCompatActivity {
 
         signUp = (TextView) findViewById(R.id.signUp);
 
+        final UserController userController = new UserController(this.getApplicationContext());
+        final DataManager dataManager = new DataManager(this.getApplicationContext());
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 username = usernameField.getText().toString();
                 Boolean found;
-                UserController userController = new UserController();
-                found = userController.userExists(username);
+                found = dataManager.searchUser(username);
                 if(found){
                     userController.addCurrentUser(username);
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
@@ -64,4 +67,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }
