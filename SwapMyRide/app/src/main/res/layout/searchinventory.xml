@@ -22,10 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/categorySpinner"
-        android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/searchField"
+        android:layout_marginEnd="5dp"
         android:layout_alignTop="@+id/searchField"
-        android:layout_marginEnd="5dp"/>
+        android:layout_alignBottom="@+id/searchField"
+        android:layout_marginBottom="-5dp"
+        android:layout_marginTop="-5dp"/>
 
     <Button
         android:layout_width="wrap_content"

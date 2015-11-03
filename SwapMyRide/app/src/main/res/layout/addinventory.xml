@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
     <include
         android:id="@+id/tool_bar"
@@ -66,7 +66,9 @@
             android:layout_alignEnd="@+id/vehicleField"
             android:layout_alignBottom="@+id/textView4"
             android:layout_alignTop="@+id/textView4"
-            android:layout_marginStart="65dp" />
+            android:layout_marginStart="65dp"
+            android:layout_marginBottom="-5dp"
+            android:layout_marginTop="-5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +89,8 @@
             android:layout_alignStart="@+id/categorySpinner"
             android:layout_alignTop="@+id/textView5"
             android:layout_alignEnd="@+id/categorySpinner"
-            />
+            android:layout_marginBottom="-5dp"
+            android:layout_marginTop="-5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,15 +145,14 @@
             android:layout_height="wrap_content"
             android:text="Shared:"
             android:id="@+id/ispublic"
-            android:layout_below="@+id/commentsField"
-            android:layout_alignStart="@+id/commentsField"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:checked="true"
-            android:layout_toStartOf="@+id/button"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/commentsField"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="35dp"
-            android:paddingTop="10dp"/>
+            android:layout_alignEnd="@+id/quantityField"
+            android:layout_alignStart="@+id/commentsField" />
 
         <Button
             android:layout_width="wrap_content"
@@ -158,11 +160,15 @@
             android:text="Done"
             android:id="@+id/button"
             android:background="@color/colorPrimary"
-            android:layout_alignTop="@+id/ispublic"
-            android:layout_alignStart="@+id/qualitySpinner"
-            android:layout_alignEnd="@+id/qualitySpinner"
-            android:layout_marginBottom="10dp"/>
+            android:layout_below="@+id/ispublic"
+            android:layout_alignEnd="@+id/quantityField"
+            android:layout_alignStart="@+id/ispublic"
+            android:layout_marginTop="35dp" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_below="@+id/button"/>
 
     </RelativeLayout>
 
