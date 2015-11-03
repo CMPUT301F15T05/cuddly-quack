@@ -2,12 +2,16 @@ package ca.ualberta.cs.swapmyride;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 
 public class SearchInventoryActivity extends AppCompatActivity {
@@ -15,15 +19,23 @@ public class SearchInventoryActivity extends AppCompatActivity {
     EditText searchField;
     Spinner categorySpinner;
     Button inventorySearch;
+    ListView searchList;
     VehicleCategory vehicleCategory;
-    InventoryList inventoryList;
+    ArrayList<Vehicle> inventoryList;
+    SearchController searchController;
+    ArrayList<Vehicle> foundVehicles;
+    InventoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchinventory);
 
-        inventoryList = UserSingleton.getCurrentUser().getInventory();
+        searchController = new SearchController();
+
+        searchList = (ListView) findViewById(R.id.searchList);
+
+        inventoryList = UserSingleton.getCurrentUser().getInventory().getList();
 
         searchField = (EditText) findViewById(R.id.searchField);
         inventorySearch = (Button) findViewById(R.id.inventorySearch);
@@ -45,10 +57,16 @@ public class SearchInventoryActivity extends AppCompatActivity {
             }
         });
 
+        // TODO setonclicklistners to get the item description
         inventorySearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList);
+
+                adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
+
+                searchList.setAdapter(adapter);
             }
         });
 
