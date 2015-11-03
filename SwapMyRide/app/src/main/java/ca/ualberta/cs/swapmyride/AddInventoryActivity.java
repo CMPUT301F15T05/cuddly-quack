@@ -90,10 +90,20 @@ public class AddInventoryActivity extends AppCompatActivity {
                 Log.i("Vehicle Name", vehicleName.getText().toString());
                 vehicle.setCategory(vehicleCategory);
                 vehicle.setQuality(vehicleQuality);
-                //vehicle.setQuantity(vehicleQuantity.getText());
+
+                //http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html#parseInt-java.lang.String-int-
+                //Nov. 3/ 2015
+                //the error should never occur as we force the user to input a numeric value, but
+                //we are required to catch it anyway
+                try {
+                    vehicle.setQuantity(Integer.parseInt(vehicleQuantity.getText().toString()));
+                }catch(NumberFormatException e){
+                    e.printStackTrace();
+                }
                 vehicle.setComments(vehicleComments.getText().toString());
-                //vehicle.setPublic();
+                vehicle.setPublic(vehiclePublic.isChecked());
                 UserSingleton.getCurrentUser().addItem(vehicle);
+
                 Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
                 startActivity(intent);
                 finish();
