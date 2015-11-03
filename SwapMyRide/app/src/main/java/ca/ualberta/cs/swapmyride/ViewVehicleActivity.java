@@ -11,7 +11,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView title;
     TextView quanitiy;
-    TextView isPublic;
+    TextView category;
     TextView quality;
     TextView comments;
     Button delete;
@@ -27,14 +27,23 @@ public class ViewVehicleActivity extends AppCompatActivity {
 
         title = (TextView) findViewById(R.id.title);
         quanitiy = (TextView) findViewById(R.id.quality);
-        isPublic = (TextView) findViewById(R.id.ispublic);
+        category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quantity);
         comments = (TextView) findViewById(R.id.commentsHead);
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
         done = (Button) findViewById(R.id.done);
 
+        Vehicle vehicle;
+        int position = getIntent().getIntExtra("vehiclePosition", 0);
 
+        vehicle = UserSingleton.getCurrentUser().getInventory().getList().get(position);
+
+        title.setText(vehicle.getName());
+        quanitiy.setText(vehicle.getQuantity().toString());
+        category.setText(vehicle.getCategory().getCategory());
+        quality.setText(vehicle.getQuality().getQuality());
+        comments.setText(vehicle.getComments());
 
     }
 }

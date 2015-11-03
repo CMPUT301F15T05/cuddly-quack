@@ -144,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shared:"
-            android:id="@+id/ispublic"
+            android:id="@+id/category"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:checked="true"
@@ -160,9 +160,9 @@
             android:text="Done"
             android:id="@+id/button"
             android:background="@color/colorPrimary"
-            android:layout_below="@+id/ispublic"
+            android:layout_below="@+id/category"
             android:layout_alignEnd="@+id/quantityField"
-            android:layout_alignStart="@+id/ispublic"
+            android:layout_alignStart="@+id/category"
             android:layout_marginTop="35dp" />
 
         <Space

@@ -1,7 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -79,7 +78,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
-        vehiclePublic = (Switch) findViewById(R.id.ispublic);
+        vehiclePublic = (Switch) findViewById(R.id.category);
 
         done = (Button) findViewById(R.id.button);
 

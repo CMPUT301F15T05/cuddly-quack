@@ -73,7 +73,7 @@
             android:text="Result"
             android:textSize="15sp"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/ispublic"
+            android:id="@+id/category"
             android:layout_alignTop="@+id/textView3"
             android:layout_alignStart="@+id/quantity"
             android:layout_alignEnd="@+id/quantity" />
@@ -85,7 +85,7 @@
             android:textSize="15sp"
             android:textColor="@color/colorPrimary"
             android:id="@+id/textView"
-            android:layout_below="@+id/ispublic"
+            android:layout_below="@+id/category"
             android:layout_alignStart="@+id/textView3"
             android:layout_marginTop="10dp"/>
 
