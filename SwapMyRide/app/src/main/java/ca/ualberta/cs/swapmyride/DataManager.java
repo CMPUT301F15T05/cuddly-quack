@@ -83,4 +83,16 @@ public class DataManager {
         File file = new File(dir, username);
         file.delete();
     }
+    /*Checks to see if a user exists. If it does, it will pass the user back, else it will
+    pass back a user equal to null
+     */
+    public User searchUser(String username){
+        if(context.getFileStreamPath(userFilePath+username).exists()){
+            return loadUser(username);
+        }
+        else{
+            User user = null;
+            return user;
+        }
+    }
 }
