@@ -33,14 +33,18 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
         assertTrue(user.getUserEmail().equals("gbull@whatever.com"));
         assertTrue(user.getUserAddress().equals("123 123st"));
 
-        user.setName("Jake");
-        user.setUserEmail("Jake@whatever.com");
-        user.setUserAddress("111 101st");
+        String newName = "Jake";
+        String newEmail = "Jake@whatever.com";
+        String newAddr = "111 101st";
+
+        user.setName(newName);
+        user.setUserEmail(newEmail);
+        user.setUserAddress(newAddr);
 
         //check overwriting previous works properly
-        assertTrue(user.getUserName().equals("Jake"));
-        assertTrue(user.getUserEmail().equals("Jake@whatever.com"));
-        assertTrue(user.getUserAddress().equals("111 101st"));
+        assertTrue(user.getName().equals(newName));
+        assertTrue(user.getUserEmail().equals(newEmail));
+        assertTrue(user.getUserAddress().equals(newAddr));
     }
 
 }
