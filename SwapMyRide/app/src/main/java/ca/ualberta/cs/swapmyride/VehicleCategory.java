@@ -9,7 +9,7 @@ package ca.ualberta.cs.swapmyride;
  */
 public enum VehicleCategory {
     // TODO: add more categories
-    SEDAN("Sedan"), COUPE("Coupe"), SUV("SUV"), CROSSOVER("Cross Over"), TRUCK("Truck"), NONE("None");
+    NONE("None"), SEDAN("Sedan"), COUPE("Coupe"), SUV("SUV"), CROSSOVER("Cross Over"), TRUCK("Truck");
 
     private String category;
 

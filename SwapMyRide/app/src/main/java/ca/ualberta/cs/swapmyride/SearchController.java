@@ -23,13 +23,39 @@ public class SearchController {
 
         int size = userVehicles.size();
 
-        for (int i = 0; i < size; i++) {
+        // search both
+        if (!(vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))) {
 
-            if (userVehicles.get(i).getName().equals(vehicleName))
-                if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
+            for (int i = 0; i < size; i++) {
+
+                if (userVehicles.get(i).getName().equals(vehicleName))
+                    if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
+                        foundVehicles.add(userVehicles.get(i));
+                    }
+            }
+        }
+
+        // Search string only
+        else if (!(vehicleName.equals("")) && (vehicleCategory.equals(VehicleCategory.NONE))) {
+
+            for (int i = 0; i < size; i++) {
+
+                if (userVehicles.get(i).getName().equals(vehicleName))
                     foundVehicles.add(userVehicles.get(i));
             }
         }
+
+        // Search category only
+        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))){
+
+            for (int i = 0; i < size; i++) {
+
+                if (userVehicles.get(i).getCategory().equals(vehicleCategory))
+                    foundVehicles.add(userVehicles.get(i));
+            }
+        }
+
+        // Default return value
         return foundVehicles;
     }
 }

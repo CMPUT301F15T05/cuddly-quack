@@ -7,7 +7,7 @@ package ca.ualberta.cs.swapmyride;
   http://javarevisited.blogspot.ca/2011/08/enum-in-java-example-tutorial.html, Oct 26 2015
 */
 public enum VehicleQuality {
-    RUSTBUCKET("Rust Bucket"), POOR("Poor"), OKAY("Okay"), GOOD("Good"), PRIME("Prime"), SHOWROOM("Show Room"), NONE("None");
+    NONE("None"), RUSTBUCKET("Rust Bucket"), POOR("Poor"), OKAY("Okay"), GOOD("Good"), PRIME("Prime"), SHOWROOM("Show Room");
 
     private String quality;
 
