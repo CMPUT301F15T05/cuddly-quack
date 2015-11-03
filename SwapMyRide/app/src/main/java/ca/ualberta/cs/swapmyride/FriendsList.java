@@ -20,6 +20,8 @@ public class FriendsList {
         friendList.remove(user);
     }
 
+    public int size(){return friendList.size();}
+
     public User findUser(User user){
         //based on the test for Use Case 8, we should search through the list and see if
         //any of the objects matches the one given, and return.
