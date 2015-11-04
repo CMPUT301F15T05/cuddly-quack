@@ -1,5 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
     ListView friendView;
     ArrayList<User> foundUsers;
     FriendAdapter adapter;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +45,26 @@ public class SearchFriendsActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                foundUsers = searchController.findUser(searchField.getText().toString(), getApplicationContext());
+
+                username = searchField.getText().toString();
+
+                foundUsers = searchController.findUser(username, getApplicationContext());
 
                 adapter = new FriendAdapter(getApplicationContext(), foundUsers);
 
                 friendView.setAdapter(adapter);
+            }
+        });
 
+        friendView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AddFriendProfileActivity.class);
+
+                //add the vehicle that has been selected to the intent to pass
+                intent.putExtra("Username", username);
+
+                startActivity(intent);
             }
         });
     }
