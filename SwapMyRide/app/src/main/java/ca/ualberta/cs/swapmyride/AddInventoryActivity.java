@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import java.util.ArrayList;
+
 public class AddInventoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -32,6 +34,8 @@ public class AddInventoryActivity extends AppCompatActivity {
     Button done;
 
     DataManager dm;
+
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +82,30 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
-        vehiclePublic = (Switch) findViewById(R.id.category);
+        vehiclePublic = (Switch) findViewById(R.id.ispublic);
 
         done = (Button) findViewById(R.id.button);
+
+        final boolean loadVehicle = getIntent().hasExtra("vehiclePosition");
+
+        if(loadVehicle){
+            position = getIntent().getIntExtra("vehiclePosition",0);
+            Vehicle loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
+            //vehicleImage = loaded.getPicture()?
+            vehicleName.setText(loaded.getName());
+            vehicleQuantity.setText(loaded.getQuantity());
+            vehicleComments.setText(loaded.getComments());
+            vehiclePublic.setChecked(loaded.getPublic());
+            //qualitySpinner.setSelection(loaded.getQuality().)
+            
+        }
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Vehicle vehicle = new Vehicle();
+                Vehicle vehicle;
+
+                vehicle = new Vehicle();
                 // vehicle.setPhoto(vehicleImage);
                 vehicle.setName(vehicleName.getText().toString());
                 Log.i("Vehicle Name", vehicleName.getText().toString());
