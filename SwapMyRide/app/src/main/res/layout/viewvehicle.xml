@@ -99,7 +99,7 @@
         android:text="Default"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
-        android:id="@+id/ispublic"
+        android:id="@+id/category"
         android:layout_alignTop="@+id/categoryHead"
         android:layout_alignStart="@+id/quantity" />
 
@@ -111,7 +111,7 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/quality"
         android:layout_alignTop="@+id/qualityHead"
-        android:layout_alignStart="@+id/ispublic" />
+        android:layout_alignStart="@+id/category" />
 
     <Button
         android:layout_width="wrap_content"
@@ -127,22 +127,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:background="@color/colorPrimary"
-        android:id="@+id/done"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Edit"
         android:background="@color/colorPrimary"
         android:id="@+id/edit"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_alignTop="@+id/delete"
+        android:layout_alignEnd="@+id/commentsHead" />
 
 </RelativeLayout>
