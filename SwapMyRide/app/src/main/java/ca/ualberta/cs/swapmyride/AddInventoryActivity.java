@@ -15,6 +15,7 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -186,12 +187,10 @@ public class AddInventoryActivity extends AppCompatActivity {
     private void dispatchTakePictureIntent() {
         Log.i("TakingPictureIntent", "Trying to take a photo");
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            Log.i("resolveActivity", "Resolve Activity != null");
-            if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-                Log.i("checkCamera", "Device has a camera");
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null &&
+                checkHasCamera(getApplicationContext())) {
+
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
         }
     }
 
@@ -204,5 +203,9 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicle.setPhoto(photo);
             vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
         }
+    }
+
+    public boolean checkHasCamera(Context context){
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 }
