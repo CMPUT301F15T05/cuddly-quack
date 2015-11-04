@@ -1,10 +1,12 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,8 +17,11 @@ import java.util.ArrayList;
 
 // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
 public class FeedAdapter extends ArrayAdapter<Vehicle> {
+    private Context context;
+
     public FeedAdapter(Context context, ArrayList<Vehicle> vehicle) {
         super(context, 0, vehicle);
+        this.context = context;
     }
 
     @Override
@@ -32,12 +37,13 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
         TextView category = (TextView) convertView.findViewById(R.id.category);
         TextView quality = (TextView) convertView.findViewById(R.id.quality);
-
+        ImageView image = (ImageView) convertView.findViewById(R.id.vehiclePicture);
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
         quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
+        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage()));
         // Return the completed view to render on screen
         return convertView;
     }

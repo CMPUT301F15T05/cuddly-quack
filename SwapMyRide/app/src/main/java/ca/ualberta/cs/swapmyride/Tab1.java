@@ -27,6 +27,7 @@ public class Tab1 extends Fragment {
 
         inventoryList = new InventoryList();
 
+        /*
         // Testing
         Vehicle vehicle = new Vehicle();
         vehicle.setName("The Very Very Very Very Cool Car");
@@ -56,6 +57,7 @@ public class Tab1 extends Fragment {
         vehicle4.setQuality(VehicleQuality.RUSTBUCKET);
         inventoryList.add(vehicle4);
         // End Testing
+        */
 
         arrayOfVehicle = inventoryList.getList();
 
