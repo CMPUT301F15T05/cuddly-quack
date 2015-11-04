@@ -46,6 +46,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UserSingleton.getCurrentUser().addFriend(possibleFriend);
+                dataManager.saveUser(UserSingleton.getCurrentUser());
                 Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
                 finish();
             }

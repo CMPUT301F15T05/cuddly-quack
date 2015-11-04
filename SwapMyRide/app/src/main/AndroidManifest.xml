@@ -61,31 +61,43 @@
         <activity
             android:name=".AddInventoryActivity"
             android:label="@string/title_activity_add_inventory"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".SearchInventoryActivity"
             android:label="@string/title_activity_search_inventory"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".ViewFeedInventory"
             android:label="@string/title_activity_view_feed_inventory"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".FeedTradeActivity"
             android:label="@string/title_activity_feed_trade"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".SearchFriendsActivity"
             android:label="@string/title_activity_search_friends"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".AddFriendProfileActivity"
             android:label="@string/title_activity_add_friend_profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".ViewFriendProfileActivity"
+            android:label="@string/title_activity_view_friend_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
     </application>
