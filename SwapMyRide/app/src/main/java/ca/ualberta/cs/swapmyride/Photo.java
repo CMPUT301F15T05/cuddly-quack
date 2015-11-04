@@ -15,8 +15,11 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonSerializer;
@@ -39,9 +42,16 @@ public class Photo{
         this.image = stream.toByteArray();
     }
 
-    public Bitmap getImage() {
+    public Bitmap getImage(Context context) {
+        Log.i("Photo", "Getting photo");
         int size = image.length;
-        Bitmap map = BitmapFactory.decodeByteArray(image,0,size);
+        Bitmap map;
+        if (size > 0) {
+            map = BitmapFactory.decodeByteArray(image, 0, size);
+        } else {
+            Log.i("Photo", "Size not bigger than zero");
+            map = BitmapFactory.decodeResource(context.getResources(), R.id.addFriend);
+        }
         return map;
     }
 

@@ -67,6 +67,7 @@ public class Tab3 extends Fragment {
             }
         });
 
+        // TODO: Carson -> editProfile needs to actually edit profile.
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
