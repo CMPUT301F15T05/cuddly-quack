@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,18 +20,25 @@ import java.io.InputStreamReader;
  */
 public class DataManager {
     private String userFilePath = "";
-    private Gson gson = new Gson();
+    private GsonBuilder builder = new GsonBuilder();
+    private Gson gson;
     private FileOutputStream outputStream;
     private Context context;
 
     public DataManager(Context context){
         this.context = context;
+
+        //set up custom serializer adapter for photos.
+        builder.registerTypeAdapter(Photo.class, new PhotoAdapter());
+        gson = builder.create();
     }
+
 
     //edited from user 'giampaolo'
     //http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson
     //Nov. 1/2015
     public void saveUser(User user){
+
         String userJson = gson.toJson(user);
         try{
             Log.i("USERFILEPATH",userFilePath+user.getUserName());
