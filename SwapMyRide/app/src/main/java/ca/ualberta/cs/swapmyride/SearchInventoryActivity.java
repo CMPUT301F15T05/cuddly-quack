@@ -2,6 +2,7 @@ package ca.ualberta.cs.swapmyride;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 public class SearchInventoryActivity extends AppCompatActivity {
 
+    Toolbar toolbar;
     EditText searchField;
     Spinner categorySpinner;
     Button inventorySearch;
@@ -30,6 +32,9 @@ public class SearchInventoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchinventory);
+
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
 
         searchController = new SearchController();
 

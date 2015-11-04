@@ -78,6 +78,11 @@
             android:label="@string/title_activity_feed_trade"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".SearchFriendsActivity"
+            android:label="@string/title_activity_search_friends"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
