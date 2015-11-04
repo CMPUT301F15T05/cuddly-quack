@@ -38,7 +38,7 @@ public class ConfigurationTest extends ActivityInstrumentationTestCase2{
         user.setUserAddress("111 101st");
 
         //check overwriting previous works properly
-        assertTrue(user.getUserName().equals("Jake"));
+        assertTrue(user.getName().equals("Jake"));
         assertTrue(user.getUserEmail().equals("Jake@whatever.com"));
         assertTrue(user.getUserAddress().equals("111 101st"));
     }

@@ -1,5 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -35,9 +36,12 @@ public class TradeList {
         this.trades.remove(index);
     }
 
-    public TradeList getUserTrades(User user){
-        TradeList miniTradeList = new TradeList();
-        //need a for loop iterator checking usernames
+    public ArrayList<Trade> getUserTrades(User user){
+        TradeList pendingTrades = user.getPendingTrades();
+        TradeList pastTrades = user.getPastTrades();
+        ArrayList<Trade> miniTradeList = new ArrayList<>();
+        miniTradeList.addAll(pendingTrades.getTrades());
+        miniTradeList.addAll(pastTrades.getTrades());
         return miniTradeList;
     }
 
