@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddFriendProfileActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
     Button addFriend;
     String username;
     DataManager dataManager;
-    User user;
+    User possibleFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +35,20 @@ public class AddFriendProfileActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("Username");
 
-        user = dataManager.loadUser(username);
+        possibleFriend = dataManager.loadUser(username);
 
         getSupportActionBar().setTitle(username);
-        fullName.setText(user.getName());
-        email.setText(user.getUserEmail());
+        fullName.setText(possibleFriend.getName());
+        email.setText(possibleFriend.getUserEmail());
 
+        // TODO Notify friend of friend request!
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                UserSingleton.getCurrentUser().addFriend(possibleFriend);
+                Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }
-
 }
