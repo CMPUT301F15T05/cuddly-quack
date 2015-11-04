@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:id="@+id/searchButton"
         android:src="@drawable/ic_search"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:layout_below="@+id/tool_bar"
         android:layout_alignParentEnd="true" />
 

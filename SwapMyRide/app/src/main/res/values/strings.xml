@@ -23,4 +23,5 @@
     <string name="title_activity_view_feed_inventory">Feed</string>
     <string name="title_activity_feed_trade">Trade</string>
     <string name="title_activity_search_friends">Search Friends</string>
+    <string name="title_activity_add_friend_profile">Add Friend</string>
 </resources>

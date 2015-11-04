@@ -83,6 +83,11 @@
             android:label="@string/title_activity_search_friends"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".AddFriendProfileActivity"
+            android:label="@string/title_activity_add_friend_profile"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
