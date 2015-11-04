@@ -78,6 +78,13 @@ public class MainMenu extends AppCompatActivity {
 
         }
 
+        if (id == R.id.action_addfriend) {
+            Intent intent = new Intent(MainMenu.this, SearchFriendsActivity.class);
+            startActivity(intent);
+            return true;
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
