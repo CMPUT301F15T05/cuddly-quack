@@ -37,4 +37,8 @@ public class FriendsList {
     public boolean hasUser(User user){
         return friendList.contains(user);
     }
+
+    public ArrayList<User> getFriendList() {
+        return friendList;
+    }
 }

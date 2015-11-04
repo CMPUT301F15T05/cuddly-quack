@@ -28,7 +28,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         //list should be empty
-        assertTrue(inventoryList.getList() == null);
+        assertTrue(inventoryList.getList().size() == 0);
         inventoryList.add(vehicle);
         //check there is an vehicle in the list
         assertFalse(inventoryList.getList().size() == 0);
@@ -81,7 +81,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicle = new Vehicle();
         Vehicle newVehicle = new Vehicle();
         //list should be empty
-        assertTrue(inventoryList.getList() == null);
+        assertTrue(inventoryList.getList().size() == 0);
         inventoryList.add(vehicle);
         inventoryList.add(newVehicle);
         //check there is an vehicle in the list

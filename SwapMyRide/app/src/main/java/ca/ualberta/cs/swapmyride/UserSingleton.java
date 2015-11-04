@@ -1,7 +1,5 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -15,9 +13,6 @@ public class UserSingleton {
 
     public static UserSingleton getInstance() {
         return ourInstance;
-    }
-
-    private UserSingleton() {
     }
 
     public static void addCurrentUser(User user){

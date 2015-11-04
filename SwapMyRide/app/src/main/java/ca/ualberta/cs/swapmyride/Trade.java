@@ -63,7 +63,8 @@ public class Trade {
     }
 
     public void send(){
-        //don't know what goes here yet
+        ownerNotified = true;
+        borrowerNotified = true;
     }
 
     public Boolean getOwnerNotified() {
@@ -107,15 +108,13 @@ public class Trade {
     }
 
     public void changeOwnerVehicle(Vehicle old, Vehicle newOne){
-        int index = this.ownerItems.indexOf(old);
-        this.ownerItems.remove(index);
+        this.ownerItems.remove(old);
         ownerItems.add(newOne);
     }
 
     public void changeBorrowerVehicle(Vehicle old, Vehicle newOne){
-        int index = this.ownerItems.indexOf(old);
-        this.ownerItems.remove(index);
-        ownerItems.add(newOne);
+        this.borrowerItems.remove(old);
+        borrowerItems.add(newOne);
     }
 
 }

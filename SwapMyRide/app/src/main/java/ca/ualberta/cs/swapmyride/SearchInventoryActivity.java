@@ -44,6 +44,7 @@ public class SearchInventoryActivity extends AppCompatActivity {
 
         searchField = (EditText) findViewById(R.id.searchField);
         inventorySearch = (Button) findViewById(R.id.inventorySearch);
+
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
 
         categorySpinner.setAdapter(new ArrayAdapter<VehicleCategory>(this, android.R.layout.simple_spinner_dropdown_item, VehicleCategory.values()));

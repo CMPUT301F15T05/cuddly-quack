@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 /**
@@ -7,9 +9,17 @@ import java.util.ArrayList;
  */
 public class SearchController {
 
-    public User findUser(String username){
+    public ArrayList<User> findUser(String username, Context context){
         //TODO: Search the server for a user that matches the given username
-        return UserSingleton.getCurrentUser();
+        DataManager dataManager = new DataManager(context);
+
+        ArrayList<User> userList = new ArrayList<>();
+
+        if (dataManager.searchUser(username)) {
+            userList.add(dataManager.loadUser(username));
+        }
+
+        return userList;
     }
 
     public Vehicle findVehicle(String vehicleName){

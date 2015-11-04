@@ -1,12 +1,13 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.test.ActivityInstrumentationTestCase2;
 import android.test.ApplicationTestCase;
 
 /**
  * Created by carsonmclean on 9/10/15.
  */
 
-public class OfflineTest extends ApplicationTestCase {
+public class OfflineTest extends ActivityInstrumentationTestCase2 {
     public OfflineTest() {super(MainMenu.class); }
 
     // Use Case 28: Add Vehicle Offline
@@ -17,7 +18,7 @@ public class OfflineTest extends ApplicationTestCase {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         //list should be empty
-        assertTrue(inventoryList.getList() == null);
+        assertTrue(inventoryList.getList().size() == 0);
         inventoryList.add(vehicle);
 
         //TODO: find how to turn on data
@@ -72,7 +73,7 @@ public class OfflineTest extends ApplicationTestCase {
         //TODO: find how to turn off data
         //android.turnOnData();
 
-        assertTrue(tradeList.getTrades() == null);
+        assertTrue(tradeList.getTrades().size() == 0);
         tradeList.add(trade);
         assertTrue(tradeList.getSize() == 1);
         assertTrue(tradeList.get(0) == trade);

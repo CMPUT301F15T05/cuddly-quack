@@ -6,7 +6,8 @@ import android.test.ActivityInstrumentationTestCase2;
  * Created by adrianomarini on 2015-11-01.
  */
 public class UserSingletonTest extends ActivityInstrumentationTestCase2 {
-    public UserSingletonTest(){super(MainMenu.class);
+    public UserSingletonTest(){
+        super(MainMenu.class);
     }
 
     public void testAddUser(){
