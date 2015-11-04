@@ -21,7 +21,6 @@ public class ViewVehicleActivity extends AppCompatActivity {
 
     Button delete;
     Button editVehicle;
-    Button done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class ViewVehicleActivity extends AppCompatActivity {
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
-        done = (Button) findViewById(R.id.done);
 
         initOnClickListeners();
 
