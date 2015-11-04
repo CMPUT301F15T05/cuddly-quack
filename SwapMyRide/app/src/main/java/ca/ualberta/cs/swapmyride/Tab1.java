@@ -73,7 +73,6 @@ public class Tab1 extends Fragment {
                 startActivity(intent);
             }
         });
-
         return v;
     }
 }
