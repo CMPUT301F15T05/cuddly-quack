@@ -58,7 +58,7 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
-        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage(getContext())));
+        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage()));
         // Return the completed view to render on screen
         return convertView;
     }

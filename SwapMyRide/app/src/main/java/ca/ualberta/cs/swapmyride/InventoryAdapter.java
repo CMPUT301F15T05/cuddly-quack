@@ -63,7 +63,7 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         quantity.setText(String.format("%d", vehicle.getQuantity()));
 
         //set the image in inventory
-        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage(getContext())));
+        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage()));
 
         // Return the completed view to render on screen
         return convertView;

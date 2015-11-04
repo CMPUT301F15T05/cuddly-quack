@@ -34,7 +34,7 @@ import java.io.Serializable;
  */
 public class Photo{
     //private Bitmap image;
-    byte image[];
+    private byte image[];
 
     Photo(Bitmap image){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -42,16 +42,17 @@ public class Photo{
         this.image = stream.toByteArray();
     }
 
-    public Bitmap getImage(Context context) {
-        Log.i("Photo", "Getting photo");
+    Photo(Context context){
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        this.image = stream.toByteArray();
+    }
+
+    public Bitmap getImage() {
         int size = image.length;
         Bitmap map;
-        if (size > 0) {
-            map = BitmapFactory.decodeByteArray(image, 0, size);
-        } else {
-            Log.i("Photo", "Size not bigger than zero");
-            map = BitmapFactory.decodeResource(context.getResources(), R.id.addFriend);
-        }
+        map = BitmapFactory.decodeByteArray(image, 0, size);
         return map;
     }
 

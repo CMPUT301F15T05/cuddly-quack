@@ -114,14 +114,18 @@ public class AddInventoryActivity extends AppCompatActivity {
         if(loadVehicle){
             position = getIntent().getIntExtra("vehiclePosition", 0);
             loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
-            //vehicleImage = loaded.getPicture()?
-            vehicleImage.setBackground(new BitmapDrawable(getResources(), loaded.getPhoto().getImage(this)));
+            vehicle.setPhoto(loaded.getPhoto());
+            vehicleImage.setBackground(new BitmapDrawable(getResources(), loaded.getPhoto().getImage()));
             vehicleName.setText(loaded.getName());
             vehicleQuantity.setText(loaded.getQuantity().toString());
             vehicleComments.setText(loaded.getComments());
             vehiclePublic.setChecked(loaded.getPublic());
             qualitySpinner.setSelection(loaded.getQuality().getPosition());
             categorySpinner.setSelection(loaded.getCategory().getPosition());
+        }
+        //default the photo to a new photo if we are not loading a vehicle
+        else{
+            vehicle.setPhoto(new Photo(getApplicationContext()));
         }
 
         vehicleImage.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +159,9 @@ public class AddInventoryActivity extends AppCompatActivity {
                 vehicle.setComments(vehicleComments.getText().toString());
                 vehicle.setPublic(vehiclePublic.isChecked());
 
+
                 //add the vehicle to our current user.
                 if(loadVehicle){
-                    //vehicle = UserSingleton.getCurrentUser().getInventory().getList().get(position);
-                    //UserSingleton.getCurrentUser().getInventory().delete(vehicle);
                     UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
                     UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
                 }
