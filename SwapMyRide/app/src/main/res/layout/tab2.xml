@@ -16,6 +16,7 @@
         android:layout_height="65dp"
         android:text="+"
         android:gravity="center"
+        android:textAlignment="gravity"
         android:id="@+id/addInventory"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
