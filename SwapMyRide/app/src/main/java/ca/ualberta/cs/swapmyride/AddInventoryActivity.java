@@ -87,25 +87,23 @@ public class AddInventoryActivity extends AppCompatActivity {
         done = (Button) findViewById(R.id.button);
 
         final boolean loadVehicle = getIntent().hasExtra("vehiclePosition");
-
+        Vehicle loaded;
         if(loadVehicle){
             position = getIntent().getIntExtra("vehiclePosition",0);
-            Vehicle loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
+            loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
             //vehicleImage = loaded.getPicture()?
             vehicleName.setText(loaded.getName());
-            vehicleQuantity.setText(loaded.getQuantity());
+            vehicleQuantity.setText(loaded.getQuantity().toString());
             vehicleComments.setText(loaded.getComments());
             vehiclePublic.setChecked(loaded.getPublic());
-            //qualitySpinner.setSelection(loaded.getQuality().)
-            
+            qualitySpinner.setSelection(loaded.getQuality().getPosition());
+            categorySpinner.setSelection(loaded.getCategory().getPosition());
         }
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Vehicle vehicle;
-
-                vehicle = new Vehicle();
+                Vehicle vehicle = new Vehicle();
                 // vehicle.setPhoto(vehicleImage);
                 vehicle.setName(vehicleName.getText().toString());
                 Log.i("Vehicle Name", vehicleName.getText().toString());
@@ -125,13 +123,23 @@ public class AddInventoryActivity extends AppCompatActivity {
                 vehicle.setPublic(vehiclePublic.isChecked());
 
                 //add the vehicle to our current user.
-                UserSingleton.getCurrentUser().addItem(vehicle);
-
+                if(loadVehicle){
+                    //vehicle = UserSingleton.getCurrentUser().getInventory().getList().get(position);
+                    //UserSingleton.getCurrentUser().getInventory().delete(vehicle);
+                    UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
+                    UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
+                }
+                else {
+                    UserSingleton.getCurrentUser().addItem(vehicle);
+                }
                 //save the user to ensure all changes are updated
                 dm.saveUser(UserSingleton.getCurrentUser());
 
-                Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
-                startActivity(intent);
+                //dont start a new activity if we are editing a vehicle
+                if(!loadVehicle) {
+                    Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
+                    startActivity(intent);
+                }
                 finish();
             }
         });

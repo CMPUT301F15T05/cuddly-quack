@@ -73,7 +73,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ViewVehicleActivity.this, AddInventoryActivity.class);
                 intent.putExtra("vehiclePosition", position);
-                //startActivity(intent);
+                startActivity(intent);
+                finish();
             }
         });
     }
