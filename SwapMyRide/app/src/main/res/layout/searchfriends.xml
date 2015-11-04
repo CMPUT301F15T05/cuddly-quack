@@ -35,7 +35,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/friendView"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/searchButton"
         android:layout_alignParentBottom="true"
