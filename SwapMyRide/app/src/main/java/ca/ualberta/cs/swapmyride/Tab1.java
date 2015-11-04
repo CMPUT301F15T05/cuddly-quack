@@ -69,11 +69,10 @@ public class Tab1 extends Fragment {
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),ViewVehicleActivity.class);
+                Intent intent = new Intent(getActivity(),ViewFeedInventory.class);
                 startActivity(intent);
             }
         });
-
         return v;
     }
 }
