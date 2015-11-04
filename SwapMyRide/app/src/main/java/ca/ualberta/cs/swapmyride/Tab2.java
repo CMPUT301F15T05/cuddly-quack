@@ -25,7 +25,6 @@ public class Tab2 extends Fragment {
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
     InventoryAdapter adapter;
-    Gson gson;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
