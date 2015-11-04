@@ -1,7 +1,10 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,6 +28,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     VehicleQuality vehicleQuality;
 
     VehicleController vehicleController;
+    Vehicle vehicle;
 
     ImageButton vehicleImage;
     EditText vehicleName;
@@ -37,15 +41,27 @@ public class AddInventoryActivity extends AppCompatActivity {
 
     int position;
 
+    //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addinventory);
-
-        dm = new DataManager(AddInventoryActivity.this);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        // TODO: Needs to smell more MVCish
+        vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
+        vehicleName = (EditText) findViewById(R.id.vehicleField);
+        vehicleQuantity = (EditText) findViewById(R.id.quantityField);
+        vehicleComments = (EditText) findViewById(R.id.commentsField);
+        vehiclePublic = (Switch) findViewById(R.id.ispublic);
+        done = (Button) findViewById(R.id.button);
+        dm = new DataManager(AddInventoryActivity.this);
+        vehicle = new Vehicle();
+
+        //Setup the spinners for category and quality
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
         categorySpinner.setAdapter(new ArrayAdapter<VehicleCategory>(this, android.R.layout.simple_spinner_dropdown_item, VehicleCategory.values()));
         // Biraj Zalavadia; http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner; 2015-11-01
@@ -77,21 +93,13 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Needs to smell more MVCish
-        vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
-        vehicleName = (EditText) findViewById(R.id.vehicleField);
-        vehicleQuantity = (EditText) findViewById(R.id.quantityField);
-        vehicleComments = (EditText) findViewById(R.id.commentsField);
-        vehiclePublic = (Switch) findViewById(R.id.ispublic);
-
-        done = (Button) findViewById(R.id.button);
-
         final boolean loadVehicle = getIntent().hasExtra("vehiclePosition");
         Vehicle loaded;
         if(loadVehicle){
-            position = getIntent().getIntExtra("vehiclePosition",0);
+            position = getIntent().getIntExtra("vehiclePosition", 0);
             loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
             //vehicleImage = loaded.getPicture()?
+            vehicleImage.setBackground(new BitmapDrawable(getResources(), loaded.getPhoto().getImage()));
             vehicleName.setText(loaded.getName());
             vehicleQuantity.setText(loaded.getQuantity().toString());
             vehicleComments.setText(loaded.getComments());
@@ -100,10 +108,19 @@ public class AddInventoryActivity extends AppCompatActivity {
             categorySpinner.setSelection(loaded.getCategory().getPosition());
         }
 
+        vehicleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dispatchTakePictureIntent();
+
+            }
+        });
+
+
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Vehicle vehicle = new Vehicle();
                 // vehicle.setPhoto(vehicleImage);
                 vehicle.setName(vehicleName.getText().toString());
                 Log.i("Vehicle Name", vehicleName.getText().toString());
@@ -144,6 +161,25 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    //TODO THESE FUNCTIONS ARE MODIFIED FROM GOOGLE TAKING PHOTOS SIMPLY
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Photo photo = new Photo();
+            photo.setImage(imageBitmap);
+            vehicle.setPhoto(photo);
+            vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+        }
     }
 }

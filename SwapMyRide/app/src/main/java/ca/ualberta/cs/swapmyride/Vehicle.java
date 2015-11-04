@@ -4,7 +4,7 @@ import android.graphics.Picture;
 import android.provider.ContactsContract;
 
 public class Vehicle {
-    private Picture photo;
+    private Photo photo;
     private String name;
     private Integer quantity;
     private String comments;
@@ -73,11 +73,11 @@ public class Vehicle {
         this.isPublic = isPublic;
     }
 
-    public void setPhoto(Picture photo){
+    public void setPhoto(Photo photo){
         this.photo = photo;
     }
 
-    public Picture getPhoto(){
+    public Photo getPhoto(){
         return this.photo;
     }
 
