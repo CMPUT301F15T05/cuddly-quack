@@ -21,16 +21,13 @@ import java.io.InputStreamReader;
 public class DataManager {
     private String userFilePath = "";
     private GsonBuilder builder = new GsonBuilder();
-    private Gson gson;
+    private Gson gson = new Gson();
     private FileOutputStream outputStream;
     private Context context;
 
     public DataManager(Context context){
         this.context = context;
 
-        //set up custom serializer adapter for photos.
-        builder.registerTypeAdapter(Photo.class, new PhotoAdapter());
-        gson = builder.create();
     }
 
 

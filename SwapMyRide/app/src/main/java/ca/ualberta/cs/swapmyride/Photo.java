@@ -14,40 +14,26 @@ import java.io.Serializable;
 /**
  * Created by Garry on 2015-11-03.
  */
-public class Photo implements Serializable{
-    private Bitmap image;
+public class Photo{
+    //private Bitmap image;
+    byte image[];
 
     Photo(Bitmap image){
-        this.image = image;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        this.image = stream.toByteArray();
     }
 
     public Bitmap getImage() {
-        return image;
+        int size = image.length;
+        Bitmap map = BitmapFactory.decodeByteArray(image,0,size);
+        return map;
     }
 
     public void setImage(Bitmap image) {
-        this.image = image;
-    }
-
-    //http://stackoverflow.com/questions/6002800/android-serializable-problem
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException{
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 0, stream);
-        byte bitmap[] = stream.toByteArray();
-        int length = bitmap.length;
-        //write out how many bytes we are going to send
-        out.write(length);
-        //write the byte stream out
-        out.write(bitmap, 0, bitmap.length);
+        image.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        this.image = stream.toByteArray();
     }
 
-    private void readObject(java.io.ObjectInputStream in)
-            throws IOException, ClassNotFoundException{
-        int length = in.read();
-        byte bitmap[] = new byte[length];
-        in.read(bitmap, 0, length);
-
-        image = BitmapFactory.decodeByteArray(bitmap, 0, length);
-
-    }
 }
