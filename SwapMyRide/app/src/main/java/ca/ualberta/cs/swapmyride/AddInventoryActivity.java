@@ -181,6 +181,15 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+        vehicleImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                vehicle.getPhoto().deleteImage(getApplicationContext());
+                vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+                return true;
+            }
+        });
+
     }
 
     //TODO THESE FUNCTIONS ARE MODIFIED FROM GOOGLE TAKING PHOTOS SIMPLY

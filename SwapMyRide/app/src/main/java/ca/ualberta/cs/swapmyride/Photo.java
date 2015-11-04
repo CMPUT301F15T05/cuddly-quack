@@ -61,4 +61,9 @@ public class Photo{
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
     }
+
+    public void deleteImage(Context context){
+        Photo photo = new Photo(context);
+        this.setImage(photo.getImage());
+    }
 }
