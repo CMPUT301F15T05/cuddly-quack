@@ -24,8 +24,18 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.tab1,container,false);
-
         inventoryList = new InventoryList();
+        User user = UserSingleton.getCurrentUser();
+
+        for (User friend: user.getFriends().getFriendList()){
+            InventoryList friendInventory = friend.getInventory();
+
+            for (Vehicle vehicle: friendInventory.getList()) {
+                if(vehicle.getPublic()){
+                    inventoryList.add(vehicle);
+                }
+            }
+        }
 
         /*
         // Testing
