@@ -1,10 +1,13 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,8 +18,10 @@ import java.util.ArrayList;
 
 // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
 public class InventoryAdapter extends ArrayAdapter<Vehicle> {
+    private Context context;
     public InventoryAdapter(Context context, ArrayList<Vehicle> vehicle) {
         super(context, 0, vehicle);
+        this.context = context;
     }
 
     @Override
@@ -31,6 +36,7 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         TextView vehicleTitle = (TextView) convertView.findViewById(R.id.vehicleTitle);
         TextView quantity = (TextView) convertView.findViewById(R.id.quantity);
         TextView ispublic = (TextView) convertView.findViewById(R.id.category);
+        ImageView image = (ImageView) convertView.findViewById(R.id.vehiclePicture);
 
         // Populate the data into the template view using the data object
         vehicleTitle.setText(vehicle.getName());
@@ -40,6 +46,9 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         //evaluates to false.
         ispublic.setText(vehicle.getPublic()? "Yes":"No");
         quantity.setText(String.format("%d", vehicle.getQuantity()));
+
+        //set the image in inventory
+        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage()));
 
         // Return the completed view to render on screen
         return convertView;
