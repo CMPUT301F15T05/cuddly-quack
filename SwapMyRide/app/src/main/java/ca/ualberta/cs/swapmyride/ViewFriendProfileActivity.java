@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -51,12 +53,32 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         removeFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                deleteDialog();
+            }
+        });
+
+    }
+
+    public void deleteDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewFriendProfileActivity.this);
+        builder.setMessage("Are you SURE you want to remove this friend? It is a permanent Action!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
                 myself.getFriends().removeFriend(friend);
                 dataManager.saveUser(myself);
                 finish();
             }
         });
-
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
 }
