@@ -22,6 +22,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
     Button delete;
     Button editVehicle;
 
+    int position;
+    DataManager dm = new DataManager(ViewVehicleActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         initOnClickListeners();
 
         Vehicle vehicle;
-        int position = getIntent().getIntExtra("vehiclePosition", 0);
+        position = getIntent().getIntExtra("vehiclePosition", 0);
 
         vehicle = UserSingleton.getCurrentUser().getInventory().getList().get(position);
 
@@ -72,7 +74,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                //TODO DELETE THE VEHICLE
+                User user = UserSingleton.getCurrentUser();
+                Vehicle toDelete = user.getInventory().getList().get(position);
+                user.getInventory().delete(toDelete);
+                dm.saveUser(user);
+                finish();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
