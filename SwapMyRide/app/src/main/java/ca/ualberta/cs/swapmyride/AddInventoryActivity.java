@@ -177,7 +177,6 @@ public class AddInventoryActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Photo photo = new Photo(imageBitmap);
-            photo.setImage(imageBitmap);
             vehicle.setPhoto(photo);
             vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
         }

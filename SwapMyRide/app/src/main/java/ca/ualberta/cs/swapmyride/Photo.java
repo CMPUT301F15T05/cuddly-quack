@@ -20,7 +20,7 @@ public class Photo{
 
     Photo(Bitmap image){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
     }
 
@@ -32,8 +32,7 @@ public class Photo{
 
     public void setImage(Bitmap image) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
     }
-
 }
