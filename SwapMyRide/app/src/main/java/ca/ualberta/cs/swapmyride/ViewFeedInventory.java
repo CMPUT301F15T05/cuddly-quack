@@ -21,12 +21,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class ViewFeedInventory extends AppCompatActivity {
 
     Toolbar toolbar;
     Button trade;
+    TextView title;
+    TextView quanitiy;
+    TextView category;
+    TextView quality;
+    TextView comments;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,15 @@ public class ViewFeedInventory extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        title = (TextView) findViewById(R.id.title);
+        quanitiy = (TextView) findViewById(R.id.quality);
+        category = (TextView) findViewById(R.id.category);
+        quality = (TextView) findViewById(R.id.quantity);
+        comments = (TextView) findViewById(R.id.commentsHead);
+
+        Vehicle vehicle;
+        position = getIntent().getIntExtra("vehiclePosition", 0);
+
         trade = (Button) findViewById(R.id.trade);
         trade.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +60,5 @@ public class ViewFeedInventory extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
 }
