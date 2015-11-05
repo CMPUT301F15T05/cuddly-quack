@@ -68,7 +68,7 @@ public class NotificationManager {
     public void showFriendRequest(final Context context, final String username){
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
-                .setMessage(username + "is now following you! Click view to see their profile!")
+                .setMessage(username + " is now following you! Click view to see their profile!")
                 .setPositiveButton("View Profile", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
