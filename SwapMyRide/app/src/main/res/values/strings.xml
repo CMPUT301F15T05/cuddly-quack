@@ -25,4 +25,7 @@
     <string name="title_activity_search_friends">Search Friends</string>
     <string name="title_activity_add_friend_profile">Add Friend</string>
     <string name="title_activity_view_friend_profile">Profile</string>
+    <string name="title_activity_edit_profile">Edit Profile</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
