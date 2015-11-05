@@ -57,7 +57,6 @@ public class Tab1 extends Fragment {
             }
         }
 
-
         arrayOfVehicle = inventoryList.getList();
 
         FeedAdapter adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
@@ -71,6 +70,7 @@ public class Tab1 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(),ViewFeedInventory.class);
+                intent.putExtra("Position", position);
                 startActivity(intent);
             }
         });

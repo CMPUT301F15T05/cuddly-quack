@@ -34,8 +34,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import java.util.ArrayList;
-
 public class AddInventoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -73,7 +71,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
-        vehiclePublic = (Switch) findViewById(R.id.ispublic);
+        vehiclePublic = (Switch) findViewById(R.id.category);
         done = (Button) findViewById(R.id.button);
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
