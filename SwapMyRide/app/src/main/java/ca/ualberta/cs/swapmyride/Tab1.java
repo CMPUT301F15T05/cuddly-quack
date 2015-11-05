@@ -52,37 +52,6 @@ public class Tab1 extends Fragment {
             }
         }
 
-        /*
-        // Testing
-        Vehicle vehicle = new Vehicle();
-        vehicle.setName("The Very Very Very Very Cool Car");
-        vehicle.setQuantity(2);
-        vehicle.setCategory(VehicleCategory.CROSSOVER);
-        vehicle.setQuality(VehicleQuality.RUSTBUCKET);
-        inventoryList.add(vehicle);
-
-        Vehicle vehicle2 = new Vehicle();
-        vehicle2.setName("The Very Very Very Very Cool Car");
-        vehicle2.setQuantity(2);
-        vehicle2.setCategory(VehicleCategory.CROSSOVER);
-        vehicle2.setQuality(VehicleQuality.RUSTBUCKET);
-        inventoryList.add(vehicle2);
-
-        Vehicle vehicle3 = new Vehicle();
-        vehicle3.setName("The Very Very Very Very Cool Car");
-        vehicle3.setQuantity(2);
-        vehicle3.setCategory(VehicleCategory.CROSSOVER);
-        vehicle3.setQuality(VehicleQuality.RUSTBUCKET);
-        inventoryList.add(vehicle3);
-
-        Vehicle vehicle4 = new Vehicle();
-        vehicle4.setName("The Very Very Very Very Cool Car");
-        vehicle4.setQuantity(2);
-        vehicle4.setCategory(VehicleCategory.CROSSOVER);
-        vehicle4.setQuality(VehicleQuality.RUSTBUCKET);
-        inventoryList.add(vehicle4);
-        // End Testing
-        */
 
         arrayOfVehicle = inventoryList.getList();
 

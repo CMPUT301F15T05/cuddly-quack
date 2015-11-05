@@ -71,7 +71,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Edit Profile"
         android:textSize="20sp"
-        android:id="@+id/editeProfile"
+        android:id="@+id/editProfile"
         android:layout_below="@+id/divider3"
         android:layout_alignStart="@+id/activeTrades"
         android:layout_marginTop="20dp"
