@@ -42,7 +42,7 @@ public class Tab3 extends Fragment {
         viewFriends = (TextView) v.findViewById(R.id.viewFriends);
         pastTrades = (TextView) v.findViewById(R.id.pastTrades);
         activeTrades = (TextView) v.findViewById(R.id.activeTrades);
-        editProfile = (TextView) v.findViewById(R.id.editeProfile);
+        editProfile = (TextView) v.findViewById(R.id.editProfile);
 
 
         viewFriends.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,8 @@ public class Tab3 extends Fragment {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
             }
         });
 
