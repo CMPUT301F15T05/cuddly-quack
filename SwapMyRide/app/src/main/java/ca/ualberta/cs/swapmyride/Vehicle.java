@@ -15,6 +15,9 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
+import android.graphics.BitmapFactory;
+
 public class Vehicle {
 
     private String belongsTo;
@@ -96,8 +99,8 @@ public class Vehicle {
         return this.photo;
     }
 
-    public void deletePhoto(){
-        this.photo = null;
+    public void deletePhoto(Context context){
+        this.photo = new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search));
     }
 
     public String getBelongsTo() {
