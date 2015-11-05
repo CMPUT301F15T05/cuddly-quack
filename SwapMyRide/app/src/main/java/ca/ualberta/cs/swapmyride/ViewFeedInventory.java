@@ -67,6 +67,7 @@ public class ViewFeedInventory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewFeedInventory.this, FeedTradeActivity.class);
+                intent.putExtra("Username", vehicle.getBelongsTo());
                 startActivity(intent);
             }
         });

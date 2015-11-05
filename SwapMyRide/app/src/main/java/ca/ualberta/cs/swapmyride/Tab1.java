@@ -36,6 +36,7 @@ public class Tab1 extends Fragment {
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
     User user;
+    FeedAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class Tab1 extends Fragment {
 
         arrayOfVehicle = inventoryList.getList();
 
-        FeedAdapter adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
+        adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 
