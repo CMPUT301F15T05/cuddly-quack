@@ -15,6 +15,7 @@ public class EditProfileActivity extends AppCompatActivity {
     UserSingleton userSingleton;
     User user;
     Button save;
+    DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setName(nameTextView.getText().toString());
                 user.setUserEmail(emailTextView.getText().toString());
                 user.setUserAddress(addressTextView.getText().toString());
+
+                dataManager = new DataManager(EditProfileActivity.this);
+                dataManager.saveUser(user);
 
                 finish();
             }
