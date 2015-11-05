@@ -113,4 +113,18 @@ public class UserController {
         DataManager dm = new DataManager(context);
         dm.saveUser(UserSingleton.getCurrentUser());
     }
+
+    public InventoryList getFriendVehicles(){
+        InventoryList inventoryList = new InventoryList();
+        for (User friend : getFriends()) {
+            InventoryList friendInventory = friend.getInventory();
+
+            for (Vehicle vehicle : friendInventory.getList()) {
+                if (vehicle.getPublic()) {
+                    inventoryList.add(vehicle);
+                }
+            }
+        }
+        return inventoryList;
+    }
 }

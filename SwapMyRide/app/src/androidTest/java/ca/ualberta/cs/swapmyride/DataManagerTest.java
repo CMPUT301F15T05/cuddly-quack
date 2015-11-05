@@ -28,13 +28,14 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
     public void testSaveUser(){
         DataManager dataManager = new DataManager(getActivity());
+        UserController uController = new UserController(getActivity());
         User user = new User();
         user.setName("Garry");
         user.setUserAddress("4465");
         user.setUserName("gbullock");
         user.setUserEmail("gbullock@ualbert.ca");
         Log.i("FilePath", getActivity().getBaseContext().getFileStreamPath(user.getUserName()).toString());
-        UserSingleton.addUser(user);
+        uController.addCurrentUser(user);
         dataManager.saveUser(user);
 
         User loadTo = dataManager.loadUser("gbullock");

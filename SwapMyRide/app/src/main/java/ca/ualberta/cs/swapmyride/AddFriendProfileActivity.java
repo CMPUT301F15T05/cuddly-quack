@@ -62,7 +62,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uController.addFriend(possibleFriend.getUserName());
+                uController.addFriend(username);
                 uController.saveCurrentUser();
                 Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
                 finish();

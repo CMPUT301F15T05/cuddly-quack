@@ -15,8 +15,6 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.graphics.Picture;
-
 import java.util.ArrayList;
 
 /**
@@ -78,24 +76,18 @@ public class Trade {
     }
 
     public void send(){
-        ownerNotified = true;
-        borrowerNotified = true;
+        ownerNotified = owner.notificationManager.notifyTrade(this);
+        borrowerNotified = borrower.notificationManager.notifyTrade(this);
+        owner.addPendingTrade(this);
+        borrower.addPendingTrade(this);
     }
 
     public Boolean getOwnerNotified() {
         return ownerNotified;
     }
 
-    public void setOwnerNotified(Boolean ownerNotified) {
-        this.ownerNotified = ownerNotified;
-    }
-
     public Boolean getBorrowerNotified() {
         return borrowerNotified;
-    }
-
-    public void setBorrowerNotified(Boolean borrowerNotified) {
-        this.borrowerNotified = borrowerNotified;
     }
 
     public Boolean getIsAccepted() {
@@ -104,6 +96,8 @@ public class Trade {
 
     public void accept(){
         this.isAccepted = true;
+        //here is where we would send an email
+        //// TODO: ADD EMAIL FUNCTIONALITY 
     }
 
     public Boolean getIsDeclined() {

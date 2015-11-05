@@ -34,8 +34,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import java.util.ArrayList;
-
 public class AddInventoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -53,7 +51,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     EditText vehicleComments;
     Switch vehiclePublic;
     Button done;
-
+    UserController uController;
     DataManager dm;
 
     int position;
@@ -67,13 +65,13 @@ public class AddInventoryActivity extends AppCompatActivity {
         setContentView(R.layout.addinventory);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
+        uController = new UserController(getApplicationContext());
         // TODO: Needs to smell more MVCish
         vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
-        vehiclePublic = (Switch) findViewById(R.id.ispublic);
+        vehiclePublic = (Switch) findViewById(R.id.category);
         done = (Button) findViewById(R.id.button);
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
@@ -163,20 +161,24 @@ public class AddInventoryActivity extends AppCompatActivity {
 
                 //add the vehicle to our current user.
                 if(loadVehicle){
-                    UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
-                    UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
+                    //UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
+                    uController.getUserInventoryItems().add(position,vehicle);
+                    //UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
+                    uController.getUserInventoryItems().remove(position+1);
                 }
                 else {
-                    UserSingleton.getCurrentUser().addItem(vehicle);
+                    //UserSingleton.getCurrentUser().addItem(vehicle);
+                    uController.getCurrentUser().addItem(vehicle);
                 }
                 //save the user to ensure all changes are updated
-                dm.saveUser(UserSingleton.getCurrentUser());
+                uController.saveCurrentUser();
 
+                /*
                 //dont start a new activity if we are editing a vehicle
                 if(!loadVehicle) {
                     Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
                     startActivity(intent);
-                }
+                }*/
                 finish();
             }
         });

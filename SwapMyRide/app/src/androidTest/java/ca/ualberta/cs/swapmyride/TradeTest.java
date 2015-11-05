@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class TradeTest extends ActivityInstrumentationTestCase2 {
     public TradeTest(){super(MainMenu.class);}
-    public Picture picture;
+    public Photo picture;
 
     // Use Case 15: Trade with Friend
     //testing if create trade works
@@ -113,7 +113,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.addBorrowerItem(vehicleTwo);
 
         tradeList.add(trade);
-        trade.send(); //trade.send() should have the functionality to notify
+        trade.send(); //trade.send() should have the functionality to notifyTrade
 
         //check that notification was done
         assertTrue(trade.getOwnerNotified());

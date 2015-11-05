@@ -40,14 +40,16 @@ public class Tab2 extends Fragment {
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
     InventoryAdapter adapter;
+    UserController uController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.tab2,container,false);
 
         addInventory = (Button) v.findViewById(R.id.addInventory);
+        uController = new UserController(getContext());
 
-        inventoryList = UserSingleton.getCurrentUser().getInventory();
+        inventoryList = uController.getCurrentUser().getInventory();
 
         arrayOfVehicle = inventoryList.getList();
 
@@ -81,6 +83,9 @@ public class Tab2 extends Fragment {
     }
     public void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        inventoryList = uController.getCurrentUser().getInventory();
+        arrayOfVehicle = inventoryList.getList();
+        adapter = new InventoryAdapter(getActivity(), arrayOfVehicle);
+        inventory.setAdapter(adapter);
     }
 }

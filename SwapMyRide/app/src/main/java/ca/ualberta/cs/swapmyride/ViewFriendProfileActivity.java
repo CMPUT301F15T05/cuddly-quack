@@ -100,4 +100,9 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         builder.show();
     }
 
+    public void changeUser(String username){
+        dataManager = new DataManager(getApplicationContext());
+        friend = dataManager.loadUser(username);
+    }
+
 }

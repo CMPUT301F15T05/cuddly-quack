@@ -44,6 +44,7 @@ public class ViewFriendsActivity extends AppCompatActivity {
 
         friendView = (ListView) findViewById(R.id.friendView);
 
+        uController.updateFriends();
         friendsList = uController.getFriends();
 
         adapter = new FriendAdapter(getApplicationContext(), friendsList);
@@ -66,6 +67,7 @@ public class ViewFriendsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        uController.updateFriends();
         friendsList = uController.getFriends();
         adapter = new FriendAdapter(getApplicationContext(), friendsList);
         friendView.setAdapter(adapter);

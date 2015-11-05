@@ -37,13 +37,17 @@ public class Tab1 extends Fragment {
     InventoryList inventoryList;
     FeedAdapter adapter;
     UserController uController;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab1,container,false);
-
+        View v = inflater.inflate(R.layout.tab1, container, false);
+        uController = new UserController(getActivity());
         arrayOfVehicle = new ArrayList<>();
         adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
+        //send notification to user when screen is returned to this area.
+        user = uController.getCurrentUser();
+        user.notificationManager.notifyMe(getContext());
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 
@@ -53,32 +57,26 @@ public class Tab1 extends Fragment {
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),ViewFeedInventory.class);
+                Intent intent = new Intent(getActivity(), ViewFeedInventory.class);
+                intent.putExtra("Position", position);
                 startActivity(intent);
             }
         });
+
         return v;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         inventoryList = new InventoryList();
-        uController = new UserController(getActivity());
         uController.updateFriends();
-        for (User friend: uController.getFriends()){
-            InventoryList friendInventory = friend.getInventory();
 
-            for (Vehicle vehicle: friendInventory.getList()) {
-                if(vehicle.getPublic()){
-                    inventoryList.add(vehicle);
-                }
-            }
-        }
-
+        inventoryList = uController.getFriendVehicles();
 
         arrayOfVehicle = inventoryList.getList();
-        adapter =new FeedAdapter(getContext(),arrayOfVehicle);
+        adapter = new FeedAdapter(getContext(), arrayOfVehicle);
         inventory.setAdapter(adapter);
+        user.notificationManager.notifyMe(getContext());
     }
 }

@@ -15,10 +15,12 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.graphics.Picture;
-import android.provider.ContactsContract;
+import android.content.Context;
+import android.graphics.BitmapFactory;
 
 public class Vehicle {
+
+    private String belongsTo;
     private Photo photo;
     private String name;
     private Integer quantity;
@@ -35,6 +37,7 @@ public class Vehicle {
         category = VehicleCategory.NONE;
         quality = VehicleQuality.NONE;
         isPublic = true;
+        belongsTo = "";
     }
 
 
@@ -96,8 +99,16 @@ public class Vehicle {
         return this.photo;
     }
 
-    public void deletePhoto(){
-        this.photo = null;
+    public void deletePhoto(Context context){
+        this.photo = new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search));
+    }
+
+    public String getBelongsTo() {
+        return belongsTo;
+    }
+
+    public void setBelongsTo(String belongsTo) {
+        this.belongsTo = belongsTo;
     }
 
 }
