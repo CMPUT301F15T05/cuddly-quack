@@ -113,7 +113,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         trade.addBorrowerItem(vehicleTwo);
 
         tradeList.add(trade);
-        trade.send(); //trade.send() should have the functionality to notify
+        trade.send(); //trade.send() should have the functionality to notifyTrade
 
         //check that notification was done
         assertTrue(trade.getOwnerNotified());

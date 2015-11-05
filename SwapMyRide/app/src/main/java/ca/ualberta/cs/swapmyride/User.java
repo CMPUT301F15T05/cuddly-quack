@@ -28,6 +28,7 @@ public class User {
     private boolean downloadImages;
     private TradeList pastTrades;
     private TradeList pendingTrades;
+    public NotificationManager notificationManager;
     //private Setting settings;
 
     //this constructor is used for creating a new name
@@ -37,6 +38,7 @@ public class User {
         friends = new FriendsList();
         pastTrades = new TradeList();
         pendingTrades = new TradeList();
+        notificationManager = new NotificationManager();
         //settings = new Setting();
     }
 

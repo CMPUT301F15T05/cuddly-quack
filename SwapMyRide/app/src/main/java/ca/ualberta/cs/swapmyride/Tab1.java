@@ -35,12 +35,17 @@ public class Tab1 extends Fragment {
     ListView inventory;
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab1,container,false);
+        View v =inflater.inflate(R.layout.tab1, container, false);
         inventoryList = new InventoryList();
-        User user = UserSingleton.getCurrentUser();
+        user = UserSingleton.getCurrentUser();
+
+        //send notification to user when screen is returned to this area.
+        user.notificationManager.notifyMe(getContext());
+
 
         for (User friend: user.getFriends().getFriendList()){
             InventoryList friendInventory = friend.getInventory();
@@ -70,5 +75,11 @@ public class Tab1 extends Fragment {
             }
         });
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        user.notificationManager.notifyMe(getContext());
     }
 }
