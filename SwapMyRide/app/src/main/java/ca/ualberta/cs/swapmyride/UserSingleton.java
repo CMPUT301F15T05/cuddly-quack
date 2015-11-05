@@ -1,5 +1,3 @@
-package ca.ualberta.cs.swapmyride;
-
 /*
  * Copyright 2015 Adriano Marini, Carson McLean, Conner Dunn, Daniel Haberstock, Garry Bullock
  *
@@ -15,6 +13,8 @@ package ca.ualberta.cs.swapmyride;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ca.ualberta.cs.swapmyride;
+
 import java.util.ArrayList;
 
 /**

@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2015 Adriano Marini, Carson McLean, Conner Dunn, Daniel Haberstock, Garry Bullock
  *
