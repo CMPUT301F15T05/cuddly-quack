@@ -19,6 +19,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -40,12 +41,10 @@ public class NotificationManager {
 
     /**
      *
-     * @param username User that added this c
-     * @return
+     * @param username String of username that has added the current user
      */
-    public Boolean notifyFriendRequest(String username){
+    public void notifyFriendRequest(String username){
         friendRequests.add(username);
-        return true;
     }
 
     //http://stackoverflow.com/questions/2115758/how-to-display-alert-dialog-in-android
@@ -81,10 +80,13 @@ public class NotificationManager {
                 .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //do nothing
+                    // Clear newly added friends from ArrayList to avoid duplicate notifications
+                        Log.i("DISMISS", "DISMISS");
                     }
                 })
                 .show();
+        friendRequests.clear();
+//        tradesToBeNotified.clear();
     }
 
     public void notifyMe(Context context) {
