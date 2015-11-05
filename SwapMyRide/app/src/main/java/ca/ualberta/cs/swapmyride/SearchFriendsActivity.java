@@ -20,6 +20,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -74,12 +75,20 @@ public class SearchFriendsActivity extends AppCompatActivity {
         friendView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), AddFriendProfileActivity.class);
+                FriendsList friendsList = UserSingleton.getCurrentUser().getFriends();
+                DataManager dataManager = new DataManager(getApplicationContext());
+                User user = dataManager.loadUser(username);
 
-                //add the vehicle that has been selected to the intent to pass
-                intent.putExtra("Username", username);
+                if (friendsList.hasUser(user)) {
+                    Log.i("hasUser", "Friend has already been added");
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), AddFriendProfileActivity.class);
 
-                startActivity(intent);
+                    //add the vehicle that has been selected to the intent to pass
+                    intent.putExtra("Username", username);
+
+                    startActivity(intent);
+                }
             }
         });
     }

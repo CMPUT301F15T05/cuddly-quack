@@ -52,6 +52,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     Switch vehiclePublic;
     Button done;
     UserController uController;
+    Button delete;
     DataManager dm;
 
     int position;
@@ -68,6 +69,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         uController = new UserController(getApplicationContext());
         // TODO: Needs to smell more MVCish
         vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
+        delete = (Button) findViewById(R.id.delete);
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
@@ -136,6 +138,15 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vehicle.setPhoto(new Photo(getApplicationContext()));
+                vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+
+
+            }
+        });
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
