@@ -77,11 +77,11 @@ public class UserController {
         return user.getFriends();
     }
 
-    public void addFriend(User toAdd){
+    public void addFriend(String toAdd){
         UserSingleton.getCurrentUser().addFriend(toAdd);
     }
 
-    public void deleteFriend(User toDelete){
+    public void deleteFriend(String toDelete){
         UserSingleton.getCurrentUser().removeFriend(toDelete);
     }
 

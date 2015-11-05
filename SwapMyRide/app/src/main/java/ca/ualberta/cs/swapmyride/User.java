@@ -92,12 +92,12 @@ public class User {
         return friends;
     }
 
-    public void addFriend(User user){
-        friends.addFriend(user);
+    public void addFriend(String username){
+        friends.addFriend(username);
     }
 
-    public void removeFriend(User user){
-        friends.removeFriend(user);
+    public void removeFriend(String username){
+        friends.removeFriend(username);
     }
 
     public TradeList getPastTrades() {

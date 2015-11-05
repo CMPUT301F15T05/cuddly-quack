@@ -3,11 +3,14 @@ package ca.ualberta.cs.swapmyride;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView category;
     TextView quality;
     TextView comments;
+    ImageView image;
 
     Button delete;
     Button editVehicle;
@@ -42,6 +46,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quantity);
         comments = (TextView) findViewById(R.id.commentsHead);
+        image = (ImageView) findViewById(R.id.picture);
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
@@ -58,7 +63,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-
+        image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
     }
 
     public void initOnClickListeners(){

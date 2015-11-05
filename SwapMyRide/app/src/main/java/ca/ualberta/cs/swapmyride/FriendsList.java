@@ -21,39 +21,31 @@ import java.util.ArrayList;
  * Created by Garry on 2015-10-26.
  */
 public class FriendsList {
-    private ArrayList<User> friendList;
+    private ArrayList<String> friendList;
 
     public FriendsList(){
         friendList = new ArrayList<>();
     }
 
-    public void addFriend(User user){
-        friendList.add(user);
+    public void addFriend(String username){
+        friendList.add(username);
     }
 
-    public void removeFriend(User user){
-        friendList.remove(user);
+    public void removeFriend(String username){
+        friendList.remove(username);
     }
 
     public int size(){return friendList.size();}
 
-    public User findUser(User user){
-        //based on the test for Use Case 8, we should search through the list and see if
-        //any of the objects matches the one given, and return.
-        for (User userInList: friendList) {
-            if(userInList.equals(user)){
-                return userInList;
-            }
-        }
-        //if we dont find the user we are looking for, i'm not sure what to return??
-        return null;
+    public boolean findUser(String username){
+        return friendList.contains(username);
     }
 
     public boolean hasUser(User user){
         return friendList.contains(user);
     }
 
-    public ArrayList<User> getFriendList() {
+    public ArrayList<String> getFriendList() {
         return friendList;
     }
 }
