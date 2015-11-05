@@ -15,10 +15,9 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.graphics.Picture;
-import android.provider.ContactsContract;
-
 public class Vehicle {
+
+    private String belongsTo;
     private Photo photo;
     private String name;
     private Integer quantity;
@@ -35,6 +34,7 @@ public class Vehicle {
         category = VehicleCategory.NONE;
         quality = VehicleQuality.NONE;
         isPublic = true;
+        belongsTo = "";
     }
 
 
@@ -98,6 +98,14 @@ public class Vehicle {
 
     public void deletePhoto(){
         this.photo = null;
+    }
+
+    public String getBelongsTo() {
+        return belongsTo;
+    }
+
+    public void setBelongsTo(String belongsTo) {
+        this.belongsTo = belongsTo;
     }
 
 }
