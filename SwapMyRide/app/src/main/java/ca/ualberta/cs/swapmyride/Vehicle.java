@@ -15,6 +15,8 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Picture;
 import android.provider.ContactsContract;
 
@@ -96,8 +98,8 @@ public class Vehicle {
         return this.photo;
     }
 
-    public void deletePhoto(){
-        this.photo = null;
+    public void deletePhoto(Context context){
+        this.photo = new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search));
     }
 
 }

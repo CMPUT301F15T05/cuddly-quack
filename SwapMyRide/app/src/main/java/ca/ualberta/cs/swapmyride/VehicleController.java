@@ -15,6 +15,7 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -44,5 +45,9 @@ public class VehicleController {
 
     public void addPhoto(Drawable photo){
 
+    }
+
+    public void deletePhoto(Vehicle vehicle, Context context){
+        vehicle.deletePhoto(context);
     }
 }
