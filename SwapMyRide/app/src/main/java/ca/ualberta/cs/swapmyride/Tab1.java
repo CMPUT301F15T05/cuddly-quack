@@ -44,7 +44,7 @@ public class Tab1 extends Fragment {
         user = UserSingleton.getCurrentUser();
 
         //send notification to user when screen is returned to this area.
-        user.notificationManager.notifyMe(getContext());
+        user.getNotificationManager().notifyMe(getContext());
 
 
         for (User friend: user.getFriends().getFriendList()){
@@ -80,6 +80,6 @@ public class Tab1 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        user.notificationManager.notifyMe(getContext());
+        user.getNotificationManager().notifyMe(getContext());
     }
 }

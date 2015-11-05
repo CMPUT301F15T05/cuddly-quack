@@ -28,7 +28,7 @@ public class User {
     private boolean downloadImages;
     private TradeList pastTrades;
     private TradeList pendingTrades;
-    public NotificationManager notificationManager;
+    private NotificationManager notificationManager;
     //private Setting settings;
 
     //this constructor is used for creating a new name
@@ -117,4 +117,6 @@ public class User {
     public void addPendingTrade(Trade pendingTrade) {
         pendingTrades.add(pendingTrade);
     }
+
+    public NotificationManager getNotificationManager() {return notificationManager; }
 }

@@ -76,8 +76,8 @@ public class Trade {
     }
 
     public void send(){
-        ownerNotified = owner.notificationManager.notifyTrade(this);
-        borrowerNotified = borrower.notificationManager.notifyTrade(this);
+        ownerNotified = owner.getNotificationManager().notifyTrade(this);
+        borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
         owner.addPendingTrade(this);
         borrower.addPendingTrade(this);
     }
