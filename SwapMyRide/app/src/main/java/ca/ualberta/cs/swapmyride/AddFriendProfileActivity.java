@@ -60,16 +60,20 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            // Save new friend to current user's friends list
-            UserSingleton.getCurrentUser().addFriend(possibleFriend);
-            dataManager.saveUser(UserSingleton.getCurrentUser());
+                if (!username.equals(UserSingleton.getCurrentUser().getUserName())) {
+                    // Save new friend to current user's friends list
+                    UserSingleton.getCurrentUser().addFriend(possibleFriend);
+                    dataManager.saveUser(UserSingleton.getCurrentUser());
 
-            // Add current user to new friend's new friends notifications
-            User newFriend = dataManager.loadUser(possibleFriend.getUserName());
-            newFriend.getNotificationManager().notifyFriendRequest(UserSingleton.getCurrentUser().getUserName());
-            dataManager.saveUser(newFriend);
-            Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
-            finish();
+                    // Add current user to new friend's new friends notifications
+                    User newFriend = dataManager.loadUser(possibleFriend.getUserName());
+                    newFriend.getNotificationManager().notifyFriendRequest(UserSingleton.getCurrentUser().getUserName());
+                    dataManager.saveUser(newFriend);
+                    Toast.makeText(getApplicationContext(), username + " Added!", Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Can't add yourself", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
