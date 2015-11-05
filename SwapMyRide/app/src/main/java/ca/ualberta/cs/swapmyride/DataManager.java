@@ -111,4 +111,15 @@ public class DataManager {
         if(username.equals("")) return false;
         return context.getFileStreamPath(userFilePath + username).exists();
     }
+
+    public void updateFriends(User user){
+        for (String friendUserName : user.getFriends().getFriendList()) {
+            if(searchUser(friendUserName)){
+                //TODO Update the friends from server
+            }
+            else{
+                //TODO Code to load friends that do not exist in the local memory
+            }
+        }
+    }
 }

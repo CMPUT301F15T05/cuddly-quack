@@ -35,27 +35,15 @@ public class Tab1 extends Fragment {
     ListView inventory;
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
+    FeedAdapter adapter;
+    UserController uController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.tab1,container,false);
-        inventoryList = new InventoryList();
-        User user = UserSingleton.getCurrentUser();
 
-        for (User friend: user.getFriends().getFriendList()){
-            InventoryList friendInventory = friend.getInventory();
-
-            for (Vehicle vehicle: friendInventory.getList()) {
-                if(vehicle.getPublic()){
-                    inventoryList.add(vehicle);
-                }
-            }
-        }
-
-
-        arrayOfVehicle = inventoryList.getList();
-
-        FeedAdapter adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
+        arrayOfVehicle = new ArrayList<>();
+        adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 
@@ -70,5 +58,27 @@ public class Tab1 extends Fragment {
             }
         });
         return v;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        inventoryList = new InventoryList();
+        uController = new UserController(getActivity());
+        uController.updateFriends();
+        for (User friend: uController.getFriends()){
+            InventoryList friendInventory = friend.getInventory();
+
+            for (Vehicle vehicle: friendInventory.getList()) {
+                if(vehicle.getPublic()){
+                    inventoryList.add(vehicle);
+                }
+            }
+        }
+
+
+        arrayOfVehicle = inventoryList.getList();
+        adapter =new FeedAdapter(getContext(),arrayOfVehicle);
+        inventory.setAdapter(adapter);
     }
 }

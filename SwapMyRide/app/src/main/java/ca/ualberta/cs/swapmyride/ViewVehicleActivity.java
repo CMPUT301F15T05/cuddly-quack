@@ -28,11 +28,10 @@ public class ViewVehicleActivity extends AppCompatActivity {
 
     Button delete;
     Button editVehicle;
-
     Gson gson;
-
     int position;
     DataManager dm = new DataManager(ViewVehicleActivity.this);
+    UserController uController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +39,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        uController = new UserController(getApplicationContext());
 
         title = (TextView) findViewById(R.id.title);
         quanitiy = (TextView) findViewById(R.id.quality);
@@ -56,7 +56,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         Vehicle vehicle;
         position = getIntent().getIntExtra("vehiclePosition", 0);
 
-        vehicle = UserSingleton.getCurrentUser().getInventory().getList().get(position);
+        vehicle = uController.getUserInventoryItems().get(position);
 
         title.setText(vehicle.getName());
         quanitiy.setText(vehicle.getQuantity().toString());

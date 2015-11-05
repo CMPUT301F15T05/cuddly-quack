@@ -31,6 +31,7 @@ public class ViewFriendsActivity extends AppCompatActivity {
     ListView friendView;
     FriendAdapter adapter;
     ArrayList<User> friendsList;
+    UserController uController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,11 @@ public class ViewFriendsActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        uController = new UserController(getApplicationContext());
 
         friendView = (ListView) findViewById(R.id.friendView);
 
-        friendsList = UserSingleton.getCurrentUser().getFriends().getFriendList();
+        friendsList = uController.getFriends();
 
         adapter = new FriendAdapter(getApplicationContext(), friendsList);
 
@@ -64,6 +66,8 @@ public class ViewFriendsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        friendsList = uController.getFriends();
+        adapter = new FriendAdapter(getApplicationContext(), friendsList);
+        friendView.setAdapter(adapter);
     }
 }

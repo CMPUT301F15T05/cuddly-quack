@@ -15,45 +15,62 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by Garry on 2015-11-01.
  */
 public class UserController {
     private static UserSingleton thisSingleton = UserSingleton.getInstance();
+    Context context;
+    DataManager dm;
+
+    UserController(Context context){
+        this.context = context;
+        dm = new DataManager(context);
+    }
+
+    public void updateFriends(){
+        ArrayList<String> friends = UserSingleton.getCurrentUser().getFriends().getFriendList();
+        ArrayList<User> users = new ArrayList<>();
+        User newUser;
+        for (String friend : friends) {
+            newUser = dm.loadUser(friend);
+            users.add(newUser);
+        }
+        UserSingleton.setFriends(users);
+    }
 
     //for the time being, these classes access the local user list to verify
     //TODO: implenment remote database usage for userExists, addCurrentUser, addUser
-    public static boolean userExists(String username){
-        String tempString;
-        for(User user : thisSingleton.getUsers()){
-            tempString = user.getUserName();
-            Log.i("userExits", tempString);
-            if(tempString.equals(username) /*&& tempString.length() == username.length()*/){
-                return true;
-            }
-        }
-        return false;
+    public boolean userExists(String username){
+        DataManager dataManager = new DataManager(context);
+        return dataManager.searchUser(username);
     }
 
     //adds current user to the contextual variables for the usage
-    public static void addCurrentUser(String username){
-        String tempString;
-        User currentUser = new User();
-        for(User user : UserSingleton.getUsers()) {
-            tempString = user.getUserName();
-            if (tempString.equals(username)) {
-                currentUser = user;
-            }
-        }
-        UserSingleton.addCurrentUser(currentUser);
+    public void addCurrentUser(String username){
+        DataManager dataManager = new DataManager(context);
+        User user = dataManager.loadUser(username);
+        UserSingleton.addCurrentUser(user);
+        updateFriends();
+    }
+
+    public void addCurrentUser(User user){
+        UserSingleton.addCurrentUser(user);
+        updateFriends();
     }
 
     //adds user to user list
-    public static boolean addUser(User user){
-        UserSingleton.addUser(user);
-        return true;
+    public void addFriend(User user){
+        UserSingleton.addFriends(user);
+    }
+
+    public ArrayList<User> getFriends(){
+        return UserSingleton.getFriends();
     }
 
     public User getCurrentUser(){
@@ -79,10 +96,21 @@ public class UserController {
 
     public void addFriend(String toAdd){
         UserSingleton.getCurrentUser().addFriend(toAdd);
+        DataManager dm = new DataManager(context);
+        UserSingleton.addFriends(dm.loadUser(toAdd));
     }
 
     public void deleteFriend(String toDelete){
         UserSingleton.getCurrentUser().removeFriend(toDelete);
+        updateFriends();
     }
 
+    public ArrayList<Vehicle> getUserInventoryItems(){
+        return UserSingleton.getCurrentUser().getInventory().getList();
+    }
+
+    public void saveCurrentUser(){
+        DataManager dm = new DataManager(context);
+        dm.saveUser(UserSingleton.getCurrentUser());
+    }
 }

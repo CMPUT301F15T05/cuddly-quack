@@ -15,6 +15,8 @@ package ca.ualberta.cs.swapmyride;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import android.app.Application;
+
 import java.util.ArrayList;
 
 /**
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  */
 public class UserSingleton {
     private static User currentUser = null;
-    private static ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<User> friends = new ArrayList<>();
 
     private static UserSingleton ourInstance = new UserSingleton();
 
@@ -42,12 +44,15 @@ public class UserSingleton {
         return currentUser;
     }
 
-    public static void addUser(User user){
-        users.add(user);
+    public static void addFriends(User user){
+        friends.add(user);
     }
 
-    public static ArrayList<User> getUsers(){
-        return users;
+    public static ArrayList<User> getFriends(){
+        return friends;
     }
 
+    public static void setFriends(ArrayList<User> users){
+        friends = users;
+    }
 }

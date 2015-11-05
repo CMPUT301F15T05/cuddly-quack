@@ -49,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
         dm = new DataManager(SignUpActivity.this);
-        uController = new UserController();
+        uController = new UserController(getApplicationContext());
 
         signUp = (Button) findViewById(R.id.signUp);
 

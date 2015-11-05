@@ -33,6 +33,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
     String username;
     DataManager dataManager;
     User possibleFriend;
+    UserController uController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        uController = new UserController(getApplicationContext());
         dataManager = new DataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
@@ -60,8 +62,8 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserSingleton.getCurrentUser().addFriend(possibleFriend);
-                dataManager.saveUser(UserSingleton.getCurrentUser());
+                uController.addFriend(possibleFriend.getUserName());
+                uController.saveCurrentUser();
                 Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
                 finish();
             }

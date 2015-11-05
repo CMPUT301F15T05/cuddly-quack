@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp = (TextView) findViewById(R.id.signUp);
 
         dm = new DataManager(LoginActivity.this);
-        uController = new UserController();
+        uController = new UserController(getApplicationContext());
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameField.getText().toString();
 
                 if(dm.searchUser(username)) {
-                    UserSingleton.addCurrentUser(dm.loadUser(username));
+                    uController.addCurrentUser(dm.loadUser(username));
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
