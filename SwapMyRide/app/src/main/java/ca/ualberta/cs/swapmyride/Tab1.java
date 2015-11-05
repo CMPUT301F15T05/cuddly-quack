@@ -63,6 +63,8 @@ public class Tab1 extends Fragment {
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 
+        inventory.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
         inventory.setAdapter(adapter);
 
         // TODO Pass state to ViewVehicleActivity!
@@ -70,7 +72,7 @@ public class Tab1 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(),ViewFeedInventory.class);
-                intent.putExtra("Position", position);
+                UserSingleton.setFeedViewVehicle(arrayOfVehicle.get(position));
                 startActivity(intent);
             }
         });

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class UserSingleton {
     private static User currentUser = null;
     private static ArrayList<User> users = new ArrayList<>();
+    private static Vehicle feedViewVehicle;
 
     private static UserSingleton ourInstance = new UserSingleton();
 
@@ -50,4 +51,11 @@ public class UserSingleton {
         return users;
     }
 
+    public static Vehicle getFeedViewVehicle() {
+        return feedViewVehicle;
+    }
+
+    public static void setFeedViewVehicle(Vehicle feedViewVehicle) {
+        UserSingleton.feedViewVehicle = feedViewVehicle;
+    }
 }
