@@ -66,6 +66,7 @@ public class NotificationManager {
     }
 
     public void showFriendRequest(final Context context, final String username){
+        friendRequests.remove(username);
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
                 .setMessage(username + " is now following you! Click view to see their profile!")
@@ -97,7 +98,6 @@ public class NotificationManager {
 
         for(String username : friendRequests){
             showFriendRequest(context, username);
-            friendRequests.clear();
         }
 
     }
