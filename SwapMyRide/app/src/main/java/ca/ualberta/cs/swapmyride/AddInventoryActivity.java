@@ -15,6 +15,7 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -42,6 +45,8 @@ import android.widget.Switch;
  */
 
 public class AddInventoryActivity extends AppCompatActivity {
+
+    static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
     Toolbar toolbar;
     Spinner categorySpinner;
@@ -256,12 +261,42 @@ public class AddInventoryActivity extends AppCompatActivity {
      */
 
     private void dispatchTakePictureIntent() {
-        Log.i("TakingPictureIntent", "Trying to take a photo");
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null &&
-                checkHasCamera(getApplicationContext())) {
+
+        // http://developer.android.com/training/permissions/requesting.html
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(AddInventoryActivity.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AddInventoryActivity.this,
+                    Manifest.permission.CAMERA)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(AddInventoryActivity.this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+
+            Log.i("TakingPictureIntent", "Trying to take a photo");
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null &&
+                    checkHasCamera(getApplicationContext())) {
 
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
         }
     }
 

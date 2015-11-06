@@ -14,10 +14,16 @@
         android:layout_width="match_parent"
         />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_below="@+id/tool_bar"
+            android:id="@+id/top"/>
+
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_below="@+id/tool_bar"
+            android:layout_below="@+id/top"
             android:layout_centerHorizontal="true"
             android:id="@+id/vehicleImage"
             android:background="@drawable/ic_default_car" />
