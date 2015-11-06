@@ -15,7 +15,6 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +22,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+/**
+ * EditProfileActivity is the class to make sure someone can edit their profile
+ * Accessible from the user tab
+ */
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -32,6 +36,14 @@ public class EditProfileActivity extends AppCompatActivity {
     Button save;
     DataManager dataManager;
 
+    /**
+     * onCreate, the fields are initialized with the information that
+     * is saved in the current user which is then editable.
+     *
+     * In this function is an onClick Listener, which functions
+     * to save the edited data if any exists at the end of the use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

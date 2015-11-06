@@ -34,6 +34,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+/**
+ * This class specifically works to add a vehicle to a user's inventory
+ *
+ * There is opportunity to input all information and a photo for the new
+ * vehicle, and then it is added to the inventory list.
+ */
+
 public class AddInventoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -60,6 +67,13 @@ public class AddInventoryActivity extends AppCompatActivity {
     //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    /**
+     * In this function (prescribed by Android), we collect all information
+     * about the new vehicle and input it into a vehicle object.
+     * This is then saved.
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +92,14 @@ public class AddInventoryActivity extends AppCompatActivity {
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
 
-        //Setup the spinners for category and quality
+        /**
+         * Using spinners to select category and quality of a vehicle - taking from the enumeration
+         * classes we have elsewhere. This function was adapted from Biraj Zalavadia on StackOverflow
+         * Accessed 2015-11-01
+         * @see <a href="http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner">stackOverflow</a>
+         */
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
         categorySpinner.setAdapter(new ArrayAdapter<VehicleCategory>(this, android.R.layout.simple_spinner_dropdown_item, VehicleCategory.values()));
-        // Biraj Zalavadia; http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner; 2015-11-01
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -95,6 +113,12 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Using spinners to select category and quality of a vehicle - taking from the enumeration
+         * classes we have elsewhere. This function was adapted from Biraj Zalavadia on StackOverflow
+         * Accessed 2015-11-01
+         * @see <a href="http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner">stackOverflow</a>
+         */
         qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
         qualitySpinner.setAdapter(new ArrayAdapter<VehicleQuality>(this, android.R.layout.simple_spinner_dropdown_item, VehicleQuality.values()));
         qualitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -129,6 +153,11 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicle.setPhoto(new Photo(getApplicationContext()));
         }
 
+        /**
+         * This onClick listener implements the function that clicking on the default
+         * image box at the top of the vehicle page will open the camera and allow the
+         * user to take a photo which will be saved directly to the vehicle object
+         */
         vehicleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +167,10 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * This onClick listener occurs when someone clicks delete. This will delete the photo
+         * that is initialized in the view.
+         */
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +180,17 @@ public class AddInventoryActivity extends AppCompatActivity {
 
             }
         });
+
+        /**
+         * This onClick listener occurs after done button is clicked. This would save
+         * the object to inventory -- which then makes it appear in the inventory tab.
+         *
+         * Taken from Oracle Documentation - we found we were required to catch the
+         * possibility that a number might be the wrong format, or not even a number
+         * at all. Accessed November 3, 2015.
+         *
+         * @see <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html#parseInt-java.lang.String-int-">Oracle</a>
+         */
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,6 +250,11 @@ public class AddInventoryActivity extends AppCompatActivity {
     }
 
     //TODO THESE FUNCTIONS ARE MODIFIED FROM GOOGLE TAKING PHOTOS SIMPLY
+
+    /**
+     * This calls the activity to take the photo.
+     */
+
     private void dispatchTakePictureIntent() {
         Log.i("TakingPictureIntent", "Trying to take a photo");
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -215,6 +264,15 @@ public class AddInventoryActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
+
+    /**
+     * After returning from the camera activity, get the photo information
+     * and send it into the structure to get it ready.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -226,6 +284,13 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
         }
     }
+
+    /**
+     * checking if the hardware has a camera that can be used.
+     *
+     * @param context
+     * @return true or false
+     */
 
     public boolean checkHasCamera(Context context){
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
