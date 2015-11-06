@@ -53,7 +53,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         vehicle.setPhoto(photo1);
         assertTrue(vehicle.getPhoto().equals(photo1));
         new VehicleController().deletePhoto(vehicle, getActivity());
-        assertTrue(vehicle.getPhoto().equals(photo1));
+        assertFalse(vehicle.getPhoto().equals(photo1));
     }
 
     // Use Case 26: Restrict Image Size
