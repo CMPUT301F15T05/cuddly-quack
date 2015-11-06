@@ -44,6 +44,10 @@ public class InventoryList {
         return vehicleList.size();
     }
 
+    /**
+     * Searches through the Inventory list to find which vehicles are public
+     * @return an ArrayList of all public vehicles
+     */
     public ArrayList<Vehicle> getPublic(){
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
         for (Vehicle vehicle: vehicleList) {
@@ -54,6 +58,10 @@ public class InventoryList {
         return publicVehicles;
     }
 
+    /**
+     * Searches through the Inventory list to find which vehicles are private
+     * @return an ArrayList of all private vehicles
+     */
     public ArrayList<Vehicle> getPrivate(){
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
         for (Vehicle vehicle: vehicleList) {
@@ -64,6 +72,11 @@ public class InventoryList {
         return publicVehicles;
     }
 
+    /**
+     * Searches the InventoryList to find a given vehicle
+     * @param vehicleName name to find
+     * @return true: vehicle exists. false: vehicle does not exist
+     */
     public boolean search(String vehicleName){
         for (Vehicle vehicle: vehicleList) {
             if(vehicle.getName().equals(vehicleName)) {
@@ -74,6 +87,11 @@ public class InventoryList {
         return false;
     }
 
+    /**
+     * Builds a new inventory list based on the category given
+     * @param category
+     * @return a new InventoryList with only vehicles of the given category
+     */
     public InventoryList getCategory(VehicleCategory category){
         InventoryList newInventory = new InventoryList();
         for (Vehicle vehicle: vehicleList){

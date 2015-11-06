@@ -49,6 +49,13 @@ public class DataManager {
     //edited from user 'giampaolo'
     //http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson
     //Nov. 1/2015
+
+    /**
+     * Save user converts the given user object into a Json string, and then attempts
+     * to write it to internal disk space. The user can the be found under the unique filename
+     * that is the same as their username.
+     * @param user user to write to internal disk
+     */
     public void saveUser(User user){
 
         String userJson = gson.toJson(user);
@@ -70,6 +77,12 @@ public class DataManager {
     //edited from user 'giampaolo'
     //http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson
     //Nov. 1/2015
+
+    /**
+     * Load user reads a user from internal disk, using the user name given as a unique file name.
+     * @param userName check to see it exists before using (ie. searchUser(userName))
+     * @return the loaded User
+     */
     public User loadUser(String userName){
         User user;
         try {
@@ -98,14 +111,20 @@ public class DataManager {
     //edited from user 'hardartcore'
     //http://stackoverflow.com/questions/14737996/android-deleting-a-file-from-internal-storage
     //Nov 1, 2015
+    /**
+     * Deletes a given user from internal disk, based on the given username
+     * @param username
+     */
     public void deleteUser(String username){
         File dir = context.getFilesDir();
         File file = new File(dir, username);
         file.delete();
     }
 
-    /*Checks to see if a user exists. If it does, it will pass the user back, else it will
-    pass back a user equal to null
+    /**
+     * Checks to see if a user exists.
+     * @param username the username to check
+     * @return wheter or not the user exists
      */
     public boolean searchUser(String username) {
         if(username.equals("")) return false;

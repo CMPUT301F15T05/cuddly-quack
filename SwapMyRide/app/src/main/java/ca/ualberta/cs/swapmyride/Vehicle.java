@@ -18,6 +18,10 @@ package ca.ualberta.cs.swapmyride;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 
+/**
+ * Vehicle stores all information regarding the vehicles in the app. All data is private,
+ * and is accessed via getters and setters.
+ */
 public class Vehicle {
 
     private String belongsTo;

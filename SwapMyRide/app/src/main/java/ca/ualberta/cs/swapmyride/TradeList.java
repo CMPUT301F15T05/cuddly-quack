@@ -51,6 +51,11 @@ public class TradeList {
         this.trades.remove(index);
     }
 
+    /**
+     * Gets all of a users past and pending trades
+     * @param user
+     * @return ArrayList of all trades
+     */
     public ArrayList<Trade> getUserTrades(User user){
         TradeList pendingTrades = user.getPendingTrades();
         TradeList pastTrades = user.getPastTrades();
