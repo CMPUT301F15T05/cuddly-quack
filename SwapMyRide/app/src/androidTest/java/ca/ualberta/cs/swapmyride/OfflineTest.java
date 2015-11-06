@@ -106,16 +106,16 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
         userone.setUserName("camclean");
         usertwo.setUserName("ccdunn");
 
-        friendsList.addFriend(userone);
-        friendsList.addFriend(usertwo);
+        friendsList.addFriend(userone.getUserName());
+        friendsList.addFriend(usertwo.getUserName());
 
         ////TODO: find how to turn off data
         //android.turnOffData();
 
         // Storing the returned User class in variable found
-        User found = friendsList.findUser(userone);
+        Boolean found = friendsList.findUser(userone.getUserName());
         // Check if found is equal to what findUser gets
-        assertTrue(found.equals(userone));
+        assertTrue(found);
 
         //TODO: find how to turn on data
         //android.turnOnData();

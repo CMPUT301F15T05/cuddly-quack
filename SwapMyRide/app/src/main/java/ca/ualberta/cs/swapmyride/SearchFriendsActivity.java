@@ -30,6 +30,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * This activity is designed to search friends and display friends that match
+ * a inputted string.
+ */
+
 public class SearchFriendsActivity extends AppCompatActivity {
 
     SearchController searchController;
@@ -41,6 +46,16 @@ public class SearchFriendsActivity extends AppCompatActivity {
     ArrayList<User> foundUsers;
     FriendAdapter adapter;
     String username;
+
+    /**
+     * Displays a search field and accepts input to search for a username
+     *
+     * Uses a SearchController to search through the
+     * information stored in the disk and return any
+     * found friends matching the query.
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
