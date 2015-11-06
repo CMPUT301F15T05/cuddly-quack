@@ -47,12 +47,12 @@ public class DataManager {
         this.context = context;
 
     }
-
+    
     /**
-     * saveUser is designed to serialise and save a user's data
-     *
-     * Edited from user giampaolo on stackOverflow. Accessed 1 November 2015.
-     *
+     * Save user converts the given user object into a Json string, and then attempts
+     * to write it to internal disk space. The user can the be found under the unique filename
+     * that is the same as their username.
+     * @param user user to write to internal disk
      * @see <a href="http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson">stackOverflow</a>
      * @param user
      */
@@ -75,13 +75,13 @@ public class DataManager {
     }
 
     /**
-     * loadUser reads the serialised data and returns a user object
+     * Load user reads a user from internal disk, using the user name given as a unique file name.
+     * @param userName check to see it exists before using (ie. searchUser(userName))
+     * @return the loaded User
      *
      * Edited from user giampaolo on stackOverflow. Accessed 1 November 2015.
      *
      * @see <a href="http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson">stackOverflow</a>
-     * @param userName
-     * @return User
      */
     public User loadUser(String userName){
         User user;
@@ -110,7 +110,7 @@ public class DataManager {
 
     /**
      * deleteUser deletes the serialized data for a user that is located in the
-     * data bank.
+     * database.
      *
      * Edited from user hardartcore on stackOverflow. Accessed 1 November 2015.
      *

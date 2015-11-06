@@ -41,8 +41,8 @@ public class Photo{
     private byte image[];
 
     /**
-     * Constructor for a Photo if an image exists.
-     * @param image
+     * Builds a Photo object based on a given bitmap
+     * @param image the image to store
      */
 
     Photo(Bitmap image){
@@ -52,8 +52,7 @@ public class Photo{
     }
 
     /**
-     * Constructor for a Photo if an image does not exist.
-     * Taking the context, the image is set to the default.
+     * Builds a default photo
      * @param context
      */
 
@@ -65,8 +64,8 @@ public class Photo{
     }
 
     /**
-     * Returns the image that is located in the object
-     * @return Bitmap of Image
+     * Decodes and returns the stored image
+     * @return A bitmap of the stored image
      */
 
     public Bitmap getImage() {
@@ -77,8 +76,8 @@ public class Photo{
     }
 
     /**
-     * With an image as input, sets the stored image as said input
-     * @param image
+     * Encodes the given bitmap and stores it in the photo object
+     * @param image bitmap image to store
      */
 
     public void setImage(Bitmap image) {
@@ -88,11 +87,9 @@ public class Photo{
     }
 
     /**
-     * Deletes any image other than the default by setting it to the
-     * default image.
+     * Removes the current image and sets it to the default
      * @param context
      */
-
     public void deleteImage(Context context){
         Photo photo = new Photo(context);
         this.setImage(photo.getImage());

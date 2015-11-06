@@ -16,7 +16,8 @@
 package ca.ualberta.cs.swapmyride;
 
 /**
- * Created by Garry on 2015-10-26.
+ * This Class stores all necessary information pertaining to the user for storage and access.
+ * It provides the foundation for all functionality of the application.
  */
 public class User {
     private String name;

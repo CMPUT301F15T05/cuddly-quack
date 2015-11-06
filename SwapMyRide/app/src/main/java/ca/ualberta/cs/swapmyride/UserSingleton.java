@@ -17,7 +17,8 @@ package ca.ualberta.cs.swapmyride;
 import java.util.ArrayList;
 
 /**
- * Created by adrianomarini on 2015-11-01.
+ * UserSingleton is the current instance of user. That is to say, it is the User whom is currently
+ * logged into the app.
  */
 public class UserSingleton {
     private static User currentUser = null;

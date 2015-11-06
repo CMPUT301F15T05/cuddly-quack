@@ -80,14 +80,9 @@ public class InventoryList {
     }
 
     /**
-     * Returns an array list of all vehicles that are
-     * declared public from the inventory
-     *
-     * Useful when creating list of publicly available items
-     *
-     * @return ArrayList with vehicles
+     * Searches through the Inventory list to find which vehicles are public
+     * @return an ArrayList of all public vehicles
      */
-
     public ArrayList<Vehicle> getPublic(){
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
         for (Vehicle vehicle: vehicleList) {
@@ -99,12 +94,8 @@ public class InventoryList {
     }
 
     /**
-     * Returns an ArrayList of all the vehicles that are declared
-     * as private from the inventory.
-     *
-     * Useful when creating list of private items
-     *
-     * @return ArrayList with vehicles
+     * Searches through the Inventory list to find which vehicles are private
+     * @return an ArrayList of all private vehicles
      */
 
     public ArrayList<Vehicle> getPrivate(){
@@ -118,11 +109,9 @@ public class InventoryList {
     }
 
     /**
-     * Given a name of a vehicle, searches inventory to see if
-     * said vehicle exists.
-     *
-     * @param vehicleName
-     * @return True if found | False if not found
+     * Searches the InventoryList to find a given vehicle
+     * @param vehicleName name to find
+     * @return true: vehicle exists. false: vehicle does not exist
      */
     public boolean search(String vehicleName){
         for (Vehicle vehicle: vehicleList) {
@@ -135,13 +124,9 @@ public class InventoryList {
     }
 
     /**
-     * Returns an InventoryList of vehicles of a specific category
-     * that are contained within the inventory
-     *
-     * Useful when searching by category/
-     *
+     * Builds a new inventory list based on the category given
      * @param category
-     * @return InventoryList.
+     * @return a new InventoryList with only vehicles of the given category
      */
 
     public InventoryList getCategory(VehicleCategory category){
