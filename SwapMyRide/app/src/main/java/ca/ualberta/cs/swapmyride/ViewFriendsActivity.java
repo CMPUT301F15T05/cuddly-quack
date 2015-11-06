@@ -25,6 +25,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Allows user to view list of friends
+ *
+ * Gets user list and determines list of friends
+ * Displays list of friends.
+ *
+ * On an item click -- displays the user profile.
+ *
+ */
+
 public class ViewFriendsActivity extends AppCompatActivity {
 
     Toolbar toolbar;

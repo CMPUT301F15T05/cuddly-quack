@@ -16,6 +16,12 @@
 package ca.ualberta.cs.swapmyride;
 
 /**
+ * This is the tab where the feeds of items will appear that a person can
+ * browse and select from. All of the items here are items from someone else's
+ * inventory.
+ *
+ * Has toolbar at the top with search, add friend, and settings menu functionality!
+ *
  * Created by Daniel on 2015-10-24.
  */
 import android.content.Intent;
@@ -38,6 +44,19 @@ public class Tab1 extends Fragment {
     FeedAdapter adapter;
     UserController uController;
     User user;
+
+    /**
+     * onCreate gets all of the items to be displayed, and makes them visible and individually
+     * clickable.
+     *
+     * This is also where notifications are held -- the app will only notify a user on this
+     * screen to prevent occlusion of other activities.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +85,10 @@ public class Tab1 extends Fragment {
 
         return v;
     }
+
+    /**
+     * Quite similar to the above -- but checking for changes when the user returns to the screen.
+     */
 
     @Override
     public void onResume() {

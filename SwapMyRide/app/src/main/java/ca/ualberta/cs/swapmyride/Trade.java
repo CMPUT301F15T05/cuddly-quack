@@ -18,7 +18,15 @@ package ca.ualberta.cs.swapmyride;
 import java.util.ArrayList;
 
 /**
- * Created by adrianomarini on 2015-10-26.
+ * Trade is the major object to encapsulate all
+ * information about a trade that will occur
+ *
+ * All relevant information to the trade will be held here.
+ *
+ * Owner items belong to the current user
+ * Borrower items are items that belong to a friend.
+ *
+ * @author adrianomarini on 2015-10-26.
  */
 public class Trade {
     private User owner = new User();
@@ -29,6 +37,14 @@ public class Trade {
     private Boolean borrowerNotified = false;
     private Boolean isAccepted = false;
     private Boolean isDeclined = false;
+
+    /**
+     * Constructs the trade with indication of who the two users
+     * participating in the app are.
+     *
+     * @param owner
+     * @param borrower
+     */
 
     public Trade(User owner, User borrower) {
         this.owner = owner;
@@ -75,6 +91,11 @@ public class Trade {
         ownerItems.add(vehicle);
     }
 
+    /**
+     * sends notifications to the borrower and owner, and then adds the trade to
+     * the pending trades of each user.
+     */
+
     public void send(){
         ownerNotified = owner.getNotificationManager().notifyTrade(this);
         borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
@@ -94,6 +115,11 @@ public class Trade {
         return isAccepted;
     }
 
+    /**
+     * Accept allows a trade to be accepted and implements the functionality
+     * to send an email with more information to all parties.
+     */
+
     public void accept(){
         this.isAccepted = true;
         //here is where we would send an email
@@ -104,9 +130,19 @@ public class Trade {
         return isDeclined;
     }
 
+    /**
+     * accept allows a user to decline a trade
+     */
+
     public void decline(){
         this.isDeclined = true;
     }
+
+    /**
+     * if a trade is declined, a new trade can be initialized with
+     * the same items from both sides pending changes
+     * @return Trade with roles swapped
+     */
 
     public Trade makeCounterTrade(){
         Trade counterTrade = new Trade(this.borrower, this.owner);
@@ -116,10 +152,22 @@ public class Trade {
         return counterTrade;
     }
 
+    /**
+     * Functionality to swap out vehicles in a trade if needed
+     * @param old
+     * @param newOne
+     */
+
     public void changeOwnerVehicle(Vehicle old, Vehicle newOne){
         this.ownerItems.remove(old);
         ownerItems.add(newOne);
     }
+
+    /**
+     * Functionality to swap out vehicles in a trade if needed
+     * @param old
+     * @param newOne
+     */
 
     public void changeBorrowerVehicle(Vehicle old, Vehicle newOne){
         this.borrowerItems.remove(old);

@@ -31,6 +31,12 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+/**
+ * ViewVehicle activity provides the functionality for the app
+ * to display all relevant information about a vehicle that is
+ * selected.
+ */
+
 public class ViewVehicleActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -50,6 +56,17 @@ public class ViewVehicleActivity extends AppCompatActivity {
     int position;
     DataManager dm = new DataManager(ViewVehicleActivity.this);
     UserController uController;
+
+    /**
+     * Using the dataManager functionality, load details of the vehicle
+     * and display all relevant information about it.
+     *
+     * The user can select to delete an item from this view, which they
+     * would be asked to confirm.
+     *
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +121,10 @@ public class ViewVehicleActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Ask the user for confirmation if they would like to delete a vehicle.
+     */
 
     public void deleteDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewVehicleActivity.this);

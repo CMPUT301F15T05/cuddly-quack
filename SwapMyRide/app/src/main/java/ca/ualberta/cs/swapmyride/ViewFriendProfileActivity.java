@@ -24,6 +24,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Allows the user to view a profile fo a friend. Selected from a
+ * list of friends.
+ *
+ */
+
 public class ViewFriendProfileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
