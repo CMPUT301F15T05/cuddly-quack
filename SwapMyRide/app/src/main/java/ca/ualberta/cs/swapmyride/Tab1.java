@@ -47,7 +47,8 @@ public class Tab1 extends Fragment {
         adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
         //send notification to user when screen is returned to this area.
         user = uController.getCurrentUser();
-        user.notificationManager.notifyMe(getContext());
+        user.getNotificationManager().notifyMe(getContext());
+
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 
@@ -69,6 +70,7 @@ public class Tab1 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         inventoryList = new InventoryList();
         uController.updateFriends();
 
@@ -77,6 +79,7 @@ public class Tab1 extends Fragment {
         arrayOfVehicle = inventoryList.getList();
         adapter = new FeedAdapter(getContext(), arrayOfVehicle);
         inventory.setAdapter(adapter);
-        user.notificationManager.notifyMe(getContext());
+        user.getNotificationManager().notifyMe(getContext());
+
     }
 }

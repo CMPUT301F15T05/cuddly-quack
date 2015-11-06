@@ -19,6 +19,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -38,15 +39,18 @@ public class NotificationManager {
         return true;
     }
 
-    public Boolean notifyFriendRequest(String username){
+    /**
+     *
+     * @param username String of username that has added the current user
+     */
+    public void notifyFriendRequest(String username){
         friendRequests.add(username);
-        return true;
     }
 
     //http://stackoverflow.com/questions/2115758/how-to-display-alert-dialog-in-android
     // Author: David Hedlund
     // Modified and Accessed 4 November 2015
-    public void showNotification(Context context){
+    public void showtrade(Context context){
         Integer size = tradesToBeNotified.size();
         String trades = Integer.toString(size);
         new AlertDialog.Builder(context)
@@ -62,9 +66,10 @@ public class NotificationManager {
     }
 
     public void showFriendRequest(final Context context, final String username){
+        friendRequests.remove(username);
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
-                .setMessage(username + "is now following you! Click view to see their profile!")
+                .setMessage(username + " is now following you! Click view to see their profile!")
                 .setPositiveButton("View Profile", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -76,21 +81,23 @@ public class NotificationManager {
                 .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //do nothing
+                    // Clear newly added friends from ArrayList to avoid duplicate notifications
+                        Log.i("DISMISS", "DISMISS");
                     }
                 })
                 .show();
+        friendRequests.clear();
+//        tradesToBeNotified.clear();
     }
 
     public void notifyMe(Context context) {
         if (tradesToBeNotified.size() > 0) {
-            showNotification(context);
+            showtrade(context);
             tradesToBeNotified.clear();
         }
 
         for(String username : friendRequests){
             showFriendRequest(context, username);
-            friendRequests.clear();
         }
 
     }
