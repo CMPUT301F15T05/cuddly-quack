@@ -47,7 +47,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2 {
         //https://developer.android.com/training/activity-testing/activity-functional-testing.html 2015-11-16
         Instrumentation.ActivityMonitor mainMenuActivityMonitor =
                 getInstrumentation().addMonitor(MainMenu.class.getName(), null, false);
-        MainMenu mainMenuActivity = (MainMenu) mainMenuActivityMonitor.waitForActivityWithTimeout(10000);
+        MainMenu mainMenuActivity = (MainMenu) mainMenuActivityMonitor.waitForActivityWithTimeout(100);
 
         //click the sign in button
         signIn = activity.getSignIn();
@@ -122,20 +122,15 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2 {
             }
         });
         getInstrumentation().waitForIdleSync();
+        MainMenu mma = (MainMenu) mainMenuActivityMonitor.waitForActivityWithTimeout(100);
 
         //Assert login worked and we are at main menu.
-        getInstrumentation().removeMonitor(mainMenuActivityMonitor);
-        mainMenuActivityMonitor =
-                getInstrumentation().addMonitor(MainMenu.class.getName(), null, false);
-        mainMenuActivity = (MainMenu) mainMenuActivityMonitor.waitForActivityWithTimeout(1000);
-        assertNotNull("Main Menu is null", mainMenuActivity);
-        assertEquals("Monitor for Main Menu has not been called",
-                1, mainMenuActivityMonitor.getHits());
+        assertNotNull("Main Menu is null", mma);
         assertEquals("Activity is of wrong type",
-                MainMenu.class, mainMenuActivity.getClass());
+                MainMenu.class, mma.getClass());
 
         //delete user 'bob' for trash cleanup
-        DataManager dm = new DataManager(mainMenuActivity.getApplicationContext());
+        DataManager dm = new DataManager(mma.getApplicationContext());
         dm.deleteUser("bob");
 
         //remove the monitors
