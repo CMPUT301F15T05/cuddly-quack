@@ -115,4 +115,12 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    public EditText getUsername(){
+        return username;
+    }
+
+    public Button getSave(){
+        return signUp;
+    }
+
 }

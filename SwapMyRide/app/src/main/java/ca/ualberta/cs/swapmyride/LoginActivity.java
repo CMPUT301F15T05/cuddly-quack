@@ -104,4 +104,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public Button getSignIn(){
+        return signIn;
+    }
+
+    public EditText getUsernameField(){
+        return usernameField;
+    }
+
+    public TextView getSignUp(){
+        return signUp;
+    }
 }
