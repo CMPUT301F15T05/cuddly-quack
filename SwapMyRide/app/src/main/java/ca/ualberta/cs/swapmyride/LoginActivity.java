@@ -26,6 +26,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * LoginActivity allows the user to enter the app as a specific username
+ *
+ * It takes in input through a username field, and determines if the username
+ * exists. If so, it loads that user object into the UserSingleton. If not,
+ * it shows an error and encourages the user to sign up
+ *
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -35,6 +44,16 @@ public class LoginActivity extends AppCompatActivity {
     String username;
     DataManager dm;
     UserController uController;
+
+    /**
+     * onCreate creates the login box and the button.
+     *
+     * Upon click, the username is checked against the
+     * database of users to see if it exists. If so, the
+     * user is added to the UserSingleton. If not, a Toast
+     * message appears, and the user is encouraged to sign up.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp = (TextView) findViewById(R.id.signUp);
 
         dm = new DataManager(LoginActivity.this);
-        uController = new UserController();
+        uController = new UserController(getApplicationContext());
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameField.getText().toString();
 
                 if(dm.searchUser(username)) {
-                    UserSingleton.addCurrentUser(dm.loadUser(username));
+                    uController.addCurrentUser(dm.loadUser(username));
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
@@ -72,6 +91,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        /**
+         * This onClick listener sends the user to the SignUpActivity if they click the link.
+         */
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

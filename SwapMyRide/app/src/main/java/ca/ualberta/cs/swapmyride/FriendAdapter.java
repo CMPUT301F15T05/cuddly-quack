@@ -25,7 +25,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel on 2015-10-31.
+ * The adapter here is used to display a list of friends.
+ *
+ * @Author Daniel Haberstock on 2015-10-31.
  */
 
 // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
@@ -34,6 +36,15 @@ public class FriendAdapter extends ArrayAdapter<User> {
         super(context, 0, user);
     }
 
+    /**
+     * This function converts the friends list of a user into an element
+     * in the list of friends
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return View
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position

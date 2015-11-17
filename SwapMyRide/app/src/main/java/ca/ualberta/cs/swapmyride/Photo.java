@@ -30,17 +30,31 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * Created by Garry on 2015-11-03.
+ * Photo is the enclosed object that implements
+ * Bitmap functionality to create, set, return,
+ * and delete images from an item
+ *
+ * @author Garry on 2015-11-03.
  */
 public class Photo{
     //private Bitmap image;
     private byte image[];
+
+    /**
+     * Builds a Photo object based on a given bitmap
+     * @param image the image to store
+     */
 
     Photo(Bitmap image){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
     }
+
+    /**
+     * Builds a default photo
+     * @param context
+     */
 
     Photo(Context context){
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_default_car);
@@ -49,6 +63,11 @@ public class Photo{
         this.image = stream.toByteArray();
     }
 
+    /**
+     * Decodes and returns the stored image
+     * @return A bitmap of the stored image
+     */
+
     public Bitmap getImage() {
         int size = image.length;
         Bitmap map;
@@ -56,12 +75,21 @@ public class Photo{
         return map;
     }
 
+    /**
+     * Encodes the given bitmap and stores it in the photo object
+     * @param image bitmap image to store
+     */
+
     public void setImage(Bitmap image) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
     }
 
+    /**
+     * Removes the current image and sets it to the default
+     * @param context
+     */
     public void deleteImage(Context context){
         Photo photo = new Photo(context);
         this.setImage(photo.getImage());

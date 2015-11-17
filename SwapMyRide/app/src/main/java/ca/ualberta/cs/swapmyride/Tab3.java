@@ -16,6 +16,11 @@
 package ca.ualberta.cs.swapmyride;
 
 /**
+ * This is the tab where a user can access their friends, their trades, and their
+ * profile.
+ *
+ * Has toolbar at the top with search, add friend, and settings menu functionality!
+ *
  * Created by Daniel on 2015-10-24.
  */
 import android.content.Intent;
@@ -34,6 +39,19 @@ public class Tab3 extends Fragment {
     TextView activeTrades;
     TextView editProfile;
 
+
+    /**
+     * OnCreate creates the list view items that can be clicked
+     * to take a user to a friends list, trade lists, or to edit
+     * their profile.
+     *
+     * Each click takes the user to a new activity
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

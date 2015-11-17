@@ -20,6 +20,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+/**
+ * This activity is designed to search friends and display friends that match
+ * a inputted string.
+ */
 
 public class SearchFriendsActivity extends AppCompatActivity {
 
@@ -40,6 +46,16 @@ public class SearchFriendsActivity extends AppCompatActivity {
     ArrayList<User> foundUsers;
     FriendAdapter adapter;
     String username;
+
+    /**
+     * Displays a search field and accepts input to search for a username
+     *
+     * Uses a SearchController to search through the
+     * information stored in the disk and return any
+     * found friends matching the query.
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +90,20 @@ public class SearchFriendsActivity extends AppCompatActivity {
         friendView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), AddFriendProfileActivity.class);
+                FriendsList friendsList = UserSingleton.getCurrentUser().getFriends();
+                DataManager dataManager = new DataManager(getApplicationContext());
+                User user = dataManager.loadUser(username);
 
-                //add the vehicle that has been selected to the intent to pass
-                intent.putExtra("Username", username);
+                if (friendsList.hasUser(user)) {
+                    Log.i("hasUser", "Friend has already been added");
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), AddFriendProfileActivity.class);
 
-                startActivity(intent);
+                    //add the vehicle that has been selected to the intent to pass
+                    intent.putExtra("Username", username);
+
+                    startActivity(intent);
+                }
             }
         });
     }

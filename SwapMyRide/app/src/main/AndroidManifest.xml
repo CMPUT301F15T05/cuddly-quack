@@ -103,6 +103,7 @@
         </activity>
         <activity
             android:name=".EditProfileActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_profile" >
         </activity>
     </application>

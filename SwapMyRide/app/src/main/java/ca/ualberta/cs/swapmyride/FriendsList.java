@@ -18,42 +18,68 @@ package ca.ualberta.cs.swapmyride;
 import java.util.ArrayList;
 
 /**
- * Created by Garry on 2015-10-26.
+ * FriendsList is an object that holds a series of usernames
+ * which are indicated to be friends of a certain user,
+ * and provides an easy way to access and mutate this data
+ *
+ * @author Garry Bullock on 2015-10-26.
  */
 public class FriendsList {
-    private ArrayList<User> friendList;
+    private ArrayList<String> friendList;
 
+    /**
+     * Constructor - takes no inputs but initializes the object.
+     */
     public FriendsList(){
         friendList = new ArrayList<>();
     }
 
-    public void addFriend(User user){
-        friendList.add(user);
+    /**
+     * Taking a username, add this person to a user's friends
+     * @param username
+     */
+    public void addFriend(String username){
+        friendList.add(username);
     }
 
-    public void removeFriend(User user){
-        friendList.remove(user);
+    /**
+     * Taking a username, remove this person from a user's friends.
+     * @param username
+     */
+    public void removeFriend(String username){
+        friendList.remove(username);
     }
 
+    /**
+     * @return Size of FriendsList
+     */
     public int size(){return friendList.size();}
 
-    public User findUser(User user){
-        //based on the test for Use Case 8, we should search through the list and see if
-        //any of the objects matches the one given, and return.
-        for (User userInList: friendList) {
-            if(userInList.equals(user)){
-                return userInList;
-            }
-        }
-        //if we dont find the user we are looking for, i'm not sure what to return??
-        return null;
+    /**
+     * Taking a username, attempts to find username in list
+     * @param username
+     * @return True if found | False if not found
+     */
+    public boolean findUser(String username){
+        return friendList.contains(username);
     }
 
+    /**
+     * Similar to the above, but instead taking an input of a user object
+     * The User object is converted to a string and the string is searched.
+     * @param user
+     * @return True if found | False if not found
+     */
     public boolean hasUser(User user){
-        return friendList.contains(user);
+        String username = user.getUserName();
+        return friendList.contains(username);
     }
 
-    public ArrayList<User> getFriendList() {
+    /**
+     * Simple getter, returning the array list if it needs to be iterated through.
+     * @return friendList
+     */
+    public ArrayList<String> getFriendList() {
         return friendList;
     }
 }

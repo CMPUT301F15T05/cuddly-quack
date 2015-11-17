@@ -1,5 +1,3 @@
-package ca.ualberta.cs.swapmyride;
-
 /*
  * Copyright 2015 Adriano Marini, Carson McLean, Conner Dunn, Daniel Haberstock, Garry Bullock
  *
@@ -15,16 +13,17 @@ package ca.ualberta.cs.swapmyride;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ca.ualberta.cs.swapmyride;
 import java.util.ArrayList;
 
 /**
- * Created by adrianomarini on 2015-11-01.
+ * UserSingleton is the current instance of user. That is to say, it is the User whom is currently
+ * logged into the app.
  */
 public class UserSingleton {
     private static User currentUser = null;
-    private static ArrayList<User> users = new ArrayList<>();
     private static Vehicle feedViewVehicle;
-
+    private static ArrayList<User> friends = new ArrayList<>();
     private static UserSingleton ourInstance = new UserSingleton();
 
     public static UserSingleton getInstance() {
@@ -43,12 +42,12 @@ public class UserSingleton {
         return currentUser;
     }
 
-    public static void addUser(User user){
-        users.add(user);
+    public static void addFriends(User user){
+        friends.add(user);
     }
 
-    public static ArrayList<User> getUsers(){
-        return users;
+    public static ArrayList<User> getFriends(){
+        return friends;
     }
 
     public static Vehicle getFeedViewVehicle() {
@@ -57,5 +56,9 @@ public class UserSingleton {
 
     public static void setFeedViewVehicle(Vehicle feedViewVehicle) {
         UserSingleton.feedViewVehicle = feedViewVehicle;
+    }
+
+    public static void setFriends(ArrayList<User> users){
+        friends = users;
     }
 }

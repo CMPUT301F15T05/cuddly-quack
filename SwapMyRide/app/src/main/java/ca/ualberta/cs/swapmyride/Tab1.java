@@ -16,6 +16,12 @@
 package ca.ualberta.cs.swapmyride;
 
 /**
+ * This is the tab where the feeds of items will appear that a person can
+ * browse and select from. All of the items here are items from someone else's
+ * inventory.
+ *
+ * Has toolbar at the top with search, add friend, and settings menu functionality!
+ *
  * Created by Daniel on 2015-10-24.
  */
 import android.content.Intent;
@@ -35,30 +41,32 @@ public class Tab1 extends Fragment {
     ListView inventory;
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
-    User user;
     FeedAdapter adapter;
+    UserController uController;
+    User user;
+
+    /**
+     * onCreate gets all of the items to be displayed, and makes them visible and individually
+     * clickable.
+     *
+     * This is also where notifications are held -- the app will only notify a user on this
+     * screen to prevent occlusion of other activities.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab1, container, false);
-        inventoryList = new InventoryList();
-        user = UserSingleton.getCurrentUser();
-
+        View v = inflater.inflate(R.layout.tab1, container, false);
+        uController = new UserController(getActivity());
+        arrayOfVehicle = new ArrayList<>();
+        adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
         //send notification to user when screen is returned to this area.
-        user.notificationManager.notifyMe(getContext());
-
-
-        for (User friend: user.getFriends().getFriendList()){
-            InventoryList friendInventory = friend.getInventory();
-
-            for (Vehicle vehicle: friendInventory.getList()) {
-                if(vehicle.getPublic()){
-                    inventoryList.add(vehicle);
-                }
-            }
-        }
-
-        arrayOfVehicle = inventoryList.getList();
+        user = uController.getCurrentUser();
+        user.getNotificationManager().notifyMe(getContext());
 
         adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
 
@@ -77,12 +85,27 @@ public class Tab1 extends Fragment {
                 startActivity(intent);
             }
         });
+
         return v;
     }
+
+    /**
+     * Quite similar to the above -- but checking for changes when the user returns to the screen.
+     */
 
     @Override
     public void onResume() {
         super.onResume();
-        user.notificationManager.notifyMe(getContext());
+
+        inventoryList = new InventoryList();
+        uController.updateFriends();
+
+        inventoryList = uController.getFriendVehicles();
+
+        arrayOfVehicle = inventoryList.getList();
+        adapter = new FeedAdapter(getContext(), arrayOfVehicle);
+        inventory.setAdapter(adapter);
+        user.getNotificationManager().notifyMe(getContext());
+
     }
 }

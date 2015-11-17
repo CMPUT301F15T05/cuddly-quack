@@ -24,7 +24,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This activity specifically displays another user that the current user
+ * of the app is planning to add - or has been notified of the other user's
+ * "following" of them.
+ */
+
 public class AddFriendProfileActivity extends AppCompatActivity {
+
 
     Toolbar toolbar;
     TextView fullName;
@@ -33,6 +40,14 @@ public class AddFriendProfileActivity extends AppCompatActivity {
     String username;
     DataManager dataManager;
     User possibleFriend;
+    UserController uController;
+
+    /**
+     * the onCreate here displays all information of the possible friend.
+     * Initializes all information from the user object returned from
+     * the Datamanager and pushes the information into the fields.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +57,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        uController = new UserController(getApplicationContext());
         dataManager = new DataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
@@ -57,13 +73,47 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         email.setText(possibleFriend.getUserEmail());
 
         // TODO Notify friend of friend request!
+
+        /**
+         * This onClick function serves to control the button used to add a friend
+         * In this button click, it is required to pass checks about the user - specifically
+         * making sure the User is not adding themselves, and that the user does not add a
+         * friend whom they are already following.
+         *
+         * If the above checks pass, the friend is added to the friends list of the current
+         * user of the app. Said section also notifies the user with a Toast if the add succeeds
+         */
+
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserSingleton.getCurrentUser().addFriend(possibleFriend);
-                dataManager.saveUser(UserSingleton.getCurrentUser());
+
+                /*
+                uController.addFriend(username);
+                uController.saveCurrentUser();
                 Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
                 finish();
+                */
+                // Check that user is not adding themselves
+                if (username.equals(UserSingleton.getCurrentUser().getUserName())) {
+                    Toast.makeText(getApplicationContext(), "Can't add yourself", Toast.LENGTH_SHORT).show();
+                }
+                // Check that user is not adding friend twice
+                else if (UserSingleton.getCurrentUser().getFriends().hasUser(possibleFriend)) {
+                    Toast.makeText(getApplicationContext(), possibleFriend.getUserName() + " has already been added", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    // Save new friend to current user's friends list
+                    UserSingleton.getCurrentUser().addFriend(possibleFriend.getUserName());
+                    dataManager.saveUser(UserSingleton.getCurrentUser());
+
+                    // Add current user to new friend's new friends notifications
+                    User newFriend = dataManager.loadUser(possibleFriend.getUserName());
+                    newFriend.getNotificationManager().notifyFriendRequest(UserSingleton.getCurrentUser().getUserName());
+                    dataManager.saveUser(newFriend);
+                    Toast.makeText(getApplicationContext(), username + " added!", Toast.LENGTH_LONG).show();
+                    finish();
+                }
             }
         });
     }

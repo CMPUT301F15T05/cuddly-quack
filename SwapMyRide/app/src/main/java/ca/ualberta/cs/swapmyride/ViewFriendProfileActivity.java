@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2015 Adriano Marini, Carson McLean, Conner Dunn, Daniel Haberstock, Garry Bullock
  *
@@ -25,6 +24,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Allows the user to view a profile fo a friend. Selected from a
+ * list of friends.
+ *
+ */
+
 public class ViewFriendProfileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -37,6 +42,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
     TextView address;
     Button removeFriend;
     int position;
+    UserController uController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        uController = new UserController(getApplicationContext());
         dataManager = new DataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
@@ -55,13 +62,14 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
 
         position = getIntent().getIntExtra("Position",0);
 
-        myself = UserSingleton.getCurrentUser();
+        myself = uController.getCurrentUser();
 
         friendsList = myself.getFriends();
 
-        friend = friendsList.getFriendList().get(position);
+        friend = dataManager.loadUser(friendsList.getFriendList().get(position));
 
         getSupportActionBar().setTitle(friend.getUserName());
+
         fullName.setText(friend.getName());
         email.setText(friend.getUserEmail());
         address.setText(friend.getUserAddress());
@@ -83,8 +91,8 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                myself.getFriends().removeFriend(friend);
-                dataManager.saveUser(myself);
+                uController.deleteFriend(friend.getUserName());
+                uController.saveCurrentUser();
                 finish();
             }
         });

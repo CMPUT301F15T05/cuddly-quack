@@ -41,6 +41,13 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+/**
+ * This is imported from Android Developers
+ * https://developer.android.com/samples/SlidingTabsBasic/src/com.example.android.common/view/SlidingTabStrip.html
+ *
+ * @see <a href="https://developer.android.com/samples/SlidingTabsBasic/src/com.example.android.common/view/SlidingTabStrip.html">Android</a>
+ */
+
 class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;

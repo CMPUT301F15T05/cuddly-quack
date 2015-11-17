@@ -25,6 +25,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * This activity allows users to sign up to the app
+ *
+ * Through the process of this, a User object is
+ * created, and it is saved as well. It is given
+ * its inventory and friendslist - and completely
+ * instantiated  before saving
+ *
+ */
+
 public class SignUpActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -36,6 +46,16 @@ public class SignUpActivity extends AppCompatActivity {
     DataManager dm;
     UserController uController;
 
+    /**
+     * The user here is given the option to enter their name, a username
+     * their email, and then their address.
+     *
+     * This is all then added to a user instance and saved.
+     *
+     * The system checks if the username is already in use and displays
+     * an error if an instance of the username is already found.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
         dm = new DataManager(SignUpActivity.this);
-        uController = new UserController();
+        uController = new UserController(getApplicationContext());
 
         signUp = (Button) findViewById(R.id.signUp);
 

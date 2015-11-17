@@ -17,33 +17,72 @@ package ca.ualberta.cs.swapmyride;
 
 import java.util.ArrayList;
 
+/**
+ * InventoryList is the object that holds an array of vehicles
+ * that belong to a specific user.
+ */
+
 public class InventoryList {
     private ArrayList<Vehicle> vehicleList;
 
+    /**
+     * Constructor - takes no arguments
+     * Creates the array of vehicles.
+     */
+
     public InventoryList(){
-        vehicleList = new ArrayList<Vehicle>();
+        vehicleList = new ArrayList<>();
     }
 
+    /**
+     * Constructor in the case where an array has been created.
+     * Takes in the array and sets it as the global vehicleList
+     * @param vehicleList
+     */
     public InventoryList(ArrayList<Vehicle> vehicleList){
         this.vehicleList = vehicleList;
     }
+
+    /**
+     * Returns an array list of the vehicles contained in the object
+     * @return ArrayList with Vehicles
+     */
 
     public ArrayList<Vehicle> getList(){
         return vehicleList;
     }
 
+    /**
+     * Adds a vehicle that is passed to the inventory list
+     * @param vehicle
+     */
+
     public void add(Vehicle vehicle){
         vehicleList.add(vehicle);
     }
+
+    /**
+     * Deletes specific vehicle that is passed from the
+     * inventory list
+     * @param vehicle
+     */
 
     public void delete(Vehicle vehicle){
         vehicleList.remove(vehicle);
     }
 
+    /**
+     * Returns the size of the inventory
+     * @return size
+     */
     public int size(){
         return vehicleList.size();
     }
 
+    /**
+     * Searches through the Inventory list to find which vehicles are public
+     * @return an ArrayList of all public vehicles
+     */
     public ArrayList<Vehicle> getPublic(){
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
         for (Vehicle vehicle: vehicleList) {
@@ -53,6 +92,11 @@ public class InventoryList {
         }
         return publicVehicles;
     }
+
+    /**
+     * Searches through the Inventory list to find which vehicles are private
+     * @return an ArrayList of all private vehicles
+     */
 
     public ArrayList<Vehicle> getPrivate(){
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
@@ -64,6 +108,11 @@ public class InventoryList {
         return publicVehicles;
     }
 
+    /**
+     * Searches the InventoryList to find a given vehicle
+     * @param vehicleName name to find
+     * @return true: vehicle exists. false: vehicle does not exist
+     */
     public boolean search(String vehicleName){
         for (Vehicle vehicle: vehicleList) {
             if(vehicle.getName().equals(vehicleName)) {
@@ -73,6 +122,12 @@ public class InventoryList {
         //default to return false
         return false;
     }
+
+    /**
+     * Builds a new inventory list based on the category given
+     * @param category
+     * @return a new InventoryList with only vehicles of the given category
+     */
 
     public InventoryList getCategory(VehicleCategory category){
         InventoryList newInventory = new InventoryList();

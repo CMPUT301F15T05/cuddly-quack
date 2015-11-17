@@ -23,6 +23,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Main menu is the central activity for our app. In this view,
+ * we have three tabs: one for a feed of friends' items, one for
+ * a feed of our own inventory, and one with a list of other activities
+ * a user can do, such as viewing friends, editing profile, and seeing trades.
+ */
+
 public class MainMenu extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -31,6 +38,12 @@ public class MainMenu extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Feed","Inventory","User"};
     int Numboftabs =3;
+
+    /**
+     * onCreate, the toolbars and tabs are created, and a user
+     * can slide between tabs.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +78,25 @@ public class MainMenu extends AppCompatActivity {
         tabs.setViewPager(pager);
     }
 
+    /**
+     * We have the options button implemented here - this allows the menu to expand
+     * and offer the settings menu
+     * @param menu
+     * @return
+     */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
         return true;
     }
+
+    /**
+     * as above, allows access to settings menu
+     * @param item
+     * @return
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

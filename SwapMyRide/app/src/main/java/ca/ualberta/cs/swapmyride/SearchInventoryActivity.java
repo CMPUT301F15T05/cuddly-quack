@@ -29,6 +29,10 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+/**
+ * Using a SearchController, allows searching through inventories
+ * by entering a search term or a category to search for.
+ */
 
 public class SearchInventoryActivity extends AppCompatActivity {
 
@@ -42,6 +46,17 @@ public class SearchInventoryActivity extends AppCompatActivity {
     SearchController searchController;
     ArrayList<Vehicle> foundVehicles;
     InventoryAdapter adapter;
+
+    /**
+     * OnCreate opens the opportunity for a user to enter a string or
+     * select a category. This is then put into the SearchController, and
+     * the returned ArrayList is displayed.
+     *
+     * The user has the option to search their own inventory, or search in general
+     * -- hence the dual button interface.
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

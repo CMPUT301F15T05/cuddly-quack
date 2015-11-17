@@ -35,13 +35,13 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         userone.setName("camclean");
         usertwo.setName("ccdunn");
 
-        friendsList.addFriend(userone);
-        friendsList.addFriend(usertwo);
+        friendsList.addFriend(userone.getUserName());
+        friendsList.addFriend(usertwo.getUserName());
 
         // Storing the returned User class in variable found
-        User found = friendsList.findUser(userone);
+        Boolean found = friendsList.findUser(userone.getUserName());
         // Check if found is equal to what findUser gets
-        assertTrue(found.equals(userone));
+        assertTrue(found);
     }
 
     // Use Case 9: Add Friend
@@ -54,8 +54,8 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         userone.setName("camclean");
         usertwo.setName("ccdunn");
 
-        friendsList.addFriend(userone);
-        friendsList.addFriend(usertwo);
+        friendsList.addFriend(userone.getUserName());
+        friendsList.addFriend(usertwo.getUserName());
 
         // Making sure that friendslist has camclean
         assertTrue(friendsList.hasUser(userone));
@@ -71,10 +71,10 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         userone.setName("camclean");
         usertwo.setName("ccdunn");
 
-        friendsList.addFriend(userone);
-        friendsList.addFriend(usertwo);
+        friendsList.addFriend(userone.getUserName());
+        friendsList.addFriend(usertwo.getUserName());
 
-        friendsList.removeFriend(userone);
+        friendsList.removeFriend(userone.getUserName());
 
         // Making sure that friendslist has camclean
         assertFalse(friendsList.hasUser(userone));
@@ -103,13 +103,14 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         user.setName("camclean");
         user.setUserName("Carson Mclean");
 
-        friendsList.addFriend(user);
+        friendsList.addFriend(user.getUserName());
 
         // Storing the returned User class in variable found
-        User found = friendsList.findUser(user);
+        Boolean found = friendsList.findUser(user.getUserName());
+        assertTrue(found);
 
         // Making sure that User is populated
-        assertTrue(found.getUserName().equals("Carson Mclean"));
+       // assertTrue(found.getName().equals("Carson Mclean"));
     }
 
 

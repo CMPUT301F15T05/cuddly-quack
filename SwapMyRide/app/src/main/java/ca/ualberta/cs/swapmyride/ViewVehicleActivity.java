@@ -1,34 +1,72 @@
+/*
+ * Copyright 2015 Adriano Marini, Carson McLean, Conner Dunn, Daniel Haberstock, Garry Bullock
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ca.ualberta.cs.swapmyride;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+/**
+ * ViewVehicle activity provides the functionality for the app
+ * to display all relevant information about a vehicle that is
+ * selected.
+ */
 
 public class ViewVehicleActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView title;
-    TextView quanitiy;
+    TextView quantity;
     TextView category;
     TextView quality;
     TextView comments;
+    ImageView image;
+
+    Gson gson;
+    ImageView picture;
 
     Button delete;
     Button editVehicle;
 
-    Gson gson;
-
     int position;
     DataManager dm = new DataManager(ViewVehicleActivity.this);
+    UserController uController;
+
+    /**
+     * Using the dataManager functionality, load details of the vehicle
+     * and display all relevant information about it.
+     *
+     * The user can select to delete an item from this view, which they
+     * would be asked to confirm.
+     *
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +74,15 @@ public class ViewVehicleActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        uController = new UserController(getApplicationContext());
 
         title = (TextView) findViewById(R.id.title);
-        quanitiy = (TextView) findViewById(R.id.quality);
+        quantity = (TextView) findViewById(R.id.quality);
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quantity);
         comments = (TextView) findViewById(R.id.commentsHead);
+        image = (ImageView) findViewById(R.id.picture);
+        picture = (ImageView) findViewById(R.id.picture);
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
@@ -51,14 +92,15 @@ public class ViewVehicleActivity extends AppCompatActivity {
         Vehicle vehicle;
         position = getIntent().getIntExtra("vehiclePosition", 0);
 
-        vehicle = UserSingleton.getCurrentUser().getInventory().getList().get(position);
+        vehicle = uController.getUserInventoryItems().get(position);
 
         title.setText(vehicle.getName());
-        quanitiy.setText(vehicle.getQuantity().toString());
+        quantity.setText(vehicle.getQuantity().toString());
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-
+        image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
+        picture.setImageBitmap(vehicle.getPhoto().getImage());
     }
 
     public void initOnClickListeners(){
@@ -77,7 +119,12 @@ public class ViewVehicleActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
+
+    /**
+     * Ask the user for confirmation if they would like to delete a vehicle.
+     */
 
     public void deleteDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewVehicleActivity.this);
@@ -87,7 +134,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                User user = UserSingleton.getCurrentUser();
+                User user = uController.getCurrentUser();
                 Vehicle toDelete = user.getInventory().getList().get(position);
                 user.getInventory().delete(toDelete);
                 dm.saveUser(user);

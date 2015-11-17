@@ -21,6 +21,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
+ *
+ * http://www.android4devs.com/2015/01/how-to-make-material-design-sliding-tabs.html
+ *
+ * Imported from AndroidForDevs
+ *
+ * Helps the sliding behaviour of the tabs to work properly.
+ *
  * Created by Daniel on 2015-10-24.
  */
 

@@ -15,6 +15,7 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,7 +37,16 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+/**
+ * This class specifically works to add a vehicle to a user's inventory
+ *
+ * There is opportunity to input all information and a photo for the new
+ * vehicle, and then it is added to the inventory list.
+ */
+
 public class AddInventoryActivity extends AppCompatActivity {
+
+    static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
     Toolbar toolbar;
     Spinner categorySpinner;
@@ -51,7 +63,8 @@ public class AddInventoryActivity extends AppCompatActivity {
     EditText vehicleComments;
     Switch vehiclePublic;
     Button done;
-
+    UserController uController;
+    Button delete;
     DataManager dm;
 
     int position;
@@ -59,15 +72,23 @@ public class AddInventoryActivity extends AppCompatActivity {
     //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    /**
+     * In this function (prescribed by Android), we collect all information
+     * about the new vehicle and input it into a vehicle object.
+     * This is then saved.
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addinventory);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
+        uController = new UserController(getApplicationContext());
         // TODO: Needs to smell more MVCish
         vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
+        delete = (Button) findViewById(R.id.delete);
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
@@ -76,10 +97,14 @@ public class AddInventoryActivity extends AppCompatActivity {
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
 
-        //Setup the spinners for category and quality
+        /**
+         * Using spinners to select category and quality of a vehicle - taking from the enumeration
+         * classes we have elsewhere. This function was adapted from Biraj Zalavadia on StackOverflow
+         * Accessed 2015-11-01
+         * @see <a href="http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner">stackOverflow</a>
+         */
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
         categorySpinner.setAdapter(new ArrayAdapter<VehicleCategory>(this, android.R.layout.simple_spinner_dropdown_item, VehicleCategory.values()));
-        // Biraj Zalavadia; http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner; 2015-11-01
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -93,6 +118,12 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Using spinners to select category and quality of a vehicle - taking from the enumeration
+         * classes we have elsewhere. This function was adapted from Biraj Zalavadia on StackOverflow
+         * Accessed 2015-11-01
+         * @see <a href="http://stackoverflow.com/questions/21600781/onitemclicklistener-of-spinner">stackOverflow</a>
+         */
         qualitySpinner = (Spinner) findViewById(R.id.qualitySpinner);
         qualitySpinner.setAdapter(new ArrayAdapter<VehicleQuality>(this, android.R.layout.simple_spinner_dropdown_item, VehicleQuality.values()));
         qualitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,6 +158,11 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicle.setPhoto(new Photo(getApplicationContext()));
         }
 
+        /**
+         * This onClick listener implements the function that clicking on the default
+         * image box at the top of the vehicle page will open the camera and allow the
+         * user to take a photo which will be saved directly to the vehicle object
+         */
         vehicleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +172,30 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * This onClick listener occurs when someone clicks delete. This will delete the photo
+         * that is initialized in the view.
+         */
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vehicle.setPhoto(new Photo(getApplicationContext()));
+                vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+
+
+            }
+        });
+
+        /**
+         * This onClick listener occurs after done button is clicked. This would save
+         * the object to inventory -- which then makes it appear in the inventory tab.
+         *
+         * Taken from Oracle Documentation - we found we were required to catch the
+         * possibility that a number might be the wrong format, or not even a number
+         * at all. Accessed November 3, 2015.
+         *
+         * @see <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html#parseInt-java.lang.String-int-">Oracle</a>
+         */
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,20 +221,24 @@ public class AddInventoryActivity extends AppCompatActivity {
 
                 //add the vehicle to our current user.
                 if(loadVehicle){
-                    UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
-                    UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
+                    //UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
+                    uController.getUserInventoryItems().add(position,vehicle);
+                    //UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
+                    uController.getUserInventoryItems().remove(position+1);
                 }
                 else {
-                    UserSingleton.getCurrentUser().addItem(vehicle);
+                    //UserSingleton.getCurrentUser().addItem(vehicle);
+                    uController.getCurrentUser().addItem(vehicle);
                 }
                 //save the user to ensure all changes are updated
-                dm.saveUser(UserSingleton.getCurrentUser());
+                uController.saveCurrentUser();
 
+                /*
                 //dont start a new activity if we are editing a vehicle
                 if(!loadVehicle) {
                     Intent intent = new Intent(AddInventoryActivity.this, MainMenu.class);
                     startActivity(intent);
-                }
+                }*/
                 finish();
             }
         });
@@ -191,15 +255,59 @@ public class AddInventoryActivity extends AppCompatActivity {
     }
 
     //TODO THESE FUNCTIONS ARE MODIFIED FROM GOOGLE TAKING PHOTOS SIMPLY
+
+    /**
+     * This calls the activity to take the photo.
+     */
+
     private void dispatchTakePictureIntent() {
-        Log.i("TakingPictureIntent", "Trying to take a photo");
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null &&
-                checkHasCamera(getApplicationContext())) {
+
+        // http://developer.android.com/training/permissions/requesting.html
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(AddInventoryActivity.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AddInventoryActivity.this,
+                    Manifest.permission.CAMERA)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(AddInventoryActivity.this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+
+            Log.i("TakingPictureIntent", "Trying to take a photo");
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null &&
+                    checkHasCamera(getApplicationContext())) {
 
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
         }
     }
+
+    /**
+     * After returning from the camera activity, get the photo information
+     * and send it into the structure to get it ready.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -211,6 +319,13 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
         }
     }
+
+    /**
+     * checking if the hardware has a camera that can be used.
+     *
+     * @param context
+     * @return true or false
+     */
 
     public boolean checkHasCamera(Context context){
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);

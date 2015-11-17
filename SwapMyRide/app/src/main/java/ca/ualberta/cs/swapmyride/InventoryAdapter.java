@@ -28,7 +28,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel on 2015-10-31.
+ * InventoryAdapter makes it possible to show inventory items in a list view
+ *
+ * @author Daniel Haberstock on 2015-10-31.
  */
 
 // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
@@ -39,6 +41,14 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         this.context = context;
     }
 
+    /**
+     * getView formats and returns a view for a specific item.
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return View (of item)
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position

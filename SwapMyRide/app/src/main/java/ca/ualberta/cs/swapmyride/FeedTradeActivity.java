@@ -33,9 +33,10 @@ public class FeedTradeActivity extends AppCompatActivity {
     String friendUsername;
     ListView feedMultipleView;
     Button trade;
-    ArrayList<Vehicle> friendInventory;
+    InventoryList friendInventory;
     ArrayList<String> vehicleNames;
     ArrayAdapter<String> adapter;
+    UserController userController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +51,11 @@ public class FeedTradeActivity extends AppCompatActivity {
 
         friendUsername = getIntent().getExtras().getString("Username");
 
-        ArrayList<User> friendsList = UserSingleton.getCurrentUser().getFriends().getFriendList();
-
         vehicleNames = new ArrayList<>();
 
-        for (User user: friendsList) {
-            if (user.getUserName().equals(friendUsername)) {
-                friendInventory = user.getInventory().getList();
-                break;
-            }
-        }
+        friendInventory = userController.getFriendVehicles(friendUsername);
 
-        for (Vehicle vehicle: friendInventory) {
+        for (Vehicle vehicle: friendInventory.getList()) {
             vehicleNames.add(vehicle.getName());
         }
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, vehicleNames);

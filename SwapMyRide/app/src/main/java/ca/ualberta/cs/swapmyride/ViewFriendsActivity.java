@@ -25,12 +25,23 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Allows user to view list of friends
+ *
+ * Gets user list and determines list of friends
+ * Displays list of friends.
+ *
+ * On an item click -- displays the user profile.
+ *
+ */
+
 public class ViewFriendsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ListView friendView;
     FriendAdapter adapter;
     ArrayList<User> friendsList;
+    UserController uController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +50,12 @@ public class ViewFriendsActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        uController = new UserController(getApplicationContext());
 
         friendView = (ListView) findViewById(R.id.friendView);
 
-        friendsList = UserSingleton.getCurrentUser().getFriends().getFriendList();
+        uController.updateFriends();
+        friendsList = uController.getFriends();
 
         adapter = new FriendAdapter(getApplicationContext(), friendsList);
 
@@ -64,6 +77,9 @@ public class ViewFriendsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        uController.updateFriends();
+        friendsList = uController.getFriends();
+        adapter = new FriendAdapter(getApplicationContext(), friendsList);
+        friendView.setAdapter(adapter);
     }
 }

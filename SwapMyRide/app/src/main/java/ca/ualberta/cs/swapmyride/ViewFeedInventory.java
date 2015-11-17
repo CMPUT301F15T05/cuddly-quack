@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Viewing inventory based on a click of a vehicle in the feed.
+ */
 
 public class ViewFeedInventory extends AppCompatActivity {
 

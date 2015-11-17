@@ -16,6 +16,10 @@
 package ca.ualberta.cs.swapmyride;
 
 /**
+ * This is the tab where the feed of the items in a user's personal inventory will appear
+ * There is a button to add new items to inventory, and as well, the option to click on each
+ * item and view it in more detail.
+ *
  * Created by Daniel on 2015-10-24.
  */
 import android.content.Intent;
@@ -40,14 +44,33 @@ public class Tab2 extends Fragment {
     ArrayList<Vehicle> arrayOfVehicle;
     InventoryList inventoryList;
     InventoryAdapter adapter;
+    UserController uController;
+
+    /**
+     * Gets all items from the inventory of the user and displays them in order.
+     *
+     * OnClick listener is present to take the user to a detail view if they select
+     * an item
+     *
+     * OnClick listener is present if they click the plus to add a new item -- taken
+     * to the add item view.
+     *
+     * Has toolbar at the top with search, add friend, and settings menu functionality!
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.tab2,container,false);
 
         addInventory = (Button) v.findViewById(R.id.addInventory);
+        uController = new UserController(getContext());
 
-        inventoryList = UserSingleton.getCurrentUser().getInventory();
+        inventoryList = uController.getCurrentUser().getInventory();
 
         arrayOfVehicle = inventoryList.getList();
 
@@ -81,6 +104,9 @@ public class Tab2 extends Fragment {
     }
     public void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        inventoryList = uController.getCurrentUser().getInventory();
+        arrayOfVehicle = inventoryList.getList();
+        adapter = new InventoryAdapter(getActivity(), arrayOfVehicle);
+        inventory.setAdapter(adapter);
     }
 }

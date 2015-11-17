@@ -20,10 +20,21 @@ import android.content.Context;
 import java.util.ArrayList;
 
 /**
- * Created by Garry on 2015-11-01.
+ * SearchController is designed to manage the search functionality
+ * of the app. Has methods to search data that exists in the objects
+ * and return it in usable form to activities
+ *
+ * @author Created by Garry on 2015-11-01.
  */
 public class SearchController {
 
+    /**
+     * Taking a username in, searches the data located on disk for any instance
+     * matching the username and returns an ArrayList with matching users.
+     * @param username
+     * @param context
+     * @return
+     */
     public ArrayList<User> findUser(String username, Context context){
         //TODO: Search the server for a user that matches the given username
         DataManager dataManager = new DataManager(context);
@@ -37,10 +48,26 @@ public class SearchController {
         return userList;
     }
 
+
+    /**
+     * FindVehicle takes a vehicleName and searches storage for a vehicle that
+     * matches. Returns the Vehicle if found.
+     * @param vehicleName
+     * @return
+     */
     public Vehicle findVehicle(String vehicleName){
         //TODO: Search the server for a vehicle that matches the given vehicleName
         return new Vehicle();
     }
+
+    /**
+     * Returns an ArrayList of vehicles based on name and/or category that is passed
+     * to the function.
+     * @param vehicleName
+     * @param vehicleCategory
+     * @param userVehicles
+     * @return
+     */
 
     public ArrayList<Vehicle> findInventoryVehicle(String vehicleName, VehicleCategory vehicleCategory, ArrayList<Vehicle> userVehicles) {
 

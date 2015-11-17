@@ -16,7 +16,9 @@
 package ca.ualberta.cs.swapmyride;
 
 /**
- * Created by Garry on 2015-10-26.
+ * This Class stores all necessary information pertaining to the user for storage and access.
+ * It provides the foundation for all functionality of the application.
+ *
  */
 public class User {
     private String name;
@@ -28,7 +30,7 @@ public class User {
     private boolean downloadImages;
     private TradeList pastTrades;
     private TradeList pendingTrades;
-    public NotificationManager notificationManager;
+    private NotificationManager notificationManager;
     //private Setting settings;
 
     //this constructor is used for creating a new name
@@ -94,12 +96,12 @@ public class User {
         return friends;
     }
 
-    public void addFriend(User user){
-        friends.addFriend(user);
+    public void addFriend(String username){
+        friends.addFriend(username);
     }
 
-    public void removeFriend(User user){
-        friends.removeFriend(user);
+    public void removeFriend(String username){
+        friends.removeFriend(username);
     }
 
     public TradeList getPastTrades() {
@@ -117,4 +119,6 @@ public class User {
     public void addPendingTrade(Trade pendingTrade) {
         pendingTrades.add(pendingTrade);
     }
+
+    public NotificationManager getNotificationManager() {return notificationManager; }
 }
