@@ -46,6 +46,8 @@ public class FeedTradeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        UserController userController = new UserController(getApplicationContext());
+
         trade = (Button) findViewById(R.id.trade);
         feedMultipleView = (ListView) findViewById(R.id.feedMultipleView);
 
