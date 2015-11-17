@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/vehiclePicture"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Default Title"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/vehicleTitle"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignTop="@+id/vehiclePicture"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/vehiclePicture"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity:"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/vehicleTitle"
+            android:layout_alignStart="@+id/vehicleTitle"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:text="Category:"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView3"
+            android:layout_alignStart="@+id/textView2"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Result"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/quantity"
+            android:layout_above="@+id/textView3"
+            android:layout_alignEnd="@+id/vehicleTitle"
+            android:layout_toEndOf="@+id/textView2"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Result"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/category"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_alignStart="@+id/quantity"
+            android:layout_alignEnd="@+id/quantity" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quality:"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView"
+            android:layout_below="@+id/category"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Result"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/quality"
+            android:layout_alignTop="@+id/textView"
+            android:layout_alignStart="@+id/quantity"
+            android:layout_alignEnd="@+id/vehicleTitle" />
+
+    </RelativeLayout>
+
+</LinearLayout>
