@@ -17,6 +17,9 @@ package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.View.MainMenu;
+
 public class ConfigurationTest extends ActivityInstrumentationTestCase2{
     public ConfigurationTest(){
         super(MainMenu.class);

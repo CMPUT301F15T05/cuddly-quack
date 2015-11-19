@@ -17,6 +17,10 @@ package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import ca.ualberta.cs.swapmyride.Model.FriendsList;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.View.MainMenu;
+
 /**
  * Created by Daniel on 2015-10-08.
  */

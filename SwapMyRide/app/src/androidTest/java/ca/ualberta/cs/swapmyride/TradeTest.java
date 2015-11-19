@@ -15,12 +15,19 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.graphics.Picture;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Toast;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+
+import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
+import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.InventoryList;
+import ca.ualberta.cs.swapmyride.Model.Photo;
+import ca.ualberta.cs.swapmyride.Model.Trade;
+import ca.ualberta.cs.swapmyride.Model.TradeList;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by adrianomarini on 2015-10-08.

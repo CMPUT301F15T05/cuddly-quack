@@ -15,10 +15,16 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.UserController;
+import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
+import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by Garry on 2015-11-02.

@@ -1,13 +1,15 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import junit.framework.TestCase;
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.View.LoginActivity;
+import ca.ualberta.cs.swapmyride.View.MainMenu;
+import ca.ualberta.cs.swapmyride.View.SignUpActivity;
 
 /**
  * This module will test for UI functionality of the login screen
@@ -22,7 +24,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2 {
     private Button signUpConfirm;
 
     public LoginActivityTest(){
-        super(ca.ualberta.cs.swapmyride.LoginActivity.class);
+        super(LoginActivity.class);
     }
 
     /**

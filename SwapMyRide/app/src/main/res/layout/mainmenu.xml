@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         />
 
-    <ca.ualberta.cs.swapmyride.SlidingTabLayout
+    <ca.ualberta.cs.swapmyride.View.SlidingTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -13,28 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ca.ualberta.cs.swapmyride;
-
-import android.test.ActivityInstrumentationTestCase2;
+package ca.ualberta.cs.swapmyride.Controller;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
-import ca.ualberta.cs.swapmyride.Model.User;
-import ca.ualberta.cs.swapmyride.View.MainMenu;
+import ca.ualberta.cs.swapmyride.Model.TradeList;
 
 /**
- * Created by adrianomarini on 2015-11-01.
+ * Created by Garry on 2015-11-01.
  */
-public class UserSingletonTest extends ActivityInstrumentationTestCase2 {
-    public UserSingletonTest(){
-        super(MainMenu.class);
+public class TradesController {
+
+    public TradeList getActiveTrades(){
+        return UserSingleton.getCurrentUser().getPendingTrades();
     }
 
-    public void testAddUser(){
-        User user1 = new User();
-        user1.setUserName("adrianomarini");
-        user1.setUserEmail("marini@ualberta.ca");
-        UserSingleton.addCurrentUser(user1);
-        User testUser = UserSingleton.getCurrentUser();
-        assertTrue(testUser.equals(user1));
+    public TradeList getPastTrades(){
+        return UserSingleton.getCurrentUser().getPastTrades();
     }
+
+
 }

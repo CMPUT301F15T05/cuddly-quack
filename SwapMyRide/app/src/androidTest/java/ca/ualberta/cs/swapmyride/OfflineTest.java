@@ -16,7 +16,16 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.ApplicationTestCase;
+
+import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
+import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.FriendsList;
+import ca.ualberta.cs.swapmyride.Model.InventoryList;
+import ca.ualberta.cs.swapmyride.Model.Trade;
+import ca.ualberta.cs.swapmyride.Model.TradeList;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by carsonmclean on 9/10/15.
