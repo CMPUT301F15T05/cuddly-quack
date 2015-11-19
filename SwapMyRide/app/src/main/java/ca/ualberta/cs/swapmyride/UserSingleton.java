@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 public class UserSingleton {
     private static User currentUser = null;
+    private static Vehicle feedViewVehicle;
     private static ArrayList<User> friends = new ArrayList<>();
-
     private static UserSingleton ourInstance = new UserSingleton();
 
     public static UserSingleton getInstance() {
@@ -48,6 +48,14 @@ public class UserSingleton {
 
     public static ArrayList<User> getFriends(){
         return friends;
+    }
+
+    public static Vehicle getFeedViewVehicle() {
+        return feedViewVehicle;
+    }
+
+    public static void setFeedViewVehicle(Vehicle feedViewVehicle) {
+        UserSingleton.feedViewVehicle = feedViewVehicle;
     }
 
     public static void setFriends(ArrayList<User> users){

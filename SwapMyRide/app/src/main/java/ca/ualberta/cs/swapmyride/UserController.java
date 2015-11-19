@@ -186,4 +186,25 @@ public class UserController {
         }
         return inventoryList;
     }
+
+    /**
+     * Gets vehicles of a specified friend of the "Active" user
+     * @return
+     */
+    public InventoryList getFriendVehicles(String username){
+        InventoryList inventoryList = new InventoryList();
+        for (User friend : getFriends()) {
+
+            if (friend.getUserName().equals(username)) {
+                InventoryList friendInventory = friend.getInventory();
+
+                for (Vehicle vehicle : friendInventory.getList()) {
+                    if (vehicle.getPublic()) {
+                        inventoryList.add(vehicle);
+                    }
+                }
+            }
+        }
+        return inventoryList;
+    }
 }

@@ -92,7 +92,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
-        vehiclePublic = (Switch) findViewById(R.id.category);
+        vehiclePublic = (Switch) findViewById(R.id.ispublic);
         done = (Button) findViewById(R.id.button);
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
@@ -217,7 +217,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 }
                 vehicle.setComments(vehicleComments.getText().toString());
                 vehicle.setPublic(vehiclePublic.isChecked());
-
+                vehicle.setBelongsTo(UserSingleton.getCurrentUser().getUserName());
 
                 //add the vehicle to our current user.
                 if(loadVehicle){

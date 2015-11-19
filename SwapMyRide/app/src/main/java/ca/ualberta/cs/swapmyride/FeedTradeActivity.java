@@ -15,13 +15,28 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseBooleanArray;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class FeedTradeActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    String friendUsername;
+    ListView feedMultipleView;
+    Button trade;
+    InventoryList friendInventory;
+    ArrayList<String> vehicleNames;
+    ArrayAdapter<String> adapter;
+    UserController userController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +46,57 @@ public class FeedTradeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-    }
+        UserController userController = new UserController(getApplicationContext());
 
+        trade = (Button) findViewById(R.id.trade);
+        feedMultipleView = (ListView) findViewById(R.id.feedMultipleView);
+
+        friendUsername = getIntent().getExtras().getString("Username");
+
+        vehicleNames = new ArrayList<>();
+
+        friendInventory = userController.getFriendVehicles(friendUsername);
+
+        for (Vehicle vehicle: friendInventory.getList()) {
+            vehicleNames.add(vehicle.getName());
+        }
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, vehicleNames);
+        feedMultipleView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        feedMultipleView.setAdapter(adapter);
+
+        trade.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            // http://theopentutorials.com/tutorials/android/listview/android-multiple-selection-listview/#ListViewMultipleSelectionActivityjava
+            public void onClick(View v) {
+                SparseBooleanArray checked = feedMultipleView.getCheckedItemPositions();
+                ArrayList<String> selectedItems = new ArrayList<>();
+                for (int i = 0; i < checked.size(); i++) {
+                    // Item position in adapter
+                    int position = checked.keyAt(i);
+                    // Add sport if it is checked i.e.) == TRUE!
+                    if (checked.valueAt(i))
+                        selectedItems.add(adapter.getItem(position));
+                }
+
+                String[] outputStrArr = new String[selectedItems.size()];
+
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    outputStrArr[i] = selectedItems.get(i);
+                }
+
+                Intent intent = new Intent(getApplicationContext(), FeedTradeActivity.class);
+
+                // Create a bundle object
+                Bundle b = new Bundle();
+                b.putStringArray("selectedItems", outputStrArr);
+
+                // Add the bundle to the intent.
+                intent.putExtras(b);
+
+                // start the ResultActivity
+                startActivity(intent);
+            }
+        });
+    }
 }

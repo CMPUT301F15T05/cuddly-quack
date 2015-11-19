@@ -68,8 +68,11 @@ public class Tab1 extends Fragment {
         user = uController.getCurrentUser();
         user.getNotificationManager().notifyMe(getContext());
 
+        adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
 
         inventory = (ListView) v.findViewById(R.id.feedView);
+
+        inventory.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         inventory.setAdapter(adapter);
 
@@ -77,8 +80,8 @@ public class Tab1 extends Fragment {
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ViewFeedInventory.class);
-                intent.putExtra("Position", position);
+                Intent intent = new Intent(getActivity(),ViewFeedInventory.class);
+                UserSingleton.setFeedViewVehicle(arrayOfVehicle.get(position));
                 startActivity(intent);
             }
         });

@@ -9,6 +9,8 @@
         android:id="@+id/feedView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:longClickable="true"
+        android:choiceMode="multipleChoice" />
 
 </RelativeLayout>
