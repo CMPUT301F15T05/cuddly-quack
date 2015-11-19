@@ -41,7 +41,6 @@ public class FeedTradeActivity extends AppCompatActivity {
     InventoryList friendInventory;
     ArrayList<String> vehicleNames;
     ArrayAdapter<String> adapter;
-    UserController userController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

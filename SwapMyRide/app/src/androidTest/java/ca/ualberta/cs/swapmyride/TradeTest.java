@@ -68,7 +68,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
@@ -115,7 +117,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create and send the trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
@@ -159,7 +163,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         trade.send();
@@ -202,7 +208,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         trade.send();
@@ -245,7 +253,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         trade.send();
@@ -320,7 +330,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
@@ -370,7 +382,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade and then delete it
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         tradeList.add(trade);
@@ -425,28 +439,36 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create some trades
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         tradeList.add(trade);
         userOne.addPendingTrade(trade);
         userTwo.addPendingTrade(trade);
 
-        Trade trade2 = new Trade(userOne, userThree);
+        Trade trade2 = new Trade();
+        trade2.setOwner(userOne);
+        trade2.setBorrower(userTwo);
         trade2.addOwnerItem(vehicleOne);
         trade2.addBorrowerItem(vehicleThree);
         tradeList.add(trade2);
         userOne.addPendingTrade(trade2);
         userThree.addPendingTrade(trade2);
 
-        Trade trade3 = new Trade(userOne, userTwo);
+        Trade trade3 = new Trade();
+        trade3.setOwner(userOne);
+        trade3.setBorrower(userTwo);
         trade3.addOwnerItem(vehicleOne);
         trade3.addBorrowerItem(vehicleTwo);
         tradeList.add(trade3);
         userOne.addPastTrade(trade3);
         userTwo.addPastTrade(trade3);
 
-        Trade trade4 = new Trade(userOne, userTwo);
+        Trade trade4 = new Trade();
+        trade4.setOwner(userOne);
+        trade4.setBorrower(userTwo);
         trade4.addOwnerItem(vehicleOne);
         trade4.addBorrowerItem(vehicleTwo);
         tradeList.add(trade4);

@@ -103,8 +103,13 @@
         </activity>
         <activity
             android:name=".View.EditProfileActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_edit_profile" >
+            android:label="@string/title_activity_edit_profile"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".View.FeedTradeUserActivity"
+            android:label="@string/title_activity_feed_trade_user"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
