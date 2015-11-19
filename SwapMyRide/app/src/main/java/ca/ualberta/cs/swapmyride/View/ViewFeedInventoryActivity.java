@@ -33,7 +33,7 @@ import ca.ualberta.cs.swapmyride.R;
  * Viewing inventory based on a click of a vehicle in the feed.
  */
 
-public class ViewFeedInventory extends AppCompatActivity {
+public class ViewFeedInventoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     Button trade;
@@ -73,7 +73,7 @@ public class ViewFeedInventory extends AppCompatActivity {
         trade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewFeedInventory.this, FeedTradeActivity.class);
+                Intent intent = new Intent(ViewFeedInventoryActivity.this, FeedTradeActivity.class);
                 intent.putExtra("Username", vehicle.getBelongsTo());
                 startActivity(intent);
             }
