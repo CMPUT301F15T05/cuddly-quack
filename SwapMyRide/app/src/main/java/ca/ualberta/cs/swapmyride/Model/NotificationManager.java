@@ -99,9 +99,7 @@ public class NotificationManager {
             showFriendRequest(context, username);
         }
 
-        Log.i("FU", "CLEAR");
         friendRequests.clear();
-        Log.i("FUT", "CLEARED");
         DataManager dm = new DataManager(context);
         dm.saveUser(UserSingleton.getCurrentUser());
 
