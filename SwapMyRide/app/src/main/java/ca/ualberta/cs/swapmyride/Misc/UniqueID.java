@@ -25,6 +25,7 @@ public class UniqueID {
     private final String id;
 
     public UniqueID(){
+        // http://www.javacirecep.com/utility/java-ways-to-generate-unique-ids-in-java/
         this.id = UUID.randomUUID().toString();
     }
 
