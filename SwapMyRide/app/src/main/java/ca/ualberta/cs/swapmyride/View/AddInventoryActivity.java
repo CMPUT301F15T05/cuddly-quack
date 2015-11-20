@@ -36,6 +36,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
@@ -211,8 +212,14 @@ public class AddInventoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // vehicle.setPhoto(vehicleImage);
+
+                if (vehicleName.getText().toString().equals("")) {
+                    Toast.makeText(AddInventoryActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 vehicle.setName(vehicleName.getText().toString());
-                Log.i("Vehicle Name", vehicleName.getText().toString());
+
                 vehicle.setCategory(vehicleCategory);
                 vehicle.setQuality(vehicleQuality);
 
