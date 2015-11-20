@@ -86,6 +86,15 @@ public class Trade {
         ownerItems.add(vehicle);
     }
 
+
+    public void clearOwnerItems() {
+        this.ownerItems.clear();
+    }
+
+    public void clearBorrowerItems() {
+        this.borrowerItems.clear();
+    }
+
     /**
      * sends notifications to the borrower and owner, and then adds the trade to
      * the pending trades of each user.

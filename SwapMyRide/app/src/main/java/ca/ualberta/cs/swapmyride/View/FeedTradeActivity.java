@@ -27,6 +27,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -50,56 +52,61 @@ public class FeedTradeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        final DataManager dataManager = new DataManager(getApplicationContext());
+
         UserController userController = new UserController(getApplicationContext());
+
+        Intent intent = this.getIntent();
 
         trade = (Button) findViewById(R.id.trade);
         feedMultipleView = (ListView) findViewById(R.id.feedMultipleView);
 
-        friendUsername = getIntent().getExtras().getString("Username");
+        friendUsername = intent.getStringExtra("Username");
+
+        getSupportActionBar().setTitle(friendUsername+" Inventory");
 
         vehicleNames = new ArrayList<>();
 
         friendInventory = userController.getFriendVehicles(friendUsername);
 
         for (Vehicle vehicle: friendInventory.getList()) {
-            vehicleNames.add(vehicle.getName());
+            if (vehicle.getPublic()) {
+                vehicleNames.add(vehicle.getName());
+            }
         }
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, vehicleNames);
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, vehicleNames);
         feedMultipleView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         feedMultipleView.setAdapter(adapter);
 
         trade.setOnClickListener(new View.OnClickListener() {
             @Override
-
             // http://theopentutorials.com/tutorials/android/listview/android-multiple-selection-listview/#ListViewMultipleSelectionActivityjava
             public void onClick(View v) {
+                // Clearing the UserSingleton's currentTrade's borrowers list
+                UserSingleton.currentTrade.clearBorrowerItems();
+
                 SparseBooleanArray checked = feedMultipleView.getCheckedItemPositions();
-                ArrayList<String> selectedItems = new ArrayList<>();
                 for (int i = 0; i < checked.size(); i++) {
                     // Item position in adapter
                     int position = checked.keyAt(i);
-                    // Add sport if it is checked i.e.) == TRUE!
-                    if (checked.valueAt(i))
-                        selectedItems.add(adapter.getItem(position));
+
+                    if (checked.valueAt(i)) {
+                        // Adding items of friendInventory that are checked
+                        UserSingleton.currentTrade.addBorrowerItem(friendInventory.getList().get(position));
+                    }
                 }
 
-                String[] outputStrArr = new String[selectedItems.size()];
+                Intent intent = new Intent(getApplicationContext(), FeedTradeUserActivity.class);
 
-                for (int i = 0; i < selectedItems.size(); i++) {
-                    outputStrArr[i] = selectedItems.get(i);
-                }
-
-                Intent intent = new Intent(getApplicationContext(), FeedTradeActivity.class);
-
-                // Create a bundle object
-                Bundle b = new Bundle();
-                b.putStringArray("selectedItems", outputStrArr);
-
-                // Add the bundle to the intent.
-                intent.putExtras(b);
+                // Setting trade data in UserSingleton
+                UserSingleton.currentTrade.setOwner(UserSingleton.getCurrentUser());
+                UserSingleton.currentTrade.setBorrower(dataManager.loadUser(friendUsername));
 
                 // start the ResultActivity
                 startActivity(intent);
+
+                finish();
             }
         });
     }
