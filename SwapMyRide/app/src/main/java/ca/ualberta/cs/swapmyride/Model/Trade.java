@@ -41,14 +41,9 @@ public class Trade {
     /**
      * Constructs the trade with indication of who the two users
      * participating in the app are.
-     *
-     * @param owner
-     * @param borrower
      */
 
-    public Trade(User owner, User borrower) {
-        this.owner = owner;
-        this.borrower = borrower;
+    public Trade() {
     }
 
     public User getOwner() {
@@ -89,6 +84,14 @@ public class Trade {
 
     public void addOwnerItem(Vehicle vehicle){
         ownerItems.add(vehicle);
+    }
+
+    public void clearOwnerItems() {
+        this.ownerItems.clear();
+    }
+
+    public void clearBorrowerItems() {
+        this.borrowerItems.clear();
     }
 
     /**
@@ -145,7 +148,9 @@ public class Trade {
      */
 
     public Trade makeCounterTrade(){
-        Trade counterTrade = new Trade(this.borrower, this.owner);
+        Trade counterTrade = new Trade();
+        counterTrade.setOwner(this.owner);
+        counterTrade.setBorrower(this.borrower);
         counterTrade.setBorrowerItems(this.getOwnerItems());
         counterTrade.setOwnerItems(this.getBorrowerItems());
         counterTrade.send();

@@ -90,7 +90,9 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 

@@ -16,6 +16,7 @@
 package ca.ualberta.cs.swapmyride.Misc;
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
@@ -28,6 +29,7 @@ public class UserSingleton {
     private static Vehicle feedViewVehicle;
     private static ArrayList<User> friends = new ArrayList<>();
     private static UserSingleton ourInstance = new UserSingleton();
+    private static Trade currentTrade = new Trade();
 
     public static UserSingleton getInstance() {
         return ourInstance;
@@ -63,5 +65,13 @@ public class UserSingleton {
 
     public static void setFriends(ArrayList<User> users){
         friends = users;
+    }
+
+    public static Trade getCurrentTrade() {
+        return currentTrade;
+    }
+
+    public static void setCurrentTrade(Trade currentTrade) {
+        UserSingleton.currentTrade = currentTrade;
     }
 }
