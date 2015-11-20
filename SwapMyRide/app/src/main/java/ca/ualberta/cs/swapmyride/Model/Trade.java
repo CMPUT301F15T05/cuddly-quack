@@ -17,6 +17,8 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
+
 /**
  * Trade is the major object to encapsulate all
  * information about a trade that will occur
@@ -37,6 +39,7 @@ public class Trade {
     private Boolean borrowerNotified = false;
     private Boolean isAccepted = false;
     private Boolean isDeclined = false;
+    private UniqueID uniqueID = new UniqueID();
 
     /**
      * Constructs the trade with indication of who the two users
@@ -179,4 +182,43 @@ public class Trade {
         borrowerItems.add(newOne);
     }
 
+    public void setOwnerNotified(Boolean ownerNotified) {
+        this.ownerNotified = ownerNotified;
+    }
+
+    public void setBorrowerNotified(Boolean borrowerNotified) {
+        this.borrowerNotified = borrowerNotified;
+    }
+
+    public void setIsAccepted(Boolean isAccepted) {
+        this.isAccepted = isAccepted;
+    }
+
+    public void setIsDeclined(Boolean isDeclined) {
+        this.isDeclined = isDeclined;
+    }
+
+    public UniqueID getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(UniqueID uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    public Trade copy(){
+        Trade newTrade = new Trade();
+
+        newTrade.setOwner(this.getOwner());
+        newTrade.setBorrower(this.getBorrower());
+        newTrade.setOwnerItems(this.getOwnerItems());
+        newTrade.setBorrowerItems(this.getBorrowerItems());
+        newTrade.setOwnerNotified(this.getOwnerNotified());
+        newTrade.setBorrowerNotified(this.getBorrowerNotified());
+        newTrade.setIsAccepted(this.getIsAccepted());
+        newTrade.setIsDeclined(this.getIsDeclined());
+        newTrade.setUniqueID(this.getUniqueID().duplicateID());
+
+        return newTrade;
+    }
 }
