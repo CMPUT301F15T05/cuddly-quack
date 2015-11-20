@@ -55,9 +55,9 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         vehiclePicture = (ImageView) findViewById(R.id.picture);
         title = (TextView) findViewById(R.id.title);
-        quanitiy = (TextView) findViewById(R.id.quality);
+        quanitiy = (TextView) findViewById(R.id.quantity);
         category = (TextView) findViewById(R.id.category);
-        quality = (TextView) findViewById(R.id.quantity);
+        quality = (TextView) findViewById(R.id.quality);
         comments = (TextView) findViewById(R.id.commentsHead);
 
         vehicle = UserSingleton.getFeedViewVehicle();
