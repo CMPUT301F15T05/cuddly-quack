@@ -104,12 +104,14 @@
         <activity
             android:name=".View.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".View.FeedTradeUserActivity"
             android:label="@string/title_activity_feed_trade_user"
-            android:theme="@style/AppTheme" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

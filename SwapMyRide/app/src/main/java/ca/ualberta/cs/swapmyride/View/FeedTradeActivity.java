@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
+import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
@@ -83,8 +84,7 @@ public class FeedTradeActivity extends AppCompatActivity {
             @Override
             // http://theopentutorials.com/tutorials/android/listview/android-multiple-selection-listview/#ListViewMultipleSelectionActivityjava
             public void onClick(View v) {
-                // Clearing the UserSingleton's currentTrade's borrowers list
-                UserSingleton.currentTrade.clearBorrowerItems();
+                Trade currentTrade = new Trade();
 
                 SparseBooleanArray checked = feedMultipleView.getCheckedItemPositions();
                 for (int i = 0; i < checked.size(); i++) {
@@ -93,15 +93,17 @@ public class FeedTradeActivity extends AppCompatActivity {
 
                     if (checked.valueAt(i)) {
                         // Adding items of friendInventory that are checked
-                        UserSingleton.currentTrade.addBorrowerItem(friendInventory.getList().get(position));
+                        currentTrade.addBorrowerItem(friendInventory.getList().get(position));
                     }
                 }
 
                 Intent intent = new Intent(getApplicationContext(), FeedTradeUserActivity.class);
 
                 // Setting trade data in UserSingleton
-                UserSingleton.currentTrade.setOwner(UserSingleton.getCurrentUser());
-                UserSingleton.currentTrade.setBorrower(dataManager.loadUser(friendUsername));
+                currentTrade.setOwner(UserSingleton.getCurrentUser());
+                currentTrade.setBorrower(dataManager.loadUser(friendUsername));
+
+                UserSingleton.setCurrentTrade(currentTrade);
 
                 // start the ResultActivity
                 startActivity(intent);

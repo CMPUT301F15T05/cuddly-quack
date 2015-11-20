@@ -29,7 +29,7 @@ public class UserSingleton {
     private static Vehicle feedViewVehicle;
     private static ArrayList<User> friends = new ArrayList<>();
     private static UserSingleton ourInstance = new UserSingleton();
-    public static Trade currentTrade = new Trade();
+    private static Trade currentTrade = new Trade();
 
     public static UserSingleton getInstance() {
         return ourInstance;

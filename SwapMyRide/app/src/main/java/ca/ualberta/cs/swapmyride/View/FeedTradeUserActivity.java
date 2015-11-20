@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
+import ca.ualberta.cs.swapmyride.Model.Trade;
+import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
@@ -33,7 +35,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(UserSingleton.getCurrentUser().getUserName()+" Inventory");
+        getSupportActionBar().setTitle(UserSingleton.getCurrentUser().getUserName() + " Inventory");
 
         userInventory = UserSingleton.getCurrentUser().getInventory();
 
@@ -54,8 +56,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
             @Override
             // http://theopentutorials.com/tutorials/android/listview/android-multiple-selection-listview/#ListViewMultipleSelectionActivityjava
             public void onClick(View v) {
-                // Clearing the UserSingleton's currentTrade's borrowers list
-                UserSingleton.currentTrade.clearOwnerItems();
+                Trade currentTrade = UserSingleton.getCurrentTrade();
 
                 SparseBooleanArray checked = feedMultipleView.getCheckedItemPositions();
                 for (int i = 0; i < checked.size(); i++) {
@@ -64,9 +65,12 @@ public class FeedTradeUserActivity extends AppCompatActivity {
 
                     if (checked.valueAt(i)) {
                         // Adding items of friendInventory that are checked
-                        UserSingleton.currentTrade.addOwnerItem(userInventory.getList().get(position));
+                        currentTrade.addOwnerItem(userInventory.getList().get(position));
                     }
                 }
+
+                UserSingleton.setCurrentTrade(currentTrade);
+
                 finish();
             }
         });

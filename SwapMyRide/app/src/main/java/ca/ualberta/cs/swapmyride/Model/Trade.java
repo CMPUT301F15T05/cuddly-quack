@@ -86,7 +86,6 @@ public class Trade {
         ownerItems.add(vehicle);
     }
 
-
     public void clearOwnerItems() {
         this.ownerItems.clear();
     }
