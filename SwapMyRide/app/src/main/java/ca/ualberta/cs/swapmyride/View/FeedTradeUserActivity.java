@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -71,8 +73,28 @@ public class FeedTradeUserActivity extends AppCompatActivity {
 
                 UserSingleton.setCurrentTrade(currentTrade);
 
+                tradeDialog();
+            }
+        });
+    }
+
+    public void tradeDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(FeedTradeUserActivity.this);
+        builder.setMessage("Are you SURE you want to proceed with this trade?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
                 finish();
             }
         });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }
