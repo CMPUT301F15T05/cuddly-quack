@@ -486,4 +486,49 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(userOneTrades.get(0).equals(trade));
         assertTrue(userTwoTrades.get(0).equals(trade));
     }
+
+    public void testCopy(){
+        //create users and their inventories
+        User userOne = new User();
+        User userTwo = new User();
+        InventoryList userOneInventory = new InventoryList();
+        InventoryList userTwoInventory = new InventoryList();
+        userOne.setName("John Smith");
+        userTwo.setName("Jane Smith");
+
+        //create items and add to inventories
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
+
+        vehicleOne.setPhoto(picture);
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory(VehicleCategory.SEDAN);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setPublic(true);
+        userOneInventory.add(vehicleOne);
+
+        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setPublic(true);
+        userTwoInventory.add(vehicleTwo);
+
+        //add new trade, assert that it was created properly
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade();
+        trade.setOwner(userOne);
+        trade.setBorrower(userTwo);
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
+
+        Trade copyTrade = trade.copy();
+        assertTrue(trade.getUniqueID().isEqualID(copyTrade.getUniqueID()));
+        assertTrue(trade.getOwner().getName().equals(copyTrade.getOwner().getName()));
+        // TODO: Add a lot more assertions if someone feels like it, the UniqueID is what we most care about
+    }
 }
