@@ -118,6 +118,11 @@
             android:label="@string/title_activity_view_pending_trades"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".View.ViewAPendingTradeActivity"
+            android:label="@string/title_activity_view_apending_trade"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
