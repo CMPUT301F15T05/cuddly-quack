@@ -3,9 +3,12 @@ package ca.ualberta.cs.swapmyride.View;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,8 +19,17 @@ import ca.ualberta.cs.swapmyride.R;
 
 public class ViewAPendingTradeActivity extends AppCompatActivity {
 
-    // TODO add things here
     Toolbar toolbar;
+    ListView friendInventory;
+    ListView userInventory;
+    Button delete;
+    Button counter;
+    Button confirm;
+    int position;
+    ArrayList<Trade> trades;
+    Trade tradeToDisplay;
+    FeedAdapter friendAdapter;
+    FeedAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +39,43 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        ListView friendInventory = (ListView) findViewById(R.id.friendInventory);
-        ListView userInventory = (ListView) findViewById(R.id.userInventory);
+        friendInventory = (ListView) findViewById(R.id.friendInventory);
+        userInventory = (ListView) findViewById(R.id.userInventory);
 
-        int position = getIntent().getIntExtra("PastTradePosition", 0);
+        delete = (Button) findViewById(R.id.delete);
+        counter = (Button) findViewById(R.id.counter);
+        confirm = (Button) findViewById(R.id.confirm);
 
-        ArrayList<Trade> trades = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
-        Trade tradeToDisplay = trades.get(position);
+        position = getIntent().getIntExtra("PastTradePosition", 0);
 
-        FeedAdapter adapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getBorrowerItems());
-        FeedAdapter userAdapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getOwnerItems());
+        trades = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
+        tradeToDisplay = trades.get(position);
 
-        friendInventory.setAdapter(adapter);
+        friendAdapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getBorrowerItems());
+        userAdapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getOwnerItems());
+
+        friendInventory.setAdapter(friendAdapter);
         userInventory.setAdapter(userAdapter);
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO add this
+            }
+        });
+
+        counter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO add this
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO add this
+            }
+        });
     }
 }
