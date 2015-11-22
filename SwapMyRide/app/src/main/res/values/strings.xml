@@ -29,4 +29,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_feed_trade_user">Trade</string>
+    <string name="title_activity_view_pending_trades">Pending Trades</string>
 </resources>

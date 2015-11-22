@@ -93,6 +93,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
 
                 Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
 
+                //TODO more MVC controller stuff
                 User friend = dataManager.loadUser(pendingTrade.getBorrower());
 
                 friend.addPendingTrade(pendingTrade);

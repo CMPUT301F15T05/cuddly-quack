@@ -99,6 +99,7 @@ public class FeedTradeActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), FeedTradeUserActivity.class);
 
+                //TODO more MVC controller stuff
                 // Setting trade data in UserSingleton
                 currentTrade.setOwner(UserSingleton.getCurrentUser().getUserName());
                 currentTrade.setBorrower(friendUsername);
