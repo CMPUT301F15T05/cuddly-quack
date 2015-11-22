@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.Trade;
@@ -28,6 +29,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
     InventoryList userInventory;
     ArrayList<String> vehicleNames;
     ArrayAdapter<String> adapter;
+    DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class FeedTradeUserActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle(UserSingleton.getCurrentUser().getUserName() + " Inventory");
+
+        dataManager = new DataManager(getApplicationContext());
 
         userInventory = UserSingleton.getCurrentUser().getInventory();
 
@@ -86,6 +90,20 @@ public class FeedTradeUserActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+
+                Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
+
+                User friend = dataManager.loadUser(pendingTrade.getBorrower());
+
+                friend.addPendingTrade(pendingTrade);
+                UserSingleton.getCurrentUser().addPendingTrade(pendingTrade);
+
+                friend.getNotificationManager().notifyTrade(pendingTrade);
+
+
+                dataManager.saveUser(friend);
+                dataManager.saveUser(UserSingleton.getCurrentUser());
+
                 finish();
             }
         });

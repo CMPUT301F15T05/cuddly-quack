@@ -57,7 +57,7 @@ public class NotificationManager {
         String trades = Integer.toString(size);
         new AlertDialog.Builder(context)
                 .setTitle("New Trade!")
-                .setMessage("You have " + trades + " new trades pending! Go to Active Trades to view!")
+                .setMessage("You have " + trades + " new trade(s) pending! Go to Active Trades to view!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

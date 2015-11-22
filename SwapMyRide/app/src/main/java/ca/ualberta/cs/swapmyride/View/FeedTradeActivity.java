@@ -100,8 +100,8 @@ public class FeedTradeActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), FeedTradeUserActivity.class);
 
                 // Setting trade data in UserSingleton
-                currentTrade.setOwner(UserSingleton.getCurrentUser());
-                currentTrade.setBorrower(dataManager.loadUser(friendUsername));
+                currentTrade.setOwner(UserSingleton.getCurrentUser().getUserName());
+                currentTrade.setBorrower(friendUsername);
 
                 UserSingleton.setCurrentTrade(currentTrade);
 
