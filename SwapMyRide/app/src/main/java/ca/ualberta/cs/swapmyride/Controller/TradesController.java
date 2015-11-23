@@ -35,7 +35,7 @@ public class TradesController {
         dataManager = new DataManager(context);
     }
 
-    public void removePendingTrades(Trade trade) {
+    public void deletePendingTrade(Trade trade) {
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
 
@@ -56,6 +56,25 @@ public class TradesController {
 
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
+    }
+
+    public void confirmPendingTrade(Trade trade){
+        // TODO: finish implementing
+        // check that items are in inventory for both parties
+        // remove from pendingList
+        // add to pastTradesList
+        // swap items between users
+        // save users
+        // save userSingleton
+    }
+
+    public void counterPendingTrade(Trade trade){
+        // TODO: finish implementing
+        // save user we are trading with for later
+        // remove from pendingList
+        // save users
+        // save userSingleton
+        // pass data to feedTradeActivity? aka the user we are trading with
     }
 
     public TradeList getActiveTrades(){

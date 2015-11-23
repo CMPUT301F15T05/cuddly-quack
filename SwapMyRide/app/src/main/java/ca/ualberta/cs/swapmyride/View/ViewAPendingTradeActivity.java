@@ -4,11 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -69,7 +66,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tradesController.removePendingTrades(tradeToDisplay);
+                tradesController.deletePendingTrade(tradeToDisplay);
                 finish();
             }
         });
@@ -78,13 +75,15 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO add this
+                // tell the user that this is a permanent action (aka they can't cancel and expect the pending trade to still be pending)
             }
         });
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO add this
+                //tradesController.confirmPendingTrade(tradeToDisplay);
+                //finish();
             }
         });
     }
