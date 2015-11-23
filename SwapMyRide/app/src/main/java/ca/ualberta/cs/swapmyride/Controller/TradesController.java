@@ -15,13 +15,41 @@
  */
 package ca.ualberta.cs.swapmyride.Controller;
 
+import android.content.Context;
+
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
+import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
+import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
  * Created by Garry on 2015-11-01.
  */
 public class TradesController {
+
+    Context context;
+    DataManager dataManager;
+
+    public TradesController(Context context) {
+        this.context = context;
+        dataManager = new DataManager(context);
+    }
+
+    public void removePendingTrades(Trade trade) {
+        User borrower = dataManager.loadUser(trade.getBorrower());
+        User owner = dataManager.loadUser(trade.getOwner());
+
+        TradeList borrowerPendingTrades = borrower.getPendingTrades();
+        borrowerPendingTrades.delete(trade.getUniqueID());
+        borrower.setPendingTrades(borrowerPendingTrades);
+
+        TradeList userPendingTrades = owner.getPendingTrades();
+        userPendingTrades.delete(trade.getUniqueID());
+        owner.setPendingTrades(userPendingTrades);
+
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+    }
 
     public TradeList getActiveTrades(){
         return UserSingleton.getCurrentUser().getPendingTrades();

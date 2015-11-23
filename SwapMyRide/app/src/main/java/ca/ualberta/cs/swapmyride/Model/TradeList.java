@@ -17,6 +17,8 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
+
 /**
  * Created by adrianomarini on 2015-10-26.
  */
@@ -48,6 +50,17 @@ public class TradeList {
     public void delete(Trade trade){
         int index = this.trades.indexOf(trade);
         this.trades.remove(index);
+    }
+
+    public void delete(UniqueID uniqueID) {
+        int length = trades.size();
+        int index = 0;
+        for (Trade trade: trades) {
+            if (trade.getUniqueID().equals(uniqueID)) {
+                trades.remove(index);
+            }
+            index++;
+        }
     }
 
     /**

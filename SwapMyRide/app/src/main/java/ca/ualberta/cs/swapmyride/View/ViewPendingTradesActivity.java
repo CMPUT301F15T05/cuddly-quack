@@ -30,21 +30,7 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        pendingTradeArray = new ArrayList<>();
-
         pendingTrades = (ListView)findViewById(R.id.pendingTrades);
-
-        ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
-
-        for (Trade trade: tradeList) {
-            String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getBorrower(), trade.getBorrowerItems().size(), trade.getOwnerItems().size());
-
-            pendingTradeArray.add(s);
-        }
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pendingTradeArray);
-
-        pendingTrades.setAdapter(adapter);
 
         pendingTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,4 +44,22 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        pendingTradeArray = new ArrayList<>();
+
+        ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
+
+        for (Trade trade: tradeList) {
+            String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
+
+            pendingTradeArray.add(s);
+        }
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pendingTradeArray);
+
+        pendingTrades.setAdapter(adapter);
+    }
 }

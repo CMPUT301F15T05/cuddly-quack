@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
+import ca.ualberta.cs.swapmyride.Controller.TradesController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.R;
@@ -30,6 +31,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
     Trade tradeToDisplay;
     FeedAdapter friendAdapter;
     FeedAdapter userAdapter;
+    TradesController tradesController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        tradesController = new TradesController(getApplicationContext());
 
         friendInventory = (ListView) findViewById(R.id.friendInventory);
         userInventory = (ListView) findViewById(R.id.userInventory);
@@ -51,6 +55,11 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         trades = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
         tradeToDisplay = trades.get(position);
 
+        if (tradeToDisplay.getOwner().equals(UserSingleton.getCurrentUser().getUserName())) {
+            counter.setVisibility(View.INVISIBLE);
+            confirm.setVisibility(View.INVISIBLE);
+        }
+
         friendAdapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getBorrowerItems());
         userAdapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getOwnerItems());
 
@@ -60,7 +69,8 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO add this
+                tradesController.removePendingTrades(tradeToDisplay);
+                finish();
             }
         });
 

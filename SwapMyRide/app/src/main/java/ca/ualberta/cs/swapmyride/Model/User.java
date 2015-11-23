@@ -120,5 +120,14 @@ public class User {
         pendingTrades.add(pendingTrade);
     }
 
-    public NotificationManager getNotificationManager() {return notificationManager; }
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
+    }
+    public void setPendingTrades(TradeList pendingTrades) {
+        this.pendingTrades = pendingTrades;
+    }
+
+    public void setPastTrades(TradeList pastTrades) {
+        this.pastTrades = pastTrades;
+    }
 }
