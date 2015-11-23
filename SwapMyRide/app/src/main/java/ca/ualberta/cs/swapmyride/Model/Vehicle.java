@@ -21,6 +21,7 @@ import android.graphics.BitmapFactory;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.Geolocation;
 
 /**
  * Vehicle stores all information regarding the vehicles in the app. All data is private,
