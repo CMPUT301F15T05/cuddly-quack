@@ -101,7 +101,6 @@ public class FeedTradeUserActivity extends AppCompatActivity {
 
                 friend.getNotificationManager().notifyTrade(pendingTrade);
 
-
                 dataManager.saveUser(friend);
                 dataManager.saveUser(UserSingleton.getCurrentUser());
 

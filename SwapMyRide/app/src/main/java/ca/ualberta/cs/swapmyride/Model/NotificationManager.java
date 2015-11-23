@@ -23,6 +23,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;
 
 /**
@@ -65,6 +67,7 @@ public class NotificationManager {
                     }
                 })
                 .show();
+        tradesToBeNotified.clear();
     }
 
     public void showFriendRequest(final Context context, final String username){
@@ -89,19 +92,16 @@ public class NotificationManager {
                 })
                 .show();
         friendRequests.clear();
-//        tradesToBeNotified.clear();
     }
 
     public void notifyMe(Context context) {
         if (tradesToBeNotified.size() > 0) {
             showtrade(context);
-            tradesToBeNotified.clear();
         }
 
         for(String username : friendRequests){
             showFriendRequest(context, username);
         }
-
     }
 
 }
