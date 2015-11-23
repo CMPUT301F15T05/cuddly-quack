@@ -1,18 +1,36 @@
 package ca.ualberta.cs.swapmyride;
 
-import android.app.Instrumentation;
 import android.content.Context;
 import android.graphics.Point;
+import android.support.test.InstrumentationRegistry;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.Display;
 import android.view.WindowManager;
 
-import java.math.RoundingMode;
+import org.junit.Before;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
+
+
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
+import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
-import ca.ualberta.cs.swapmyride.View.Tab1;
-
 /**
  * Created by adrianomarini on 2015-11-18.
  *
@@ -20,83 +38,44 @@ import ca.ualberta.cs.swapmyride.View.Tab1;
  * correctly and that all of the intended functions are present
  * and operational
  *
+ *
  */
-public class MainMenuTest extends ActivityInstrumentationTestCase2 {
+public class MainMenuTest extends ActivityInstrumentationTestCase2{
+
+    private MainMenu mainMenu;
 
     public MainMenuTest() { super(MainMenu.class); }
 
-    public void testMainMenu(){
-        Context context = super.getActivity();
-
-        /**
-         * Instructions on how to get display size taken from:
-         * http://stackoverflow.com/questions/1016896/get-screen-dimensions-in-pixels
-         * User: Josef Pfleger           Date: 2015-11-18
-         */
-
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        int centreWidth = width / 2;
-        int heightCentre = height / 2;
-
-        /**
-         * Instructions on how to use TouchUtils taken from:
-         * http://developer.android.com/reference/android/test/TouchUtils.html
-         * Date: 2015-11-18
-         */
-
-        //Feed of items should be active
-
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
-        //Inventory feed should be active
-
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
-        //List of extra things should be active
-
-        TouchUtils.drag(this, 0, centreWidth, heightCentre, heightCentre, 1);
-        //Inventory feed should be active
-
-        TouchUtils.drag(this, 0, centreWidth, heightCentre, heightCentre, 1);
-        //Item feed should be active
-
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
+        mainMenu = (MainMenu) getActivity();
     }
 
+    /**
+     * This test tests the UI functionality of clicking on an item in the
+     * friends' inventory feed to verify that the proper view activity
+     * opens and that the information that is opened is correct
+     */
+
     public void testClickItem(){
-        Context context = super.getActivity();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        int centreWidth = width / 2;
-        int heightCentre = height / 2;
-
+        populateTestData();
+        Context context = getInstrumentation().getContext();
         //Feed of items should be active
-
         //Tap on an item in the feed,
 
         //ViewVehicleActivity should be active
 
         //Assert information matches the prescribed info
+
+
+        cleanUp();
     }
 
     public void testClickInventory(){
-        Context context = super.getActivity();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        int centreWidth = width / 2;
-        int heightCentre = height / 2;
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
+        populateTestData();
+        Context context = getInstrumentation().getContext();
 
         //Feed of inventory should be active
 
@@ -115,20 +94,12 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2 {
         //assert information matches changes
 
 
+        cleanUp();
     }
 
     public void testViewFriends(){
-        Context context = super.getActivity();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        int centreWidth = width / 2;
-        int heightCentre = height / 2;
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
+        populateTestData();
+        Context context = getInstrumentation().getContext();
 
         //Tab3 should be active, tap View Friends
 
@@ -140,20 +111,12 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2 {
 
         //Assert matching information
 
+        cleanUp();
     }
 
     public void testEditProfile(){
-        Context context = super.getActivity();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        int centreWidth = width / 2;
-        int heightCentre = height / 2;
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
-        TouchUtils.drag(this, width, centreWidth, heightCentre, heightCentre, 1);
+        populateTestData();
+        Context context = getInstrumentation().getContext();
 
         //Tab3 should be active, tap Edit Profile
 
@@ -162,9 +125,11 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2 {
         //change name + click save
 
         //re-enter -- verify information matches
+        cleanUp();
     }
 
     public void testAddFriends(){
+        populateTestData();
         //Click search button
 
         //Verify search activity starts
@@ -177,14 +142,91 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2 {
 
         //verify activity returned
 
+        cleanUp();
     }
 
     public void testAddItem(){
+        populateTestData();
 
+        cleanUp();
     }
 
     public void testSearch(){
+        populateTestData();
 
+        cleanUp();
     }
-    
+
+    /**
+     * This method populates known data into hte current user area
+     * to ensure that it can be tested and verified.
+     */
+
+    public void populateTestData(){
+        Context context = getInstrumentation().getContext();
+        DataManager dm = new DataManager(context);
+        //Create 2 users and make them friends
+        User main = new User();
+        User friend = new User();
+
+        main.setUserName("bob");
+        main.setName("Bob");
+        main.setUserAddress("123 Fake Street");
+        main.setUserEmail("bob@bob.bob");
+
+        friend.setUserName("jane");
+        friend.setName("Jane");
+        friend.setUserAddress("234 Fake Street");
+        friend.setUserEmail("jane@jane.jane");
+
+        main.addFriend("jane");
+
+        //Give them 2 inventory items each
+        Vehicle v1 = new Vehicle();
+        Vehicle v2 = new Vehicle();
+        Vehicle v3 = new Vehicle();
+        Vehicle v4 = new Vehicle();
+
+        v1.setName("Jeep");
+        v1.setCategory(VehicleCategory.SUV);
+        v1.setQuantity(1);
+        v1.setQuality(VehicleQuality.SHOWROOM);
+
+        v2.setName("Honda");
+        v2.setCategory(VehicleCategory.SEDAN);
+        v2.setQuality(VehicleQuality.RUSTBUCKET);
+        v2.setQuantity(1);
+
+        main.addItem(v1);
+        main.addItem(v2);
+
+        v3.setName("Toyota");
+        v3.setCategory(VehicleCategory.SUV);
+        v3.setQuantity(1);
+        v3.setQuality(VehicleQuality.SHOWROOM);
+
+        v4.setName("Mitsubishi");
+        v4.setCategory(VehicleCategory.SEDAN);
+        v4.setQuality(VehicleQuality.RUSTBUCKET);
+        v4.setQuantity(1);
+
+        friend.addItem(v3);
+        friend.addItem(v4);
+
+        dm.saveUser(main);
+        dm.saveUser(friend);
+    }
+
+    /**
+     * This method removes the test data that exists from the system
+     * to ensure that it will not cause other issues by sticking around
+     */
+    public void cleanUp(){
+        Context context = getInstrumentation().getContext();
+        DataManager dm = new DataManager(context);
+        //delete the two created users
+        dm.deleteUser("bob");
+        dm.deleteUser("jane");
+    }
+
 }
