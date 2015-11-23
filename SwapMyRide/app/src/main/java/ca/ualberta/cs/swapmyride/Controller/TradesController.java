@@ -47,6 +47,13 @@ public class TradesController {
         userPendingTrades.delete(trade.getUniqueID());
         owner.setPendingTrades(userPendingTrades);
 
+        // make sure to save the right user back to the userSingleton!
+        if(borrower.getUserName().equals(UserSingleton.getCurrentUser().getUserName())) {
+            UserSingleton.addCurrentUser(borrower);
+        } else {
+            UserSingleton.addCurrentUser(owner);
+        }
+
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
     }

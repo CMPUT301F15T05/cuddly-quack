@@ -56,7 +56,7 @@ public class TradeList {
         int length = trades.size();
         int index = 0;
         for (Trade trade: trades) {
-            if (trade.getUniqueID().equals(uniqueID)) {
+            if (trade.getUniqueID().isEqualID(uniqueID)) {
                 trades.remove(index);
             }
             index++;
