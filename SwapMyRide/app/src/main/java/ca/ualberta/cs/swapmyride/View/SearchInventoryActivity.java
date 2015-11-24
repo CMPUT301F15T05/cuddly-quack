@@ -52,6 +52,7 @@ public class SearchInventoryActivity extends AppCompatActivity {
     SearchController searchController;
     ArrayList<Vehicle> foundVehicles;
     InventoryAdapter adapter;
+    EditText distance;
 
     /**
      * OnCreate opens the opportunity for a user to enter a string or
@@ -75,6 +76,8 @@ public class SearchInventoryActivity extends AppCompatActivity {
         searchController = new SearchController();
 
         searchList = (ListView) findViewById(R.id.searchList);
+
+        distance = (EditText) findViewById(R.id.distanceEdit);
 
         inventoryList = UserSingleton.getCurrentUser().getInventory().getList();
 

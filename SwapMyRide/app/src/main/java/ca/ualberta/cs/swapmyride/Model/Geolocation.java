@@ -36,7 +36,7 @@ public class Geolocation {
      *
      * This is considered the default location for items
      *
-     * Method for providers and locationadapted from:
+     * Method for providers and location adapted from:
      * http://stackoverflow.com/questions/17591147/how-to-get-current-location-in-android
      * User: Boris Pawlowski (& Thomas Clemensen)           Accessed: 22-11-2015
      *
@@ -97,7 +97,7 @@ public class Geolocation {
         }
 
         if(lastKnownLocation == null){
-
+            address.setPostalCode("Location Error");
         }
 
         //If it is not null, try to get an address from the lat/long
@@ -135,10 +135,36 @@ public class Geolocation {
         return address;
     }
 
-    public Address setSpecificLocation(Context context, String location){
+    public Address setSpecificLocation(Context context, Activity activity, String location){
         Address address = new Address(Locale.getDefault());
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         List<Address> addresses;
+        // http://developer.android.com/training/permissions/requesting.html
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+
+            // No explanation needed, we can request the permission.
+
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST__COARSE_LOCATION);
+
+        }
+        // http://developer.android.com/training/permissions/requesting.html
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+
+            // No explanation needed, we can request the permission.
+
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST__FINE_LOCATION);
+
+        }
         try{
             addresses = geocoder.getFromLocationName(location, 1);
             address.setLocality(addresses.get(0).getLocality());
@@ -150,9 +176,15 @@ public class Geolocation {
             address.setLongitude(addresses.get(0).getLongitude());
         }
         catch(IOException e){
+            address.setPostalCode("LOCATION ERROR");
             return address;
         }
         catch (IllegalArgumentException e){
+            address.setPostalCode("LOCATION ERROR");
+            return address;
+        }
+        catch (IndexOutOfBoundsException e){
+            address.setPostalCode("LOCATION ERROR");
             return address;
         }
         return address;

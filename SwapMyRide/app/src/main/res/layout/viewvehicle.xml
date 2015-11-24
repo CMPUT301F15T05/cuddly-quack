@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity:"
+        android:text="Quality:"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qauntityHead"
@@ -60,7 +60,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quality:"
+        android:text="Quantity:"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qualityHead"
@@ -69,20 +69,19 @@
         android:layout_alignStart="@+id/categoryHead" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comments"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/commentsHead"
-        android:layout_below="@+id/qualityHead"
-        android:layout_alignStart="@+id/qualityHead"
-        android:layout_marginTop="25dp"
-        android:layout_alignParentEnd="true"
         android:maxLines="8"
-        android:lines="8"
+        android:lines="4"
         android:gravity="center"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@+id/picture"
+        android:layout_alignBottom="@+id/delete"
+        android:layout_below="@+id/location" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,8 +90,8 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/quantity"
-        android:layout_alignTop="@+id/qauntityHead"
-        android:layout_alignStart="@+id/title" />
+        android:layout_above="@+id/categoryHead"
+        android:layout_alignStart="@+id/category" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,8 +100,8 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/category"
-        android:layout_alignTop="@+id/categoryHead"
-        android:layout_alignStart="@+id/quantity" />
+        android:layout_above="@+id/qualityHead"
+        android:layout_alignStart="@+id/quality" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,7 +111,7 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/quality"
         android:layout_alignTop="@+id/qualityHead"
-        android:layout_alignStart="@+id/category" />
+        android:layout_alignStart="@+id/location" />
 
     <Button
         android:layout_width="wrap_content"
@@ -131,7 +130,29 @@
         android:text="Edit"
         android:background="@color/colorPrimary"
         android:id="@+id/edit"
-        android:layout_alignTop="@+id/delete"
-        android:layout_alignEnd="@+id/commentsHead" />
+        android:layout_above="@+id/delete"
+        android:layout_alignStart="@+id/delete"
+        android:layout_marginBottom="43dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postal Code:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView9"
+        android:layout_below="@+id/qualityHead"
+        android:layout_alignStart="@+id/qualityHead"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/location"
+        android:layout_alignTop="@+id/textView9"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

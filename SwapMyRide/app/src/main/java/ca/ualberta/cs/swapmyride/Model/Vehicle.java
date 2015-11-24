@@ -17,6 +17,7 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.location.Address;
 
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -37,6 +38,7 @@ public class Vehicle {
     private VehicleCategory category;
     private VehicleQuality quality;
     private boolean isPublic;
+    private Address location;
 
     public Vehicle(){
         //add default constructor for photo
@@ -119,5 +121,9 @@ public class Vehicle {
     public void setBelongsTo(String belongsTo) {
         this.belongsTo = belongsTo;
     }
+
+    public void setLocation(Address address) {this.location = address;}
+
+    public Address getLocation(){return this.location;}
 
 }

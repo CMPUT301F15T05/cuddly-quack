@@ -51,6 +51,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView quality;
     TextView comments;
     ImageView image;
+    TextView location;
 
     Gson gson;
     ImageView picture;
@@ -88,6 +89,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         comments = (TextView) findViewById(R.id.commentsHead);
         image = (ImageView) findViewById(R.id.picture);
         picture = (ImageView) findViewById(R.id.picture);
+        location = (TextView) findViewById(R.id.location);
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
@@ -106,6 +108,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         comments.setText(vehicle.getComments());
         image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
         picture.setImageBitmap(vehicle.getPhoto().getImage());
+        location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
     }
 
     public void initOnClickListeners(){

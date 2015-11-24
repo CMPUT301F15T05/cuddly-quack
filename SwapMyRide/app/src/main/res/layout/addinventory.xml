@@ -143,9 +143,8 @@
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
             android:id="@+id/textView7"
-            android:layout_below="@+id/textView6"
-            android:layout_alignStart="@+id/textView6"
-            android:layout_marginTop="35dp"/>
+            android:layout_below="@+id/quantityField"
+            android:layout_alignStart="@+id/textView6" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -189,6 +188,31 @@
             android:layout_width="0dp"
             android:layout_height="10dp"
             android:layout_below="@+id/button"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Postal Code:"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView8"
+            android:layout_alignBaseline="@+id/locationField"
+            android:layout_alignBottom="@+id/locationField"
+            android:layout_alignStart="@+id/ispublic" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/locationField"
+            android:inputType="textPersonName"
+            android:hint="Location"
+            android:textColorHint="@color/colorAccent"
+            android:textColor="@color/colorAccent"
+            android:layout_below="@+id/commentsField"
+            android:layout_alignEnd="@+id/commentsField"
+            android:text="Location"
+            android:layout_toEndOf="@+id/textView8"
+            android:layout_alignStart="@+id/quantityField" />
 
     </RelativeLayout>
 

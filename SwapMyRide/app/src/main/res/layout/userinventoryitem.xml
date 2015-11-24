@@ -47,14 +47,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
         android:text="Public:"
         android:textSize="15sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/vehiclePicture"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"

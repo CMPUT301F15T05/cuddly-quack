@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -37,10 +38,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import java.util.Locale;
+
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -76,6 +80,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     UserController uController;
     Button delete;
     DataManager dm;
+    EditText location;
 
     int position;
 
@@ -104,8 +109,14 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehicleComments = (EditText) findViewById(R.id.commentsField);
         vehiclePublic = (Switch) findViewById(R.id.ispublic);
         done = (Button) findViewById(R.id.button);
+        location = (EditText) findViewById(R.id.locationField);
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
+
+        //Assign and display the current location
+        Geolocation geolocation = new Geolocation();
+        Address current = geolocation.getCurrentLocation(getApplicationContext(), this);
+        location.setText(current.getPostalCode());
 
         /**
          * Using spinners to select category and quality of a vehicle - taking from the enumeration
@@ -162,7 +173,9 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehiclePublic.setChecked(loaded.getPublic());
             qualitySpinner.setSelection(loaded.getQuality().getPosition());
             categorySpinner.setSelection(loaded.getCategory().getPosition());
+            location.setText(loaded.getLocation().getPostalCode());
         }
+
         //default the photo to a new photo if we are not loading a vehicle
         else{
             vehicle.setPhoto(new Photo(getApplicationContext()));
@@ -211,10 +224,13 @@ public class AddInventoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // vehicle.setPhoto(vehicleImage);
+                Geolocation geolocation1 = new Geolocation();
                 vehicle.setName(vehicleName.getText().toString());
                 Log.i("Vehicle Name", vehicleName.getText().toString());
                 vehicle.setCategory(vehicleCategory);
                 vehicle.setQuality(vehicleQuality);
+                vehicle.setLocation(geolocation1.setSpecificLocation(getApplicationContext(),
+                        AddInventoryActivity.this, location.getText().toString()));
 
                 //http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html#parseInt-java.lang.String-int-
                 //Nov. 3/ 2015
