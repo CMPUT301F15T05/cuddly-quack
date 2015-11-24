@@ -1,29 +1,18 @@
 package ca.ualberta.cs.swapmyride;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.ViewFinder;
+import android.support.test.espresso.action.ViewActions;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
-
-import org.junit.Before;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anyOf;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.startsWith;
-import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
-
+import android.widget.ListView;
+import android.widget.TextView;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -31,6 +20,8 @@ import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
+import ca.ualberta.cs.swapmyride.View.ViewFeedInventoryActivity;
+
 /**
  * Created by adrianomarini on 2015-11-18.
  *
@@ -42,16 +33,9 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  */
 public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
-    private MainMenu mainMenu;
+    ListView feed;
 
     public MainMenuTest() { super(MainMenu.class); }
-
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
-        mainMenu = (MainMenu) getActivity();
-    }
 
     /**
      * This test tests the UI functionality of clicking on an item in the
@@ -62,22 +46,32 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
     public void testClickItem(){
         populateTestData();
         Context context = getInstrumentation().getContext();
+        MainMenu mainMenu = (MainMenu) getActivity();
         //Feed of items should be active
         //Tap on an item in the feed,
-
+        feed = mainMenu.getFeed();
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                feed.performItemClick(feed, 0, 1);
+            }
+        });
         //ViewVehicleActivity should be active
-
+        Instrumentation.ActivityMonitor viewItemActivityMonitor =
+                getInstrumentation().addMonitor(ViewFeedInventoryActivity.class.getName(), null, false);
+        ViewFeedInventoryActivity viewFeedInventoryActivity = (ViewFeedInventoryActivity)
+                viewItemActivityMonitor.waitForActivityWithTimeout(100);
+        assertNotNull(viewFeedInventoryActivity);
         //Assert information matches the prescribed info
-
-
+        TextView name = viewFeedInventoryActivity.getTheName();
+        assertEquals(name, "Toyota");
         cleanUp();
     }
 
     public void testClickInventory(){
         populateTestData();
         Context context = getInstrumentation().getContext();
-
-        //Feed of inventory should be active
+        //Swipe left to get to inventory screen
 
         //tap on an item
 
@@ -87,13 +81,10 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
         //Try changing an item's attribute + save
 
-        //Feed inventory should be active
-
         // tap same item
 
         //assert information matches changes
-
-
+        
         cleanUp();
     }
 

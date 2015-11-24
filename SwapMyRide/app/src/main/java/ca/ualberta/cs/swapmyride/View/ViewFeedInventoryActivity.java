@@ -79,4 +79,8 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
             }
         });
     }
+
+    public TextView getTheName(){
+        return title;
+    }
 }

@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
 import ca.ualberta.cs.swapmyride.R;
@@ -134,5 +135,7 @@ public class MainMenu extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public ListView getFeed(){
+        return (ListView) findViewById(R.id.feedView);
+    }
 }
