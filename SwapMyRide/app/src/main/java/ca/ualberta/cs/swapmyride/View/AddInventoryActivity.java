@@ -356,4 +356,12 @@ public class AddInventoryActivity extends AppCompatActivity {
     public boolean checkHasCamera(Context context){
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
+
+    public EditText getVehicleName(){
+        return (EditText) findViewById(R.id.vehicleField);
+    }
+
+    public Button getSaveButton(){
+        return (Button) findViewById(R.id.save);
+    }
 }

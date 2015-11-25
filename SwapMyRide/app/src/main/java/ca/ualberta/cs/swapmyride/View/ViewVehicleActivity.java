@@ -157,4 +157,12 @@ public class ViewVehicleActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
+    public TextView getTheName(){
+        return (TextView) findViewById(R.id.title);
+    }
+
+    public Button getEditButton(){
+        return (Button) findViewById(R.id.edit);
+    }
 }

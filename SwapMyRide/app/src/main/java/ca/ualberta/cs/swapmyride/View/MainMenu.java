@@ -138,4 +138,8 @@ public class MainMenu extends AppCompatActivity {
     public ListView getFeed(){
         return (ListView) findViewById(R.id.feedView);
     }
+
+    public ListView getInventoryView(){
+        return (ListView) findViewById(R.id.inventoryView);
+    }
 }

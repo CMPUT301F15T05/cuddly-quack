@@ -49,34 +49,60 @@ public class Geolocation {
     public Address getCurrentLocation(Context context, Activity activity) throws IllegalArgumentException {
         Address address = new Address(Locale.getDefault());
         lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
         // http://developer.android.com/training/permissions/requesting.html
+        // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-        } else {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
-            // No explanation needed, we can request the permission.
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
 
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST__COARSE_LOCATION);
+            } else {
 
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        1);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
         }
-        // http://developer.android.com/training/permissions/requesting.html
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // http://developer.android.com/training/permissions/requesting.html
+            // Here, thisActivity is the current activity
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
 
-        } else {
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-            // No explanation needed, we can request the permission.
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.s
 
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST__FINE_LOCATION);
+                } else {
 
-        }
+                    // No explanation needed, we can request the permission.
 
+                    ActivityCompat.requestPermissions(activity,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            1);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            }
         //Check which location providers are enabled
         //The two major ones are gps services and the mobile network
         Boolean gps = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -135,43 +161,17 @@ public class Geolocation {
         return address;
     }
 
-    public Address setSpecificLocation(Context context, Activity activity, String location){
+    public Address setSpecificLocation(Context context, Activity activity, String myLocation){
         Address address = new Address(Locale.getDefault());
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         List<Address> addresses;
-        // http://developer.android.com/training/permissions/requesting.html
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-        } else {
-
-            // No explanation needed, we can request the permission.
-
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST__COARSE_LOCATION);
-
-        }
-        // http://developer.android.com/training/permissions/requesting.html
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-        } else {
-
-            // No explanation needed, we can request the permission.
-
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST__FINE_LOCATION);
-
-        }
         try{
-            addresses = geocoder.getFromLocationName(location, 1);
+            addresses = geocoder.getFromLocationName(myLocation, 1);
             address.setLocality(addresses.get(0).getLocality());
             address.setCountryName(addresses.get(0).getCountryName());
             address.setAdminArea(addresses.get(0).getAdminArea());
             address.setAddressLine(0, addresses.get(0).getAddressLine(0));
-            address.setPostalCode(location);
+            address.setPostalCode(myLocation);
             address.setLatitude(addresses.get(0).getLatitude());
             address.setLongitude(addresses.get(0).getLongitude());
         }

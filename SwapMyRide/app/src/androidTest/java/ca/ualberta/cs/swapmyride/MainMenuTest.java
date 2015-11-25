@@ -4,6 +4,7 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewFinder;
 import android.support.test.espresso.action.ViewActions;
 import android.test.ActivityInstrumentationTestCase2;
@@ -11,16 +12,22 @@ import android.test.TouchUtils;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.AddInventoryActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 import ca.ualberta.cs.swapmyride.View.ViewFeedInventoryActivity;
+import ca.ualberta.cs.swapmyride.View.ViewVehicleActivity;
 
 /**
  * Created by adrianomarini on 2015-11-18.
@@ -34,6 +41,7 @@ import ca.ualberta.cs.swapmyride.View.ViewFeedInventoryActivity;
 public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     ListView feed;
+    ListView inventory;
 
     public MainMenuTest() { super(MainMenu.class); }
 
@@ -45,7 +53,6 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void testClickItem(){
         populateTestData();
-        Context context = getInstrumentation().getContext();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Feed of items should be active
         //Tap on an item in the feed,
@@ -56,6 +63,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
                 feed.performItemClick(feed, 0, 1);
             }
         });
+        getInstrumentation().waitForIdleSync();
         //ViewVehicleActivity should be active
         Instrumentation.ActivityMonitor viewItemActivityMonitor =
                 getInstrumentation().addMonitor(ViewFeedInventoryActivity.class.getName(), null, false);
@@ -64,34 +72,74 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         assertNotNull(viewFeedInventoryActivity);
         //Assert information matches the prescribed info
         TextView name = viewFeedInventoryActivity.getTheName();
-        assertEquals(name, "Toyota");
+        assertEquals(name.getText(), "Toyota");
         cleanUp();
     }
 
     public void testClickInventory(){
         populateTestData();
-        Context context = getInstrumentation().getContext();
+        MainMenu mainMenu = (MainMenu) getActivity();
         //Swipe left to get to inventory screen
-
+        ViewActions.swipeLeft();
         //tap on an item
-
+        inventory = mainMenu.getInventoryView();
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                inventory.performItemClick(inventory, 0, 1);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
         //Assert the view activity is active
-
+        Instrumentation.ActivityMonitor viewInventoryActivityMonitor =
+                getInstrumentation().addMonitor(ViewVehicleActivity.class.getName(), null, false);
+        ViewVehicleActivity viewVehicleActivity = (ViewVehicleActivity)
+                    viewInventoryActivityMonitor.waitForActivityWithTimeout(100);
+        assertNotNull(viewVehicleActivity);
         //Assert information matches
+        TextView name = viewVehicleActivity.getTheName();
+        assertEquals(name.getText(), "Jeep");
+        //Tap Edit
+        final Button edit = viewVehicleActivity.getEditButton();
+        viewVehicleActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                edit.performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        Instrumentation.ActivityMonitor editInventoryActivityMonitor =
+                getInstrumentation().addMonitor(AddInventoryActivity.class.getName(), null, false);
+        AddInventoryActivity addInventoryActivity = (AddInventoryActivity)
+                editInventoryActivityMonitor.waitForActivityWithTimeout(100);
+        assertNotNull(addInventoryActivity);
 
-        //Try changing an item's attribute + save
-
-        // tap same item
-
+        //Change name to "Meepy"
+        EditText name1 = addInventoryActivity.getVehicleName();
+        name1.setText("Meepy");
+        final Button save = addInventoryActivity.getSaveButton();
+        addInventoryActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                save.performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
         //assert information matches changes
-        
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                inventory.performItemClick(inventory, 0, 1);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        TextView name3 = viewVehicleActivity.getTheName();
+        assertEquals("Meepy", name3.getText());
         cleanUp();
     }
 
     public void testViewFriends(){
         populateTestData();
-        Context context = getInstrumentation().getContext();
-
         //Tab3 should be active, tap View Friends
 
         //ViewFriendsActivity should be active
@@ -107,8 +155,6 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void testEditProfile(){
         populateTestData();
-        Context context = getInstrumentation().getContext();
-
         //Tab3 should be active, tap Edit Profile
 
         //Verify information is active
@@ -154,7 +200,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      */
 
     public void populateTestData(){
-        Context context = getInstrumentation().getContext();
+        Context context = getActivity();
         DataManager dm = new DataManager(context);
         //Create 2 users and make them friends
         User main = new User();
