@@ -56,8 +56,11 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        vehiclePicture = (ImageView) findViewById(R.id.picture);
+        //vehiclePicture = (ImageView) findViewById(R.id.picture);
         myGallery = (LinearLayout)findViewById(R.id.mygallery);
+
+
+
         title = (TextView) findViewById(R.id.title);
         quantity = (TextView) findViewById(R.id.quantity);
         category = (TextView) findViewById(R.id.category);
@@ -68,7 +71,13 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(vehicle.getName());
 
-        vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+        //vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+        for (int i = 0; i < 10; ++i) {
+            ImageView newPicture = new ImageView(this);
+            newPicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+            myGallery.addView(newPicture);
+        }
+
         title.setText(vehicle.getName());
         quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
