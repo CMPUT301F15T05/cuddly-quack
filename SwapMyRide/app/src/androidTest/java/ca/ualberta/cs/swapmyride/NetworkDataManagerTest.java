@@ -19,18 +19,18 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         user.setName("Garry");
         user.setUserAddress("4465");
         user.setUserName("gbullock");
-        user.setUserEmail("gbullock@ualbert.ca");
+        user.setUserEmail("gbullock@ualberta.ca");
 
         ndm.saveUser(user);
     }
-    
+
     public void testDeleteUser(){
         NetworkDataManager ndm = new NetworkDataManager();
         User user = new User();
         user.setName("Garry");
         user.setUserAddress("4465");
         user.setUserName("gbullock");
-        user.setUserEmail("gbullock@ualbert.ca");
+        user.setUserEmail("gbullock@ualberta.ca");
 
         ndm.saveUser(user);
 
