@@ -59,7 +59,7 @@ public class NotificationManager {
         String trades = Integer.toString(size);
         new AlertDialog.Builder(context)
                 .setTitle("New Trade!")
-                .setMessage("You have " + trades + " new trades pending! Go to Active Trades to view!")
+                .setMessage("You have " + trades + " new trade(s) pending! Go to Active Trades to view!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -67,6 +67,7 @@ public class NotificationManager {
                     }
                 })
                 .show();
+        tradesToBeNotified.clear();
     }
 
     public void showFriendRequest(final Context context, final String username){
@@ -87,21 +88,17 @@ public class NotificationManager {
                     }
                 })
                 .show();
+        friendRequests.clear();
     }
 
     public void notifyMe(Context context) {
         if (tradesToBeNotified.size() > 0) {
             showtrade(context);
-            tradesToBeNotified.clear();
         }
 
         for(String username : friendRequests){
             showFriendRequest(context, username);
         }
-
-        Log.i("FU", "CLEAR");
-        friendRequests.clear();
-        Log.i("FUT", "CLEARED");
         DataManager dm = new DataManager(context);
         dm.saveUser(UserSingleton.getCurrentUser());
 

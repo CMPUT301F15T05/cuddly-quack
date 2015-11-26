@@ -37,6 +37,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -75,16 +76,13 @@ public class Tab1 extends Fragment {
         //send notification to user when screen is returned to this area.
         user = uController.getCurrentUser();
         user.getNotificationManager().notifyMe(getContext());
-
-        adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
+        new DataManager(getContext()).saveUser(user);  // TODO: these should be put into a Notification controller
+        UserSingleton.addCurrentUser(user);  // TODO: these should be put into a Notification controller
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 
-        inventory.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
         inventory.setAdapter(adapter);
 
-        // TODO Pass state to ViewVehicleActivity!
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -114,6 +112,8 @@ public class Tab1 extends Fragment {
         adapter = new FeedAdapter(getContext(), arrayOfVehicle);
         inventory.setAdapter(adapter);
         user.getNotificationManager().notifyMe(getContext());
+        new DataManager(getContext()).saveUser(user);  // TODO: these should be put into a Notification controller
+        UserSingleton.addCurrentUser(user);  // TODO: these should be put into a Notification controller
 
     }
 }

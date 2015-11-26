@@ -31,8 +31,8 @@ import ca.ualberta.cs.swapmyride.Misc.UniqueID;
  * @author adrianomarini on 2015-10-26.
  */
 public class Trade {
-    private User owner = new User();
-    private User borrower = new User();
+    private String owner;
+    private String borrower;
     private ArrayList<Vehicle> ownerItems = new ArrayList<>();
     private ArrayList<Vehicle> borrowerItems = new ArrayList<>();
     private Boolean ownerNotified = false;
@@ -47,21 +47,23 @@ public class Trade {
      */
 
     public Trade() {
+        owner = "";
+        borrower = "";
     }
 
-    public User getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
 
-    public User getBorrower() {
+    public String getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(User borrower) {
+    public void setBorrower(String borrower) {
         this.borrower = borrower;
     }
 
@@ -103,10 +105,9 @@ public class Trade {
      */
 
     public void send(){
-        ownerNotified = owner.getNotificationManager().notifyTrade(this);
-        borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
-        owner.addPendingTrade(this);
-        borrower.addPendingTrade(this);
+        //borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
+        //owner.addPendingTrade(this);
+        //borrower.addPendingTrade(this);
     }
 
     public Boolean getOwnerNotified() {
