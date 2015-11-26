@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
@@ -39,7 +40,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button trade;
     ImageView vehiclePicture;
-    LinearLayout myGallery;
+    LinearLayout gallery;
     TextView title;
     TextView quantity;
     TextView category;
@@ -57,7 +58,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
 
         //vehiclePicture = (ImageView) findViewById(R.id.picture);
-        myGallery = (LinearLayout)findViewById(R.id.mygallery);
+        gallery = (LinearLayout)findViewById(R.id.feedinventorygallery);
 
 
 
@@ -71,7 +72,13 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(vehicle.getName());
 
-        //vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+        //vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
+        gallery.removeAllViews();
+        for (Photo _photo : vehicle.getPhotoArrayList()) {
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            gallery.addView(newImage);
+        }
 
 
         title.setText(vehicle.getName());

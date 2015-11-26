@@ -110,6 +110,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         comments.setText(vehicle.getComments());
         //image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
         //picture.setImageBitmap(vehicle.getPhoto().getImage());
+        gallery.removeAllViews();
         for (Photo _photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
