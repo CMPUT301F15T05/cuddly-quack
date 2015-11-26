@@ -9,6 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar" >
+        <LinearLayout
+            android:id="@+id/mygallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            />
+    </HorizontalScrollView>
+
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"

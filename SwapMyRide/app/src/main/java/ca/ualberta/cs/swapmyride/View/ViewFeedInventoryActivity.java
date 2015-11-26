@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
@@ -38,8 +39,9 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button trade;
     ImageView vehiclePicture;
+    LinearLayout myGallery;
     TextView title;
-    TextView quanitiy;
+    TextView quantity;
     TextView category;
     TextView quality;
     TextView comments;
@@ -53,9 +55,11 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+
         vehiclePicture = (ImageView) findViewById(R.id.picture);
+        myGallery = (LinearLayout)findViewById(R.id.mygallery);
         title = (TextView) findViewById(R.id.title);
-        quanitiy = (TextView) findViewById(R.id.quantity);
+        quantity = (TextView) findViewById(R.id.quantity);
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quality);
         comments = (TextView) findViewById(R.id.commentsHead);
@@ -66,7 +70,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
         title.setText(vehicle.getName());
-        quanitiy.setText(String.format("%d",vehicle.getQuantity()));
+        quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
