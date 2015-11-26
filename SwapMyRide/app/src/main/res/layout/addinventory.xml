@@ -46,7 +46,7 @@
             android:layout_below="@+id/delete"
             android:text="Name:"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
             android:id="@+id/vehicleName"
@@ -75,7 +75,7 @@
             android:id="@+id/textView4"
             android:layout_below="@+id/vehicleField"
             android:layout_alignStart="@+id/vehicleName"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="10dp" />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
             android:layout_alignStart="@+id/vehicleName"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/textView5" />
 
         <Spinner
@@ -119,8 +119,8 @@
             android:text="Quantity:"
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
-            android:layout_marginTop="25dp"
-            android:id="@+id/textView6"
+            android:layout_marginTop="15dp"
+            android:id="@+id/quantityHead"
             android:paddingTop="10dp"/>
 
         <EditText
@@ -131,7 +131,7 @@
             android:textColorHint="@color/colorAccent"
             android:ems="10"
             android:id="@+id/quantityField"
-            android:layout_alignTop="@+id/textView6"
+            android:layout_alignTop="@+id/quantityHead"
             android:layout_alignStart="@+id/categorySpinner"
             android:layout_alignEnd="@+id/vehicleField"
             />
@@ -142,15 +142,16 @@
             android:text="Comments:"
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/textView7"
-            android:layout_below="@+id/quantityField"
-            android:layout_alignStart="@+id/textView6" />
+            android:id="@+id/commentsHead"
+            android:layout_below="@+id/postalCodeHead"
+            android:layout_alignStart="@+id/quantityHead"
+            android:layout_marginTop="20dp"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView7"
-            android:layout_alignStart="@+id/textView7"
+            android:layout_below="@+id/commentsHead"
+            android:layout_alignStart="@+id/commentsHead"
             android:layout_alignEnd="@+id/quantityField"
             android:id="@+id/commentsField"
             android:hint="Description Here"
@@ -168,7 +169,7 @@
             android:checked="true"
             android:paddingTop="10dp"
             android:layout_below="@+id/commentsField"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="5dp"
             android:layout_alignEnd="@+id/quantityField"
             android:layout_alignStart="@+id/commentsField" />
 
@@ -195,10 +196,11 @@
             android:text="Postal Code:"
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/textView8"
-            android:layout_alignBaseline="@+id/locationField"
-            android:layout_alignBottom="@+id/locationField"
-            android:layout_alignStart="@+id/ispublic" />
+            android:id="@+id/postalCodeHead"
+            android:layout_below="@+id/quantityHead"
+            android:layout_alignStart="@+id/commentsHead"
+            android:layout_marginTop="15dp"
+            android:paddingTop="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -208,11 +210,9 @@
             android:hint="Location"
             android:textColorHint="@color/colorAccent"
             android:textColor="@color/colorAccent"
-            android:layout_below="@+id/commentsField"
-            android:layout_alignEnd="@+id/commentsField"
-            android:text="Location"
-            android:layout_toEndOf="@+id/textView8"
-            android:layout_alignStart="@+id/quantityField" />
+            android:layout_alignTop="@+id/postalCodeHead"
+            android:layout_alignStart="@+id/quantityField"
+            android:layout_alignEnd="@+id/quantityField" />
 
     </RelativeLayout>
 
