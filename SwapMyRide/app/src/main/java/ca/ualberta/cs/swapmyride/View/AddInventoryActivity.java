@@ -62,6 +62,7 @@ import ca.ualberta.cs.swapmyride.Controller.VehicleController;
 public class AddInventoryActivity extends AppCompatActivity {
 
     static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+    static final int MY_PERMISSIONS_REQUEST_LOCATION = 2;
 
     Toolbar toolbar;
     Spinner categorySpinner;
@@ -84,6 +85,9 @@ public class AddInventoryActivity extends AppCompatActivity {
     EditText location;
 
     int position;
+
+    Address current;
+    Geolocation geolocation;
 
     //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -114,10 +118,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
 
-        //Assign and display the current location
-        Geolocation geolocation = new Geolocation();
-        Address current = geolocation.getCurrentLocation(getApplicationContext(), this);
-        location.setText(current.getPostalCode());
+        dispatchGetLocation();
 
         /**
          * Using spinners to select category and quality of a vehicle - taking from the enumeration
@@ -329,6 +330,41 @@ public class AddInventoryActivity extends AppCompatActivity {
 
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
+        }
+    }
+
+    private void dispatchGetLocation() {
+
+        // http://developer.android.com/training/permissions/requesting.html
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(AddInventoryActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AddInventoryActivity.this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(AddInventoryActivity.this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            //Assign and display the current location
+            geolocation = new Geolocation();
+            current = geolocation.getCurrentLocation(getApplicationContext(), this);
+            location.setText(current.getPostalCode());
         }
     }
 
