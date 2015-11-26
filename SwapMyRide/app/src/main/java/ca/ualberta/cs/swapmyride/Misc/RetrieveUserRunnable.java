@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride.Misc;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -27,7 +29,7 @@ public class RetrieveUserRunnable implements Runnable {
     private Gson gson = new Gson();
 
     public RetrieveUserRunnable(String username, String url){
-        this.url = url + "users/" + user.getUserName();
+        this.url = url + "users/" + username;
     }
 
     public void run(){
@@ -59,6 +61,10 @@ public class RetrieveUserRunnable implements Runnable {
         }
 
         this.user = hit.getSource();
+        Log.i("NetworkDataManager", user.getName());
+        Log.i("NetworkDataManager", user.getUserName());
+        Log.i("NetworkDataManager", user.getUserEmail());
+        Log.i("NetworkDataManager", user.getUserAddress());
     }
 
     /*

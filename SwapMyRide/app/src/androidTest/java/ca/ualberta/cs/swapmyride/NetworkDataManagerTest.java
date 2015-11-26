@@ -5,6 +5,7 @@ import android.util.Log;
 
 import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
@@ -57,21 +58,23 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         user.setUserAddress("1021");
         user.setUserName("ccdunn");
         user.setUserEmail("ccdunn@ualberta.ca");
+        user.addFriend("gbullock");
 
         ndm.saveUser(user);
 
         Log.i("NetworkDataManager", "Saved User!");
 
         try{
-            Thread.sleep(500);
+            Thread.sleep(1000);
         }catch (Exception e){
             e.printStackTrace();
         }
 
         user2 = ndm.retrieveUser(user.getUserName());
 
-        assertTrue(user2.equals(user));
+        assertTrue("Users are not equal!!", user.equals(user2));
 
+        Log.i("NetworkDataManager", "Users Equal!");
         //wait a decent amount of time to ensure the save has time to happen
         try{
             Thread.sleep(500);

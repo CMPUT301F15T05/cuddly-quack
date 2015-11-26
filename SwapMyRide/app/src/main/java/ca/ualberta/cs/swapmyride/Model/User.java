@@ -135,7 +135,7 @@ public class User {
     public boolean equals(Object other){
         if (other == null) return false;
         if (other == this) return true;
-        if (!(other instanceof User))return false;
+        if (other.getClass() != this.getClass())return false;
         User test = (User)other;
         if(!this.name.equals(test.getName())) return false;
         if(!this.userName.equals(test.getUserName())) return false;
@@ -144,8 +144,7 @@ public class User {
         if(!this.userName.equals(test.getUserName())) return false;
         if(!this.getInventory().getList().equals(test.getInventory().getList()))return false;
         if(!this.getFriends().getFriendList().equals(test.getFriends().getFriendList())) return false;
-        if(this.downloadImages == test.getDownloadImages()) return false;
-        if(!this.userName.equals(test.getUserName())) return false;
+        if(this.downloadImages != test.getDownloadImages()) return false;
         if(!this.getPendingTrades().getTrades().equals(test.getPendingTrades().getTrades())) return false;
         if(!this.getPastTrades().getTrades().equals(test.getPastTrades().getTrades())) return false;
 

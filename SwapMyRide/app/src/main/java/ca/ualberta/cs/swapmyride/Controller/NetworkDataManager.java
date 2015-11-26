@@ -28,7 +28,7 @@ public class NetworkDataManager {
     }
 
     public User retrieveUser(String username){
-        User user = null;
+        User user;
         RetrieveUserRunnable runnable = new RetrieveUserRunnable(username, hostUrl);
         Thread thread = new Thread(runnable);
         thread.start();
