@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.InventoryAdapter;
+import ca.ualberta.cs.swapmyride.Misc.DistanceOption;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -52,7 +53,8 @@ public class SearchInventoryActivity extends AppCompatActivity {
     SearchController searchController;
     ArrayList<Vehicle> foundVehicles;
     InventoryAdapter adapter;
-    EditText distance;
+    Spinner distance;
+    DistanceOption desiredDistance;
 
     /**
      * OnCreate opens the opportunity for a user to enter a string or
@@ -77,8 +79,6 @@ public class SearchInventoryActivity extends AppCompatActivity {
 
         searchList = (ListView) findViewById(R.id.searchList);
 
-        distance = (EditText) findViewById(R.id.distanceEdit);
-
         inventoryList = UserSingleton.getCurrentUser().getInventory().getList();
 
         searchField = (EditText) findViewById(R.id.searchField);
@@ -102,19 +102,40 @@ public class SearchInventoryActivity extends AppCompatActivity {
             }
         });
 
-        // TODO setonclicklistners to get the item description
-        inventorySearch.setOnClickListener(new View.OnClickListener() {
+        distance = (Spinner) findViewById(R.id.distanceSpinner);
+
+        distance.setAdapter(new ArrayAdapter<DistanceOption>(this, android.R.layout.simple_spinner_dropdown_item, DistanceOption.values()));
+
+        distance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onClick(View v) {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                desiredDistance = (DistanceOption) distance.getSelectedItem();
+            }
 
-                foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList);
-
-                adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
-
-                searchList.setAdapter(adapter);
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // What if nothing selected?
+                desiredDistance = DistanceOption.HUNDRED;
             }
         });
+            // TODO setonclicklistners to get the item description
+            inventorySearch.setOnClickListener(new View.OnClickListener()
+
+                                               {
+                                                   @Override
+                                                   public void onClick(View v) {
+
+                                                       foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList);
+
+                                                       adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
+
+                                                       searchList.setAdapter(adapter);
+                                                   }
+                                               }
+
+            );
+
+        }
 
     }
-
-}

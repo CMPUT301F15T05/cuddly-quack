@@ -64,16 +64,12 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/feedSearch" />
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Distance"
-        android:textColorHint="@color/colorAccent"
-        android:ems="10"
-        android:id="@+id/distanceEdit"
+        android:id="@+id/distanceSpinner"
         android:layout_alignTop="@+id/inventorySearch"
-        android:layout_alignStart="@+id/categorySpinner"
-        android:text="Distance" />
+        android:layout_toEndOf="@+id/inventorySearch"
+        android:spinnerMode="dropdown" />
 
 </RelativeLayout>

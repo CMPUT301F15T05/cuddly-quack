@@ -19,6 +19,7 @@ package ca.ualberta.cs.swapmyride.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.widget.ListView;
 
 import ca.ualberta.cs.swapmyride.View.Tab1;
 import ca.ualberta.cs.swapmyride.View.Tab2;
@@ -40,6 +41,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 
+    Tab1 tab1;
+    Tab2 tab2;
+    Tab3 tab3;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
@@ -56,17 +60,17 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0) // if the position is 0 we are returning the First tab
         {
-            Tab1 tab1 = new Tab1();
+            tab1 = new Tab1();
             return tab1;
         }
         else if (position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            Tab2 tab2 = new Tab2();
+            tab2 = new Tab2();
             return tab2;
         }
 
         else {
-            Tab3 tab3 = new Tab3();
+            tab3 = new Tab3();
             return tab3;
         }
 
@@ -85,4 +89,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return NumbOfTabs;
     }
+
+    public ListView getInventoryListView(){
+        return tab1.getInventoryList();
+    }
+
 }

@@ -122,4 +122,8 @@ public class AddFriendProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    public Button getAddFriend(){
+        return addFriend;
+    }
 }

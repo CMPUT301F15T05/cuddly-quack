@@ -80,9 +80,8 @@
         android:lines="4"
         android:gravity="center"
         android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/picture"
-        android:layout_alignBottom="@+id/delete"
-        android:layout_below="@+id/location" />
+        android:layout_above="@+id/delete"
+        android:layout_alignStart="@+id/edit" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -120,10 +119,9 @@
         android:text="Delete"
         android:background="@color/colorPrimary"
         android:id="@+id/delete"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/commentsHead" />
 
     <Button
         android:layout_width="wrap_content"
@@ -131,9 +129,8 @@
         android:text="Edit"
         android:background="@color/colorPrimary"
         android:id="@+id/edit"
-        android:layout_above="@+id/delete"
-        android:layout_alignStart="@+id/delete"
-        android:layout_marginBottom="43dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/categoryHead" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -156,5 +153,35 @@
         android:layout_alignTop="@+id/textView9"
         android:layout_alignStart="@+id/title"
         android:layout_marginStart="67dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/Latitude"
+        android:layout_above="@+id/commentsHead"
+        android:layout_toStartOf="@+id/quality" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/Longitude"
+        android:layout_above="@+id/commentsHead"
+        android:layout_toEndOf="@+id/location" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lat / Long:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView12"
+        android:layout_above="@+id/commentsHead"
+        android:layout_alignStart="@+id/textView9" />
 
 </RelativeLayout>

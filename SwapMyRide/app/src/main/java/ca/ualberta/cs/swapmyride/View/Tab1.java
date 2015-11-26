@@ -116,4 +116,9 @@ public class Tab1 extends Fragment {
         UserSingleton.addCurrentUser(user);  // TODO: these should be put into a Notification controller
 
     }
+
+    public ListView getInventoryList(){
+        return inventory;
+    }
+
 }
