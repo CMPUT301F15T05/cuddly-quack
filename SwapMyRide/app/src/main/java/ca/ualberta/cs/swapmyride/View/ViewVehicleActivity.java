@@ -104,8 +104,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-        image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
-        picture.setImageBitmap(vehicle.getPhoto().getImage());
+        //image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
+        //picture.setImageBitmap(vehicle.getPhoto().getImage());
     }
 
     public void initOnClickListeners(){

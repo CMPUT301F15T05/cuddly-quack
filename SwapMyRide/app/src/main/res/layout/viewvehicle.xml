@@ -9,15 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:id="@+id/picture"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
         android:layout_below="@+id/tool_bar"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/ic_default_car" />
+        android:id="@+id/horizontal" >
+        <LinearLayout
+            android:id="@+id/mygallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            />
+    </HorizontalScrollView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,10 +30,9 @@
         android:textSize="25sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/title"
-        android:layout_alignTop="@+id/picture"
+        android:layout_alignTop="@+id/horizontal"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_toEndOf="@+id/picture"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
         android:lines="3" />
@@ -42,8 +44,8 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qauntityHead"
-        android:layout_below="@+id/picture"
-        android:layout_alignStart="@+id/picture"
+        android:layout_below="@+id/title"
+        android:layout_alignStart="@+id/tit"
         android:layout_marginTop="25dp" />
 
     <TextView
