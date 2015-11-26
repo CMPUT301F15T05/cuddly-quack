@@ -177,6 +177,7 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicle.deletePhotoArrayList(getApplicationContext());
         }
 
+        gallery.removeAllViews();
         for (Photo photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(this);
             newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
@@ -207,6 +208,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //vehicle.setPhoto(new Photo(getApplicationContext()));
                 //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
+                gallery.removeAllViews();
                 for (Photo photo : vehicle.getPhotoArrayList()) {
                     ImageView newImage = new ImageView(getApplicationContext());
                     newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
@@ -284,6 +286,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //vehicle.getPhoto().deleteImage(getApplicationContext());
                 //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
+                gallery.removeAllViews();
                 for (Photo photo : vehicle.getPhotoArrayList()) {
                     ImageView newImage = new ImageView(getApplicationContext());
                     newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
@@ -368,6 +371,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 photoArrayList.add(photo);
                 vehicle.setPhotoArrayList(photoArrayList);
             }
+            gallery.removeAllViews();
             for (Photo _photo : vehicle.getPhotoArrayList()) {
                 ImageView newImage = new ImageView(getApplicationContext());
                 newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
