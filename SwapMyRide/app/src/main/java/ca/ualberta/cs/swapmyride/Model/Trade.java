@@ -17,6 +17,8 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
+
 /**
  * Trade is the major object to encapsulate all
  * information about a trade that will occur
@@ -29,41 +31,39 @@ import java.util.ArrayList;
  * @author adrianomarini on 2015-10-26.
  */
 public class Trade {
-    private User owner = new User();
-    private User borrower = new User();
+    private String owner;
+    private String borrower;
     private ArrayList<Vehicle> ownerItems = new ArrayList<>();
     private ArrayList<Vehicle> borrowerItems = new ArrayList<>();
     private Boolean ownerNotified = false;
     private Boolean borrowerNotified = false;
     private Boolean isAccepted = false;
     private Boolean isDeclined = false;
+    private UniqueID uniqueID = new UniqueID();
 
     /**
      * Constructs the trade with indication of who the two users
      * participating in the app are.
-     *
-     * @param owner
-     * @param borrower
      */
 
-    public Trade(User owner, User borrower) {
-        this.owner = owner;
-        this.borrower = borrower;
+    public Trade() {
+        owner = "";
+        borrower = "";
     }
 
-    public User getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
 
-    public User getBorrower() {
+    public String getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(User borrower) {
+    public void setBorrower(String borrower) {
         this.borrower = borrower;
     }
 
@@ -91,16 +91,23 @@ public class Trade {
         ownerItems.add(vehicle);
     }
 
+    public void clearOwnerItems() {
+        this.ownerItems.clear();
+    }
+
+    public void clearBorrowerItems() {
+        this.borrowerItems.clear();
+    }
+
     /**
      * sends notifications to the borrower and owner, and then adds the trade to
      * the pending trades of each user.
      */
 
     public void send(){
-        ownerNotified = owner.getNotificationManager().notifyTrade(this);
-        borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
-        owner.addPendingTrade(this);
-        borrower.addPendingTrade(this);
+        //borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
+        //owner.addPendingTrade(this);
+        //borrower.addPendingTrade(this);
     }
 
     public Boolean getOwnerNotified() {
@@ -145,7 +152,9 @@ public class Trade {
      */
 
     public Trade makeCounterTrade(){
-        Trade counterTrade = new Trade(this.borrower, this.owner);
+        Trade counterTrade = new Trade();
+        counterTrade.setOwner(this.owner);
+        counterTrade.setBorrower(this.borrower);
         counterTrade.setBorrowerItems(this.getOwnerItems());
         counterTrade.setOwnerItems(this.getBorrowerItems());
         counterTrade.send();
@@ -174,4 +183,43 @@ public class Trade {
         borrowerItems.add(newOne);
     }
 
+    public void setOwnerNotified(Boolean ownerNotified) {
+        this.ownerNotified = ownerNotified;
+    }
+
+    public void setBorrowerNotified(Boolean borrowerNotified) {
+        this.borrowerNotified = borrowerNotified;
+    }
+
+    public void setIsAccepted(Boolean isAccepted) {
+        this.isAccepted = isAccepted;
+    }
+
+    public void setIsDeclined(Boolean isDeclined) {
+        this.isDeclined = isDeclined;
+    }
+
+    public UniqueID getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(UniqueID uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    public Trade copy(){
+        Trade newTrade = new Trade();
+
+        newTrade.setOwner(this.getOwner());
+        newTrade.setBorrower(this.getBorrower());
+        newTrade.setOwnerItems(this.getOwnerItems());
+        newTrade.setBorrowerItems(this.getBorrowerItems());
+        newTrade.setOwnerNotified(this.getOwnerNotified());
+        newTrade.setBorrowerNotified(this.getBorrowerNotified());
+        newTrade.setIsAccepted(this.getIsAccepted());
+        newTrade.setIsDeclined(this.getIsDeclined());
+        newTrade.setUniqueID(this.getUniqueID().duplicateID());
+
+        return newTrade;
+    }
 }

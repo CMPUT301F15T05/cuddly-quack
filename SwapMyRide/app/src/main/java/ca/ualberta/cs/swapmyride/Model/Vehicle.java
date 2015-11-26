@@ -93,7 +93,6 @@ public class Vehicle {
         this.quality = quality;
     }
 
-
     public boolean getPublic() {
         return isPublic;
     }

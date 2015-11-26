@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
+import ca.ualberta.cs.swapmyride.Model.NotificationManager;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
@@ -68,7 +69,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
@@ -115,16 +118,19 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create and send the trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
         tradeList.add(trade);
-        trade.send(); //trade.send() should have the functionality to notifyTrade
+        NotificationManager nm = new NotificationManager();
+        nm.notifyTrade(trade);
 
         //check that notification was done
-        assertTrue(trade.getOwnerNotified());
-        assertTrue(trade.getBorrowerNotified());
+        assertTrue(trade.getOwnerNotified());  // TODO: double check that these vars are updated
+        assertTrue(trade.getBorrowerNotified());  // TODO: double check that these vars are updated
     }
 
     // Use Case 17: Respond to Trade
@@ -159,7 +165,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         trade.send();
@@ -202,7 +210,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         trade.send();
@@ -245,7 +255,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         trade.send();
@@ -320,7 +332,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
 
@@ -370,7 +384,9 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create trade and then delete it
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         tradeList.add(trade);
@@ -425,28 +441,36 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         //create some trades
         TradeList tradeList = new TradeList();
-        Trade trade = new Trade(userOne, userTwo);
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
         trade.addOwnerItem(vehicleOne);
         trade.addBorrowerItem(vehicleTwo);
         tradeList.add(trade);
         userOne.addPendingTrade(trade);
         userTwo.addPendingTrade(trade);
 
-        Trade trade2 = new Trade(userOne, userThree);
+        Trade trade2 = new Trade();
+        trade2.setOwner(userOne.getUserName());
+        trade2.setBorrower(userTwo.getUserName());
         trade2.addOwnerItem(vehicleOne);
         trade2.addBorrowerItem(vehicleThree);
         tradeList.add(trade2);
         userOne.addPendingTrade(trade2);
         userThree.addPendingTrade(trade2);
 
-        Trade trade3 = new Trade(userOne, userTwo);
+        Trade trade3 = new Trade();
+        trade3.setOwner(userOne.getUserName());
+        trade3.setBorrower(userTwo.getUserName());
         trade3.addOwnerItem(vehicleOne);
         trade3.addBorrowerItem(vehicleTwo);
         tradeList.add(trade3);
         userOne.addPastTrade(trade3);
         userTwo.addPastTrade(trade3);
 
-        Trade trade4 = new Trade(userOne, userTwo);
+        Trade trade4 = new Trade();
+        trade4.setOwner(userOne.getUserName());
+        trade4.setBorrower(userTwo.getUserName());
         trade4.addOwnerItem(vehicleOne);
         trade4.addBorrowerItem(vehicleTwo);
         tradeList.add(trade4);
@@ -463,5 +487,52 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
 
         assertTrue(userOneTrades.get(0).equals(trade));
         assertTrue(userTwoTrades.get(0).equals(trade));
+    }
+
+    public void testCopy(){
+        //create users and their inventories
+        User userOne = new User();
+        User userTwo = new User();
+        InventoryList userOneInventory = new InventoryList();
+        InventoryList userTwoInventory = new InventoryList();
+        userOne.setName("John Smith");
+        userTwo.setName("Jane Smith");
+        userOne.setUserName("john");
+        userTwo.setUserName("jane");
+
+        //create items and add to inventories
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
+
+        vehicleOne.setPhoto(picture);
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory(VehicleCategory.SEDAN);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setPublic(true);
+        userOneInventory.add(vehicleOne);
+
+        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setPublic(true);
+        userTwoInventory.add(vehicleTwo);
+
+        //add new trade, assert that it was created properly
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
+
+        Trade copyTrade = trade.copy();
+        assertTrue(trade.getUniqueID().isEqualID(copyTrade.getUniqueID()));
+        assertTrue(trade.getOwner().equals(copyTrade.getOwner()));
+        // TODO: Add a lot more assertions if someone feels like it, the UniqueID is what we most care about
     }
 }

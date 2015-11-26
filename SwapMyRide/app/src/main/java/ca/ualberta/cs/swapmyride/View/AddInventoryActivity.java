@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -225,8 +226,13 @@ public class AddInventoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // vehicle.setPhoto(vehicleImage);
                 Geolocation geolocation1 = new Geolocation();
+
+                if (vehicleName.getText().toString().equals("")) {
+                    Toast.makeText(AddInventoryActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 vehicle.setName(vehicleName.getText().toString());
-                Log.i("Vehicle Name", vehicleName.getText().toString());
+
                 vehicle.setCategory(vehicleCategory);
                 vehicle.setQuality(vehicleQuality);
                 vehicle.setLocation(geolocation1.setSpecificLocation(getApplicationContext(),

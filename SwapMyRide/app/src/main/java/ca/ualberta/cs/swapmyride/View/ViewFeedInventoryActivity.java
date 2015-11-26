@@ -55,16 +55,18 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         vehiclePicture = (ImageView) findViewById(R.id.picture);
         title = (TextView) findViewById(R.id.title);
-        quanitiy = (TextView) findViewById(R.id.quality);
+        quanitiy = (TextView) findViewById(R.id.quantity);
         category = (TextView) findViewById(R.id.category);
-        quality = (TextView) findViewById(R.id.quantity);
+        quality = (TextView) findViewById(R.id.quality);
         comments = (TextView) findViewById(R.id.commentsHead);
 
         vehicle = UserSingleton.getFeedViewVehicle();
 
+        getSupportActionBar().setTitle(vehicle.getName());
+
         vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
         title.setText(vehicle.getName());
-        quanitiy.setText(vehicle.getQuantity().toString());
+        quanitiy.setText(String.format("%d",vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
@@ -76,6 +78,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewFeedInventoryActivity.this, FeedTradeActivity.class);
                 intent.putExtra("Username", vehicle.getBelongsTo());
                 startActivity(intent);
+                finish();
             }
         });
     }
