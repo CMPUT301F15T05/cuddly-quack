@@ -40,6 +40,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -70,9 +72,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     VehicleController vehicleController;
     Vehicle vehicle;
 
-    //ImageButton vehicleImage;
     LinearLayout gallery;
-    HorizontalScrollView horizontalScrollView;
     EditText vehicleName;
     EditText vehicleQuantity;
     EditText vehicleComments;
@@ -103,8 +103,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         uController = new UserController(getApplicationContext());
         // TODO: Needs to smell more MVCish
         //vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
-        gallery = (LinearLayout) findViewById(R.id.gallery);
-        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.addinventoryhorizontal);
+        gallery = (LinearLayout) findViewById(R.id.addinventorygallery);
         delete = (Button) findViewById(R.id.delete);
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
@@ -189,7 +188,7 @@ public class AddInventoryActivity extends AppCompatActivity {
          * image box at the top of the vehicle page will open the camera and allow the
          * user to take a photo which will be saved directly to the vehicle object
          */
-        horizontalScrollView.setOnClickListener(new View.OnClickListener() {
+        gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -279,20 +278,20 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
-//        gallery.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                //vehicle.getPhoto().deleteImage(getApplicationContext());
-//                //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
-//                vehicle.deletePhotoArrayList(getApplicationContext());
-//                for (Photo photo : vehicle.getPhotoArrayList()) {
-//                    ImageView newImage = new ImageView(getApplicationContext());
-//                    newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
-//                    gallery.addView(newImage);
-//                }
-//                return true;
-//            }
-//        });
+        gallery.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //vehicle.getPhoto().deleteImage(getApplicationContext());
+                //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+                vehicle.deletePhotoArrayList(getApplicationContext());
+                for (Photo photo : vehicle.getPhotoArrayList()) {
+                    ImageView newImage = new ImageView(getApplicationContext());
+                    newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+                    gallery.addView(newImage);
+                }
+                return true;
+            }
+        });
 
     }
 
@@ -357,8 +356,24 @@ public class AddInventoryActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Photo photo = new Photo(imageBitmap);
-            vehicle.getPhotoArrayList().add(photo);
-            //vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+            // TODO: Fix so that if only default photo, remove it.
+            if (vehicle.getPhotoArrayList().get(0).equals(new Photo(this))) {
+                Log.i("Equals","Equals");
+                ArrayList<Photo> photoArrayList = new ArrayList<Photo>();
+                photoArrayList.add(photo);
+                vehicle.setPhotoArrayList(photoArrayList);
+            } else {
+                Log.i("Doesn't equal","Doesn't equal");
+                ArrayList<Photo> photoArrayList = vehicle.getPhotoArrayList();
+                photoArrayList.add(photo);
+                vehicle.setPhotoArrayList(photoArrayList);
+            }
+            for (Photo _photo : vehicle.getPhotoArrayList()) {
+                ImageView newImage = new ImageView(getApplicationContext());
+                newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+                gallery.addView(newImage);
+            }
+
         }
     }
 

@@ -26,11 +26,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -53,7 +55,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
     ImageView image;
 
     Gson gson;
-    ImageView picture;
+    //ImageView picture;
+    LinearLayout gallery;
 
     Button delete;
     Button editVehicle;
@@ -87,7 +90,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
         quality = (TextView) findViewById(R.id.quantity);
         comments = (TextView) findViewById(R.id.commentsHead);
         image = (ImageView) findViewById(R.id.picture);
-        picture = (ImageView) findViewById(R.id.picture);
+        //picture = (ImageView) findViewById(R.id.picture);
+        gallery = (LinearLayout) findViewById(R.id.viewvehiclegallery);
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
@@ -106,6 +110,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
         comments.setText(vehicle.getComments());
         //image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
         //picture.setImageBitmap(vehicle.getPhoto().getImage());
+        for (Photo _photo : vehicle.getPhotoArrayList()) {
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            gallery.addView(newImage);
+        }
     }
 
     public void initOnClickListeners(){
