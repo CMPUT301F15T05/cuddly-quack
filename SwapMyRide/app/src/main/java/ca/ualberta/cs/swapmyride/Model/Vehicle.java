@@ -113,7 +113,7 @@ public class Vehicle {
 
     public void deletePhotoArrayList(Context context){
         this.photoArrayList.clear();
-        this.photoArrayList.add(new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search)));
+        this.photoArrayList.add(new Photo(context));
     }
 
     public String getBelongsTo() {
