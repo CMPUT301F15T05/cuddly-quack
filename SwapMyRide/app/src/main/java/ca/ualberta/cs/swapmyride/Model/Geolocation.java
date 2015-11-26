@@ -124,6 +124,8 @@ public class Geolocation {
 
         if(lastKnownLocation == null){
             address.setPostalCode("Location Error");
+            address.setLocality("Location Error");
+            address.setCountryName("Location Error");
         }
 
         //If it is not null, try to get an address from the lat/long

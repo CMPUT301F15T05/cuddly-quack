@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -52,6 +53,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView comments;
     ImageView image;
     TextView location;
+    TextView lat;
+    TextView longit;
 
     Gson gson;
     ImageView picture;
@@ -90,6 +93,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.picture);
         picture = (ImageView) findViewById(R.id.picture);
         location = (TextView) findViewById(R.id.location);
+        lat = (TextView) findViewById(R.id.Latitude);
+        longit = (TextView) findViewById(R.id.Longitude);
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
@@ -106,9 +111,27 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-        image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
-        picture.setImageBitmap(vehicle.getPhoto().getImage());
-        location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
+        try {
+            image.setBackground(new BitmapDrawable(getApplicationContext().getResources(), vehicle.getPhoto().getImage()));
+        }catch (NullPointerException e){
+            image.setBackground(new BitmapDrawable(getApplicationContext().getResources(), new Photo(getApplicationContext()).getImage()));
+        }
+        try {
+            picture.setImageBitmap(vehicle.getPhoto().getImage());
+        }catch (NullPointerException e){
+            image.setImageBitmap(new Photo(getApplicationContext()).getImage());
+        }
+        try {
+            location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
+            lat.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLatitude()));
+            longit.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLongitude()));
+        }catch (Exception e){
+            location.setText("Location Error");
+            lat.setText("0");
+            longit.setText("0");
+        }
+
+
     }
 
     public void initOnClickListeners(){
