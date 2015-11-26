@@ -1,5 +1,6 @@
 package ca.ualberta.cs.swapmyride.Controller;
 
+import ca.ualberta.cs.swapmyride.Misc.DeleteUserRunnable;
 import ca.ualberta.cs.swapmyride.Misc.SaveUserRunnable;
 import ca.ualberta.cs.swapmyride.Model.User;
 
@@ -16,12 +17,13 @@ public class NetworkDataManager {
      * Method for saving users to the server.
      */
     public void saveUser(User user){
-        Thread saveUserThread = new Thread(new SaveUserRunnable(user,hostUrl));
+        Thread saveUserThread = new Thread(new SaveUserRunnable(user, hostUrl));
         saveUserThread.start();
     }
 
     public void deleteUser(String username){
-
+        Thread deleteUserThread = new Thread(new DeleteUserRunnable(username, hostUrl));
+        deleteUserThread.start();
     }
 }
 

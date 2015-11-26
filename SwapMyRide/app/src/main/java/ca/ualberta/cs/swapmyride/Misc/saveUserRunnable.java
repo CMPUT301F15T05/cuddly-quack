@@ -26,7 +26,7 @@ public class SaveUserRunnable implements Runnable{
     public SaveUserRunnable(final User user, final String url){
         this.user = user;
         this.url = url + "users/" + user.getUserName();
-        Log.d("USER URL", this.url);
+        Log.i("NetworkDataManager", this.url);
     }
     /* Based on https://github.com/rayzhangcl/ESDemo and https://github.com/joshua2ua/AndroidElasticSearch */
     public  void run(){
@@ -48,7 +48,7 @@ public class SaveUserRunnable implements Runnable{
         try {
             response = httpClient.execute(httpAdd);
             String status = response.getStatusLine().toString();
-            Log.i("SaveUserRunnable-Status", status);
+            Log.i("NetworkDataManager", status);
         }catch (Exception e){
             e.printStackTrace();
         }
