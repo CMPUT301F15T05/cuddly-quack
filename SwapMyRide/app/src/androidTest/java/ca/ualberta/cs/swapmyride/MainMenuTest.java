@@ -2,22 +2,13 @@ package ca.ualberta.cs.swapmyride;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.graphics.Point;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.ViewFinder;
 import android.support.test.espresso.action.ViewActions;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -25,8 +16,11 @@ import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.AddInventoryActivity;
+import ca.ualberta.cs.swapmyride.View.EditProfileActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 import ca.ualberta.cs.swapmyride.View.ViewFeedInventoryActivity;
+import ca.ualberta.cs.swapmyride.View.ViewFriendProfileActivity;
+import ca.ualberta.cs.swapmyride.View.ViewFriendsActivity;
 import ca.ualberta.cs.swapmyride.View.ViewVehicleActivity;
 
 /**
@@ -60,7 +54,8 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         mainMenu.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                feed.performItemClick(feed, 0, 1);
+                View v = feed.getChildAt(0);
+                feed.performItemClick(v, 0, v.getId());
             }
         });
         getInstrumentation().waitForIdleSync();
@@ -86,7 +81,8 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         mainMenu.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                inventory.performItemClick(inventory, 0, 1);
+                View v = inventory.getChildAt(0);
+                inventory.performItemClick(v, 0, v.getId());
             }
         });
         getInstrumentation().waitForIdleSync();
@@ -129,7 +125,8 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         mainMenu.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                inventory.performItemClick(inventory, 0, 1);
+                View v = inventory.getChildAt(0);
+                inventory.performItemClick(v, 0, v.getId());
             }
         });
         getInstrumentation().waitForIdleSync();
@@ -140,30 +137,93 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void testViewFriends(){
         populateTestData();
+        MainMenu mainMenu = (MainMenu) getActivity();
         //Tab3 should be active, tap View Friends
-
+        ViewActions.swipeLeft();
+        ViewActions.swipeLeft();
+        final TextView friends = mainMenu.getViewFriends();
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                friends.performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
         //ViewFriendsActivity should be active
-
+        Instrumentation.ActivityMonitor friendsListMonitor =
+                getInstrumentation().addMonitor(ViewFriendsActivity.class.getName(), null, false);
+        ViewFriendsActivity viewFriendsActivity = (ViewFriendsActivity)
+                friendsListMonitor.waitForActivityWithTimeout(100);
         //Verify a friend exists
-
+        assertNotNull(viewFriendsActivity.getFriendsList());
+        assertNotNull(viewFriendsActivity);
         //Tap that friend -- ViewFriendProfileActivity should be active
-
+        final ListView myFriends = viewFriendsActivity.getFriendsList();
+        viewFriendsActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                View v = myFriends.getChildAt(0);
+                myFriends.performItemClick(v, 0, v.getId());
+            }
+        });
         //Assert matching information
+        Instrumentation.ActivityMonitor viewFriendProfileMonitor =
+                getInstrumentation().addMonitor(ViewFriendProfileActivity.class.getName(), null, false);
+        ViewFriendProfileActivity viewFriendProfileActivity = (ViewFriendProfileActivity)
+                viewFriendProfileMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull(viewFriendProfileActivity);
+        TextView name = viewFriendProfileActivity.getFullName();
+        assertEquals(name.getText(), "Jane");
 
         cleanUp();
     }
 
     public void testEditProfile(){
         populateTestData();
+        MainMenu mainMenu = (MainMenu) getActivity();
         //Tab3 should be active, tap Edit Profile
-
+        ViewActions.swipeLeft();
+        ViewActions.swipeLeft();
+        final TextView edit = mainMenu.getEditProfile();
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                edit.performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
         //Verify information is active
-
+        Instrumentation.ActivityMonitor editProfileActivityMonitor =
+                getInstrumentation().addMonitor(EditProfileActivity.class.getName(), null, false);
+        EditProfileActivity editProfileActivity = (EditProfileActivity)
+                editProfileActivityMonitor.waitForActivityWithTimeout(100);
         //change name + click save
-
+        TextView name = editProfileActivity.getNameText();
+        assertEquals("Bob", name.getText());
+        name.setText("Joe");
+        final Button save = editProfileActivity.getSaveButton();
+        editProfileActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                save.performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
         //re-enter -- verify information matches
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                edit.performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+
+        TextView name1 = editProfileActivity.getNameText();
+        assertEquals("Joe", name1.getText());
+
         cleanUp();
     }
+
 
     public void testAddFriends(){
         populateTestData();

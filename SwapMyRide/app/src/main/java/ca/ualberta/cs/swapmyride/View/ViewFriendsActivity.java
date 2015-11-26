@@ -87,4 +87,8 @@ public class ViewFriendsActivity extends AppCompatActivity {
         adapter = new FriendAdapter(getApplicationContext(), friendsList);
         friendView.setAdapter(adapter);
     }
+
+    public ListView getFriendsList(){
+        return (ListView) findViewById(R.id.friendView);
+    }
 }

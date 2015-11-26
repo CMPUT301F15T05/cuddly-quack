@@ -25,6 +25,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
 import ca.ualberta.cs.swapmyride.R;
@@ -141,5 +144,21 @@ public class MainMenu extends AppCompatActivity {
 
     public ListView getInventoryView(){
         return (ListView) findViewById(R.id.inventoryView);
+    }
+
+    public TextView getViewFriends(){
+        return (TextView) findViewById(R.id.viewFriends);
+    }
+
+    public TextView getPastTrades(){
+        return (TextView) findViewById(R.id.pastTrades);
+    }
+
+    public TextView getCurrentTrades(){
+        return (TextView) findViewById(R.id.activeTrades);
+    }
+
+    public TextView getEditProfile(){
+        return (TextView) findViewById(R.id.editProfile);
     }
 }
