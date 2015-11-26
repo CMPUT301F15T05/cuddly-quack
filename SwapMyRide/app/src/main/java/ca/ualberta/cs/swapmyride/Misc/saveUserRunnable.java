@@ -48,7 +48,7 @@ public class SaveUserRunnable implements Runnable{
         try {
             response = httpClient.execute(httpAdd);
             String status = response.getStatusLine().toString();
-            Log.i("SaveUserRunnable - Status", status);
+            Log.i("SaveUserRunnable-Status", status);
         }catch (Exception e){
             e.printStackTrace();
         }
