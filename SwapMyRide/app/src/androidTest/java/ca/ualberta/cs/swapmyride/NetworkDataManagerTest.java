@@ -48,4 +48,39 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         Log.i("NetworkDataManager", "Deleted User!");
     }
+
+    public void testRetrieveUser(){
+        NetworkDataManager ndm = new NetworkDataManager();
+        User user = new User();
+        User user2;
+        user.setName("Connor");
+        user.setUserAddress("1021");
+        user.setUserName("ccdunn");
+        user.setUserEmail("ccdunn@ualberta.ca");
+
+        ndm.saveUser(user);
+
+        Log.i("NetworkDataManager", "Saved User!");
+
+        try{
+            Thread.sleep(500);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        user2 = ndm.retrieveUser(user.getUserName());
+
+        assertTrue(user2.equals(user));
+
+        //wait a decent amount of time to ensure the save has time to happen
+        try{
+            Thread.sleep(500);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        ndm.deleteUser(user.getUserName());
+
+        Log.i("NetworkDataManager", "Deleted User!");
+    }
 }
