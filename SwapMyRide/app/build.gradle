@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.0"
-
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "ca.ualberta.cs.swapmyride"
         minSdkVersion 18
