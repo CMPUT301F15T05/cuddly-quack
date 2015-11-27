@@ -19,11 +19,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;
 
@@ -101,7 +100,7 @@ public class NotificationManager {
         }
 
         friendRequests.clear();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         dm.saveUser(UserSingleton.getCurrentUser());
 
     }

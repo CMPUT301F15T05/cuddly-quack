@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
@@ -48,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText address;
-    DataManager dm;
+    LocalDataManager dm;
     UserController uController;
 
     /**
@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.usernameField);
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
-        dm = new DataManager(SignUpActivity.this);
+        dm = new LocalDataManager(SignUpActivity.this);
         uController = new UserController(getApplicationContext());
 
         signUp = (Button) findViewById(R.id.signUp);

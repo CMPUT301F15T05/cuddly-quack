@@ -15,11 +15,10 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
@@ -35,7 +34,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
     public DataManagerTest(){super(MainMenu.class);}
 
     public void testSaveUser(){
-        DataManager dataManager = new DataManager(getActivity());
+        LocalDataManager dataManager = new LocalDataManager(getActivity());
         UserController uController = new UserController(getActivity());
         User user = new User();
         user.setName("Garry");
@@ -58,7 +57,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
     public void testDeleteUser(){
         Log.i("WERE Here","RIGHT HERE");
-        DataManager dm = new DataManager(getActivity());
+        LocalDataManager dm = new LocalDataManager(getActivity());
         User user = new User();
         user.setName("Garry");
         user.setUserAddress("4465");
@@ -77,7 +76,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSaveUserWithVehicle(){
-        DataManager dataManager = new DataManager(getActivity());
+        LocalDataManager dataManager = new LocalDataManager(getActivity());
 
         User user = new User();
         user.setName("Garry");
@@ -138,7 +137,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSearchUser(){
-        DataManager dataManager = new DataManager(getActivity());
+        LocalDataManager dataManager = new LocalDataManager(getActivity());
 
         User user = new User();
         user.setName("Garry");

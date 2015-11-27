@@ -22,7 +22,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -30,7 +29,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FriendAdapter;
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.FriendsList;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -98,7 +97,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FriendsList friendsList = UserSingleton.getCurrentUser().getFriends();
-                DataManager dataManager = new DataManager(getApplicationContext());
+                LocalDataManager dataManager = new LocalDataManager(getApplicationContext());
                 User user = dataManager.loadUser(username);
 
                 if (friendsList.hasUser(user)) {

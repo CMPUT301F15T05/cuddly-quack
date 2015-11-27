@@ -19,7 +19,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -42,7 +41,7 @@ public class SearchController {
      */
     public ArrayList<User> findUser(String username, Context context){
         //TODO: Search the server for a user that matches the given username
-        DataManager dataManager = new DataManager(context);
+        LocalDataManager dataManager = new LocalDataManager(context);
 
         ArrayList<User> userList = new ArrayList<>();
 

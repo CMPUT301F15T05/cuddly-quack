@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
@@ -43,7 +43,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
     TextView email;
     Button addFriend;
     String username;
-    DataManager dataManager;
+    LocalDataManager dataManager;
     User possibleFriend;
     UserController uController;
 
@@ -63,7 +63,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         uController = new UserController(getApplicationContext());
-        dataManager = new DataManager(getApplicationContext());
+        dataManager = new LocalDataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
         email = (TextView) findViewById(R.id.email);

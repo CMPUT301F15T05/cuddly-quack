@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
@@ -39,7 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
     UserSingleton userSingleton;
     User user;
     Button save;
-    DataManager dataManager;
+    LocalDataManager dataManager;
 
     /**
      * onCreate, the fields are initialized with the information that
@@ -87,7 +87,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setUserEmail(emailTextView.getText().toString());
                 user.setUserAddress(addressTextView.getText().toString());
 
-                dataManager = new DataManager(EditProfileActivity.this);
+                dataManager = new LocalDataManager(EditProfileActivity.this);
                 dataManager.saveUser(user);
 
                 finish();

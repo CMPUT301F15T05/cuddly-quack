@@ -2,12 +2,8 @@ package ca.ualberta.cs.swapmyride;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.graphics.Rect;
-import android.support.test.espresso.action.ViewActions;
 import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
-import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;
@@ -341,7 +336,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void populateTestData(){
         Context context = getActivity();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         Geolocation geolocation = new Geolocation();
         //Create 2 users and make them friends
         User main = new User();
@@ -407,7 +402,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      */
     public void cleanUp(){
         Context context = getInstrumentation().getContext();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         //delete the two created users
         dm.deleteUser("bob");
         dm.deleteUser("jane");
@@ -415,7 +410,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void cleanThird(){
         Context context = getInstrumentation().getContext();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         //delete the created user
         dm.deleteUser("bill");
     }
@@ -423,7 +418,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void populateThird(){
         Context context = getActivity();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         Geolocation geolocation = new Geolocation();
         //Create user
         User three = new User();

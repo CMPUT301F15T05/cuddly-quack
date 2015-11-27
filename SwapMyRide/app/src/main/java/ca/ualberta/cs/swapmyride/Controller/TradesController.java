@@ -28,11 +28,11 @@ import ca.ualberta.cs.swapmyride.Model.User;
 public class TradesController {
 
     Context context;
-    DataManager dataManager;
+    LocalDataManager dataManager;
 
     public TradesController(Context context) {
         this.context = context;
-        dataManager = new DataManager(context);
+        dataManager = new LocalDataManager(context);
     }
 
     public void deletePendingTrade(Trade trade) {

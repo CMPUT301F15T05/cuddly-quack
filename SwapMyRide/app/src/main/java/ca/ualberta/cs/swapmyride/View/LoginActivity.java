@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     Button signIn;
     TextView signUp;
     String username;
-    DataManager dm;
+    LocalDataManager dm;
     UserController uController;
 
     /**
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
         signUp = (TextView) findViewById(R.id.signUp);
 
-        dm = new DataManager(LoginActivity.this);
+        dm = new LocalDataManager(LoginActivity.this);
         uController = new UserController(getApplicationContext());
 
         signIn.setOnClickListener(new View.OnClickListener() {
