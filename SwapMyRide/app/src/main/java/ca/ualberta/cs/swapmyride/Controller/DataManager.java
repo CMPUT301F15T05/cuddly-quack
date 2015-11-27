@@ -1,6 +1,8 @@
 package ca.ualberta.cs.swapmyride.Controller;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import ca.ualberta.cs.swapmyride.Model.User;
 
@@ -12,13 +14,22 @@ import ca.ualberta.cs.swapmyride.Model.User;
  */
 public class DataManager {
     private Context context;
+    NetworkDataManager ndm;
+    LocalDataManager ldm;
 
     public DataManager(Context context){
         this.context = context;
+        ndm = new NetworkDataManager();
+        ldm = new LocalDataManager(context);
     }
 
     public void saveUser(User user){
-
+        if(networkAvailable()){
+            //SAVE THE USER ON SERVER
+            ndm.saveUser(user);
+        }
+        //save user on disk
+        ldm.saveUser(user);
     }
 
     public User loadUser(String userName){
@@ -26,7 +37,6 @@ public class DataManager {
     }
 
     public void deleteUser(String username){
-
     }
 
     public boolean searchUser(String username){
@@ -49,5 +59,17 @@ public class DataManager {
                 //TODO Code to load friends that do not exist in the local memory
             }
         }
+    }
+
+    /**
+     * networkAvailable checks the android device to see if there is a network connection
+     * available. It should be performed before doing any network action.
+     * @return
+     */
+    private boolean networkAvailable(){
+        ConnectivityManager connectionManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectionManager.getActiveNetworkInfo();
+        return info != null && info.isConnected();
     }
 }
