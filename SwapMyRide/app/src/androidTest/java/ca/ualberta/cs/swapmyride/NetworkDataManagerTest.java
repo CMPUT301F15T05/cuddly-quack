@@ -41,7 +41,7 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         //wait a decent amount of time to ensure the save has time to happen
         try{
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         Log.i("NetworkDataManager", "Saved User!");
 
         try{
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -101,11 +101,24 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.saveUser(user);
 
         try{
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        assertTrue(ndm.searchUser(user.getUserName()));
+        assertTrue("Could not find the user",ndm.searchUser(user.getUserName()));
+
+        assertFalse("Found a user that doesnt exist!", ndm.searchUser("NotExistingUser"));
+
+        ndm.deleteUser(user.getUserName());
+
+        try{
+            Thread.sleep(500);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertFalse("Still finding user that should be deleted...",
+                ndm.searchUser(user.getUserName()));
     }
 }
