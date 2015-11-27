@@ -25,7 +25,7 @@ public class DeleteUserRunnable implements Runnable {
     public void run(){
         HttpClient httpClient = new DefaultHttpClient();
         HttpDelete httpDelete = new HttpDelete(url);
-        httpDelete.setHeader("Accept", "application/Json");
+        httpDelete.setHeader("Accept", "application/json");
 
         try{
             HttpResponse response = httpClient.execute(httpDelete);

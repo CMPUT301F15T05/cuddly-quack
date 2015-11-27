@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
+import ca.ualberta.cs.swapmyride.Misc.SearchUserRunnable;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
@@ -85,5 +86,26 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.deleteUser(user.getUserName());
 
         Log.i("NetworkDataManager", "Deleted User!");
+    }
+
+    public void testSearchUser(){
+        NetworkDataManager ndm = new NetworkDataManager();
+        User user = new User();
+        User user2;
+        user.setName("Connor");
+        user.setUserAddress("1021");
+        user.setUserName("ccdunn");
+        user.setUserEmail("ccdunn@ualberta.ca");
+        user.addFriend("gbullock");
+
+        ndm.saveUser(user);
+
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(ndm.searchUser(user.getUserName()));
     }
 }

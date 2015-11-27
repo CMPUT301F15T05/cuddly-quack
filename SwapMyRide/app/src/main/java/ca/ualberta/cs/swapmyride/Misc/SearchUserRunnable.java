@@ -1,0 +1,71 @@
+package ca.ualberta.cs.swapmyride.Misc;
+
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+
+import ca.ualberta.cs.swapmyride.Model.SearchHit;
+import ca.ualberta.cs.swapmyride.Model.User;
+
+/**
+ * Created by Garry on 2015-11-26.
+ */
+public class SearchUserRunnable implements Runnable {
+    private String url;
+    private boolean exists;
+    Gson gson = new Gson();
+
+    public SearchUserRunnable(String username, String url){
+        this.url = url + "users/_search?pretty=1&q=" + username;
+    }
+    public void run(){
+        HttpClient client = new DefaultHttpClient();
+        HttpGet search = new HttpGet(url);
+        search.setHeader("Accept","application/json");
+        HttpResponse response = null;
+        SearchHit<User> hit = null;
+
+        try {
+            response = client.execute(search);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        Type searchHitType = new TypeToken<SearchHit<User>>(){}.getType();
+
+        try {
+            hit = gson.fromJson(
+                    new InputStreamReader(response.getEntity().getContent()),
+                    searchHitType);
+        } catch (JsonIOException e) {
+            throw new RuntimeException(e);
+        } catch (JsonSyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalStateException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Log.i("ISFOUND", String.valueOf(hit.isFound()));
+        exists = hit.isFound();
+        response.
+    }
+
+    public boolean getExists(){
+        return exists;
+    }
+}
