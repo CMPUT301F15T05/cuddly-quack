@@ -16,8 +16,11 @@
 package ca.ualberta.cs.swapmyride.Model;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.location.Address;
+
+import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -31,7 +34,7 @@ import ca.ualberta.cs.swapmyride.Model.Geolocation;
 public class Vehicle {
 
     private String belongsTo;
-    private Photo photo;
+    private ArrayList<Photo> photoArrayList;
     private String name;
     private Integer quantity;
     private String comments;
@@ -41,10 +44,12 @@ public class Vehicle {
     private Address location;
 
     public Vehicle(){
-        //add default constructor for photo
+        //TODO: add default constructor for photo
         name = "";
         quantity = 0;
         comments = "";
+        //photoArrayList.add(new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search)));
+        photoArrayList = new ArrayList<Photo>();
         category = VehicleCategory.NONE;
         quality = VehicleQuality.NONE;
         isPublic = true;
@@ -101,16 +106,17 @@ public class Vehicle {
         this.isPublic = isPublic;
     }
 
-    public void setPhoto(Photo photo){
-        this.photo = photo;
+    public void setPhotoArrayList(ArrayList<Photo> photoArrayList){
+        this.photoArrayList = photoArrayList;
     }
 
-    public Photo getPhoto(){
-        return this.photo;
+    public ArrayList<Photo> getPhotoArrayList(){
+        return this.photoArrayList;
     }
 
-    public void deletePhoto(Context context){
-        this.photo = new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search));
+    public void deletePhotoArrayList(Context context){
+        this.photoArrayList.clear();
+        this.photoArrayList.add(new Photo(context));
     }
 
     public String getBelongsTo() {

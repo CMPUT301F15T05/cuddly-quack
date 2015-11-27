@@ -51,6 +51,6 @@ public class VehicleController {
     }
 
     public void deletePhoto(Vehicle vehicle, Context context){
-        vehicle.deletePhoto(context);
+        vehicle.deletePhotoArrayList(context);
     }
 }

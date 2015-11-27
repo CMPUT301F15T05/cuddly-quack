@@ -23,9 +23,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
@@ -38,8 +40,9 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button trade;
     ImageView vehiclePicture;
+    LinearLayout gallery;
     TextView title;
-    TextView quanitiy;
+    TextView quantity;
     TextView category;
     TextView quality;
     TextView comments;
@@ -53,9 +56,14 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        vehiclePicture = (ImageView) findViewById(R.id.picture);
+
+        //vehiclePicture = (ImageView) findViewById(R.id.picture);
+        gallery = (LinearLayout)findViewById(R.id.feedinventorygallery);
+
+
+
         title = (TextView) findViewById(R.id.title);
-        quanitiy = (TextView) findViewById(R.id.quantity);
+        quantity = (TextView) findViewById(R.id.quantity);
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quality);
         comments = (TextView) findViewById(R.id.commentsHead);
@@ -64,9 +72,17 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(vehicle.getName());
 
-        vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+        //vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
+        gallery.removeAllViews();
+        for (Photo _photo : vehicle.getPhotoArrayList()) {
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            gallery.addView(newImage);
+        }
+
+
         title.setText(vehicle.getName());
-        quanitiy.setText(String.format("%d",vehicle.getQuantity()));
+        quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());

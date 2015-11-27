@@ -20,13 +20,18 @@
             android:layout_below="@+id/tool_bar"
             android:id="@+id/top"/>
 
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/top"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/vehicleImage"
-            android:background="@drawable/ic_default_car" />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tool_bar"
+            android:id="@+id/addinventoryhorizontal" >
+            <LinearLayout
+                android:id="@+id/addinventorygallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                />
+        </HorizontalScrollView>
 
         <Button
             android:layout_width="match_parent"
@@ -34,7 +39,7 @@
             android:text="Delete Photo"
             android:id="@+id/delete"
             android:background="@color/colorPrimary"
-            android:layout_below="@+id/vehicleImage"
+            android:layout_below="@+id/addinventoryhorizontal"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
