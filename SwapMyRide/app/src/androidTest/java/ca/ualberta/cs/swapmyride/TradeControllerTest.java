@@ -53,20 +53,22 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
-        userOneInventory.add(vehicleOne);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
-        userTwoInventory.add(vehicleTwo);
+
         vehicleTwo.setName("Jeep");
-        vehicleOne.setCategory(VehicleCategory.SEDAN);
-        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleOne.setPublic(true);
+        vehicleTwo.setPublic(true);
+
+        userTwoInventory.add(vehicleTwo);
+        userOneInventory.add(vehicleOne);
 
         //create trade
         TradeList tradeList = new TradeList();

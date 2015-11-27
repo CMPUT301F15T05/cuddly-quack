@@ -65,6 +65,7 @@ public class TradesController {
     public void confirmPendingTrade(Trade trade) throws Exception {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
+            Log.d("Valid trade", "Created Exeption");
             throw new Exception("Trade is no longer valid");
         }
 
@@ -73,13 +74,13 @@ public class TradesController {
 
         // swap items between users
         owner.getInventory().getList().addAll(trade.getBorrowerItems());
-        borrower.getInventory().getList().removeAll(trade.getBorrowerItems());
+        borrower.getInventory().deleteAll(trade.getBorrowerItems());
 
         borrower.getInventory().getList().addAll(trade.getOwnerItems());
-        owner.getInventory().getList().removeAll(trade.getOwnerItems());
+        owner.getInventory().deleteAll(trade.getOwnerItems());
 
         // remove from pendingList
-       owner.getPendingTrades().delete(trade.getUniqueID());
+        owner.getPendingTrades().delete(trade.getUniqueID());
         borrower.getPendingTrades().delete(trade.getUniqueID());
 
         // add to pastTradesList
@@ -115,12 +116,32 @@ public class TradesController {
         ArrayList<Vehicle> borrower = dataManager.loadUser(trade.getBorrower()).getInventory().getList();
         ArrayList<Vehicle> owner = dataManager.loadUser(trade.getOwner()).getInventory().getList();
 
-        // TODO: ContainsAll seems to not work, always returns false
-        Boolean ob = ((owner.containsAll(trade.getOwnerItems())));
-        Boolean bb = (borrower.containsAll(trade.getBorrowerItems()));
-        Log.d("Trade Controller owner", ob.toString());
-        Log.d("Trade Controller borr", bb.toString());
+        Boolean o = validVehicles(trade.getOwnerItems(), owner);
+        Boolean b = validVehicles(trade.getBorrowerItems(), borrower);
 
-        return ob && bb;
+        Boolean c = o && b;
+
+        return c;
     }
+
+    public Boolean validVehicles(ArrayList<Vehicle> tradeVehicles, ArrayList<Vehicle> inventoryVehicles) {
+
+        for (Vehicle tradeVehicle: tradeVehicles) {
+            Boolean vehicleInInventory = false;
+            for (Vehicle inventoryVehicle: inventoryVehicles) {
+                //TODO Compare vehicles
+                if (tradeVehicle.getUniqueID().isEqualID(inventoryVehicle.getUniqueID())) {
+                    vehicleInInventory = true;
+                    break;
+                }
+
+            }
+            if (!(vehicleInInventory)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

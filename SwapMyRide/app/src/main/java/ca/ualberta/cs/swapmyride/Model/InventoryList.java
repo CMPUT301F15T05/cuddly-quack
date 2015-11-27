@@ -16,6 +16,7 @@
 package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 
@@ -70,7 +71,13 @@ public class InventoryList {
      */
 
     public void delete(Vehicle vehicle){
-        vehicleList.remove(vehicle);
+
+        for (int i = 0; i < this.vehicleList.size(); i++) {
+            if (this.vehicleList.get(i).getUniqueID().isEqualID(vehicle.getUniqueID())) {
+                this.vehicleList.remove(i);
+                return;
+            }
+        }
     }
 
     /**
@@ -141,5 +148,17 @@ public class InventoryList {
         return newInventory;
     }
 
+
+
+    public void deleteAll(ArrayList<Vehicle> toDelete) {
+
+        for(Vehicle vehicle: this.vehicleList){
+            for(Vehicle toDeleteVehicle: toDelete){
+                if(vehicle.getUniqueID().isEqualID(toDeleteVehicle.getUniqueID())) {
+                    this.delete(toDeleteVehicle);
+                }
+            }
+        }
+    }
 
 }

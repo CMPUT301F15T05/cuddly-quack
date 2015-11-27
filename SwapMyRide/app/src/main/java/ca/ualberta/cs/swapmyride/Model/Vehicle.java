@@ -18,6 +18,7 @@ package ca.ualberta.cs.swapmyride.Model;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
@@ -36,6 +37,7 @@ public class Vehicle {
     private VehicleCategory category;
     private VehicleQuality quality;
     private boolean isPublic;
+    private UniqueID uniqueID = new UniqueID();
 
     public Vehicle(){
         //add default constructor for photo
@@ -118,4 +120,11 @@ public class Vehicle {
         this.belongsTo = belongsTo;
     }
 
+    public UniqueID getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(UniqueID uniqueID) {
+        this.uniqueID = uniqueID;
+    }
 }
