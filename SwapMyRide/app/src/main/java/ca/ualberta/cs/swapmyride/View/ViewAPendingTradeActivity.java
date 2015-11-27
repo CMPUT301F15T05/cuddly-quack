@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,8 @@ import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
 public class ViewAPendingTradeActivity extends AppCompatActivity {
@@ -82,9 +86,55 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //tradesController.confirmPendingTrade(tradeToDisplay);
-                //finish();
+                confirmDialog();
             }
         });
+    }
+
+    public void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
+        builder.setMessage("Are you SURE you want to confirm this trade? It is a permanent Action!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                try {
+                    tradesController.confirmPendingTrade(tradeToDisplay);
+                } catch (Exception e) {
+                    notValidTradeDialog();
+                }
+
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    public void notValidTradeDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
+        builder.setMessage("The trade is no longer valid! Do you wish to KEEP the trade for later or DELETE it.");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Keep", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                tradesController.deletePendingTrade(tradeToDisplay);
+                finish();
+            }
+        });
+        builder.show();
     }
 }

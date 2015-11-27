@@ -16,11 +16,15 @@
 package ca.ualberta.cs.swapmyride.Controller;
 
 import android.content.Context;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
 /**
  * Created by Garry on 2015-11-01.
@@ -58,20 +62,42 @@ public class TradesController {
         dataManager.saveUser(owner);
     }
 
-    public void confirmPendingTrade(Trade trade){
-        // TODO: finish implementing
+    public void confirmPendingTrade(Trade trade) throws Exception {
         // check that items are in inventory for both parties
-        // remove from pendingList
-        // add to pastTradesList
+        if (!(validTrade(trade))) {
+            throw new Exception("Trade is no longer valid");
+        }
+
+        User borrower = dataManager.loadUser(trade.getBorrower());
+        User owner = dataManager.loadUser(trade.getOwner());
+
         // swap items between users
+        owner.getInventory().getList().addAll(trade.getBorrowerItems());
+        borrower.getInventory().getList().removeAll(trade.getBorrowerItems());
+
+        borrower.getInventory().getList().addAll(trade.getOwnerItems());
+        owner.getInventory().getList().removeAll(trade.getOwnerItems());
+
+        // remove from pendingList
+       owner.getPendingTrades().delete(trade.getUniqueID());
+        borrower.getPendingTrades().delete(trade.getUniqueID());
+
+        // add to pastTradesList
+        owner.addPastTrade(trade);
+        borrower.addPastTrade(trade);
+
         // save users
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+
         // save userSingleton
+        UserSingleton.addCurrentUser(owner);
     }
 
     public void counterPendingTrade(Trade trade){
         // TODO: finish implementing
-        // save user we are trading with for later
         // remove from pendingList
+        // save user we are trading with for later
         // save users
         // save userSingleton
         // pass data to feedTradeActivity? aka the user we are trading with
@@ -85,5 +111,16 @@ public class TradesController {
         return UserSingleton.getCurrentUser().getPastTrades();
     }
 
+    public boolean validTrade(Trade trade) {
+        ArrayList<Vehicle> borrower = dataManager.loadUser(trade.getBorrower()).getInventory().getList();
+        ArrayList<Vehicle> owner = dataManager.loadUser(trade.getOwner()).getInventory().getList();
 
+        // TODO: ContainsAll seems to not work, always returns false
+        Boolean ob = ((owner.containsAll(trade.getOwnerItems())));
+        Boolean bb = (borrower.containsAll(trade.getBorrowerItems()));
+        Log.d("Trade Controller owner", ob.toString());
+        Log.d("Trade Controller borr", bb.toString());
+
+        return ob && bb;
+    }
 }
