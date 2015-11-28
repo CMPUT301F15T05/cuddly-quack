@@ -124,8 +124,12 @@ public class AddInventoryActivity extends AppCompatActivity {
 
         //Assign and display the current location
         geolocation = new Geolocation();
-        current = geolocation.getCurrentLocation(getApplicationContext(), this);
-        location.setText(current.getPostalCode());
+        try {
+            current = geolocation.getCurrentLocation(getApplicationContext(), this);
+            location.setText(current.getPostalCode());
+        } catch (IllegalArgumentException e){
+            location.setText("Geolocation cannot be determined.");
+        }
 
         /**
          * Using spinners to select category and quality of a vehicle - taking from the enumeration
