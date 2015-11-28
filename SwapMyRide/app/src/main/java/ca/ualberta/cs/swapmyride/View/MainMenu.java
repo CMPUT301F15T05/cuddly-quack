@@ -32,6 +32,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
+import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.R;
 
 /**
@@ -49,6 +50,7 @@ public class MainMenu extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Feed","Inventory","User"};
     int Numboftabs =3;
+    Geolocation geolocation = new Geolocation();
 
     /**
      * onCreate, the toolbars and tabs are created, and a user
@@ -61,6 +63,8 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu);
         // Creating The Toolbar and setting it as the Toolbar for the activity
+
+        geolocation.getPermission(this, this.getApplicationContext());
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);

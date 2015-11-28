@@ -70,6 +70,7 @@
         android:id="@+id/distanceSpinner"
         android:layout_alignTop="@+id/inventorySearch"
         android:layout_toEndOf="@+id/inventorySearch"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        android:hint="Distance"/>
 
 </RelativeLayout>
