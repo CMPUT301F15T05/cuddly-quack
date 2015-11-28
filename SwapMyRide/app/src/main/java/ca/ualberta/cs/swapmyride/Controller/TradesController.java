@@ -39,6 +39,7 @@ public class TradesController {
         dataManager = new DataManager(context);
     }
 
+    // TODO REMOVE FROM NOTIFICATION MANAGER
     public void deletePendingTrade(Trade trade) {
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
@@ -65,12 +66,13 @@ public class TradesController {
     public void confirmPendingTrade(Trade trade) throws Exception {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
-            Log.d("Valid trade", "Created Exeption");
             throw new Exception("Trade is no longer valid");
         }
 
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
+
+        trade.swapBelongsTo();
 
         // swap items between users
         owner.getInventory().getList().addAll(trade.getBorrowerItems());

@@ -15,8 +15,7 @@ import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
-import ca.ualberta.cs.swapmyride.Model.User;
-import ca.ualberta.cs.swapmyride.Model.Vehicle;
+
 import ca.ualberta.cs.swapmyride.R;
 
 public class ViewAPendingTradeActivity extends AppCompatActivity {
@@ -104,7 +103,6 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     notValidTradeDialog();
                 }
-
                 finish();
             }
         });
