@@ -16,11 +16,17 @@
 package ca.ualberta.cs.swapmyride.Controller;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.FeedTradeActivity;
 
 /**
  * Created by Garry on 2015-11-01.
@@ -35,6 +41,7 @@ public class TradesController {
         dataManager = new LocalDataManager(context);
     }
 
+    // TODO REMOVE FROM NOTIFICATION MANAGER
     public void deletePendingTrade(Trade trade) {
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
@@ -58,23 +65,49 @@ public class TradesController {
         dataManager.saveUser(owner);
     }
 
-    public void confirmPendingTrade(Trade trade){
-        // TODO: finish implementing
+    public void confirmPendingTrade(Trade trade) throws Exception {
         // check that items are in inventory for both parties
-        // remove from pendingList
-        // add to pastTradesList
+        if (!(validTrade(trade))) {
+            throw new Exception("Trade is no longer valid");
+        }
+
+        User borrower = dataManager.loadUser(trade.getBorrower());
+        User owner = dataManager.loadUser(trade.getOwner());
+
+        trade.swapBelongsTo();
+
         // swap items between users
+        owner.getInventory().getList().addAll(trade.getBorrowerItems());
+        borrower.getInventory().deleteAll(trade.getBorrowerItems());
+
+        borrower.getInventory().getList().addAll(trade.getOwnerItems());
+        owner.getInventory().deleteAll(trade.getOwnerItems());
+
+        // remove from pendingList
+        owner.getPendingTrades().delete(trade.getUniqueID());
+        borrower.getPendingTrades().delete(trade.getUniqueID());
+
+        // add to pastTradesList
+        owner.addPastTrade(trade);
+        borrower.addPastTrade(trade);
+
         // save users
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+
         // save userSingleton
+        UserSingleton.addCurrentUser(owner);
     }
 
-    public void counterPendingTrade(Trade trade){
-        // TODO: finish implementing
-        // save user we are trading with for later
-        // remove from pendingList
-        // save users
-        // save userSingleton
-        // pass data to feedTradeActivity? aka the user we are trading with
+    public void counterPendingTrade(Context context, Trade trade){
+
+        // Saving done in deleteTrade
+        deletePendingTrade(trade);
+
+        Intent intent = new Intent(context, FeedTradeActivity.class);
+        intent.putExtra("Username", trade.getOwner());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public TradeList getActiveTrades(){
@@ -83,6 +116,37 @@ public class TradesController {
 
     public TradeList getPastTrades(){
         return UserSingleton.getCurrentUser().getPastTrades();
+    }
+
+    public boolean validTrade(Trade trade) {
+        ArrayList<Vehicle> borrower = dataManager.loadUser(trade.getBorrower()).getInventory().getList();
+        ArrayList<Vehicle> owner = dataManager.loadUser(trade.getOwner()).getInventory().getList();
+
+        Boolean o = validVehicles(trade.getOwnerItems(), owner);
+        Boolean b = validVehicles(trade.getBorrowerItems(), borrower);
+
+        Boolean c = o && b;
+
+        return c;
+    }
+
+    public Boolean validVehicles(ArrayList<Vehicle> tradeVehicles, ArrayList<Vehicle> inventoryVehicles) {
+
+        for (Vehicle tradeVehicle: tradeVehicles) {
+            Boolean vehicleInInventory = false;
+            for (Vehicle inventoryVehicle: inventoryVehicles) {
+                //TODO Compare vehicles
+                if (tradeVehicle.getUniqueID().isEqualID(inventoryVehicle.getUniqueID())) {
+                    vehicleInInventory = true;
+                    break;
+                }
+
+            }
+            if (!(vehicleInInventory)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

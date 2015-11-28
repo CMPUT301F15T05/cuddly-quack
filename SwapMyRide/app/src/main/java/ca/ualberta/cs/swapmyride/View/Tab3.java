@@ -76,7 +76,8 @@ public class Tab3 extends Fragment {
         pastTrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), ViewPastTradesActivity.class);
+                startActivity(intent);
             }
         });
 

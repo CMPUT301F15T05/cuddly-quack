@@ -222,4 +222,14 @@ public class Trade {
 
         return newTrade;
     }
+
+    public void swapBelongsTo() {
+        for (Vehicle vehicle: ownerItems) {
+            vehicle.setBelongsTo(borrower);
+        }
+
+        for (Vehicle vehicle: borrowerItems) {
+            vehicle.setBelongsTo(owner);
+        }
+    }
 }
