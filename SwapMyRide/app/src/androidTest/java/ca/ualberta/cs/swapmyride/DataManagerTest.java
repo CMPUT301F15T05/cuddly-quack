@@ -26,6 +26,7 @@ import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.LoginActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
@@ -33,7 +34,7 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  */
 public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
-    public DataManagerTest(){super(MainMenu.class);}
+    public DataManagerTest(){super(LoginActivity.class);}
 
     public void testSaveUser(){
         NetworkDataManager ndm = new NetworkDataManager();
@@ -94,7 +95,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         ldm.deleteUser(user.getUserName());
 
         try{
-            Thread.sleep(200);
+            Thread.sleep(250);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -106,7 +107,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         //wait a decent amount of time to ensure the save has time to happen
         try{
-            Thread.sleep(200);
+            Thread.sleep(250);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -118,7 +119,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         //wait a decent amount of time to ensure the delete has time to happen
         try{
-            Thread.sleep(200);
+            Thread.sleep(250);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -146,12 +147,12 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.saveUser(user);
 
         try{
-            Thread.sleep(200);
+            Thread.sleep(250);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        assertTrue(dm.searchUserLocal(user.getUserName()));
+        assertTrue(dm.searchUserServer(user.getUserName()));
 
         User user2 = dm.loadUser(user.getUserName());
 
@@ -159,18 +160,29 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dm.deleteUser(user.getUserName());
 
+        try{
+            Thread.sleep(250);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertFalse(dm.searchUserServer(user.getUserName()));
+
+        ndm.deleteUser(user.getUserName());
+        ldm.deleteUser(user.getUserName());
+
+        Log.i("NEWDATAMANAGER", "Saving user locally!");
+        //test saving and loading locally.
         ldm.saveUser(user);
 
         assertTrue(dm.searchUserLocal(user.getUserName()));
-
-        user2 = null;
+        assertFalse(dm.searchUserServer(user.getUserName()));
 
         user2 = dm.loadUser(user.getUserName());
 
         assertTrue(user.equals(user2));
 
         dm.deleteUser(user.getUserName() );
-
     }
 
     public void testSaveUserWithVehicle(){
@@ -189,11 +201,54 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.deleteUser(user.getUserName());
         ldm.deleteUser(user.getUserName());
 
+        dm.saveUser(user);
 
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(dm.searchUserLocal(user.getUserName()));
+        assertTrue(dm.searchUserServer(user.getUserName()));
+
+        Vehicle car = new Vehicle();
+        car.setName("2008 Cadillac");
+        car.setCategory(VehicleCategory.SEDAN);
+        car.setQuality(VehicleQuality.OKAY);
+        car.setQuantity(1);
+        car.setPublic(true);
+        car.setComments("These are some comments yep yep");
+        user.addItem(car);
+
+        dm.saveUser(user);
+
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(dm.searchUserLocal(user.getUserName()));
+        assertTrue(dm.searchUserServer(user.getUserName()));
+
+        User loadTo = dm.loadUser(user.getUserName());
+
+        //check that the list exists
+        assertTrue(loadTo.getInventory().size() == 1);
+        //assert no friends have magically appeared
+        assertTrue(loadTo.getFriends().size() == 0);
+        //assert no random tradelist appeared
+        assertTrue(loadTo.getPastTrades().getSize() == 0);
+        assertTrue(loadTo.getPendingTrades().getSize() == 0);
+        //check the given car is the same as the car we gave it
+        Vehicle newCar = loadTo.getInventory().getList().get(0);
+
+        assertTrue(newCar.getName().equals(car.getName()));
+        assertTrue(newCar.getCategory().equals(car.getCategory()));
+        assertTrue(newCar.getQuality().equals(car.getQuality()));
+        assertTrue(newCar.getQuantity().equals(car.getQuantity()));
+        assertTrue(newCar.getPublic() == car.getPublic());
+        assertTrue(newCar.getComments().equals(car.getComments()));
     }
-
-    public void testSearchUser(){
-
-    }
-
 }

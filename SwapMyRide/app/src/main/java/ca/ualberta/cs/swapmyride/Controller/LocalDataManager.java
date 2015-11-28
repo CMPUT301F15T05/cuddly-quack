@@ -65,7 +65,8 @@ public class LocalDataManager {
 
         String userJson = gson.toJson(user);
         try{
-            Log.i("USERFILEPATH",userFilePath+user.getUserName());
+            //Log.i("USERFILEPATH",userFilePath+user.getUserName());
+            Log.i("NEWDATAMANAGER", user.getUserName());
             outputStream = context.openFileOutput(userFilePath + user.getUserName(),
                     Context.MODE_PRIVATE);
             outputStream.write(userJson.getBytes());
@@ -109,9 +110,10 @@ public class LocalDataManager {
             user = null;
         }
         catch (IOException e){
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
 
+        Log.i("NEWDATAMANAGER", "INSIDE LOAD - USERNAME: " + user.getUserName());
         return user;
     }
 

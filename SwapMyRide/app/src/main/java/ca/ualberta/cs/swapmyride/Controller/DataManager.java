@@ -3,7 +3,11 @@ package ca.ualberta.cs.swapmyride.Controller;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
+import java.util.ArrayList;
+
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
@@ -24,12 +28,14 @@ public class DataManager {
     }
 
     public void saveUser(User user){
+        //save user on disk
+        Log.i("NEWDATAMANAGER", "Inside DM.saveUser - " + user.getUserName());
+        ldm.saveUser(user);
+
         if(networkAvailable()){
             //SAVE THE USER ON SERVER
             ndm.saveUser(user);
         }
-        //save user on disk
-        ldm.saveUser(user);
     }
 
     /**
@@ -45,10 +51,12 @@ public class DataManager {
                 return ndm.retrieveUser(username);
             }
         }
-        else if (ldm.searchUser(username)){
+
+        if(searchUserLocal(username)){
             return ldm.loadUser(username);
         }
 
+        Log.i("NEWDATAMANAGER", "Returning a new user...");
         return new User();
     }
 
@@ -72,17 +80,17 @@ public class DataManager {
     /**
      * updateFriends gets friends from the server based on the friends list
      * of a user. This exists so that a friendsList does not store user
-     * obejcts - but just usernames so that it is smaller.
-     * @param user
+     * objects - but just usernames so that it is smaller.
+     *
      */
-    public void updateFriends(User user){
-        for (String friendUserName : user.getFriends().getFriendList()) {
-            if(searchUserServer(friendUserName)){
-                //TODO Update the friends from server
-            }
-            else{
-                //TODO Code to load friends that do not exist in the local memory
-            }
+    public void updateFriends(){
+        User friend;
+        //empty the user list
+        UserSingleton.setFriends(new ArrayList<User>());
+
+        for (String friendUserName : UserSingleton.getCurrentUser().getFriends().getFriendList()) {
+            friend = loadUser(friendUserName);
+            UserSingleton.addFriends(friend);
         }
     }
 
