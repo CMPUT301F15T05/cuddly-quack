@@ -40,6 +40,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         DataManager dm = new DataManager(getActivity());
         LocalDataManager ldm = new LocalDataManager(getActivity());
 
+
         User user = new User();
         user.setName("Garry");
         user.setUserAddress("4465");
@@ -47,9 +48,19 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         user.setUserEmail("gbullock@ualbert.ca");
         user.setDownloadImages(true);
 
+        ndm.deleteUser(user.getUserName());
+        ldm.deleteUser(user.getUserName());
+
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         assertFalse(dm.searchUserLocal(user.getUserName()));
         assertFalse(dm.searchUserServer(user.getUserName()));
 
+        //This is what we are testing!
         dm.saveUser(user);
 
         //wait a decent amount of time to ensure the save has time to happen
@@ -61,10 +72,59 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         assertTrue(dm.searchUserLocal(user.getUserName()));
         assertTrue(dm.searchUserServer(user.getUserName()));
+
+        ndm.deleteUser(user.getUserName());
+        ldm.deleteUser(user.getUserName());
     }
 
     public void testDeleteUser(){
+        NetworkDataManager ndm = new NetworkDataManager();
+        DataManager dm = new DataManager(getActivity());
+        LocalDataManager ldm = new LocalDataManager(getActivity());
 
+
+        User user = new User();
+        user.setName("Garry");
+        user.setUserAddress("4465");
+        user.setUserName("gbullock");
+        user.setUserEmail("gbullock@ualbert.ca");
+        user.setDownloadImages(true);
+
+        ndm.deleteUser(user.getUserName());
+        ldm.deleteUser(user.getUserName());
+
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertFalse(dm.searchUserLocal(user.getUserName()));
+        assertFalse(dm.searchUserServer(user.getUserName()));
+
+        dm.saveUser(user);
+
+        //wait a decent amount of time to ensure the save has time to happen
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(dm.searchUserLocal(user.getUserName()));
+        assertTrue(dm.searchUserServer(user.getUserName()));
+
+        dm.deleteUser(user.getUserName());
+
+        //wait a decent amount of time to ensure the delete has time to happen
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertFalse(dm.searchUserLocal(user.getUserName()));
+        assertFalse(dm.searchUserServer(user.getUserName()));
     }
 
     public void testSaveUserWithVehicle(){
