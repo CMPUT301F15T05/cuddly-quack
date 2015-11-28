@@ -23,32 +23,9 @@ import java.util.Locale;
  *
  */
 public class Geolocation {
-    static final int MY_PERMISSIONS_REQUEST__COARSE_LOCATION = 1;
-    static final int MY_PERMISSIONS_REQUEST__FINE_LOCATION = 1;
-
     private LocationManager lm;
 
-    /**
-     * @param context
-     * @param activity
-     *
-     * This method deals with finding the device's current location
-     *
-     * This is considered the default location for items
-     *
-     * Method for providers and location adapted from:
-     * http://stackoverflow.com/questions/17591147/how-to-get-current-location-in-android
-     * User: Boris Pawlowski (& Thomas Clemensen)           Accessed: 22-11-2015
-     *
-     * Method for finding address using Geocoder adapted from
-     * http://stackoverflow.com/questions/9409195/how-to-get-complete-address-from-latitude-and-longitude
-     * User: user370305                                    Accessed: 22-11-2015
-     *
-     */
-
-    public Address getCurrentLocation(Context context, Activity activity) throws IllegalArgumentException {
-        Address address = new Address(Locale.getDefault());
-        lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+    public Boolean getPermission(Activity activity, Context context){
         // http://developer.android.com/training/permissions/requesting.html
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(context,
@@ -76,38 +53,87 @@ public class Geolocation {
                 // result of the request.
             }
         }
-            // http://developer.android.com/training/permissions/requesting.html
-            // Here, thisActivity is the current activity
-            if (ContextCompat.checkSelfPermission(context,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
+        // http://developer.android.com/training/permissions/requesting.html
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-                // Should we show an explanation?
-                if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                        Manifest.permission.ACCESS_FINE_LOCATION)) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.s
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.s
 
-                } else {
+            } else {
 
-                    // No explanation needed, we can request the permission.
+                // No explanation needed, we can request the permission.
 
-                    ActivityCompat.requestPermissions(activity,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            1);
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
 
-                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                    // app-defined int constant. The callback method gets the
-                    // result of the request.
-                }
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
             }
+        }
+
+        if ((ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED)&&(ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @param context
+     * @param activity
+     *
+     * This method deals with finding the device's current location
+     *
+     * This is considered the default location for items
+     *
+     * Method for providers and location adapted from:
+     * http://stackoverflow.com/questions/17591147/how-to-get-current-location-in-android
+     * User: Boris Pawlowski (& Thomas Clemensen)           Accessed: 22-11-2015
+     *
+     * Method for finding address using Geocoder adapted from
+     * http://stackoverflow.com/questions/9409195/how-to-get-complete-address-from-latitude-and-longitude
+     * User: user370305                                    Accessed: 22-11-2015
+     *
+     */
+
+    public Address getCurrentLocation(Context context, Activity activity) throws IllegalArgumentException {
+        Address address = new Address(Locale.getDefault());
+        lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+        Boolean permission = getPermission(activity, context);
         //Check which location providers are enabled
         //The two major ones are gps services and the mobile network
         Boolean gps = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         Boolean network = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         Location lastKnownLocation = new Location("GPS");
+
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
+            address.setPostalCode("Location Not Enabled");
+            address.setLocality("No Location");
+            address.setLatitude(0);
+            address.setLongitude(0);
+            return address;
+        }
+
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED){
+            address.setPostalCode("Location Not Enabled");
+            address.setLocality("No Location");
+            address.setLatitude(0);
+            address.setLongitude(0);
+            return address;
+        }
 
         if (!gps && !network){
             throw new IllegalArgumentException();
