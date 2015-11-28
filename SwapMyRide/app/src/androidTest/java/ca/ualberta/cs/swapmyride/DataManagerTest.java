@@ -18,7 +18,9 @@ package ca.ualberta.cs.swapmyride;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
@@ -33,5 +35,47 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
     public DataManagerTest(){super(MainMenu.class);}
 
+    public void testSaveUser(){
+        NetworkDataManager ndm = new NetworkDataManager();
+        DataManager dm = new DataManager(getActivity());
+        LocalDataManager ldm = new LocalDataManager(getActivity());
 
+        User user = new User();
+        user.setName("Garry");
+        user.setUserAddress("4465");
+        user.setUserName("gbullock");
+        user.setUserEmail("gbullock@ualbert.ca");
+        user.setDownloadImages(true);
+
+        assertFalse(dm.searchUserLocal(user.getUserName()));
+        assertFalse(dm.searchUserServer(user.getUserName()));
+
+        dm.saveUser(user);
+
+        //wait a decent amount of time to ensure the save has time to happen
+        try{
+            Thread.sleep(500);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(dm.searchUserLocal(user.getUserName()));
+        assertTrue(dm.searchUserServer(user.getUserName()));
+    }
+
+    public void testDeleteUser(){
+
+    }
+
+    public void testSaveUserWithVehicle(){
+
+    }
+
+    public void testSearchUser(){
+
+    }
+
+    public void testGetUser(){
+
+    }
 }
