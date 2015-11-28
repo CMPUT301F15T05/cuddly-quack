@@ -36,7 +36,7 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
 public class TradeTest extends ActivityInstrumentationTestCase2 {
     public TradeTest(){super(MainMenu.class);}
     public Photo picture;
-
+    /*
     // Use Case 15: Trade with Friend
     //testing if create trade works
     public void testCreateTrade(){
@@ -535,4 +535,5 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(trade.getOwner().equals(copyTrade.getOwner()));
         // TODO: Add a lot more assertions if someone feels like it, the UniqueID is what we most care about
     }
+    */
 }
