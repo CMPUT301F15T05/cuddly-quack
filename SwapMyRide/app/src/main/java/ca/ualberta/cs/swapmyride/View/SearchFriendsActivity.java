@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -114,4 +115,15 @@ public class SearchFriendsActivity extends AppCompatActivity {
         });
     }
 
+    public EditText getSearchField(){
+        return(EditText) findViewById(R.id.searchField);
+    }
+
+    public ImageButton getSearch(){
+        return(ImageButton) findViewById(R.id.searchButton);
+    }
+
+    public ListView getFriendView(){
+        return (ListView) findViewById(R.id.friendView);
+    }
 }

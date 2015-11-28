@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/driano">
 
     <include
         android:id="@+id/tool_bar"
@@ -9,15 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:id="@+id/picture"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_below="@+id/tool_bar"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/ic_default_car" />
+        android:id="@+id/viewvehiclehorizontal" >
+        <LinearLayout
+            android:id="@+id/viewvehiclegallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            />
+    </HorizontalScrollView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,10 +31,9 @@
         android:textSize="25sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/title"
-        android:layout_alignTop="@+id/picture"
+        android:layout_alignTop="@+id/viewvehiclehorizontal"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_toEndOf="@+id/picture"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
         android:lines="3" />
@@ -38,12 +41,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity:"
+        android:text="Quality:"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qauntityHead"
-        android:layout_below="@+id/picture"
-        android:layout_alignStart="@+id/picture"
+        android:layout_below="@+id/title"
         android:layout_marginTop="25dp" />
 
     <TextView
@@ -55,34 +57,34 @@
         android:id="@+id/categoryHead"
         android:layout_below="@+id/qauntityHead"
         android:layout_alignStart="@+id/qauntityHead"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quality:"
+        android:text="Quantity:"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qualityHead"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/categoryHead"
         android:layout_alignStart="@+id/categoryHead" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comments"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/commentsHead"
-        android:layout_below="@+id/qualityHead"
-        android:layout_alignStart="@+id/qualityHead"
-        android:layout_marginTop="25dp"
-        android:layout_alignParentEnd="true"
-        android:maxLines="8"
-        android:lines="8"
+        android:maxLines="3"
+        android:lines="3"
         android:gravity="center"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/Latitude"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/edit"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,8 +93,8 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/quantity"
-        android:layout_alignTop="@+id/qauntityHead"
-        android:layout_alignStart="@+id/title" />
+        android:layout_above="@+id/categoryHead"
+        android:layout_alignStart="@+id/category" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,8 +103,8 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/category"
-        android:layout_alignTop="@+id/categoryHead"
-        android:layout_alignStart="@+id/quantity" />
+        android:layout_above="@+id/qualityHead"
+        android:layout_alignStart="@+id/quality" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,7 +114,7 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/quality"
         android:layout_alignTop="@+id/qualityHead"
-        android:layout_alignStart="@+id/category" />
+        android:layout_alignStart="@+id/location" />
 
     <Button
         android:layout_width="wrap_content"
@@ -120,10 +122,11 @@
         android:text="Delete"
         android:background="@color/colorPrimary"
         android:id="@+id/delete"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -131,7 +134,64 @@
         android:text="Edit"
         android:background="@color/colorPrimary"
         android:id="@+id/edit"
-        android:layout_alignTop="@+id/delete"
-        android:layout_alignEnd="@+id/commentsHead" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postal Code:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/postalCode"
+        android:layout_below="@+id/qualityHead"
+        android:layout_alignStart="@+id/qualityHead"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/location"
+        android:layout_alignTop="@+id/postalCode"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginStart="67dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/Latitude"
+        android:layout_alignTop="@+id/latLong"
+        android:layout_toEndOf="@+id/latLong"
+        android:layout_marginStart="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/Longitude"
+        android:layout_alignTop="@+id/Latitude"
+        android:layout_toEndOf="@+id/Latitude"
+        android:layout_marginStart="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lat. / Long:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/latLong"
+        android:layout_below="@+id/postalCode"
+        android:layout_alignStart="@+id/postalCode"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

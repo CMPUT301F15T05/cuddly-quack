@@ -15,6 +15,7 @@
  */
 package ca.ualberta.cs.swapmyride;
 
+import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
@@ -30,6 +31,7 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  * Created by Garry on 2015-11-02.
  */
 public class DataManagerTest extends ActivityInstrumentationTestCase2 {
+
     public DataManagerTest(){super(MainMenu.class);}
 
     public void testSaveUser(){

@@ -52,10 +52,9 @@
         android:layout_height="wrap_content"
         android:text="Inventory"
         android:id="@+id/inventorySearch"
-        android:layout_alignTop="@+id/feedSearch"
-        android:layout_alignParentEnd="true"
         android:background="@color/colorPrimary"
-        android:layout_marginEnd="5dp"/>
+        android:layout_alignTop="@+id/feedSearch"
+        android:layout_alignEnd="@+id/searchField" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -64,5 +63,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/feedSearch" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/distanceSpinner"
+        android:layout_alignTop="@+id/inventorySearch"
+        android:layout_toEndOf="@+id/inventorySearch"
+        android:spinnerMode="dropdown"
+        android:hint="Distance"/>
 
 </RelativeLayout>

@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -33,14 +34,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import java.util.Locale;
+import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -57,6 +65,7 @@ import ca.ualberta.cs.swapmyride.Controller.VehicleController;
 public class AddInventoryActivity extends AppCompatActivity {
 
     static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+    static final int MY_PERMISSIONS_REQUEST_LOCATION = 2;
 
     Toolbar toolbar;
     Spinner categorySpinner;
@@ -67,7 +76,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     VehicleController vehicleController;
     Vehicle vehicle;
 
-    ImageButton vehicleImage;
+    LinearLayout gallery;
     EditText vehicleName;
     EditText vehicleQuantity;
     EditText vehicleComments;
@@ -76,8 +85,12 @@ public class AddInventoryActivity extends AppCompatActivity {
     UserController uController;
     Button delete;
     DataManager dm;
+    EditText location;
 
     int position;
+
+    Address current;
+    Geolocation geolocation;
 
     //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -97,15 +110,22 @@ public class AddInventoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         uController = new UserController(getApplicationContext());
         // TODO: Needs to smell more MVCish
-        vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
+        //vehicleImage = (ImageButton) findViewById(R.id.vehicleImage);
+        gallery = (LinearLayout) findViewById(R.id.addinventorygallery);
         delete = (Button) findViewById(R.id.delete);
         vehicleName = (EditText) findViewById(R.id.vehicleField);
         vehicleQuantity = (EditText) findViewById(R.id.quantityField);
         vehicleComments = (EditText) findViewById(R.id.commentsField);
         vehiclePublic = (Switch) findViewById(R.id.ispublic);
         done = (Button) findViewById(R.id.button);
+        location = (EditText) findViewById(R.id.locationField);
         dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
+
+        //Assign and display the current location
+        geolocation = new Geolocation();
+        current = geolocation.getCurrentLocation(getApplicationContext(), this);
+        location.setText(current.getPostalCode());
 
         /**
          * Using spinners to select category and quality of a vehicle - taking from the enumeration
@@ -154,18 +174,30 @@ public class AddInventoryActivity extends AppCompatActivity {
         if(loadVehicle){
             position = getIntent().getIntExtra("vehiclePosition", 0);
             loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
-            vehicle.setPhoto(loaded.getPhoto());
-            vehicleImage.setBackground(new BitmapDrawable(getResources(), loaded.getPhoto().getImage()));
+            vehicle.setPhotoArrayList(loaded.getPhotoArrayList());
+            //vehicleImage.setBackground(new BitmapDrawable(getResources(), loaded.getPhoto().getImage()));
+
             vehicleName.setText(loaded.getName());
             vehicleQuantity.setText(loaded.getQuantity().toString());
             vehicleComments.setText(loaded.getComments());
             vehiclePublic.setChecked(loaded.getPublic());
             qualitySpinner.setSelection(loaded.getQuality().getPosition());
             categorySpinner.setSelection(loaded.getCategory().getPosition());
+            location.setText(loaded.getLocation().getPostalCode());
         }
+
         //default the photo to a new photo if we are not loading a vehicle
         else{
-            vehicle.setPhoto(new Photo(getApplicationContext()));
+            // TODO: Default photo? Here or set in Vehicle?
+            //vehicle.setPhoto(new Photo(getApplicationContext()));
+            vehicle.deletePhotoArrayList(getApplicationContext());
+        }
+
+        gallery.removeAllViews();
+        for (Photo photo : vehicle.getPhotoArrayList()) {
+            ImageView newImage = new ImageView(this);
+            newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+            gallery.addView(newImage);
         }
 
         /**
@@ -173,7 +205,7 @@ public class AddInventoryActivity extends AppCompatActivity {
          * image box at the top of the vehicle page will open the camera and allow the
          * user to take a photo which will be saved directly to the vehicle object
          */
-        vehicleImage.setOnClickListener(new View.OnClickListener() {
+        gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -189,10 +221,15 @@ public class AddInventoryActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vehicle.setPhoto(new Photo(getApplicationContext()));
-                vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
-
-
+                //vehicle.setPhoto(new Photo(getApplicationContext()));
+                //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+                vehicle.deletePhotoArrayList(getApplicationContext());
+                gallery.removeAllViews();
+                for (Photo photo : vehicle.getPhotoArrayList()) {
+                    ImageView newImage = new ImageView(getApplicationContext());
+                    newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+                    gallery.addView(newImage);
+                }
             }
         });
 
@@ -211,10 +248,18 @@ public class AddInventoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // vehicle.setPhoto(vehicleImage);
+                Geolocation geolocation1 = new Geolocation();
+
+                if (vehicleName.getText().toString().equals("")) {
+                    Toast.makeText(AddInventoryActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 vehicle.setName(vehicleName.getText().toString());
-                Log.i("Vehicle Name", vehicleName.getText().toString());
+
                 vehicle.setCategory(vehicleCategory);
                 vehicle.setQuality(vehicleQuality);
+                vehicle.setLocation(geolocation1.setSpecificLocation(getApplicationContext(),
+                        AddInventoryActivity.this, location.getText().toString()));
 
                 //http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html#parseInt-java.lang.String-int-
                 //Nov. 3/ 2015
@@ -253,11 +298,18 @@ public class AddInventoryActivity extends AppCompatActivity {
             }
         });
 
-        vehicleImage.setOnLongClickListener(new View.OnLongClickListener() {
+        gallery.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                vehicle.getPhoto().deleteImage(getApplicationContext());
-                vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+                //vehicle.getPhoto().deleteImage(getApplicationContext());
+                //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
+                vehicle.deletePhotoArrayList(getApplicationContext());
+                gallery.removeAllViews();
+                for (Photo photo : vehicle.getPhotoArrayList()) {
+                    ImageView newImage = new ImageView(getApplicationContext());
+                    newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+                    gallery.addView(newImage);
+                }
                 return true;
             }
         });
@@ -282,7 +334,7 @@ public class AddInventoryActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(AddInventoryActivity.this,
                     Manifest.permission.CAMERA)) {
 
-                // Show an expanation to the user *asynchronously* -- don't block
+                // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
 
@@ -325,8 +377,25 @@ public class AddInventoryActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Photo photo = new Photo(imageBitmap);
-            vehicle.setPhoto(photo);
-            vehicleImage.setBackground(new BitmapDrawable(getResources(), imageBitmap));
+            // TODO: Fix so that if only default photo, remove it.
+            if (vehicle.getPhotoArrayList().get(0).equals(new Photo(this))) {
+                Log.i("Equals","Equals");
+                ArrayList<Photo> photoArrayList = new ArrayList<Photo>();
+                photoArrayList.add(photo);
+                vehicle.setPhotoArrayList(photoArrayList);
+            } else {
+                Log.i("Doesn't equal","Doesn't equal");
+                ArrayList<Photo> photoArrayList = vehicle.getPhotoArrayList();
+                photoArrayList.add(photo);
+                vehicle.setPhotoArrayList(photoArrayList);
+            }
+            gallery.removeAllViews();
+            for (Photo _photo : vehicle.getPhotoArrayList()) {
+                ImageView newImage = new ImageView(getApplicationContext());
+                newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+                gallery.addView(newImage);
+            }
+
         }
     }
 
@@ -339,5 +408,13 @@ public class AddInventoryActivity extends AppCompatActivity {
 
     public boolean checkHasCamera(Context context){
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
+    public EditText getVehicleName(){
+        return (EditText) findViewById(R.id.vehicleField);
+    }
+
+    public Button getSaveButton(){
+        return (Button) findViewById(R.id.save);
     }
 }

@@ -116,4 +116,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         friend = dataManager.loadUser(username);
     }
 
+    public TextView getFullName(){
+        return (TextView) findViewById(R.id.fullName);
+    }
 }

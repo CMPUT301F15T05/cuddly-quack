@@ -95,5 +95,12 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    public TextView getNameText(){
+        return (TextView) findViewById(R.id.nameField);
+    }
+
+    public Button getSaveButton(){
+        return (Button) findViewById(R.id.save);
+    }
 
 }

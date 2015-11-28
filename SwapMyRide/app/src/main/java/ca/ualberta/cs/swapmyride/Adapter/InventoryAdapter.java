@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
@@ -75,7 +76,8 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         quantity.setText(String.format("%d", vehicle.getQuantity()));
 
         //set the image in inventory
-        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage()));
+
+        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
 
         // Return the completed view to render on screen
         return convertView;

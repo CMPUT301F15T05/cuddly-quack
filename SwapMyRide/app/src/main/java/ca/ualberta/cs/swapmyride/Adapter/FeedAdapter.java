@@ -16,7 +16,10 @@
 package ca.ualberta.cs.swapmyride.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +27,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
@@ -61,7 +66,7 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         quantity.setText(String.format("%d", vehicle.getQuantity()));
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
-        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhoto().getImage()));
+        image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
         // Return the completed view to render on screen
         return convertView;
     }

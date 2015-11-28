@@ -26,11 +26,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -51,9 +53,13 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView quality;
     TextView comments;
     ImageView image;
+    TextView location;
+    TextView lat;
+    TextView longit;
 
     Gson gson;
-    ImageView picture;
+    //ImageView picture;
+    LinearLayout gallery;
 
     Button delete;
     Button editVehicle;
@@ -86,8 +92,12 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quantity);
         comments = (TextView) findViewById(R.id.commentsHead);
-        image = (ImageView) findViewById(R.id.picture);
-        picture = (ImageView) findViewById(R.id.picture);
+        //image = (ImageView) findViewById(R.id.picture);
+        //picture = (ImageView) findViewById(R.id.picture);
+        location = (TextView) findViewById(R.id.location);
+        lat = (TextView) findViewById(R.id.Latitude);
+        longit = (TextView) findViewById(R.id.Longitude);
+        gallery = (LinearLayout) findViewById(R.id.viewvehiclegallery);
 
         delete = (Button) findViewById(R.id.delete);
         editVehicle = (Button) findViewById(R.id.edit);
@@ -104,8 +114,31 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-        image.setBackground(new BitmapDrawable(Resources.getSystem(), vehicle.getPhoto().getImage()));
-        picture.setImageBitmap(vehicle.getPhoto().getImage());
+//        try {
+//            image.setBackground(new BitmapDrawable(getApplicationContext().getResources(), vehicle.getPhoto().getImage()));
+//        }catch (NullPointerException e){
+//            image.setBackground(new BitmapDrawable(getApplicationContext().getResources(), new Photo(getApplicationContext()).getImage()));
+//        }
+//        try {
+//            picture.setImageBitmap(vehicle.getPhoto().getImage());
+//        }catch (NullPointerException e){
+//            image.setImageBitmap(new Photo(getApplicationContext()).getImage());
+//        }
+        gallery.removeAllViews();
+        for (Photo _photo : vehicle.getPhotoArrayList()) {
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            gallery.addView(newImage);
+        }
+        try {
+            location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
+            lat.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLatitude()));
+            longit.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLongitude()));
+        }catch (Exception e){
+            location.setText("Location Error");
+            lat.setText("0");
+            longit.setText("0");
+        }
     }
 
     public void initOnClickListeners(){
@@ -153,5 +186,13 @@ public class ViewVehicleActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public TextView getTheName(){
+        return (TextView) findViewById(R.id.title);
+    }
+
+    public Button getEditButton(){
+        return (Button) findViewById(R.id.edit);
     }
 }

@@ -15,15 +15,24 @@
  */
 package ca.ualberta.cs.swapmyride.View;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
+import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.R;
 
 /**
@@ -41,6 +50,7 @@ public class MainMenu extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Feed","Inventory","User"};
     int Numboftabs =3;
+    Geolocation geolocation = new Geolocation();
 
     /**
      * onCreate, the toolbars and tabs are created, and a user
@@ -53,6 +63,8 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu);
         // Creating The Toolbar and setting it as the Toolbar for the activity
+
+        geolocation.getPermission(this, this.getApplicationContext());
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -132,5 +144,35 @@ public class MainMenu extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public ListView getFeed(){
+        return (ListView) findViewById(R.id.feedView);
+    }
 
+    public ListView getInventoryView(){
+        return adapter.getInventoryListView();
+    }
+
+    public TextView getViewFriends(){
+        return (TextView) findViewById(R.id.viewFriends);
+    }
+
+    public TextView getPastTrades(){
+        return (TextView) findViewById(R.id.pastTrades);
+    }
+
+    public TextView getCurrentTrades(){
+        return (TextView) findViewById(R.id.activeTrades);
+    }
+
+    public TextView getEditProfile(){
+        return (TextView) findViewById(R.id.editProfile);
+    }
+
+    public SlidingTabLayout getTabs(){
+        return (SlidingTabLayout) findViewById(R.id.tabs);
+    }
+
+    public ActionMenuItemView getActionAddFriend(){
+        return (ActionMenuItemView) findViewById(R.id.action_addfriend);
+    }
 }

@@ -71,7 +71,6 @@ public class NotificationManager {
     }
 
     public void showFriendRequest(final Context context, final String username){
-        friendRequests.remove(username);
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
                 .setMessage(username + " is now following you! Click view to see their profile!")
@@ -86,8 +85,6 @@ public class NotificationManager {
                 .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    // Clear newly added friends from ArrayList to avoid duplicate notifications
-                        Log.i("DISMISS", "DISMISS");
                     }
                 })
                 .show();
@@ -102,6 +99,11 @@ public class NotificationManager {
         for(String username : friendRequests){
             showFriendRequest(context, username);
         }
+
+        friendRequests.clear();
+        DataManager dm = new DataManager(context);
+        dm.saveUser(UserSingleton.getCurrentUser());
+
     }
 
 }
