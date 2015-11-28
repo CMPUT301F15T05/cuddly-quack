@@ -127,7 +127,68 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         assertFalse(dm.searchUserServer(user.getUserName()));
     }
 
+    public void testGetUser(){
+        NetworkDataManager ndm = new NetworkDataManager();
+        DataManager dm = new DataManager(getActivity());
+        LocalDataManager ldm = new LocalDataManager(getActivity());
+
+        User user = new User();
+        user.setName("Garry");
+        user.setUserAddress("4465");
+        user.setUserName("gbullock");
+        user.setUserEmail("gbullock@ualbert.ca");
+        user.setDownloadImages(true);
+
+        ndm.deleteUser(user.getUserName());
+        ldm.deleteUser(user.getUserName());
+
+        //save the user strictly to the server first, and make sure that it
+        ndm.saveUser(user);
+
+        try{
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(dm.searchUserLocal(user.getUserName()));
+
+        User user2 = dm.loadUser(user.getUserName());
+
+        assertTrue(user.equals(user2));
+
+        dm.deleteUser(user.getUserName());
+
+        ldm.saveUser(user);
+
+        assertTrue(dm.searchUserLocal(user.getUserName()));
+
+        user2 = null;
+
+        user2 = dm.loadUser(user.getUserName());
+
+        assertTrue(user.equals(user2));
+
+        dm.deleteUser(user.getUserName() );
+
+    }
+
     public void testSaveUserWithVehicle(){
+        NetworkDataManager ndm = new NetworkDataManager();
+        DataManager dm = new DataManager(getActivity());
+        LocalDataManager ldm = new LocalDataManager(getActivity());
+
+
+        User user = new User();
+        user.setName("Garry");
+        user.setUserAddress("4465");
+        user.setUserName("gbullock");
+        user.setUserEmail("gbullock@ualbert.ca");
+        user.setDownloadImages(true);
+
+        ndm.deleteUser(user.getUserName());
+        ldm.deleteUser(user.getUserName());
+
 
     }
 
@@ -135,7 +196,4 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testGetUser(){
-
-    }
 }
