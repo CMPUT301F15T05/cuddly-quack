@@ -116,11 +116,25 @@
         <activity
             android:name=".View.ViewPendingTradesActivity"
             android:label="@string/title_activity_view_pending_trades"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".View.ViewAPendingTradeActivity"
             android:label="@string/title_activity_view_apending_trade"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".View.ViewPastTradesActivity"
+            android:label="@string/title_activity_view_past_trades"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".View.ViewAPastTradeActivity"
+            android:label="@string/title_activity_view_apast_trade"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
     </application>

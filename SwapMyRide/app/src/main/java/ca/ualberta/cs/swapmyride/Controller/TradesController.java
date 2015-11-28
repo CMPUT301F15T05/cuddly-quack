@@ -16,6 +16,7 @@
 package ca.ualberta.cs.swapmyride.Controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.FeedTradeActivity;
 
 /**
  * Created by Garry on 2015-11-01.
@@ -97,13 +99,15 @@ public class TradesController {
         UserSingleton.addCurrentUser(owner);
     }
 
-    public void counterPendingTrade(Trade trade){
-        // TODO: finish implementing
-        // remove from pendingList
-        // save user we are trading with for later
-        // save users
-        // save userSingleton
-        // pass data to feedTradeActivity? aka the user we are trading with
+    public void counterPendingTrade(Context context, Trade trade){
+
+        // Saving done in deleteTrade
+        deletePendingTrade(trade);
+
+        Intent intent = new Intent(context, FeedTradeActivity.class);
+        intent.putExtra("Username", trade.getOwner());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public TradeList getActiveTrades(){

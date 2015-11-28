@@ -50,7 +50,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         counter = (Button) findViewById(R.id.counter);
         confirm = (Button) findViewById(R.id.confirm);
 
-        position = getIntent().getIntExtra("PastTradePosition", 0);
+        position = getIntent().getIntExtra("PendingTradePosition", 0);
 
         trades = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
         tradeToDisplay = trades.get(position);
@@ -77,8 +77,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         counter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO add this
-                // tell the user that this is a permanent action (aka they can't cancel and expect the pending trade to still be pending)
+                counterTradeDialog();
             }
         });
 
@@ -126,6 +125,29 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
             }
         });
         builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                tradesController.deletePendingTrade(tradeToDisplay);
+                finish();
+            }
+        });
+        builder.show();
+    }
+
+    public void counterTradeDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
+        builder.setMessage("Are you SURE you want to counter this trade? It is a permanent Action!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Counter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                tradesController.counterPendingTrade(getApplicationContext(), tradeToDisplay);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
