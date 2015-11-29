@@ -258,6 +258,11 @@ public class AddInventoryActivity extends AppCompatActivity {
                     Toast.makeText(AddInventoryActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if (vehicleQuantity.getText().toString().equals("0")) {
+                    Toast.makeText(AddInventoryActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 vehicle.setName(vehicleName.getText().toString());
 
                 vehicle.setCategory(vehicleCategory);
