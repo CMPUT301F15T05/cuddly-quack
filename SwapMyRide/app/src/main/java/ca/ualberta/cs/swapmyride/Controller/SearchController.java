@@ -15,12 +15,15 @@
  */
 package ca.ualberta.cs.swapmyride.Controller;
 
+import android.app.Activity;
 import android.content.Context;
+import android.location.Address;
 
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
+import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
@@ -74,11 +77,15 @@ public class SearchController {
      * @return
      */
 
-    public ArrayList<Vehicle> findInventoryVehicle(String vehicleName, VehicleCategory vehicleCategory, ArrayList<Vehicle> userVehicles) {
+    public ArrayList<Vehicle> findInventoryVehicle(String vehicleName, VehicleCategory vehicleCategory, ArrayList<Vehicle> userVehicles,
+                                                   Activity activity, Context context, double distance) {
 
         ArrayList<Vehicle> foundVehicles = new ArrayList<>();
 
         int size = userVehicles.size();
+
+        Geolocation geolocation = new Geolocation();
+        Address address = geolocation.getCurrentLocation(context, activity);
 
         // search both
         if (!(vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))) {
@@ -87,7 +94,11 @@ public class SearchController {
 
                 if (userVehicles.get(i).getName().equals(vehicleName))
                     if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
-                        foundVehicles.add(userVehicles.get(i));
+                        if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
+                                userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                                address.getLongitude())) {
+                            foundVehicles.add(userVehicles.get(i));
+                        }
                     }
             }
         }
@@ -97,8 +108,13 @@ public class SearchController {
 
             for (int i = 0; i < size; i++) {
 
-                if (userVehicles.get(i).getName().equals(vehicleName))
-                    foundVehicles.add(userVehicles.get(i));
+                if (userVehicles.get(i).getName().equals(vehicleName)) {
+                    if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
+                            userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                            address.getLongitude())) {
+                        foundVehicles.add(userVehicles.get(i));
+                    }
+                }
             }
         }
 
@@ -107,8 +123,14 @@ public class SearchController {
 
             for (int i = 0; i < size; i++) {
 
-                if (userVehicles.get(i).getCategory().equals(vehicleCategory))
-                    foundVehicles.add(userVehicles.get(i));
+                if (userVehicles.get(i).getCategory().equals(vehicleCategory)){
+                    if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
+                            userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                            address.getLongitude())){
+                        foundVehicles.add(userVehicles.get(i));
+                    }
+                }
+
             }
         }
 
@@ -117,54 +139,33 @@ public class SearchController {
     }
 
     /**
-     * Returns an ArrayList of vehicles based on name and/or category that is passed
-     * to the function.
-     * @param vehicleName
-     * @param vehicleCategory
-     * @param userVehicles
-     * @return
+     * Calculates to find out if a car is within the prescribed distance from the device's
+     * current location
+     * @param distance
+     * @param latCar
+     * @param longCar
+     * @param lat
+     * @param longit
+     * @return True if vehicle is within the specified distance
+     *
+     * Adapted from:
+     * http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+     *
+     * User: Deduplicator / Chuck        Accessed: 28/11/2015
      */
 
-    public ArrayList<Vehicle> findInventoryVehicleDistance(String vehicleName, VehicleCategory vehicleCategory,
-                                                           ArrayList<Vehicle> userVehicles, int distance) {
+    public Boolean withinDistance(double distance, double latCar, double longCar, double lat, double longit){
+        double diff;
+        double r = 6371; // Radius of the earth in KM
+        double dLat = Math.toRadians(lat - latCar);
+        double dLong = Math.toRadians(longit - longCar);
+        double a = Math.pow(Math.sin(dLat / 2),2) + Math.cos(Math.toRadians(latCar)) * Math.cos(Math.toRadians(lat)) *
+                Math.pow(Math.sin(dLong / 2),2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        diff = r * c;
 
-        ArrayList<Vehicle> foundVehicles = new ArrayList<>();
+        if(diff <= distance){return true;}
 
-        int size = userVehicles.size();
-
-        // search both
-        if (!(vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))) {
-
-            for (int i = 0; i < size; i++) {
-
-                if (userVehicles.get(i).getName().equals(vehicleName))
-                    if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
-                        foundVehicles.add(userVehicles.get(i));
-                    }
-            }
-        }
-
-        // Search string only
-        else if (!(vehicleName.equals("")) && (vehicleCategory.equals(VehicleCategory.NONE))) {
-
-            for (int i = 0; i < size; i++) {
-
-                if (userVehicles.get(i).getName().equals(vehicleName))
-                    foundVehicles.add(userVehicles.get(i));
-            }
-        }
-
-        // Search category only
-        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))){
-
-            for (int i = 0; i < size; i++) {
-
-                if (userVehicles.get(i).getCategory().equals(vehicleCategory))
-                    foundVehicles.add(userVehicles.get(i));
-            }
-        }
-
-        // Default return value
-        return foundVehicles;
+        return false;
     }
 }

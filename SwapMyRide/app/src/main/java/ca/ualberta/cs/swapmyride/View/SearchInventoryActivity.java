@@ -126,7 +126,8 @@ public class SearchInventoryActivity extends AppCompatActivity {
                                                    @Override
                                                    public void onClick(View v) {
 
-                                                       foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList);
+                                                       foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList,
+                                                               SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
 
                                                        adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
 
