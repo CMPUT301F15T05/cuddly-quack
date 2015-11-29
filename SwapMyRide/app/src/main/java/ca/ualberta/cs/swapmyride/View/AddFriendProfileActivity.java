@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -43,7 +44,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
     TextView email;
     Button addFriend;
     String username;
-    LocalDataManager dataManager;
+    DataManager dataManager;
     User possibleFriend;
     UserController uController;
 
@@ -63,7 +64,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         uController = new UserController(getApplicationContext());
-        dataManager = new LocalDataManager(getApplicationContext());
+        dataManager = new DataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
         email = (TextView) findViewById(R.id.email);
@@ -92,13 +93,6 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*
-                uController.addFriend(username);
-                uController.saveCurrentUser();
-                Toast.makeText(getApplicationContext(), username+" Added!",Toast.LENGTH_LONG).show();
-                finish();
-                */
                 // Check that user is not adding themselves
                 if (username.equals(UserSingleton.getCurrentUser().getUserName())) {
                     Toast.makeText(getApplicationContext(), "Can't add yourself", Toast.LENGTH_SHORT).show();
@@ -113,9 +107,9 @@ public class AddFriendProfileActivity extends AppCompatActivity {
                     dataManager.saveUser(UserSingleton.getCurrentUser());
 
                     // Add current user to new friend's new friends notifications
-                    User newFriend = dataManager.loadUser(possibleFriend.getUserName());
-                    newFriend.getNotificationManager().notifyFriendRequest(UserSingleton.getCurrentUser().getUserName());
-                    dataManager.saveUser(newFriend);
+                    //User newFriend = dataManager.loadUser(possibleFriend.getUserName());
+                    possibleFriend.getNotificationManager().notifyFriendRequest(UserSingleton.getCurrentUser().getUserName());
+                    dataManager.saveUser(possibleFriend);
                     Toast.makeText(getApplicationContext(), username + " added!", Toast.LENGTH_LONG).show();
                     finish();
                 }

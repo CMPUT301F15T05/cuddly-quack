@@ -71,7 +71,6 @@ public class AddInventoryActivity extends AppCompatActivity {
     Spinner qualitySpinner;
     VehicleQuality vehicleQuality;
 
-    VehicleController vehicleController;
     Vehicle vehicle;
 
     LinearLayout gallery;
@@ -82,7 +81,6 @@ public class AddInventoryActivity extends AppCompatActivity {
     Button done;
     UserController uController;
     Button delete;
-    LocalDataManager dm;
     EditText location;
 
     int position;
@@ -117,7 +115,6 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehiclePublic = (Switch) findViewById(R.id.ispublic);
         done = (Button) findViewById(R.id.button);
         location = (EditText) findViewById(R.id.locationField);
-        dm = new LocalDataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
 
         //Assign and display the current location
