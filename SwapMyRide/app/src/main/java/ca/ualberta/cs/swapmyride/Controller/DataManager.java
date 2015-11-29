@@ -29,7 +29,6 @@ public class DataManager {
 
     public void saveUser(User user){
         //save user on disk
-        Log.i("NEWDATAMANAGER", "Inside DM.saveUser - " + user.getUserName());
         ldm.saveUser(user);
 
         if(networkAvailable()){

@@ -41,11 +41,11 @@ public class SearchController {
      */
     public ArrayList<User> findUser(String username, Context context){
         //TODO: Search the server for a user that matches the given username
-        LocalDataManager dataManager = new LocalDataManager(context);
+        DataManager dataManager = new DataManager(context);
 
         ArrayList<User> userList = new ArrayList<>();
 
-        if (dataManager.searchUser(username)) {
+        if (dataManager.searchUserServer(username)) {
             userList.add(dataManager.loadUser(username));
         }
 
