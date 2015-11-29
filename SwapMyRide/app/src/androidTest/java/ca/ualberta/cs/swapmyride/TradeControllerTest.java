@@ -16,6 +16,7 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
@@ -47,8 +48,8 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
         userOne.setUserName("dhaberst");
         userTwo.setUserName("ccdunn");
 
-        InventoryList userOneInventory = new InventoryList();
-        InventoryList userTwoInventory = new InventoryList();
+        InventoryList userOneInventory = userOne.getInventory();
+        InventoryList userTwoInventory = userTwo.getInventory();
 
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
@@ -69,6 +70,7 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
 
         userTwoInventory.add(vehicleTwo);
         userOneInventory.add(vehicleOne);
+
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -95,12 +97,194 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testConfirmTrade() {
+        User userOne = new User();
+        User userTwo = new User();
+
+        TradesController tradesController = new TradesController(getActivity());
+        DataManager dataManager = new DataManager(getActivity());
+
+        userOne.setUserName("dhaberst");
+        userTwo.setUserName("ccdunn");
+
+        InventoryList userOneInventory = userOne.getInventory();
+        InventoryList userTwoInventory = userTwo.getInventory();
+
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
+
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory(VehicleCategory.SEDAN);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setPublic(true);
+
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setPublic(true);
+
+        userTwoInventory.add(vehicleTwo);
+        userOneInventory.add(vehicleOne);
 
 
+        //create trade
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
+        tradeList.add(trade);
+
+        userOne.setPendingTrades(tradeList);
+        userTwo.setPendingTrades(tradeList);
+
+        dataManager.saveUser(userOne);
+        dataManager.saveUser(userTwo);
+
+        boolean b = true;
+
+        try {
+            tradesController.confirmPendingTrade(trade);
+        } catch (Exception e) {
+            assertFalse(b);
+        }
+
+        userOne = dataManager.loadUser(userOne.getUserName());
+        userTwo = dataManager.loadUser(userTwo.getUserName());
+
+        assertTrue(userOne.getInventory().getList().size() == 1);
+        assertTrue(userTwo.getInventory().getList().size() == 1);
+
+        assertTrue(userOne.getInventory().getList().get(0).getUniqueID().isEqualID(vehicleTwo.getUniqueID()));
+        assertTrue(userTwo.getInventory().getList().get(0).getUniqueID().isEqualID(vehicleOne.getUniqueID()));
+    }
+
+    public void testConfirmTradeThrowsException() {
+        User userOne = new User();
+        User userTwo = new User();
+
+        TradesController tradesController = new TradesController(getActivity());
+        DataManager dataManager = new DataManager(getActivity());
+
+        userOne.setUserName("dhaberst1");
+        userTwo.setUserName("ccdunn1");
+
+        InventoryList userOneInventory = userOne.getInventory();
+        InventoryList userTwoInventory = userTwo.getInventory();
+
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
+
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory(VehicleCategory.SEDAN);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setPublic(true);
+
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setPublic(true);
+
+        userTwoInventory.add(vehicleTwo);
+        // Not adding vehicle to throw exception
+        // userOneInventory.add(vehicleOne);
+
+
+        //create trade
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
+        tradeList.add(trade);
+
+        userOne.setPendingTrades(tradeList);
+        userTwo.setPendingTrades(tradeList);
+
+        dataManager.saveUser(userOne);
+        dataManager.saveUser(userTwo);
+
+        boolean b = true;
+
+        try {
+            tradesController.confirmPendingTrade(trade);
+        } catch (Exception e) {
+            assertTrue(b);
+        }
 
     }
 
     public void testDeleteTrade() {
+        User userOne = new User();
+        User userTwo = new User();
+
+        TradesController tradesController = new TradesController(getActivity());
+        DataManager dataManager = new DataManager(getActivity());
+
+        userOne.setUserName("dhaberst2");
+        userTwo.setUserName("ccdunn2");
+
+        InventoryList userOneInventory = userOne.getInventory();
+        InventoryList userTwoInventory = userTwo.getInventory();
+
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
+
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory(VehicleCategory.SEDAN);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setPublic(true);
+
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setPublic(true);
+
+        userTwoInventory.add(vehicleTwo);
+        userOneInventory.add(vehicleOne);
+
+
+        //create trade
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
+        tradeList.add(trade);
+
+        userOne.setPendingTrades(tradeList);
+        userTwo.setPendingTrades(tradeList);
+
+        dataManager.saveUser(userOne);
+        dataManager.saveUser(userTwo);
+
+        tradesController.deletePendingTrade(trade);
+
+        userOne = dataManager.loadUser(userOne.getUserName());
+        userTwo = dataManager.loadUser(userTwo.getUserName());
+
+        assertTrue(userOne.getInventory().getList().size() == 1);
+        assertTrue(userTwo.getInventory().getList().size() == 1);
+
+        assertTrue(userOne.getInventory().getList().get(0).getUniqueID().isEqualID(vehicleOne.getUniqueID()));
+        assertTrue(userTwo.getInventory().getList().get(0).getUniqueID().isEqualID(vehicleTwo.getUniqueID()));
+
+        assertTrue(userOne.getPendingTrades().getTrades().size() == 0);
+        assertTrue(userTwo.getPendingTrades().getTrades().size() == 0);
 
     }
 
