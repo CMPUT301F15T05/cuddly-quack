@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -48,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText address;
-    LocalDataManager dm;
+    DataManager dm;
     UserController uController;
 
     /**
@@ -73,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.usernameField);
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
-        dm = new LocalDataManager(SignUpActivity.this);
+        dm = new DataManager(SignUpActivity.this);
         uController = new UserController(getApplicationContext());
 
         signUp = (Button) findViewById(R.id.signUp);
@@ -85,14 +86,14 @@ public class SignUpActivity extends AppCompatActivity {
                 String myUsername = username.getText().toString();
                 String myEmail = email.getText().toString();
                 String myAddress = address.getText().toString();
-
+                Boolean found = dm.searchUserServer(myUsername);
                 //check the username does not already exist
-                if(dm.searchUser(myUsername)){
+                if(found){
                     Toast.makeText(getApplicationContext(),"Username Already Exists", Toast.LENGTH_LONG).show();
                     username.setText("");
                 }
 
-                else if(!dm.searchUser(myUsername) && !myUsername.equals("")){
+                else if(!found && !myUsername.equals("")){
                     User newUser = new User();
                     newUser.setName(myName);
                     newUser.setUserName(myUsername);
