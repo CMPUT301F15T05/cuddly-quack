@@ -61,6 +61,7 @@ public class DataManager {
      * @see <a href="http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson">stackOverflow</a>
      * @param user
      */
+
     public void saveUser(User user){
 
         String userJson = gson.toJson(user);

@@ -36,6 +36,7 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
 public class TradeTest extends ActivityInstrumentationTestCase2 {
     public TradeTest(){super(MainMenu.class);}
     public Photo picture;
+    public ArrayList<Photo> photoArrayList;
 
     // Use Case 15: Trade with Friend
     //testing if create trade works
@@ -50,22 +51,27 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
-        userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
         vehicleOne.setQuantity(1);
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
-        userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        userOneInventory.add(vehicleOne);
+
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
-        vehicleOne.setCategory(VehicleCategory.SEDAN);
-        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
         vehicleTwo.setQuantity(1);
         vehicleTwo.setComments("1994 Jeep");
-        vehicleOne.setPublic(true);
+        vehicleTwo.setPublic(true);
+        userTwoInventory.add(vehicleTwo);
 
         //add new trade, assert that it was created properly
         TradeList tradeList = new TradeList();
@@ -99,8 +105,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -108,7 +118,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -146,8 +156,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -155,7 +169,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -191,8 +205,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -200,7 +218,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -236,8 +254,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -245,7 +267,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -296,8 +318,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleThree = new Vehicle();
         Vehicle vehicleFour = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -305,7 +331,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -314,7 +340,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setPublic(true);
 
         userOneInventory.add(vehicleThree);
-        vehicleThree.setPhoto(picture);
+        vehicleThree.setPhotoArrayList(photoArrayList);
         vehicleThree.setName("Chrysler");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -322,7 +348,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleThree.setComments("2001 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleFour);
-        vehicleFour.setPhoto(picture);
+        vehicleFour.setPhotoArrayList(photoArrayList);
         vehicleFour.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -365,8 +391,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -374,7 +404,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -414,8 +444,12 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleTwo = new Vehicle();
         Vehicle vehicleThree = new Vehicle();
 
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
         userOneInventory.add(vehicleOne);
-        vehicleOne.setPhoto(picture);
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -423,7 +457,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setComments("1995 Cadillac");
         vehicleOne.setPublic(true);
         userTwoInventory.add(vehicleTwo);
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -431,7 +465,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleTwo.setComments("1994 Jeep");
         vehicleOne.setPublic(true);
         userOneInventory.add(vehicleThree);
-        vehicleThree.setPhoto(picture);
+        vehicleThree.setPhotoArrayList(photoArrayList);
         vehicleThree.setName("Chrysler");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -504,7 +538,11 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
 
-        vehicleOne.setPhoto(picture);
+        picture = new Photo(getActivity());
+        photoArrayList = new ArrayList<>();
+        photoArrayList.add(picture);
+
+        vehicleOne.setPhotoArrayList(photoArrayList);
         vehicleOne.setName("Cadillac");
         vehicleOne.setCategory(VehicleCategory.SEDAN);
         vehicleOne.setQuality(VehicleQuality.GOOD);
@@ -513,7 +551,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
         vehicleOne.setPublic(true);
         userOneInventory.add(vehicleOne);
 
-        vehicleTwo.setPhoto(picture);
+        vehicleTwo.setPhotoArrayList(photoArrayList);
         vehicleTwo.setName("Jeep");
         vehicleTwo.setCategory(VehicleCategory.SEDAN);
         vehicleTwo.setQuality(VehicleQuality.GOOD);

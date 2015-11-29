@@ -21,5 +21,36 @@ public enum DistanceOption {
     public int getPosition(){
         return position;
     }
+
+    // http://stackoverflow.com/questions/7758313/java-enum-overriding-tostring
+    // Accessed: 11/28/2015 Author: Lazy Beard
+    @Override
+    public String toString() {
+        String name = "";
+        switch (this) {
+            case ONE_HUNDRED_KM:
+                name = "100KM";
+                break;
+            case FIFTY_KM:
+                name = "50KM";
+                break;
+            case TEN_KM:
+                name = "10KM";
+                break;
+            case FIVE_KM:
+                name = "10KM";
+                break;
+            case TWO_KM:
+                name = "2KM";
+                break;
+            case ONE_KM:
+                name = "1KM";
+                break;
+            default:
+                name = "";
+                break;
+        }
+        return name;
+    }
 }
 

@@ -70,7 +70,13 @@ public class InventoryList {
      */
 
     public void delete(Vehicle vehicle){
-        vehicleList.remove(vehicle);
+
+        for (int i = 0; i < this.vehicleList.size(); i++) {
+            if (this.vehicleList.get(i).getUniqueID().isEqualID(vehicle.getUniqueID())) {
+                this.vehicleList.remove(i);
+                return;
+            }
+        }
     }
 
     /**
@@ -141,5 +147,13 @@ public class InventoryList {
         return newInventory;
     }
 
+
+
+    public void deleteAll(ArrayList<Vehicle> toDelete) {
+
+        for(Vehicle toDeleteVehicle: toDelete) {
+            this.delete(toDeleteVehicle);
+        }
+    }
 
 }

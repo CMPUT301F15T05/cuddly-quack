@@ -119,24 +119,22 @@ public class SearchInventoryActivity extends AppCompatActivity {
                 desiredDistance = DistanceOption.ONE_HUNDRED_KM;
             }
         });
-            // TODO setonclicklistners to get the item description
-            inventorySearch.setOnClickListener(new View.OnClickListener()
+        // TODO setonclicklistners to get the item description
+        inventorySearch.setOnClickListener(new View.OnClickListener() {
 
-                                               {
-                                                   @Override
-                                                   public void onClick(View v) {
+           @Override
+           public void onClick(View v) {
 
-                                                       foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList,
-                                                               SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
+               foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList,
+                       SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
 
-                                                       adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
 
-                                                       searchList.setAdapter(adapter);
-                                                   }
-                                               }
+               adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
 
-            );
-
-        }
+               searchList.setAdapter(adapter);
+           }
+       });
 
     }
+
+}

@@ -124,8 +124,12 @@ public class AddInventoryActivity extends AppCompatActivity {
 
         //Assign and display the current location
         geolocation = new Geolocation();
-        current = geolocation.getCurrentLocation(getApplicationContext(), this);
-        location.setText(current.getPostalCode());
+        try {
+            current = geolocation.getCurrentLocation(getApplicationContext(), this);
+            location.setText(current.getPostalCode());
+        } catch (IllegalArgumentException e){
+            location.setText("Geolocation cannot be determined.");
+        }
 
         /**
          * Using spinners to select category and quality of a vehicle - taking from the enumeration
@@ -252,6 +256,11 @@ public class AddInventoryActivity extends AppCompatActivity {
 
                 if (vehicleName.getText().toString().equals("")) {
                     Toast.makeText(AddInventoryActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (vehicleQuantity.getText().toString().equals("0")) {
+                    Toast.makeText(AddInventoryActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 vehicle.setName(vehicleName.getText().toString());
