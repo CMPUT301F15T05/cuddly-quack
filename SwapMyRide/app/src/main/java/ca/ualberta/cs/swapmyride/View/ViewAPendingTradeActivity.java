@@ -2,6 +2,8 @@ package ca.ualberta.cs.swapmyride.View;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,10 +14,12 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
 public class ViewAPendingTradeActivity extends AppCompatActivity {
@@ -99,6 +103,37 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                 dialog.dismiss();
                 try {
                     tradesController.confirmPendingTrade(tradeToDisplay);
+
+                    //Portions of this page are modifications based on work created and
+                    // shared by the Android Open Source Project and used according to
+                    // terms described in the Creative Commons 2.5 Attribution License.
+                    //Accessed 2015-11-29
+                    //http://developer.android.com/guide/components/intents-common.html#Email
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("The following trade has been confirmed - ");
+
+                    stringBuilder.append(tradeToDisplay.getOwner() + " has traded:");
+                    for (Vehicle item : tradeToDisplay.getOwnerItems()) {
+                        stringBuilder.append(item.getName());
+                    }
+
+                    stringBuilder.append(tradeToDisplay.getBorrower() + " has traded:");
+                    for (Vehicle item : tradeToDisplay.getBorrowerItems()) {
+                        stringBuilder.append(item.getName());
+                    }
+
+
+                    String body = stringBuilder.toString();
+
+                    Intent sender = new Intent(Intent.ACTION_SENDTO);
+                    sender.setType("*/*");
+                    sender.setData(Uri.parse("mailto:"));
+                    String ownerEmail = new DataManager(getApplicationContext()).loadUser(tradeToDisplay.getOwner()).getUserEmail();
+                    String borrowerEmail = new DataManager(getApplicationContext()).loadUser(tradeToDisplay.getBorrower()).getUserEmail();
+                    sender.putExtra(sender.EXTRA_EMAIL, new String[] {ownerEmail, borrowerEmail});
+                    sender.putExtra(sender.EXTRA_SUBJECT, "[SwapMyRide] Trade Complete");
+                    sender.putExtra(sender.EXTRA_TEXT, body);
+                    startActivity(Intent.createChooser(sender, "email"));
                 } catch (Exception e) {
                     notValidTradeDialog();
                 }

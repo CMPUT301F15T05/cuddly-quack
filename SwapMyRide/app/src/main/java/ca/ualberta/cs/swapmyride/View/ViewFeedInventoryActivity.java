@@ -85,7 +85,8 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         gallery.removeAllViews();
         for (Photo _photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(getApplicationContext());
-            newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            //newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            newImage.setImageBitmap(_photo.getImage());
             gallery.addView(newImage);
         }
 
