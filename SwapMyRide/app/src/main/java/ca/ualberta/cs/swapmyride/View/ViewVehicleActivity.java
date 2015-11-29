@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -52,12 +53,10 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView category;
     TextView quality;
     EditText comments;
-    ImageView image;
     TextView location;
     TextView lat;
     TextView longit;
 
-    Gson gson;
     //ImageView picture;
     LinearLayout gallery;
 
@@ -65,7 +64,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     Button editVehicle;
 
     int position;
-    LocalDataManager dm = new LocalDataManager(ViewVehicleActivity.this);
+    DataManager dm = new DataManager(ViewVehicleActivity.this);
     UserController uController;
 
     /**
@@ -157,13 +156,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     /**
      * Ask the user for confirmation if they would like to delete a vehicle.
      */
-
     public void deleteDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewVehicleActivity.this);
         builder.setMessage("Are you SURE you want to delete this vehicle? It is a permanent Action!");
