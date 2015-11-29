@@ -24,6 +24,7 @@ import ca.ualberta.cs.swapmyride.View.EditProfileActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 import ca.ualberta.cs.swapmyride.View.SearchFriendsActivity;
 import ca.ualberta.cs.swapmyride.View.SlidingTabLayout;
+import ca.ualberta.cs.swapmyride.View.Tab2;
 import ca.ualberta.cs.swapmyride.View.ViewFeedInventoryActivity;
 import ca.ualberta.cs.swapmyride.View.ViewFriendProfileActivity;
 import ca.ualberta.cs.swapmyride.View.ViewFriendsActivity;
@@ -325,12 +326,38 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void testAddItem(){
         populateTestData();
-
+        MainMenu mainMenu = (MainMenu) getActivity();
+        Tab2 tab2 = mainMenu.getTab2();
+        final Button add = tab2.getAddInventory();
+        SlidingTabLayout tabs = mainMenu.getTabs();
+        tabs.getChildAt(0);
+        mainMenu.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                add.performClick();
+            }
+        });
+        Instrumentation.ActivityMonitor addItemActivityMonitor = getInstrumentation().addMonitor
+                (AddInventoryActivity.class.getName(), null, false);
+        AddInventoryActivity addInventoryActivity = (AddInventoryActivity)
+                addItemActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull(addInventoryActivity);
+        EditText name = addInventoryActivity.getVehicleName();
+        name.setText("Test Car");
+        final Button save = addInventoryActivity.getSaveButton();
+        addInventoryActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                save.performClick();
+            }
+        });
         cleanUp();
     }
 
+
+
     /**
-     * This method populates known data into hte current user area
+     * This method populates known data into the current user area
      * to ensure that it can be tested and verified.
      */
 
@@ -343,48 +370,13 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      * to ensure that it will not cause other issues by sticking around
      */
     public void cleanUp(){
-        Context context = getInstrumentation().getContext();
-        LocalDataManager dm = new LocalDataManager(context);
-        //delete the two created users
-        dm.deleteUser("bob");
-        dm.deleteUser("jane");
     }
 
     public void cleanThird(){
-        Context context = getInstrumentation().getContext();
-        LocalDataManager dm = new LocalDataManager(context);
-        //delete the created user
-        dm.deleteUser("bill");
     }
 
 
     public void populateThird(){
-        Context context = getActivity();
-        LocalDataManager dm = new LocalDataManager(context);
-        Geolocation geolocation = new Geolocation();
-        //Create user
-        User three = new User();
-
-        three.setUserName("bill");
-        three.setName("Bill");
-        three.setUserAddress("345 Fake Street");
-        three.setUserEmail("bill@bill.bill");
-
-        //Give them 2 inventory items
-        Vehicle v1 = new Vehicle();
-        Vehicle v2 = new Vehicle();
-
-        v1.setName("Tank");
-        v1.setCategory(VehicleCategory.SUV);
-        v1.setQuantity(1);
-        v1.setQuality(VehicleQuality.SHOWROOM);
-        v1.setLocation(geolocation.getCurrentLocation(getActivity().getApplicationContext(), getActivity()));
-
-        v2.setName("Chrysler");
-        v2.setCategory(VehicleCategory.SEDAN);
-        v2.setQuality(VehicleQuality.RUSTBUCKET);
-        v2.setQuantity(1);
-        v2.setLocation(geolocation.getCurrentLocation(getActivity().getApplicationContext(), getActivity()));
     }
 
 }

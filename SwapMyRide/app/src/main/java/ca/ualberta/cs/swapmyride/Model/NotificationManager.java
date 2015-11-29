@@ -43,6 +43,10 @@ public class NotificationManager {
         return true;
     }
 
+    public void removeTrade(Trade trade){
+        tradesToBeNotified.remove(trade);
+    }
+
     /**
      *
      * @param username String of username that has added the current user
@@ -54,7 +58,7 @@ public class NotificationManager {
     //http://stackoverflow.com/questions/2115758/how-to-display-alert-dialog-in-android
     // Author: David Hedlund
     // Modified and Accessed 4 November 2015
-    public void showtrade(Context context){
+    public void showTrade(Context context){
         Integer size = tradesToBeNotified.size();
         String trades = Integer.toString(size);
         new AlertDialog.Builder(context)
@@ -93,7 +97,7 @@ public class NotificationManager {
 
     public void notifyMe(Context context) {
         if (tradesToBeNotified.size() > 0) {
-            showtrade(context);
+            showTrade(context);
         }
 
         for(String username : friendRequests){

@@ -112,4 +112,8 @@ public class Tab2 extends Fragment {
         adapter = new InventoryAdapter(getActivity(), arrayOfVehicle);
         inventory.setAdapter(adapter);
     }
+
+    public Button getAddInventory(){
+        return addInventory;
+    }
 }

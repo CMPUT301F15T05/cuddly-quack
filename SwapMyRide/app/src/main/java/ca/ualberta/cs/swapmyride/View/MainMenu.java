@@ -179,4 +179,8 @@ public class MainMenu extends AppCompatActivity {
     public ActionMenuItemView getActionAddFriend(){
         return (ActionMenuItemView) findViewById(R.id.action_addfriend);
     }
+
+    public Tab2 getTab2(){
+        return adapter.tab2;
+    }
 }

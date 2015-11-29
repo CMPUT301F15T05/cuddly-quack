@@ -40,6 +40,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
@@ -63,7 +65,6 @@ import ca.ualberta.cs.swapmyride.Controller.VehicleController;
 public class AddInventoryActivity extends AppCompatActivity {
 
     static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
-    static final int MY_PERMISSIONS_REQUEST_LOCATION = 2;
 
     Toolbar toolbar;
     Spinner categorySpinner;
@@ -298,6 +299,9 @@ public class AddInventoryActivity extends AppCompatActivity {
                 }
                 //save the user to ensure all changes are updated
                 uController.saveCurrentUser();
+                Gson gson = new Gson();
+                String s = gson.toJson(vehicle);
+                Log.i("SizeOfCar", Integer.toString(s.length()));
 
                 /*
                 //dont start a new activity if we are editing a vehicle

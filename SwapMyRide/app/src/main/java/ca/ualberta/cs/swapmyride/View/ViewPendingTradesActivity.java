@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
+import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.R;
 
 public class ViewPendingTradesActivity extends AppCompatActivity {
@@ -31,6 +32,14 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         pendingTrades = (ListView)findViewById(R.id.pendingTrades);
+
+        ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
+
+        for (Trade trade: tradeList) {
+            String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
+
+            pendingTradeArray.add(s);
+        }
 
         pendingTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -123,6 +123,7 @@ public class User {
     public NotificationManager getNotificationManager() {
         return notificationManager;
     }
+
     public void setPendingTrades(TradeList pendingTrades) {
         this.pendingTrades = pendingTrades;
     }
