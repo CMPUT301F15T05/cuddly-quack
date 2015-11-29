@@ -31,10 +31,12 @@ public class DataManager {
         //save user on disk
         ldm.saveUser(user);
 
+        /*
         if(networkAvailable()){
             //SAVE THE USER ON SERVER
             ndm.saveUser(user);
         }
+        */
     }
 
     /**
@@ -45,12 +47,13 @@ public class DataManager {
      * @return
      */
     public User loadUser(String username){
+        /*
         if(networkAvailable()){
             if (searchUserServer(username)){
                 return ndm.retrieveUser(username);
             }
         }
-
+        */
         if(searchUserLocal(username)){
             return ldm.loadUser(username);
         }
@@ -60,9 +63,11 @@ public class DataManager {
     }
 
     public void deleteUser(String username){
+        /*
         if(networkAvailable()){
             ndm.deleteUser(username);
         }
+        */
         ldm.deleteUser(username);
     }
 
@@ -70,11 +75,15 @@ public class DataManager {
         return ldm.searchUser(username);
     }
 
+    //TODO: FIX THIS BACK TO ACTUAL SERVER.
     public boolean searchUserServer(String username){
+        /*
         if(networkAvailable()){
             return ndm.searchUser(username);
         }
         else return false;
+        */
+        return searchUserLocal(username);
     }
     /**
      * updateFriends gets friends from the server based on the friends list
