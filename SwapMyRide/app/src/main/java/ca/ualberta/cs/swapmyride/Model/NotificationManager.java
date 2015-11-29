@@ -22,6 +22,7 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;
@@ -100,7 +101,7 @@ public class NotificationManager {
         }
 
         friendRequests.clear();
-        LocalDataManager dm = new LocalDataManager(context);
+        DataManager dm = new DataManager(context);
         dm.saveUser(UserSingleton.getCurrentUser());
 
     }
