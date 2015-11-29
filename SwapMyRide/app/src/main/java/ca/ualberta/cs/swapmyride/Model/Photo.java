@@ -18,10 +18,12 @@ package ca.ualberta.cs.swapmyride.Model;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.R;
 
 /**
@@ -33,7 +35,8 @@ import ca.ualberta.cs.swapmyride.R;
  */
 public class Photo{
     //private Bitmap image;
-    private byte image[];
+    UniqueID uid;
+    private String encodedImage;
 
     /**
      * Builds a Photo object based on a given bitmap
@@ -41,10 +44,13 @@ public class Photo{
      */
 
     public Photo(Bitmap image){
+        byte temp[];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        this.image = stream.toByteArray();
-        Log.i("Size", Integer.toString(this.image.length));
+        temp = stream.toByteArray();
+        encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
+        uid = new UniqueID();
+        Log.i("Size", Integer.toString(encodedImage.length()));
     }
 
     /**
@@ -53,11 +59,14 @@ public class Photo{
      */
 
     public Photo(Context context){
+        byte temp[];
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_default_car);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        this.image = stream.toByteArray();
-        Log.i("Size", Integer.toString(this.image.length));
+        temp = stream.toByteArray();
+        encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
+        uid = new UniqueID();
+        Log.i("Size", Integer.toString(temp.length));
     }
 
     /**
@@ -66,6 +75,8 @@ public class Photo{
      */
 
     public Bitmap getImage() {
+        byte image[];
+        image = Base64.decode(encodedImage, Base64.DEFAULT);
         int size = image.length;
         Bitmap map;
         map = BitmapFactory.decodeByteArray(image, 0, size);
@@ -78,9 +89,11 @@ public class Photo{
      */
 
     public void setImage(Bitmap image) {
+        byte temp[];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        this.image = stream.toByteArray();
+        temp = stream.toByteArray();
+        encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
     }
 
     /**
