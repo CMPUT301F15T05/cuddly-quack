@@ -62,15 +62,16 @@
         android:id="@+id/searchList"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/feedSearch" />
+        android:layout_below="@+id/distanceSpinner" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/distanceSpinner"
         android:layout_alignTop="@+id/inventorySearch"
-        android:layout_toEndOf="@+id/inventorySearch"
         android:spinnerMode="dropdown"
-        android:hint="Distance"/>
+        android:hint="Distance"
+        android:layout_alignEnd="@+id/categorySpinner"
+        android:layout_alignStart="@+id/categorySpinner" />
 
 </RelativeLayout>
