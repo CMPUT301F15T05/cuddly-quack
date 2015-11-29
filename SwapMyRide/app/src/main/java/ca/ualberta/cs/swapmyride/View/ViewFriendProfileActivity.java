@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Model.FriendsList;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -39,7 +40,7 @@ import ca.ualberta.cs.swapmyride.Controller.UserController;
 public class ViewFriendProfileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    LocalDataManager dataManager;
+    DataManager dataManager;
     User myself;
     User friend;
     FriendsList friendsList;
@@ -59,7 +60,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         uController = new UserController(getApplicationContext());
-        dataManager = new LocalDataManager(getApplicationContext());
+        dataManager = new DataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
         email = (TextView) findViewById(R.id.email);
@@ -112,7 +113,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
     }
 
     public void changeUser(String username){
-        dataManager = new LocalDataManager(getApplicationContext());
+        dataManager = new DataManager(getApplicationContext());
         friend = dataManager.loadUser(username);
     }
 
