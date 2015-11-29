@@ -117,6 +117,9 @@ public class ViewVehicleActivity extends AppCompatActivity {
         for (Photo _photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
+            newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            newImage.setAdjustViewBounds(true);
+            //newImage.setMaxWidth(40);
             gallery.addView(newImage);
         }
         try {

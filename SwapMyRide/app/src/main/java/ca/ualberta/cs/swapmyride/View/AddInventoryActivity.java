@@ -197,7 +197,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         for (Photo photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(this);
             newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
-            newImage.getLayoutParams().height = 100;
+            //newImage.getLayoutParams().height = 100;
             gallery.addView(newImage);
         }
 

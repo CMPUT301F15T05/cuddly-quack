@@ -48,9 +48,10 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qauntityHead"
-        android:layout_alignStart="@+id/title"
         android:layout_below="@+id/title"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="false"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,8 +61,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/categoryHead"
         android:layout_below="@+id/qauntityHead"
-        android:layout_alignStart="@+id/title"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,7 +73,7 @@
         android:id="@+id/qualityHead"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/categoryHead"
-        android:layout_alignStart="@+id/title" />
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -89,7 +90,6 @@
         android:layout_marginRight="10dp"
         android:layout_below="@+id/Latitude"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@+id/title"
         android:layout_alignParentEnd="true"
         android:layout_alignEnd="@+id/title"
         android:layout_above="@+id/delete" />
@@ -155,8 +155,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/postalCode"
         android:layout_below="@+id/qualityHead"
-        android:layout_alignStart="@+id/title"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -198,8 +198,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/latLong"
         android:layout_below="@+id/postalCode"
-        android:layout_alignStart="@+id/title"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
 
 
 </RelativeLayout>
