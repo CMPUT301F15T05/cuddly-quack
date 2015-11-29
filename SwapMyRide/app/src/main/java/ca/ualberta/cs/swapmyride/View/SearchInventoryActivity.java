@@ -116,9 +116,10 @@ public class SearchInventoryActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // What if nothing selected?
-                desiredDistance = DistanceOption.ONE_HUNDRED_KM;
+                desiredDistance = DistanceOption.NONE;
             }
         });
+
         // TODO setonclicklistners to get the item description
         inventorySearch.setOnClickListener(new View.OnClickListener() {
 

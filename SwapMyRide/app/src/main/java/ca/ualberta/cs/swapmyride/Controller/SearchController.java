@@ -95,8 +95,8 @@ public class SearchController {
                 if (userVehicles.get(i).getName().equals(vehicleName))
                     if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
                         if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
-                                userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
-                                address.getLongitude())) {
+                               userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                               address.getLongitude())) {
                             foundVehicles.add(userVehicles.get(i));
                         }
                     }
@@ -124,11 +124,11 @@ public class SearchController {
             for (int i = 0; i < size; i++) {
 
                 if (userVehicles.get(i).getCategory().equals(vehicleCategory)){
-                    if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
-                            userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
-                            address.getLongitude())){
+                   if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
+                           userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                           address.getLongitude())){
                         foundVehicles.add(userVehicles.get(i));
-                    }
+                   }
                 }
 
             }
@@ -155,6 +155,11 @@ public class SearchController {
      */
 
     public Boolean withinDistance(double distance, double latCar, double longCar, double lat, double longit){
+
+        if(distance == 0.0){
+            return true;
+        }
+
         double diff;
         double r = 6371; // Radius of the earth in KM
         double dLat = Math.toRadians(lat - latCar);

@@ -4,7 +4,7 @@ package ca.ualberta.cs.swapmyride.Misc;
  * Created by adrianomarini on 15-11-26.
  */
 public enum DistanceOption {
-    ONE_HUNDRED_KM("100",0), FIFTY_KM("50", 1), TEN_KM("10",2), FIVE_KM("5", 3), TWO_KM("2", 4), ONE_KM("1",5);
+    NONE("0", 0), ONE_HUNDRED_KM("100",1), FIFTY_KM("50", 2), TEN_KM("10",3), FIVE_KM("5", 4), TWO_KM("2", 5), ONE_KM("1",6);
 
     private String distance;
     private int position;
@@ -46,7 +46,7 @@ public enum DistanceOption {
             case ONE_KM:
                 name = "1KM";
                 break;
-            default:
+            case NONE:
                 name = "";
                 break;
         }
