@@ -15,6 +15,9 @@
  */
 package ca.ualberta.cs.swapmyride.Model;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
@@ -130,7 +133,9 @@ public class Trade {
     public void accept(){
         this.isAccepted = true;
         //here is where we would send an email
-        //// TODO: ADD EMAIL FUNCTIONALITY 
+        //// TODO: ADD EMAIL FUNCTIONALITY
+        // No? Isn't that in the Activity?
+
     }
 
     public Boolean getIsDeclined() {

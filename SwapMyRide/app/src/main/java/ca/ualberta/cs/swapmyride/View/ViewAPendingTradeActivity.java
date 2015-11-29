@@ -2,6 +2,8 @@ package ca.ualberta.cs.swapmyride.View;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -99,6 +101,20 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                 dialog.dismiss();
                 try {
                     tradesController.confirmPendingTrade(tradeToDisplay);
+
+                    //Portions of this page are modifications based on work created and
+                    // shared by the Android Open Source Project and used according to
+                    // terms described in the Creative Commons 2.5 Attribution License.
+                    //Accessed 2015-11-29
+                    //http://developer.android.com/guide/components/intents-common.html#Email
+                    String email = new StringBuilder().append("[SwapMyRide] Trade Complete: \n").toString();
+
+                    Intent sender = new Intent(Intent.ACTION_SENDTO);
+                    sender.setType("*/*");
+                    sender.setData(Uri.parse("mailto:"));
+                    sender.putExtra(sender.EXTRA_SUBJECT, "[SwapMyRide] Trade Complete:");
+                    sender.putExtra(sender.EXTRA_TEXT, email);
+                    startActivity(Intent.createChooser(sender, "email"));
                 } catch (Exception e) {
                     notValidTradeDialog();
                 }
