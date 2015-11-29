@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.Trade;
@@ -29,7 +29,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
     InventoryList userInventory;
     ArrayList<String> vehicleNames;
     ArrayAdapter<String> adapter;
-    LocalDataManager dataManager;
+    DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(UserSingleton.getCurrentUser().getUserName() + " Inventory");
 
-        dataManager = new LocalDataManager(getApplicationContext());
+        dataManager = new DataManager(getApplicationContext());
 
         userInventory = UserSingleton.getCurrentUser().getInventory();
 
