@@ -51,6 +51,9 @@ public class TradesController {
 
         friend.getNotificationManager().notifyTrade(pendingTrade);
 
+        friend.getNotificationManager().notifyTrade(pendingTrade);
+        UserSingleton.getCurrentUser().getNotificationManager().notifyTrade(pendingTrade);
+
         dataManager.saveUser(friend);
         dataManager.saveUser(UserSingleton.getCurrentUser());
     }
@@ -68,6 +71,9 @@ public class TradesController {
         TradeList userPendingTrades = owner.getPendingTrades();
         userPendingTrades.delete(trade.getUniqueID());
         owner.setPendingTrades(userPendingTrades);
+
+        owner.getNotificationManager().removeTrade(trade);
+        borrower.getNotificationManager().removeTrade(trade);
 
         // make sure to save the right user back to the userSingleton!
         if(borrower.getUserName().equals(UserSingleton.getCurrentUser().getUserName())) {

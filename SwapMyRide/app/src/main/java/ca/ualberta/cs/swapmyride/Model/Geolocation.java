@@ -152,6 +152,8 @@ public class Geolocation {
             address.setPostalCode("Location Error");
             address.setLocality("Location Error");
             address.setCountryName("Location Error");
+            address.setLatitude(0);
+            address.setLongitude(0);
         }
 
         //If it is not null, try to get an address from the lat/long
@@ -169,12 +171,18 @@ public class Geolocation {
             try{
                 addresses = geocoder.getFromLocation(latitude, longitude, 1);
             } catch (IOException e){
-                address.setLocality("ERROR");
-                address.setCountryName("IO");
+                address.setPostalCode("Location Error");
+                address.setLocality("Location Error");
+                address.setCountryName("Location Error");
+                address.setLatitude(0);
+                address.setLongitude(0);
                 return address;
             } catch (IllegalArgumentException e){
-                address.setLocality("ERROR");
-                address.setCountryName("Illegal");
+                address.setPostalCode("Location Error");
+                address.setLocality("Location Error");
+                address.setCountryName("Location Error");
+                address.setLatitude(0);
+                address.setLongitude(0);
                 return address;
             }
 
@@ -204,15 +212,27 @@ public class Geolocation {
             address.setLongitude(addresses.get(0).getLongitude());
         }
         catch(IOException e){
-            address.setPostalCode("LOCATION ERROR");
+            address.setPostalCode("Location Error");
+            address.setLocality("Location Error");
+            address.setCountryName("Location Error");
+            address.setLatitude(0);
+            address.setLongitude(0);
             return address;
         }
         catch (IllegalArgumentException e){
-            address.setPostalCode("LOCATION ERROR");
+            address.setPostalCode("Location Error");
+            address.setLocality("Location Error");
+            address.setCountryName("Location Error");
+            address.setLatitude(0);
+            address.setLongitude(0);
             return address;
         }
         catch (IndexOutOfBoundsException e){
-            address.setPostalCode("LOCATION ERROR");
+            address.setPostalCode("Location Error");
+            address.setLocality("Location Error");
+            address.setCountryName("Location Error");
+            address.setLatitude(0);
+            address.setLongitude(0);
             return address;
         }
         return address;

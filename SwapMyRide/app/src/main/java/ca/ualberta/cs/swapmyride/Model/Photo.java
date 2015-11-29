@@ -18,6 +18,7 @@ package ca.ualberta.cs.swapmyride.Model;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 
@@ -43,6 +44,7 @@ public class Photo{
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
+        Log.i("Size", Integer.toString(this.image.length));
     }
 
     /**
@@ -55,6 +57,7 @@ public class Photo{
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         this.image = stream.toByteArray();
+        Log.i("Size", Integer.toString(this.image.length));
     }
 
     /**
