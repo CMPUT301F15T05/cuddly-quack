@@ -2,12 +2,8 @@ package ca.ualberta.cs.swapmyride;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.graphics.Rect;
-import android.support.test.espresso.action.ViewActions;
 import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
-import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;
@@ -340,65 +335,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      */
 
     public void populateTestData(){
-        Context context = getActivity();
-        DataManager dm = new DataManager(context);
-        Geolocation geolocation = new Geolocation();
-        //Create 2 users and make them friends
-        User main = new User();
-        User friend = new User();
 
-        main.setUserName("bob");
-        main.setName("Bob");
-        main.setUserAddress("123 Fake Street");
-        main.setUserEmail("bob@bob.bob");
-
-        friend.setUserName("jane");
-        friend.setName("Jane");
-        friend.setUserAddress("234 Fake Street");
-        friend.setUserEmail("jane@jane.jane");
-
-        main.addFriend("jane");
-
-        //Give them 2 inventory items each
-        Vehicle v1 = new Vehicle();
-        Vehicle v2 = new Vehicle();
-        Vehicle v3 = new Vehicle();
-        Vehicle v4 = new Vehicle();
-
-        v1.setName("Jeep");
-        v1.setCategory(VehicleCategory.SUV);
-        v1.setQuantity(1);
-        v1.setQuality(VehicleQuality.SHOWROOM);
-        v1.setLocation(geolocation.getCurrentLocation(getActivity().getApplicationContext(), getActivity()));
-
-        v2.setName("Honda");
-        v2.setCategory(VehicleCategory.SEDAN);
-        v2.setQuality(VehicleQuality.RUSTBUCKET);
-        v2.setQuantity(1);
-        v2.setLocation(geolocation.getCurrentLocation(getActivity().getApplicationContext(), getActivity()));
-
-        main.addItem(v1);
-        main.addItem(v2);
-
-        v3.setName("Toyota");
-        v3.setCategory(VehicleCategory.SUV);
-        v3.setQuantity(1);
-        v3.setQuality(VehicleQuality.SHOWROOM);
-        v3.setLocation(geolocation.getCurrentLocation(getActivity().getApplicationContext(), getActivity()));
-
-        v4.setName("Mitsubishi");
-        v4.setCategory(VehicleCategory.SEDAN);
-        v4.setQuality(VehicleQuality.RUSTBUCKET);
-        v4.setQuantity(1);
-        v4.setLocation(geolocation.getCurrentLocation(getActivity().getApplicationContext(), getActivity()));
-
-        friend.addItem(v3);
-        friend.addItem(v4);
-
-        dm.saveUser(main);
-        dm.saveUser(friend);
-
-        UserSingleton.addCurrentUser(main);
     }
 
     /**
@@ -407,7 +344,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      */
     public void cleanUp(){
         Context context = getInstrumentation().getContext();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         //delete the two created users
         dm.deleteUser("bob");
         dm.deleteUser("jane");
@@ -415,7 +352,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void cleanThird(){
         Context context = getInstrumentation().getContext();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         //delete the created user
         dm.deleteUser("bill");
     }
@@ -423,7 +360,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void populateThird(){
         Context context = getActivity();
-        DataManager dm = new DataManager(context);
+        LocalDataManager dm = new LocalDataManager(context);
         Geolocation geolocation = new Geolocation();
         //Create user
         User three = new User();

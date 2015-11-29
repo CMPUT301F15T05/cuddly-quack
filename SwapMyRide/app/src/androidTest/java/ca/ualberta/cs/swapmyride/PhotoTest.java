@@ -19,6 +19,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cs.swapmyride.Controller.VehicleController;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -32,14 +34,15 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
     public PhotoTest(){
         super(MainMenu.class);
     }
-
+    /*
     // Use Case 23: Add Photo
     public void testAddPhotoToItem(){
         Photo picture = new Photo(getActivity());
-        Photo tooLargePicture = new Photo(getActivity());
         Vehicle vehicle = new Vehicle();
-        vehicle.setPhoto(picture);
-        assertTrue(vehicle.getPhoto().equals(picture));
+        ArrayList<Photo> arrayList = new ArrayList<>();
+        arrayList.add(picture);
+        vehicle.setPhotoArrayList(arrayList);
+        assertTrue(vehicle.getPhotoArrayList().equals(arrayList));
     }
 
     // Use Case 24: View Photo
@@ -55,10 +58,12 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         Photo photo1 = new Photo(image);
         Photo picture = new Photo (getActivity());
         Vehicle vehicle = new Vehicle();
-        vehicle.setPhoto(photo1);
-        assertTrue(vehicle.getPhoto().equals(photo1));
+        ArrayList<Photo> arrayList = new ArrayList<>();
+        arrayList.add(photo1);
+        vehicle.setPhotoArrayList(arrayList);
+        assertTrue(vehicle.getPhotoArrayList().equals(arrayList));
         new VehicleController().deletePhoto(vehicle, getActivity());
-        assertFalse(vehicle.getPhoto().equals(photo1));
+        assertFalse(vehicle.getPhotoArrayList().equals(arrayList));
     }
 
     // Use Case 26: Restrict Image Size
@@ -66,8 +71,10 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         Photo tooLargePicture = new Photo(getActivity());
         Vehicle vehicle = new Vehicle();
         Boolean thrown = true;
+        ArrayList<Photo> arrayList = new ArrayList<>();
+        arrayList.add(tooLargePicture);
         try{
-            vehicle.setPhoto(tooLargePicture);
+            vehicle.setPhotoArrayList(arrayList);
         }
         catch(Exception e){
             thrown = true;
@@ -83,5 +90,7 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicle = new Vehicle();  // need to be an vehicle stored on remote
 
     }
+    */
+    
 }
 

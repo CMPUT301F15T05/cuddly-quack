@@ -2,6 +2,7 @@ package ca.ualberta.cs.swapmyride.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,30 +16,28 @@ import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.R;
 
-public class ViewPendingTradesActivity extends AppCompatActivity {
+public class ViewPastTradesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    ListView pendingTrades;
-    ArrayList<String> pendingTradeArray;
+    ListView pastTrades;
+    ArrayList<String> pastTradeArray;
     ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pendingtrades);
+        setContentView(R.layout.viewpasttrades);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        pendingTrades = (ListView)findViewById(R.id.pendingTrades);
+        pastTrades = (ListView)findViewById(R.id.pastTrades);
 
-        pendingTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        pastTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAPendingTradeActivity.class);
-
-                intent.putExtra("PendingTradePosition", position);
-
+                Intent intent = new Intent(getApplicationContext(), ViewAPastTradeActivity.class);
+                intent.putExtra("PastTradePosition", position);
                 startActivity(intent);
             }
         });
@@ -48,18 +47,19 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        pendingTradeArray = new ArrayList<>();
+        pastTradeArray = new ArrayList<>();
 
-        ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
+        ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPastTrades().getTrades();
 
         for (Trade trade: tradeList) {
-            String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
+            String s = String.format("%s traded %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
 
-            pendingTradeArray.add(s);
+            pastTradeArray.add(s);
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pendingTradeArray);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pastTradeArray);
 
-        pendingTrades.setAdapter(adapter);
+        pastTrades.setAdapter(adapter);
     }
+
 }

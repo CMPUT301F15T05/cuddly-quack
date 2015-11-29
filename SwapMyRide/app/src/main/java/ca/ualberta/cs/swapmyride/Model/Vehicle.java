@@ -24,6 +24,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
@@ -43,6 +44,7 @@ public class Vehicle {
     private VehicleCategory category;
     private VehicleQuality quality;
     private boolean isPublic;
+    private UniqueID uniqueID = new UniqueID();
     private Address location;
 
     public Vehicle(){
@@ -60,7 +62,6 @@ public class Vehicle {
 
 
     public String getName() {
-
         return name;
     }
 
@@ -137,8 +138,19 @@ public class Vehicle {
         this.belongsTo = belongsTo;
     }
 
-    public void setLocation(Address address) {this.location = address;}
+    public UniqueID getUniqueID() {
+        return uniqueID;
+    }
 
-    public Address getLocation(){return this.location;}
+    public void setUniqueID(UniqueID uniqueID) {
+        this.uniqueID = uniqueID;
+    }
 
+    public void setLocation(Address address) {
+        this.location = address;
+    }
+
+    public Address getLocation(){
+        return this.location;
+    }
 }

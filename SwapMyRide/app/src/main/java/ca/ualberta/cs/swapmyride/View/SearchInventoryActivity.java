@@ -116,26 +116,26 @@ public class SearchInventoryActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // What if nothing selected?
-                desiredDistance = DistanceOption.HUNDRED;
+                desiredDistance = DistanceOption.NONE;
             }
         });
-            // TODO setonclicklistners to get the item description
-            inventorySearch.setOnClickListener(new View.OnClickListener()
 
-                                               {
-                                                   @Override
-                                                   public void onClick(View v) {
+        // TODO setonclicklistners to get the item description
+        inventorySearch.setOnClickListener(new View.OnClickListener() {
 
-                                                       foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList);
+           @Override
+           public void onClick(View v) {
 
-                                                       adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
+               foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList,
+                       SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
 
-                                                       searchList.setAdapter(adapter);
-                                                   }
-                                               }
 
-            );
+               adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
 
-        }
+               searchList.setAdapter(adapter);
+           }
+       });
 
     }
+
+}

@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.View.LoginActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 import ca.ualberta.cs.swapmyride.View.SignUpActivity;
@@ -132,7 +132,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2 {
                 MainMenu.class, mma.getClass());
 
         //delete user 'bob' for trash cleanup
-        DataManager dm = new DataManager(mma.getApplicationContext());
+        LocalDataManager dm = new LocalDataManager(mma.getApplicationContext());
         dm.deleteUser("bob");
 
         //remove the monitors

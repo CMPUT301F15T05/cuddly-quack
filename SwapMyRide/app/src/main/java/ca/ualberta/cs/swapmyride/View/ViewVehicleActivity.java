@@ -18,13 +18,13 @@ package ca.ualberta.cs.swapmyride.View;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +32,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -51,13 +52,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView quantity;
     TextView category;
     TextView quality;
-    TextView comments;
-    ImageView image;
+    EditText comments;
     TextView location;
     TextView lat;
     TextView longit;
 
-    Gson gson;
     //ImageView picture;
     LinearLayout gallery;
 
@@ -91,7 +90,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         quantity = (TextView) findViewById(R.id.quality);
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quantity);
-        comments = (TextView) findViewById(R.id.commentsHead);
+        comments = (EditText) findViewById(R.id.commentsHead);
         //image = (ImageView) findViewById(R.id.picture);
         //picture = (ImageView) findViewById(R.id.picture);
         location = (TextView) findViewById(R.id.location);
@@ -147,13 +146,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     /**
      * Ask the user for confirmation if they would like to delete a vehicle.
      */
-
     public void deleteDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewVehicleActivity.this);
         builder.setMessage("Are you SURE you want to delete this vehicle? It is a permanent Action!");

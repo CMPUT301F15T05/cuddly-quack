@@ -22,9 +22,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
@@ -45,8 +48,11 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
     TextView quantity;
     TextView category;
     TextView quality;
-    TextView comments;
+    EditText comments;
     Vehicle vehicle;
+    TextView postal;
+    TextView lat;
+    TextView longit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +69,13 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
 
         title = (TextView) findViewById(R.id.title);
-        quantity = (TextView) findViewById(R.id.quantity);
+        quantity = (TextView) findViewById(R.id.quality);
         category = (TextView) findViewById(R.id.category);
-        quality = (TextView) findViewById(R.id.quality);
-        comments = (TextView) findViewById(R.id.commentsHead);
+        quality = (TextView) findViewById(R.id.quantity);
+        comments = (EditText) findViewById(R.id.commentsHead);
+        postal = (TextView) findViewById(R.id.location);
+        lat = (TextView) findViewById(R.id.Latitude);
+        longit = (TextView) findViewById(R.id.Longitude);
 
         vehicle = UserSingleton.getFeedViewVehicle();
 
@@ -86,6 +95,10 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
+        postal.setText(vehicle.getLocation().getPostalCode() + ", "+vehicle.getLocation().getLocality());
+        lat.setText(String.valueOf(vehicle.getLocation().getLatitude()));
+        longit.setText(String.valueOf(vehicle.getLocation().getLongitude()));
+
 
         trade = (Button) findViewById(R.id.trade);
         trade.setOnClickListener(new View.OnClickListener() {

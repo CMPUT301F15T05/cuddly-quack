@@ -27,7 +27,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.Trade;
@@ -52,8 +51,6 @@ public class FeedTradeActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-        final DataManager dataManager = new DataManager(getApplicationContext());
 
         UserController userController = new UserController(getApplicationContext());
 

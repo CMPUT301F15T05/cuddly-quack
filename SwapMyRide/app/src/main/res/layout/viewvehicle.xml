@@ -14,7 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tool_bar"
-        android:id="@+id/viewvehiclehorizontal" >
+        android:id="@+id/viewvehiclehorizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
         <LinearLayout
             android:id="@+id/viewvehiclegallery"
             android:layout_width="wrap_content"
@@ -27,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Default Name"
-        android:maxLines="3"
+        android:maxLines="1"
         android:textSize="25sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/title"
@@ -45,8 +48,9 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/qauntityHead"
+        android:layout_alignStart="@+id/title"
         android:layout_below="@+id/title"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,7 +60,7 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/categoryHead"
         android:layout_below="@+id/qauntityHead"
-        android:layout_alignStart="@+id/qauntityHead"
+        android:layout_alignStart="@+id/title"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -68,23 +72,27 @@
         android:id="@+id/qualityHead"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/categoryHead"
-        android:layout_alignStart="@+id/categoryHead" />
+        android:layout_alignStart="@+id/title" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comments"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/commentsHead"
-        android:maxLines="3"
-        android:lines="3"
+        android:background="@null"
+        android:inputType="none"
+        android:editable="false"
+        android:cursorVisible="false"
         android:gravity="center"
         android:layout_marginRight="10dp"
         android:layout_below="@+id/Latitude"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@+id/edit"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignStart="@+id/title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/title"
+        android:layout_above="@+id/delete" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -147,7 +155,7 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/postalCode"
         android:layout_below="@+id/qualityHead"
-        android:layout_alignStart="@+id/qualityHead"
+        android:layout_alignStart="@+id/title"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -190,7 +198,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/latLong"
         android:layout_below="@+id/postalCode"
-        android:layout_alignStart="@+id/postalCode"
+        android:layout_alignStart="@+id/title"
         android:layout_marginTop="20dp"/>
+
 
 </RelativeLayout>

@@ -4,7 +4,7 @@ package ca.ualberta.cs.swapmyride.Misc;
  * Created by adrianomarini on 15-11-26.
  */
 public enum DistanceOption {
-    HUNDRED("100",0), FIFTY("50", 1), TWENTY("20",2), TEN("10",3), FIVE("5", 4), TWO("2", 5), ONE("1",6);
+    NONE("0", 0), ONE_HUNDRED_KM("100",1), FIFTY_KM("50", 2), TEN_KM("10",3), FIVE_KM("5", 4), TWO_KM("2", 5), ONE_KM("1",6);
 
     private String distance;
     private int position;
@@ -20,6 +20,37 @@ public enum DistanceOption {
 
     public int getPosition(){
         return position;
+    }
+
+    // http://stackoverflow.com/questions/7758313/java-enum-overriding-tostring
+    // Accessed: 11/28/2015 Author: Lazy Beard
+    @Override
+    public String toString() {
+        String name = "";
+        switch (this) {
+            case ONE_HUNDRED_KM:
+                name = "100KM";
+                break;
+            case FIFTY_KM:
+                name = "50KM";
+                break;
+            case TEN_KM:
+                name = "10KM";
+                break;
+            case FIVE_KM:
+                name = "10KM";
+                break;
+            case TWO_KM:
+                name = "2KM";
+                break;
+            case ONE_KM:
+                name = "1KM";
+                break;
+            case NONE:
+                name = "";
+                break;
+        }
+        return name;
     }
 }
 

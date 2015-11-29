@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 
@@ -82,8 +83,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameField.getText().toString();
 
-                if(dm.searchUser(username)) {
+                if(dm.searchUserServer(username)) {
                     uController.addCurrentUser(dm.loadUser(username));
+                    uController.updateFriends();
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();

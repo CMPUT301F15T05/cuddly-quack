@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:id="@+id/driano">
 
     <include
         android:id="@+id/tool_bar"
@@ -11,28 +10,15 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
-    <TextView
-        android:layout_width="369dp"
-        android:layout_height="28dp"
-        android:text="Default Name"
-        android:maxLines="3"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/title"
-        android:layout_alignTop="@+id/picture"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/picture"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:lines="3"
-        android:layout_marginBottom="10dp" />
-
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/tool_bar"
-        android:id="@+id/feedinventoryhorizontal" >
+        android:id="@+id/feedinventoryhorizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fillViewport="false">
         <LinearLayout
             android:id="@+id/feedinventorygallery"
             android:layout_width="wrap_content"
@@ -41,93 +27,162 @@
             />
     </HorizontalScrollView>
 
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quantity:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/qauntityHead" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/quantity" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quality:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/qualityHead" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/quality" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Category:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/categoryHead"
-            android:layout_below="@+id/qauntityHead"
-            android:layout_alignStart="@+id/qauntityHead" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/category" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default Name"
+        android:maxLines="1"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/title"
+        android:layout_below="@+id/feedinventoryhorizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:lines="1"
+        android:gravity="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
-        android:layout_width="374dp"
-        android:layout_height="105dp"
-        android:text="Comments"
-        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quality:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/qauntityHead"
+        android:layout_alignStart="@+id/title"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/categoryHead"
+        android:layout_below="@+id/qauntityHead"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/qualityHead"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/categoryHead"
+        android:layout_alignStart="@+id/title" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/commentsHead"
-        android:layout_below="@+id/qualityHead"
-        android:layout_alignStart="@+id/qualityHead"
-        android:layout_marginTop="25dp"
-        android:layout_alignParentEnd="true"
-        android:maxLines="8"
-        android:lines="8"
+        android:background="@null"
+        android:inputType="none"
+        android:editable="false"
+        android:cursorVisible="false"
         android:gravity="center"
         android:layout_marginRight="10dp"
-        android:layout_weight="0.81" />
+        android:layout_below="@+id/Latitude"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/title"
+        android:layout_toStartOf="@+id/trade"
+        android:layout_alignBottom="@+id/trade" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/quantity"
+        android:layout_above="@+id/categoryHead"
+        android:layout_alignStart="@+id/category"
+        android:layout_alignEnd="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/category"
+        android:layout_above="@+id/qualityHead"
+        android:layout_alignStart="@+id/quality"
+        android:layout_alignEnd="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/quality"
+        android:layout_alignTop="@+id/qualityHead"
+        android:layout_alignStart="@+id/location"
+        android:layout_alignEnd="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postal Code:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/postalCode"
+        android:layout_below="@+id/qualityHead"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/location"
+        android:layout_alignTop="@+id/postalCode"
+        android:layout_alignStart="@+id/Latitude"
+        android:layout_alignEnd="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/Latitude"
+        android:layout_alignTop="@+id/latLong"
+        android:layout_toEndOf="@+id/latLong"
+        android:layout_marginStart="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/Longitude"
+        android:layout_alignTop="@+id/Latitude"
+        android:layout_toEndOf="@+id/Latitude"
+        android:layout_marginStart="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lat. / Long:"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/latLong"
+        android:layout_below="@+id/postalCode"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:layout_width="65dp"
@@ -140,8 +195,7 @@
         android:background="@drawable/roundbutton"
         android:textSize="45sp"
         android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_gravity="right" />
+        android:layout_marginRight="15dp" />
 
 
-</LinearLayout>
+</RelativeLayout>

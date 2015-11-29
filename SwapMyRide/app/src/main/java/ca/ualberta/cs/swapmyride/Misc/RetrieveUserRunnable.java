@@ -61,10 +61,6 @@ public class RetrieveUserRunnable implements Runnable {
         }
 
         this.user = hit.getSource();
-        Log.i("NetworkDataManager", user.getName());
-        Log.i("NetworkDataManager", user.getUserName());
-        Log.i("NetworkDataManager", user.getUserEmail());
-        Log.i("NetworkDataManager", user.getUserAddress());
     }
 
     /*

@@ -19,7 +19,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -40,7 +39,7 @@ public class UserController {
     /**
      * updateFriends gets the friendList of the current user (whoever is logged in),
      * and ensures their most recent data is accessible by the UserController.
-     * The usernames are read from the friends list, they are then passed to the DataManager which
+     * The usernames are read from the friends list, they are then passed to the LocalDataManager which
      * loads the username and returns a user. This user is stored in the UserSingleton in a list
      * of users.
      */
@@ -59,18 +58,18 @@ public class UserController {
     //TODO: implenment remote database usage for userExists, addCurrentUser, addUser
 
     /**
-     * userExists sends the username to DataManager which checks to see if the user exists in
+     * userExists sends the username to LocalDataManager which checks to see if the user exists in
      * the internal file system.
      * @param username
      * @return true: User exists, false: User does not
      */
     public boolean userExists(String username){
-        return dm.searchUser(username);
+        return dm.searchUserLocal(username);
     }
 
     /**
      * Stores the given user into the "Active" user inside UserSingleton for access.
-     * This version takes a username, loads it from the DataManager, and then stores the returned
+     * This version takes a username, loads it from the LocalDataManager, and then stores the returned
      * user into the Singleton.
      * @param username
      */
@@ -168,7 +167,7 @@ public class UserController {
     }
 
     /**
-     * Uses DataManager to save the "Active" user.
+     * Uses LocalDataManager to save the "Active" user.
      */
     public void saveCurrentUser(){
         dm.saveUser(UserSingleton.getCurrentUser());
