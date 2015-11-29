@@ -37,7 +37,7 @@ public class TradeTest extends ActivityInstrumentationTestCase2 {
     public TradeTest(){super(MainMenu.class);}
     public Photo picture;
     /*
-    
+
     public ArrayList<Photo> photoArrayList;
     // Use Case 15: Trade with Friend
     //testing if create trade works

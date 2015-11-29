@@ -43,6 +43,7 @@ public class TradesController {
 
     // TODO REMOVE FROM NOTIFICATION MANAGER
     public void deletePendingTrade(Trade trade) {
+        //TODO MODIFY THIS TO NOT LOAD/SAVE SO OFTEN
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
 
