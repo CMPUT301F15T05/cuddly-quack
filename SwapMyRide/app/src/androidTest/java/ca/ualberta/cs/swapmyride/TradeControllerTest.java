@@ -16,6 +16,7 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
@@ -47,8 +48,8 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
         userOne.setUserName("dhaberst");
         userTwo.setUserName("ccdunn");
 
-        InventoryList userOneInventory = new InventoryList();
-        InventoryList userTwoInventory = new InventoryList();
+        InventoryList userOneInventory = userOne.getInventory();
+        InventoryList userTwoInventory = userTwo.getInventory();
 
         Vehicle vehicleOne = new Vehicle();
         Vehicle vehicleTwo = new Vehicle();
@@ -69,6 +70,7 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
 
         userTwoInventory.add(vehicleTwo);
         userOneInventory.add(vehicleOne);
+
 
         //create trade
         TradeList tradeList = new TradeList();
@@ -96,6 +98,7 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
 
     public void testConfirmTrade() {
 
+        
 
 
     }

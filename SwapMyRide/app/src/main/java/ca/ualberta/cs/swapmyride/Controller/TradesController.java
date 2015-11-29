@@ -41,6 +41,20 @@ public class TradesController {
         dataManager = new DataManager(context);
     }
 
+    public void initiateTrade() {
+        Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
+
+        User friend = dataManager.loadUser(pendingTrade.getBorrower());
+
+        friend.addPendingTrade(pendingTrade);
+        UserSingleton.getCurrentUser().addPendingTrade(pendingTrade);
+
+        friend.getNotificationManager().notifyTrade(pendingTrade);
+
+        dataManager.saveUser(friend);
+        dataManager.saveUser(UserSingleton.getCurrentUser());
+    }
+
     // TODO REMOVE FROM NOTIFICATION MANAGER
     public void deletePendingTrade(Trade trade) {
         User borrower = dataManager.loadUser(trade.getBorrower());
