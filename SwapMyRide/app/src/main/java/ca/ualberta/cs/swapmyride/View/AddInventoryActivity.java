@@ -34,17 +34,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import java.util.Locale;
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
@@ -73,7 +71,6 @@ public class AddInventoryActivity extends AppCompatActivity {
     Spinner qualitySpinner;
     VehicleQuality vehicleQuality;
 
-    VehicleController vehicleController;
     Vehicle vehicle;
 
     LinearLayout gallery;
@@ -84,7 +81,6 @@ public class AddInventoryActivity extends AppCompatActivity {
     Button done;
     UserController uController;
     Button delete;
-    DataManager dm;
     EditText location;
 
     int position;
@@ -119,7 +115,6 @@ public class AddInventoryActivity extends AppCompatActivity {
         vehiclePublic = (Switch) findViewById(R.id.ispublic);
         done = (Button) findViewById(R.id.button);
         location = (EditText) findViewById(R.id.locationField);
-        dm = new DataManager(AddInventoryActivity.this);
         vehicle = new Vehicle();
 
         //Assign and display the current location

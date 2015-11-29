@@ -21,7 +21,6 @@ import android.location.Address;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -49,7 +48,7 @@ public class SearchController {
 
         ArrayList<User> userList = new ArrayList<>();
 
-        if (dataManager.searchUser(username)) {
+        if (dataManager.searchUserServer(username)) {
             userList.add(dataManager.loadUser(username));
         }
 

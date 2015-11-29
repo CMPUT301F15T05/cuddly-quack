@@ -1,5 +1,7 @@
 package ca.ualberta.cs.swapmyride.Controller;
 
+import android.util.Log;
+
 import ca.ualberta.cs.swapmyride.Misc.DeleteUserRunnable;
 import ca.ualberta.cs.swapmyride.Misc.RetrieveUserRunnable;
 import ca.ualberta.cs.swapmyride.Misc.SaveUserRunnable;
@@ -19,6 +21,7 @@ public class NetworkDataManager {
      * Method for saving users to the server.
      */
     public void saveUser(User user){
+        Log.i("NEWDATAMANAGER", "INSIDE NETWORK SAVE USER - " + user.getUserName());
         Thread saveUserThread = new Thread(new SaveUserRunnable(user, hostUrl));
         saveUserThread.start();
     }
@@ -30,6 +33,7 @@ public class NetworkDataManager {
 
     public User retrieveUser(String username){
         User user;
+        Log.i("NEWDATAMANAGER", "INSIDE NETWORK LOAD USER! - " + username);
         RetrieveUserRunnable runnable = new RetrieveUserRunnable(username, hostUrl);
         Thread thread = new Thread(runnable);
         thread.start();

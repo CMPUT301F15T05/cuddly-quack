@@ -58,6 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         user = userSingleton.getCurrentUser();
+        dataManager = new DataManager(EditProfileActivity.this);
 
         TextView usernameTextView = (TextView) findViewById(R.id.usernameField);
         usernameTextView.setText(user.getUserName().toString());
@@ -86,10 +87,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setName(nameTextView.getText().toString());
                 user.setUserEmail(emailTextView.getText().toString());
                 user.setUserAddress(addressTextView.getText().toString());
-
-                dataManager = new DataManager(EditProfileActivity.this);
                 dataManager.saveUser(user);
-
                 finish();
             }
         });
