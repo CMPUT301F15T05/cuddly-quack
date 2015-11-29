@@ -197,6 +197,8 @@ public class AddInventoryActivity extends AppCompatActivity {
         for (Photo photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(this);
             newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+            newImage.setAdjustViewBounds(true);
+            newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             //newImage.getLayoutParams().height = 100;
             gallery.addView(newImage);
         }
@@ -230,6 +232,8 @@ public class AddInventoryActivity extends AppCompatActivity {
                     ImageView newImage = new ImageView(getApplicationContext());
                     //newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
                     newImage.setImageBitmap(photo.getImage());
+                    newImage.setAdjustViewBounds(true);
+                    newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                     gallery.addView(newImage);
                 }
             }
@@ -390,6 +394,8 @@ public class AddInventoryActivity extends AppCompatActivity {
             for (Photo _photo : vehicle.getPhotoArrayList()) {
                 ImageView newImage = new ImageView(getApplicationContext());
                 newImage.setImageBitmap(_photo.getImage());
+                newImage.setAdjustViewBounds(true);
+                newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 //newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
                 gallery.addView(newImage);
             }
