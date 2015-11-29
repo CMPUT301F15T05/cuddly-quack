@@ -19,8 +19,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.location.Address;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -117,6 +119,14 @@ public class Vehicle {
     public void deletePhotoArrayList(Context context){
         this.photoArrayList.clear();
         this.photoArrayList.add(new Photo(context));
+    }
+
+    public void addPhoto(Photo photo, Context context) {
+        if (this.photoArrayList.get(0).equals(new Photo(context))) {
+            Log.i("Vehicle.addPhoto()", "Array list is default photo");
+            this.photoArrayList.clear();
+        }
+        this.photoArrayList.add(photo);
     }
 
     public String getBelongsTo() {

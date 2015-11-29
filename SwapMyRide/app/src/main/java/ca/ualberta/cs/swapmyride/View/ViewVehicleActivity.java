@@ -114,16 +114,6 @@ public class ViewVehicleActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-//        try {
-//            image.setBackground(new BitmapDrawable(getApplicationContext().getResources(), vehicle.getPhoto().getImage()));
-//        }catch (NullPointerException e){
-//            image.setBackground(new BitmapDrawable(getApplicationContext().getResources(), new Photo(getApplicationContext()).getImage()));
-//        }
-//        try {
-//            picture.setImageBitmap(vehicle.getPhoto().getImage());
-//        }catch (NullPointerException e){
-//            image.setImageBitmap(new Photo(getApplicationContext()).getImage());
-//        }
         gallery.removeAllViews();
         for (Photo _photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(getApplicationContext());

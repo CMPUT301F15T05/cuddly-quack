@@ -183,7 +183,8 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehiclePublic.setChecked(loaded.getPublic());
             qualitySpinner.setSelection(loaded.getQuality().getPosition());
             categorySpinner.setSelection(loaded.getCategory().getPosition());
-            location.setText(loaded.getLocation().getPostalCode());
+            // TODO: Fix null error issue
+            //location.setText(loaded.getLocation().getPostalCode());
         }
 
         //default the photo to a new photo if we are not loading a vehicle
@@ -197,6 +198,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         for (Photo photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(this);
             newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+            newImage.getLayoutParams().height = 100;
             gallery.addView(newImage);
         }
 
@@ -377,18 +379,7 @@ public class AddInventoryActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Photo photo = new Photo(imageBitmap);
-            // TODO: Fix so that if only default photo, remove it.
-            if (vehicle.getPhotoArrayList().get(0).equals(new Photo(this))) {
-                Log.i("Equals","Equals");
-                ArrayList<Photo> photoArrayList = new ArrayList<Photo>();
-                photoArrayList.add(photo);
-                vehicle.setPhotoArrayList(photoArrayList);
-            } else {
-                Log.i("Doesn't equal","Doesn't equal");
-                ArrayList<Photo> photoArrayList = vehicle.getPhotoArrayList();
-                photoArrayList.add(photo);
-                vehicle.setPhotoArrayList(photoArrayList);
-            }
+            vehicle.addPhoto(photo,getApplicationContext());
             gallery.removeAllViews();
             for (Photo _photo : vehicle.getPhotoArrayList()) {
                 ImageView newImage = new ImageView(getApplicationContext());

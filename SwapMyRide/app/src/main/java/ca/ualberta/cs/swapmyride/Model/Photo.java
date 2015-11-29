@@ -88,4 +88,8 @@ public class Photo{
         Photo photo = new Photo(context);
         this.setImage(photo.getImage());
     }
+
+    public boolean equals(Photo other) {
+        return this.getImage().sameAs(other.getImage());
+    }
 }
