@@ -22,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,7 +46,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
     TextView quantity;
     TextView category;
     TextView quality;
-    TextView comments;
+    EditText comments;
     Vehicle vehicle;
 
     @Override
@@ -66,7 +67,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         quantity = (TextView) findViewById(R.id.quantity);
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quality);
-        comments = (TextView) findViewById(R.id.commentsHead);
+        comments = (EditText) findViewById(R.id.commentsHead);
 
         vehicle = UserSingleton.getFeedViewVehicle();
 

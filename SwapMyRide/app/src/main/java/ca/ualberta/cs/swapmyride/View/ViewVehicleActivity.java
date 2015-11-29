@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     TextView quantity;
     TextView category;
     TextView quality;
-    TextView comments;
+    EditText comments;
     ImageView image;
     TextView location;
     TextView lat;
@@ -90,7 +91,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
         quantity = (TextView) findViewById(R.id.quality);
         category = (TextView) findViewById(R.id.category);
         quality = (TextView) findViewById(R.id.quantity);
-        comments = (TextView) findViewById(R.id.commentsHead);
+        comments = (EditText) findViewById(R.id.commentsHead);
         //image = (ImageView) findViewById(R.id.picture);
         //picture = (ImageView) findViewById(R.id.picture);
         location = (TextView) findViewById(R.id.location);
