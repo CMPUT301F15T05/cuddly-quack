@@ -224,6 +224,67 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testDeleteTrade() {
+        User userOne = new User();
+        User userTwo = new User();
+
+        TradesController tradesController = new TradesController(getActivity());
+        DataManager dataManager = new DataManager(getActivity());
+
+        userOne.setUserName("dhaberst2");
+        userTwo.setUserName("ccdunn2");
+
+        InventoryList userOneInventory = userOne.getInventory();
+        InventoryList userTwoInventory = userTwo.getInventory();
+
+        Vehicle vehicleOne = new Vehicle();
+        Vehicle vehicleTwo = new Vehicle();
+
+        vehicleOne.setName("Cadillac");
+        vehicleOne.setCategory(VehicleCategory.SEDAN);
+        vehicleOne.setQuality(VehicleQuality.GOOD);
+        vehicleOne.setQuantity(1);
+        vehicleOne.setComments("1995 Cadillac");
+        vehicleOne.setPublic(true);
+
+        vehicleTwo.setName("Jeep");
+        vehicleTwo.setCategory(VehicleCategory.SEDAN);
+        vehicleTwo.setQuality(VehicleQuality.GOOD);
+        vehicleTwo.setQuantity(1);
+        vehicleTwo.setComments("1994 Jeep");
+        vehicleTwo.setPublic(true);
+
+        userTwoInventory.add(vehicleTwo);
+        userOneInventory.add(vehicleOne);
+
+
+        //create trade
+        TradeList tradeList = new TradeList();
+        Trade trade = new Trade();
+        trade.setOwner(userOne.getUserName());
+        trade.setBorrower(userTwo.getUserName());
+        trade.addOwnerItem(vehicleOne);
+        trade.addBorrowerItem(vehicleTwo);
+        tradeList.add(trade);
+
+        userOne.setPendingTrades(tradeList);
+        userTwo.setPendingTrades(tradeList);
+
+        dataManager.saveUser(userOne);
+        dataManager.saveUser(userTwo);
+
+        tradesController.deletePendingTrade(trade);
+
+        userOne = dataManager.loadUser(userOne.getUserName());
+        userTwo = dataManager.loadUser(userTwo.getUserName());
+
+        assertTrue(userOne.getInventory().getList().size() == 1);
+        assertTrue(userTwo.getInventory().getList().size() == 1);
+
+        assertTrue(userOne.getInventory().getList().get(0).getUniqueID().isEqualID(vehicleOne.getUniqueID()));
+        assertTrue(userTwo.getInventory().getList().get(0).getUniqueID().isEqualID(vehicleTwo.getUniqueID()));
+
+        assertTrue(userOne.getPendingTrades().getTrades().size() == 0);
+        assertTrue(userTwo.getPendingTrades().getTrades().size() == 0);
 
     }
 
