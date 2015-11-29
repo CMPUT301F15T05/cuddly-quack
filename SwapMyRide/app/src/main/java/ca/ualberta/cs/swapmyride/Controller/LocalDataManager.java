@@ -61,23 +61,30 @@ public class LocalDataManager {
      * @see <a href="http://stackoverflow.com/questions/19459082/read-and-write-data-with-gson">stackOverflow</a>
      * @param user
      */
-    public void saveUser(User user){
+    public void saveUser(final User user){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String userJson = gson.toJson(user);
+                try{
+                    //Log.i("USERFILEPATH",userFilePath+user.getUserName());
+                    Log.i("NEWDATAMANAGER", "INSIDE LOCAL SAVE - USERNAME: "+ user.getUserName());
+                    outputStream = context.openFileOutput(userFilePath + user.getUserName(),
+                            Context.MODE_PRIVATE);
+                    outputStream.write(userJson.getBytes());
+                    outputStream.close();
+                }
+                catch (FileNotFoundException e){
+                    e.printStackTrace();
+                }
+                catch (IOException e){
+                    throw new RuntimeException();
+                }
+            }
+        });
 
-        String userJson = gson.toJson(user);
-        try{
-            //Log.i("USERFILEPATH",userFilePath+user.getUserName());
-            Log.i("NEWDATAMANAGER", "INSIDE LOCAL SAVE - USERNAME: "+ user.getUserName());
-            outputStream = context.openFileOutput(userFilePath + user.getUserName(),
-                    Context.MODE_PRIVATE);
-            outputStream.write(userJson.getBytes());
-            outputStream.close();
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            throw new RuntimeException();
-        }
+        thread.start();
+
     }
 
     /**
