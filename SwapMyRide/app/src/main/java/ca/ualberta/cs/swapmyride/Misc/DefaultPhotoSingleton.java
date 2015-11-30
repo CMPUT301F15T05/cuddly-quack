@@ -13,6 +13,7 @@ public class DefaultPhotoSingleton {
 
     public void init(Context context){
         this.defaultPhoto = new Photo(context);
+        this.defaultPhoto.getUid().setId("-1");
     }
 
     public Photo getDefaultPhoto(){
