@@ -103,12 +103,12 @@ public class TradesController {
         owner.addPastTrade(trade);
         borrower.addPastTrade(trade);
 
+        // save userSingleton
+        UserSingleton.addCurrentUser(owner);  // Only an owner should be able to click 'returned'
+
         // save users
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
-
-        // save userSingleton
-        UserSingleton.addCurrentUser(owner);  // Only an owner should be able to click 'returned'
     }
 
     public void confirmPendingTrade(Trade trade) throws Exception {
@@ -126,11 +126,11 @@ public class TradesController {
         owner.getPendingTrades().setAccepted(trade.getUniqueID(), true);
         borrower.getPendingTrades().setAccepted(trade.getUniqueID(), true);
 
-        dataManager.saveUser(borrower);
-        dataManager.saveUser(owner);
-
         // save userSingleton
         UserSingleton.addCurrentUser(borrower);  // Only a borrower should be able to click 'confirm' on a trade
+
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
     }
 
     public void confirmPendingTradeNotBorrowing(Trade trade) {
@@ -154,12 +154,12 @@ public class TradesController {
         owner.addPastTrade(trade);
         borrower.addPastTrade(trade);
 
+        // save userSingleton
+        UserSingleton.addCurrentUser(borrower); // Only a borrower should be able to click 'confirm' on a trade
+
         // save users
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
-
-        // save userSingleton
-        UserSingleton.addCurrentUser(borrower); // Only a borrower should be able to click 'confirm' on a trade
     }
 
     public void counterPendingTrade(Context context, Trade trade){

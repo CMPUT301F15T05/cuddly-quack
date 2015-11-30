@@ -35,7 +35,7 @@ public class User {
 
     //this constructor is used for creating a new name
     public User(){
-        //userName = "";
+        userName = "";
         inventory = new InventoryList();
         friends = new FriendsList();
         pastTrades = new TradeList();
@@ -142,7 +142,6 @@ public class User {
         if(!this.userName.equals(test.getUserName())) return false;
         if(!this.userEmail.equals(test.getUserEmail())) return false;
         if(!this.userAddress.equals(test.getUserAddress())) return false;
-        if(!this.userName.equals(test.getUserName())) return false;
         if(!this.getInventory().getList().equals(test.getInventory().getList()))return false;
         if(!this.getFriends().getFriendList().equals(test.getFriends().getFriendList())) return false;
         if(this.downloadImages != test.getDownloadImages()) return false;

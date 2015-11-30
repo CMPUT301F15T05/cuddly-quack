@@ -158,6 +158,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                     sender.putExtra(sender.EXTRA_TEXT, body);
                     startActivity(Intent.createChooser(sender, "email"));
                 } catch (Exception e) {
+                    e.printStackTrace();  // debugging
                     notValidTradeDialog();
                 }
                 Intent intent = new Intent(ViewAPendingTradeActivity.this, MainMenu.class);
