@@ -40,6 +40,7 @@ public class TradesController {
     public TradesController(Context context) {
         this.context = context;
         dataManager = new NetworkDataManager();
+        dataManagerLocal = new LocalDataManager(context);
     }
 
     public void initiateTrade() {
