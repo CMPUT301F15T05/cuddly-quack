@@ -21,6 +21,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.InvalidTradeException;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
@@ -83,10 +84,10 @@ public class TradesController {
         dataManager.saveUser(owner);
     }
 
-    public void confirmPendingTrade(Trade trade) throws Exception {
+    public void confirmPendingTrade(Trade trade) throws InvalidTradeException {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
-            throw new Exception("Trade is no longer valid");
+            throw new InvalidTradeException("Trade is no longer valid");
         }
 
         User borrower = dataManager.loadUser(trade.getBorrower());
@@ -114,7 +115,7 @@ public class TradesController {
         dataManager.saveUser(owner);
 
         // save userSingleton
-        UserSingleton.addCurrentUser(owner);
+        UserSingleton.addCurrentUser(borrower);
     }
 
     public void counterPendingTrade(Context context, Trade trade){
