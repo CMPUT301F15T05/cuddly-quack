@@ -1,6 +1,7 @@
 package ca.ualberta.cs.swapmyride.Misc;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import ca.ualberta.cs.swapmyride.Model.Photo;
 
@@ -9,16 +10,17 @@ import ca.ualberta.cs.swapmyride.Model.Photo;
  */
 public class DefaultPhotoSingleton {
     private static DefaultPhotoSingleton ourInstance = null;
-    private Photo defaultPhoto;
+    private Bitmap image;
+    private Photo photo;
 
     public void init(Context context){
-        this.defaultPhoto = new Photo(context);
-        this.defaultPhoto.getUid().setId("-1");
+        photo = new Photo(context);
+        image = photo.getImage();
     }
 
-    public Photo getDefaultPhoto(){
-        return defaultPhoto;
-    }
+    public Bitmap getImage(){return image;}
+
+    public Photo getDefaultPhoto(){return photo; }
 
     public static DefaultPhotoSingleton getInstance() {
         if(ourInstance == null){

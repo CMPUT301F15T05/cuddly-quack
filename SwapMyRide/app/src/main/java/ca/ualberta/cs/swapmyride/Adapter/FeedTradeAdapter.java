@@ -71,10 +71,11 @@ public class FeedTradeAdapter extends ArrayAdapter<Vehicle> {
         Photo photo;
         if(vehicle.getPhotoIds().size() > 0) {
             photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
+            image.setBackground(new BitmapDrawable(photo.getImage()));
         }
-        else photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
-
-        image.setBackground(new BitmapDrawable(photo.getImage()));
+        else{
+            image.setBackground(new BitmapDrawable(DefaultPhotoSingleton.getInstance().getImage()));
+        }
         // Return the completed view to render on screen
         return convertView;
     }

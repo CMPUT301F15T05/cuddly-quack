@@ -91,14 +91,14 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         //load the picture from the first
         for (UniqueID uid : vehicle.getPhotoIds()){
             Photo photo;
+            ImageView newImage = new ImageView(getApplicationContext());
             if(UserSingleton.getDownloadPhotos()){
                 photo = ldm.loadPhoto(uid.getID());
+                newImage.setImageBitmap(photo.getImage());
             }
-            else{
-                photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
+            else {
+                newImage.setImageBitmap(DefaultPhotoSingleton.getInstance().getImage());
             }
-            ImageView newImage = new ImageView(getApplicationContext());
-            newImage.setImageBitmap(photo.getImage());
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             newImage.setAdjustViewBounds(true);
             gallery.addView(newImage);

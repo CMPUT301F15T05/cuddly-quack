@@ -55,8 +55,6 @@ public class UserController {
     }
 
     //for the time being, these classes access the local user list to verify
-    //TODO: implenment remote database usage for userExists, addCurrentUser, addUser
-
     /**
      * userExists sends the username to LocalDataManager which checks to see if the user exists in
      * the internal file system.
@@ -110,7 +108,6 @@ public class UserController {
      * @return
      */
     public InventoryList getInventory(User user){
-        //TODO: Get the inventory of a given user
         InventoryList inventory;
         User currentUser = getCurrentUser();
         inventory = currentUser.getInventory();
@@ -122,7 +119,6 @@ public class UserController {
      * @param preference
      */
     public void changeDownloadPreferance(boolean preference){
-        //TODO:Switch the prefrance of the current user
         UserSingleton.getCurrentUser().setDownloadImages(preference);
     }
 
@@ -142,8 +138,6 @@ public class UserController {
      */
     public void deleteFriend(String toDelete){
         UserSingleton.getCurrentUser().removeFriend(toDelete);
-
-        //TODO Is this as efficient as it could be??
         updateFriends();
     }
 
