@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
@@ -63,11 +64,10 @@ public class DataManager {
     }
 
     public void deleteUser(String username){
-        /*
+
         if(networkAvailable()){
             ndm.deleteUser(username);
         }
-        */
         ldm.deleteUser(username);
     }
 
@@ -99,6 +99,13 @@ public class DataManager {
         }
         else return false;
 
+    }
+
+    public void savePhoto(Photo photo){
+        if(networkAvailable()){
+            ndm.savePhoto(photo);
+        }
+        ldm.savePhoto(photo);
     }
     /**
      * updateFriends gets friends from the server based on the friends list

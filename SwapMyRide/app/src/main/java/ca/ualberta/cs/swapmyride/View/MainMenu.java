@@ -33,6 +33,7 @@ import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
@@ -120,10 +121,14 @@ public class MainMenu extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
         DataManager dataManager = new DataManager(getApplicationContext());
+        LocalDataManager ldm = new LocalDataManager(getApplicationContext());
         dataManager.saveUser(UserSingleton.getCurrentUser());
         for(Vehicle vehicle : UserSingleton.getCurrentUser().getInventory().getList()){
             for (UniqueID photoId : vehicle.getPhotoIds()){
-                if(dataManager.)
+                //if the photo does not exist on the server save it... else do not
+                if(!dataManager.searchPhotoServer(photoId.getID())){
+                    dataManager.savePhoto(ldm.loadPhoto(photoId.getID()));
+                }
             }
         }
         for (User friend: UserSingleton.getFriends()){
