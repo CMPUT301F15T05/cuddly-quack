@@ -19,13 +19,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
-import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
