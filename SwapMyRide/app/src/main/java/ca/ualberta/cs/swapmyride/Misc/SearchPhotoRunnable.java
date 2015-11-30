@@ -1,21 +1,16 @@
 package ca.ualberta.cs.swapmyride.Misc;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.SearchHit;
 
