@@ -108,12 +108,18 @@ public class TradesController {
         dataManager.saveUser(owner);
 
         // save userSingleton
-        UserSingleton.addCurrentUser(owner);
+        UserSingleton.addCurrentUser(owner);  // Only an owner should be able to click 'returned'
     }
 
     public void confirmPendingTrade(Trade trade) throws Exception {
+        // check that items are in inventory for both parties
+        if (!(validTrade(trade))) {
+            throw new Exception("Trade is no longer valid");
+        }
+
         if(!trade.getIsBorrowing()) confirmPendingTradeNotBorrowing(trade);
 
+        // Starting the borrowing-trade logic
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
 
@@ -124,15 +130,10 @@ public class TradesController {
         dataManager.saveUser(owner);
 
         // save userSingleton
-        UserSingleton.addCurrentUser(owner);
+        UserSingleton.addCurrentUser(borrower);  // Only a borrower should be able to click 'confirm' on a trade
     }
 
-    public void confirmPendingTradeNotBorrowing(Trade trade) throws Exception {
-        // check that items are in inventory for both parties
-        if (!(validTrade(trade))) {
-            throw new Exception("Trade is no longer valid");
-        }
-
+    public void confirmPendingTradeNotBorrowing(Trade trade) {
         User borrower = dataManager.loadUser(trade.getBorrower());
         User owner = dataManager.loadUser(trade.getOwner());
 
@@ -158,7 +159,7 @@ public class TradesController {
         dataManager.saveUser(owner);
 
         // save userSingleton
-        UserSingleton.addCurrentUser(owner);
+        UserSingleton.addCurrentUser(borrower); // Only a borrower should be able to click 'confirm' on a trade
     }
 
     public void counterPendingTrade(Context context, Trade trade){
