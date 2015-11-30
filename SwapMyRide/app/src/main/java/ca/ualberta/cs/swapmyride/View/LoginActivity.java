@@ -27,6 +27,9 @@ import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
+import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 
@@ -46,7 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     Button signIn;
     TextView signUp;
     String username;
-    DataManager dm;
+    NetworkDataManager dm;
+    LocalDataManager ldm;
+    DataManager dataManager;
     UserController uController;
 
     /**
@@ -67,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        DefaultPhotoSingleton.getInstance().init(getApplicationContext());
+
         getSupportActionBar().setTitle(R.string.title_activity_login);
 
         usernameField = (EditText) findViewById(R.id.usernameField);
@@ -75,17 +82,26 @@ public class LoginActivity extends AppCompatActivity {
 
         signUp = (TextView) findViewById(R.id.signUp);
 
-        dm = new DataManager(LoginActivity.this);
+        dm = new NetworkDataManager();
+        ldm = new LocalDataManager(LoginActivity.this);
+        dataManager = new DataManager(getApplicationContext());
         uController = new UserController(getApplicationContext());
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = usernameField.getText().toString();
-
-                if(dm.searchUserServer(username)) {
-                    uController.addCurrentUser(dm.loadUser(username));
-                    uController.updateFriends();
+                User user;
+                if(dm.searchUser(username)) {
+                    user = dm.retrieveUser(username);
+                    uController.addCurrentUser(user);
+                    dataManager.updateFriends();
+                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(ldm.searchUser(username)){
+                    uController.addCurrentUser(ldm.loadUser(username));
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
@@ -103,9 +119,15 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                finish();
+                if(dataManager.networkAvailable()) {
+                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                else{
+                    Toast.makeText(LoginActivity.this, "You must be online to sign up!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

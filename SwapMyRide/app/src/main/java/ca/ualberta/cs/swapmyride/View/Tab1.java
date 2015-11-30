@@ -75,9 +75,6 @@ public class Tab1 extends Fragment {
         adapter = new FeedAdapter(getActivity(), arrayOfVehicle);
         //send notification to user when screen is returned to this area.
         user = uController.getCurrentUser();
-        user.getNotificationManager().notifyMe(getContext());
-        new LocalDataManager(getContext()).saveUser(user);  // TODO: these should be put into a Notification controller
-        UserSingleton.addCurrentUser(user);  // TODO: these should be put into a Notification controller
 
         inventory = (ListView) v.findViewById(R.id.feedView);
 

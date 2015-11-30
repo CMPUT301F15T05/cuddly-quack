@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 
@@ -42,7 +43,6 @@ import ca.ualberta.cs.swapmyride.Model.User;
 public class LocalDataManager {
     private String userFilePath = "";
     private String photoFilePath = "";
-    private GsonBuilder builder = new GsonBuilder();
     private Gson gson = new Gson();
     private FileOutputStream outputStream;
     private Context context;
@@ -122,7 +122,6 @@ public class LocalDataManager {
             throw new RuntimeException(e);
         }
 
-        Log.i("NEWDATAMANAGER", "INSIDE LOCAL LOAD - USERNAME: " + user.getUserName());
         return user;
     }
 
@@ -199,12 +198,11 @@ public class LocalDataManager {
             photo = gson.fromJson(json, Photo.class);
         }
         catch (FileNotFoundException e){
-            photo = null;
+            photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
         }
         catch (IOException e){
             throw new RuntimeException(e);
         }
-
         Log.i("NEWDATAMANAGER", "INSIDE LOCAL LOAD - PHOTO: " + photoId);
         return photo;
     }

@@ -43,8 +43,9 @@ public class NotificationManager {
         return true;
     }
 
-    public void removeTrade(Trade trade){
+    public Boolean removeTrade(Trade trade){
         tradesToBeNotified.remove(trade);
+        return true;
     }
 
     /**
@@ -61,23 +62,36 @@ public class NotificationManager {
     public void showTrade(Context context){
         Integer size = tradesToBeNotified.size();
         String trades = Integer.toString(size);
-        new AlertDialog.Builder(context)
-                .setTitle("New Trade!")
-                .setMessage("You have " + trades + " new trade(s) pending! Go to Active Trades to view!")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //do nothing
-                    }
-                })
-                .show();
+        if (trades == "1") {
+            new AlertDialog.Builder(context)
+                    .setTitle("New Trade!")
+                    .setMessage("You have " + trades + " new trade pending! Go to Pending Trades to view!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    })
+                    .show();
+        } else {
+            new AlertDialog.Builder(context)
+                    .setTitle("New Trade!")
+                    .setMessage("You have " + trades + " new trades pending! Go to Pending Trades to view!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    })
+                    .show();
+        }
         tradesToBeNotified.clear();
     }
 
     public void showFriendRequest(final Context context, final String username){
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
-                .setMessage(username + " is now following you! Click view to see their profile!")
+                .setMessage(username + " is now following you! Click to view their profile!")
                 .setPositiveButton("View Profile", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

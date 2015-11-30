@@ -135,7 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="#"
+            android:hint="0"
             android:textColorHint="@color/colorAccent"
             android:ems="10"
             android:id="@+id/quantityField"

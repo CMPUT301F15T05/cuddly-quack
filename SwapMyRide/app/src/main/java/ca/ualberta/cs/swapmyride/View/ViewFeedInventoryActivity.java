@@ -30,6 +30,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
@@ -94,7 +95,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
                 photo = ldm.loadPhoto(uid.getID());
             }
             else{
-                photo = new Photo(getApplicationContext());
+                photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
             }
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setImageBitmap(photo.getImage());

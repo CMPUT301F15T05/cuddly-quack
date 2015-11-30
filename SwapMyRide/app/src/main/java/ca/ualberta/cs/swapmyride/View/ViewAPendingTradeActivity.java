@@ -15,7 +15,9 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
+import ca.ualberta.cs.swapmyride.Misc.InvalidTradeException;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 
@@ -151,14 +153,13 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                     Intent sender = new Intent(Intent.ACTION_SENDTO);
                     sender.setType("*/*");
                     sender.setData(Uri.parse("mailto:"));
-                    String ownerEmail = new DataManager(getApplicationContext()).loadUser(tradeToDisplay.getOwner()).getUserEmail();
-                    String borrowerEmail = new DataManager(getApplicationContext()).loadUser(tradeToDisplay.getBorrower()).getUserEmail();
+                    String ownerEmail = new LocalDataManager(getApplicationContext()).loadUser(tradeToDisplay.getOwner()).getUserEmail();
+                    String borrowerEmail = new LocalDataManager(getApplicationContext()).loadUser(tradeToDisplay.getBorrower()).getUserEmail();
                     sender.putExtra(sender.EXTRA_EMAIL, new String[] {ownerEmail, borrowerEmail});
                     sender.putExtra(sender.EXTRA_SUBJECT, "[SwapMyRide] Trade Complete");
                     sender.putExtra(sender.EXTRA_TEXT, body);
                     startActivity(Intent.createChooser(sender, "email"));
-                } catch (Exception e) {
-                    e.printStackTrace();  // debugging
+                } catch (InvalidTradeException e) {
                     notValidTradeDialog();
                 }
                 Intent intent = new Intent(ViewAPendingTradeActivity.this, MainMenu.class);

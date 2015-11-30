@@ -18,12 +18,16 @@ package ca.ualberta.cs.swapmyride.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.Switch;
 
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    Switch aSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,17 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.settings);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        aSwitch = (Switch) findViewById(R.id.downloadImages);
         setSupportActionBar(toolbar);
+        aSwitch.setChecked(UserSingleton.getCurrentUser().getDownloadImages());
     }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        UserSingleton.getCurrentUser().setDownloadImages(aSwitch.isChecked());
+        Log.i("Settings","User download preference: " +
+        String.valueOf(UserSingleton.getCurrentUser().getDownloadImages()));
+    }
 
 }

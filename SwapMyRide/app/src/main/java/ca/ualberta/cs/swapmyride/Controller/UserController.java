@@ -29,11 +29,11 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
  */
 public class UserController {
     Context context;
-    DataManager dm;
+    LocalDataManager dm;
 
     public UserController(Context context){
         this.context = context;
-        dm = new DataManager(context);
+        dm = new LocalDataManager(context);
     }
 
     /**
@@ -64,19 +64,7 @@ public class UserController {
      * @return true: User exists, false: User does not
      */
     public boolean userExists(String username){
-        return dm.searchUserLocal(username);
-    }
-
-    /**
-     * Stores the given user into the "Active" user inside UserSingleton for access.
-     * This version takes a username, loads it from the LocalDataManager, and then stores the returned
-     * user into the Singleton.
-     * @param username
-     */
-    public void addCurrentUser(String username){
-        User user = dm.loadUser(username);
-        UserSingleton.addCurrentUser(user);
-        updateFriends();
+        return dm.searchUser(username);
     }
 
     /**
@@ -86,8 +74,9 @@ public class UserController {
      * @param user
      */
     public void addCurrentUser(User user){
+        dm.saveUser(user);
         UserSingleton.addCurrentUser(user);
-        updateFriends();
+        //updateFriends();
     }
 
     /**
