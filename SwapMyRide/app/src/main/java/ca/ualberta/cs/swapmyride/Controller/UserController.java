@@ -29,11 +29,11 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
  */
 public class UserController {
     Context context;
-    DataManager dm;
+    LocalDataManager dm;
 
     public UserController(Context context){
         this.context = context;
-        dm = new DataManager(context);
+        dm = new LocalDataManager(context);
     }
 
     /**
@@ -64,7 +64,7 @@ public class UserController {
      * @return true: User exists, false: User does not
      */
     public boolean userExists(String username){
-        return dm.searchUserLocal(username);
+        return dm.searchUser(username);
     }
 
     /**
