@@ -45,17 +45,16 @@ public class SearchController {
      */
     public ArrayList<User> findUser(String username, Context context){
         //TODO: Search the server for a user that matches the given username
-        DataManager dataManager = new DataManager(context);
+        NetworkDataManager dataManager = new NetworkDataManager();
 
         ArrayList<User> userList = new ArrayList<>();
 
-        if (dataManager.searchUserServer(username)) {
-            userList.add(dataManager.loadUser(username));
+        if (dataManager.searchUser(username)) {
+            userList.add(dataManager.retrieveUser(username));
         }
 
         return userList;
     }
-
 
     /**
      * FindVehicle takes a vehicleName and searches storage for a vehicle that
