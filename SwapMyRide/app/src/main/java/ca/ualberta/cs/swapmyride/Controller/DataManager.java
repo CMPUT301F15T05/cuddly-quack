@@ -133,7 +133,7 @@ public class DataManager {
      * http://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android
      * November 27/2015
      */
-    private boolean networkAvailable(){
+    public boolean networkAvailable(){
         ConnectivityManager connectionManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectionManager.getActiveNetworkInfo();
