@@ -28,8 +28,6 @@ public class RetrievePhotoRunnable implements Runnable {
     public RetrievePhotoRunnable(String photoId, String url){
         this.url = url + "photos/" + photoId;
     }
-
-
     /*
      * Returns the photo if found by the retrieve function. Make sure to wait for the thread to
      * Finish first.

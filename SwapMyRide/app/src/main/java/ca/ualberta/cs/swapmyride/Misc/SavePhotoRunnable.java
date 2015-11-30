@@ -13,7 +13,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.UnsupportedEncodingException;
 
 import ca.ualberta.cs.swapmyride.Model.Photo;
-import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
  * Created by Garry on 2015-11-29.
