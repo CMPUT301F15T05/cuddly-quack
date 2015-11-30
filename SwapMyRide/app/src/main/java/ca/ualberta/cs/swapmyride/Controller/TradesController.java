@@ -17,7 +17,6 @@ package ca.ualberta.cs.swapmyride.Controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -35,17 +34,19 @@ import ca.ualberta.cs.swapmyride.View.FeedTradeActivity;
 public class TradesController {
 
     Context context;
-    LocalDataManager dataManager;
+    NetworkDataManager dataManager;
+    LocalDataManager dataManagerLocal;
 
     public TradesController(Context context) {
         this.context = context;
-        dataManager = new LocalDataManager(context);
+        dataManager = new NetworkDataManager();
+        dataManagerLocal = new LocalDataManager(context);
     }
 
     public void initiateTrade() {
         Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
 
-        User friend = dataManager.loadUser(pendingTrade.getBorrower());
+        User friend = dataManager.retrieveUser(pendingTrade.getBorrower());
 
         friend.addPendingTrade(pendingTrade);
         UserSingleton.getCurrentUser().addPendingTrade(pendingTrade);
@@ -55,12 +56,15 @@ public class TradesController {
 
         dataManager.saveUser(friend);
         dataManager.saveUser(UserSingleton.getCurrentUser());
+
+        dataManagerLocal.saveUser(friend);
+        dataManagerLocal.saveUser(UserSingleton.getCurrentUser());
     }
 
     public void deletePendingTrade(Trade trade) {
         //TODO MODIFY THIS TO NOT LOAD/SAVE SO OFTEN
-        User borrower = dataManager.loadUser(trade.getBorrower());
-        User owner = dataManager.loadUser(trade.getOwner());
+        User borrower = dataManager.retrieveUser(trade.getBorrower());
+        User owner = dataManager.retrieveUser(trade.getOwner());
 
         TradeList borrowerPendingTrades = borrower.getPendingTrades();
         borrowerPendingTrades.delete(trade.getUniqueID());
@@ -82,6 +86,9 @@ public class TradesController {
 
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
+
+        dataManagerLocal.saveUser(borrower);
+        dataManagerLocal.saveUser(owner);
     }
 
     public void confirmPendingTrade(Trade trade) throws InvalidTradeException {
@@ -90,8 +97,8 @@ public class TradesController {
             throw new InvalidTradeException("Trade is no longer valid");
         }
 
-        User borrower = dataManager.loadUser(trade.getBorrower());
-        User owner = dataManager.loadUser(trade.getOwner());
+        User borrower = dataManager.retrieveUser(trade.getBorrower());
+        User owner = dataManager.retrieveUser(trade.getOwner());
 
         trade.swapBelongsTo();
 
@@ -113,6 +120,9 @@ public class TradesController {
         // save users
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
+
+        dataManagerLocal.saveUser(borrower);
+        dataManagerLocal.saveUser(owner);
 
         // save userSingleton
         UserSingleton.addCurrentUser(borrower);
@@ -138,8 +148,8 @@ public class TradesController {
     }
 
     public boolean validTrade(Trade trade) {
-        ArrayList<Vehicle> borrower = dataManager.loadUser(trade.getBorrower()).getInventory().getList();
-        ArrayList<Vehicle> owner = dataManager.loadUser(trade.getOwner()).getInventory().getList();
+        ArrayList<Vehicle> borrower = dataManager.retrieveUser(trade.getBorrower()).getInventory().getList();
+        ArrayList<Vehicle> owner = dataManager.retrieveUser(trade.getOwner()).getInventory().getList();
 
         Boolean o = validVehicles(trade.getOwnerItems(), owner);
         Boolean b = validVehicles(trade.getBorrowerItems(), borrower);
