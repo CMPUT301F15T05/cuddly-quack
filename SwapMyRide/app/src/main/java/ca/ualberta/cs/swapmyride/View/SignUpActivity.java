@@ -99,6 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                     newUser.setUserName(myUsername);
                     newUser.setUserAddress(myAddress);
                     newUser.setUserEmail(myEmail);
+                    newUser.setDownloadImages(true);
 
                     //set the current user to this new user
                     UserSingleton.addCurrentUser(newUser);

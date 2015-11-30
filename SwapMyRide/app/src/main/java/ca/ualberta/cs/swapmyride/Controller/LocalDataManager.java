@@ -199,12 +199,11 @@ public class LocalDataManager {
             photo = gson.fromJson(json, Photo.class);
         }
         catch (FileNotFoundException e){
-            photo = null;
+            photo = new Photo(context);
         }
         catch (IOException e){
             throw new RuntimeException(e);
         }
-
         Log.i("NEWDATAMANAGER", "INSIDE LOCAL LOAD - PHOTO: " + photoId);
         return photo;
     }

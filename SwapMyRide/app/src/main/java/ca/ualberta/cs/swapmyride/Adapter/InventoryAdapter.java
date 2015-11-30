@@ -27,6 +27,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -82,7 +83,7 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         LocalDataManager ldm = new LocalDataManager(context);
         Photo photo;
-        if(vehicle.getPhotoIds().size() > 0) {
+        if(vehicle.getPhotoIds().size() > 0 && UserSingleton.getCurrentUser().getDownloadImages()) {
             photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
         }
         else{

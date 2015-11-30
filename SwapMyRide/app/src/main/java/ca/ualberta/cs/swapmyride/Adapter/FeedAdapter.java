@@ -31,6 +31,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -72,7 +73,7 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         //load the picture from the first
         LocalDataManager ldm = new LocalDataManager(context);
         Photo photo;
-        if(vehicle.getPhotoIds().size() > 0) {
+        if(vehicle.getPhotoIds().size() > 0 && UserSingleton.getCurrentUser().getDownloadImages()) {
             photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
         }
         else{
