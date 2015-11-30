@@ -32,6 +32,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.R;
@@ -142,7 +143,8 @@ public class MainMenu extends AppCompatActivity {
         }
 
         if (id == R.id.action_refresh) {
-            // Code
+            DataManager dataManager = new DataManager(getApplicationContext());
+            dataManager.updateFriends();
             return true;
         }
 

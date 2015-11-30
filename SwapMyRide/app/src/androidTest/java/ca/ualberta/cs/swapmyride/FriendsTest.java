@@ -62,7 +62,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         friendsList.addFriend(usertwo.getUserName());
 
         // Making sure that friendslist has camclean
-        assertTrue(friendsList.hasUser(userone));
+        assertTrue(friendsList.hasUser(userone.getUserName()));
     }
 
     // Use Case 10: Remove Friend
@@ -81,7 +81,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         friendsList.removeFriend(userone.getUserName());
 
         // Making sure that friendslist has camclean
-        assertFalse(friendsList.hasUser(userone));
+        assertFalse(friendsList.hasUser(userone.getUserName()));
     }
 
     // Use Case 11: User Profile
