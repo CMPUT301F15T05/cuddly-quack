@@ -17,6 +17,7 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 
 /**
@@ -70,7 +71,6 @@ public class InventoryList {
      */
 
     public void delete(Vehicle vehicle){
-
         for (int i = 0; i < this.vehicleList.size(); i++) {
             if (this.vehicleList.get(i).getUniqueID().isEqualID(vehicle.getUniqueID())) {
                 this.vehicleList.remove(i);

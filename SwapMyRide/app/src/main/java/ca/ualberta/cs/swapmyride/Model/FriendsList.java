@@ -69,11 +69,10 @@ public class FriendsList {
     /**
      * Similar to the above, but instead taking an input of a user object
      * The User object is converted to a string and the string is searched.
-     * @param user
+     *
      * @return True if found | False if not found
      */
-    public boolean hasUser(User user){
-        String username = user.getUserName();
+    public boolean hasUser(String username){
         return friendList.contains(username);
     }
 

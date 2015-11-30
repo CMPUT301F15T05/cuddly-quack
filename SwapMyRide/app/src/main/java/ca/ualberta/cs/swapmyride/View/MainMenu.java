@@ -32,8 +32,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
 /**
@@ -109,6 +115,28 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
+     * When pausing the application from main menu, save all the data that we need to.
+     */
+    @Override
+    protected void onPause(){
+        super.onPause();
+        DataManager dataManager = new DataManager(getApplicationContext());
+        LocalDataManager ldm = new LocalDataManager(getApplicationContext());
+        dataManager.saveUser(UserSingleton.getCurrentUser());
+        for(Vehicle vehicle : UserSingleton.getCurrentUser().getInventory().getList()){
+            for (UniqueID photoId : vehicle.getPhotoIds()){
+                //if the photo does not exist on the server save it... else do not
+                if(!dataManager.searchPhotoServer(photoId.getID())){
+                    dataManager.savePhoto(ldm.loadPhoto(photoId.getID()));
+                }
+            }
+        }
+        for (User friend: UserSingleton.getFriends()){
+            dataManager.saveUser(friend);
+        }
+    }
+
+    /**
      * as above, allows access to settings menu
      * @param item
      * @return
@@ -142,7 +170,8 @@ public class MainMenu extends AppCompatActivity {
         }
 
         if (id == R.id.action_refresh) {
-            // Code
+            DataManager dataManager = new DataManager(getApplicationContext());
+            dataManager.updateFriends();
             return true;
         }
 

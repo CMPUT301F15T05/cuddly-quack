@@ -7,8 +7,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
 /**
  * An abstract class that manages the saving, loading, searching, and retrieving of data, from both
@@ -31,12 +34,10 @@ public class DataManager {
         //save user on disk
         ldm.saveUser(user);
 
-        /*
         if(networkAvailable()){
             //SAVE THE USER ON SERVER
             ndm.saveUser(user);
         }
-        */
     }
 
     /**
@@ -63,27 +64,48 @@ public class DataManager {
     }
 
     public void deleteUser(String username){
-        /*
+
         if(networkAvailable()){
             ndm.deleteUser(username);
         }
-        */
         ldm.deleteUser(username);
+    }
+
+    public void deletePhoto(String photoId){
+        if(networkAvailable()){
+            ndm.deletePhoto(photoId);
+        }
+        ldm.deletePhoto(photoId);
     }
 
     public boolean searchUserLocal(String username){
         return ldm.searchUser(username);
     }
 
-    //TODO: FIX THIS BACK TO ACTUAL SERVER.
     public boolean searchUserServer(String username){
-        /*
         if(networkAvailable()){
             return ndm.searchUser(username);
         }
         else return false;
-        */
-        return searchUserLocal(username);
+
+    }
+    public boolean searchPhotoLocal(String photoId){
+        return ldm.searchPhoto(photoId);
+    }
+
+    public boolean searchPhotoServer(String photoId){
+        if(networkAvailable()){
+            return ndm.searchPhoto(photoId);
+        }
+        else return false;
+
+    }
+
+    public void savePhoto(Photo photo){
+        if(networkAvailable()){
+            ndm.savePhoto(photo);
+        }
+        ldm.savePhoto(photo);
     }
     /**
      * updateFriends gets friends from the server based on the friends list
@@ -97,7 +119,26 @@ public class DataManager {
         UserSingleton.setFriends(new ArrayList<User>());
 
         for (String friendUserName : UserSingleton.getCurrentUser().getFriends().getFriendList()) {
-            friend = loadUser(friendUserName);
+            if(searchUserServer(friendUserName)) {
+                friend = ndm.retrieveUser(friendUserName);
+                ldm.saveUser(friend);
+                //if we want to download photos, do it here
+                if(UserSingleton.getDownloadPhotos()){
+                    //get all vehicles from the friend
+                    for (Vehicle vehicle: friend.getInventory().getList()){
+                        //get all the unique id's for photos for each vehicle
+                        for (UniqueID id: vehicle.getPhotoIds()) {
+                            //if they already exist, we dont need to download them
+                            if (!ldm.searchPhoto(id.getID())){
+                                ldm.savePhoto(ndm.retrievePhoto(id.getID()));
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                friend = ldm.loadUser(friendUserName);
+            }
             UserSingleton.addFriends(friend);
         }
     }
@@ -112,7 +153,7 @@ public class DataManager {
      * http://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android
      * November 27/2015
      */
-    private boolean networkAvailable(){
+    public boolean networkAvailable(){
         ConnectivityManager connectionManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectionManager.getActiveNetworkInfo();

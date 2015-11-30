@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
@@ -44,7 +45,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
     TextView email;
     Button addFriend;
     String username;
-    DataManager dataManager;
+    NetworkDataManager dataManager;
     User possibleFriend;
     UserController uController;
 
@@ -64,7 +65,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         uController = new UserController(getApplicationContext());
-        dataManager = new DataManager(getApplicationContext());
+        dataManager = new NetworkDataManager();
 
         fullName = (TextView) findViewById(R.id.fullName);
         email = (TextView) findViewById(R.id.email);
@@ -72,7 +73,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("Username");
 
-        possibleFriend = dataManager.loadUser(username);
+        possibleFriend = dataManager.retrieveUser(username);
 
         getSupportActionBar().setTitle(username);
         fullName.setText(possibleFriend.getName());
@@ -98,17 +99,18 @@ public class AddFriendProfileActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Can't add yourself", Toast.LENGTH_SHORT).show();
                 }
                 // Check that user is not adding friend twice
-                else if (UserSingleton.getCurrentUser().getFriends().hasUser(possibleFriend)) {
+                else if (UserSingleton.getCurrentUser().getFriends().hasUser(possibleFriend.getUserName())) {
                     Toast.makeText(getApplicationContext(), possibleFriend.getUserName() + " has already been added", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     // Save new friend to current user's friends list
                     UserSingleton.getCurrentUser().addFriend(possibleFriend.getUserName());
-                    dataManager.saveUser(UserSingleton.getCurrentUser());
-
+                    LocalDataManager ldm = new LocalDataManager(getApplicationContext());
+                    ldm.saveUser(UserSingleton.getCurrentUser());
                     // Add current user to new friend's new friends notifications
                     //User newFriend = dataManager.loadUser(possibleFriend.getUserName());
                     possibleFriend.getNotificationManager().notifyFriendRequest(UserSingleton.getCurrentUser().getUserName());
+                    ldm.saveUser(possibleFriend);
                     dataManager.saveUser(possibleFriend);
                     Toast.makeText(getApplicationContext(), username + " added!", Toast.LENGTH_LONG).show();
                     finish();

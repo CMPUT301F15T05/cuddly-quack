@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
@@ -49,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText address;
-    DataManager dm;
+    NetworkDataManager dm;
     UserController uController;
 
     /**
@@ -74,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.usernameField);
         email = (EditText) findViewById(R.id.emailField);
         address = (EditText) findViewById(R.id.editText2);
-        dm = new DataManager(SignUpActivity.this);
+        dm = new NetworkDataManager();
         uController = new UserController(getApplicationContext());
 
         signUp = (Button) findViewById(R.id.signUp);
@@ -86,7 +87,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String myUsername = username.getText().toString();
                 String myEmail = email.getText().toString();
                 String myAddress = address.getText().toString();
-                Boolean found = dm.searchUserServer(myUsername);
+
+                Boolean found = dm.searchUser(myUsername);
                 //check the username does not already exist
                 if(found){
                     Toast.makeText(getApplicationContext(),"Username Already Exists", Toast.LENGTH_LONG).show();

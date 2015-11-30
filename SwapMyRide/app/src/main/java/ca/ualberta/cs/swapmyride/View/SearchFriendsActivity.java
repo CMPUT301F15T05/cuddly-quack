@@ -98,10 +98,8 @@ public class SearchFriendsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FriendsList friendsList = UserSingleton.getCurrentUser().getFriends();
-                DataManager dataManager = new DataManager(getApplicationContext());
-                User user = dataManager.loadUser(username);
 
-                if (friendsList.hasUser(user)) {
+                if (friendsList.hasUser(username)) {
                     Log.i("hasUser", "Friend has already been added");
                 } else {
                     Intent intent = new Intent(getApplicationContext(), AddFriendProfileActivity.class);
