@@ -122,7 +122,6 @@ public class LocalDataManager {
             throw new RuntimeException(e);
         }
 
-        Log.i("NEWDATAMANAGER", "INSIDE LOCAL LOAD - USERNAME: " + user.getUserName());
         return user;
     }
 

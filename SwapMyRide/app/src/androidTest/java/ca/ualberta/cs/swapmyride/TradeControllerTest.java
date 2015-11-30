@@ -18,8 +18,12 @@ package ca.ualberta.cs.swapmyride;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import java.net.UnknownServiceException;
+
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
+import ca.ualberta.cs.swapmyride.Misc.InvalidTradeException;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
@@ -27,26 +31,35 @@ import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.LoginActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by Daniel on 2015-11-26.
  */
 
-public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
+    public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
     public TradeControllerTest(){
-        super(MainMenu.class);
+        super(LoginActivity.class);
     }
 
     public void testValidTrade() {
         User userOne = new User();
         User userTwo = new User();
 
+        userOne.setUserName("dhaberst");
+        userTwo.setUserName("ccdunn");
+
+        userOne.addFriend(userTwo.getUserName());
+        userTwo.addFriend(userOne.getUserName());
+
+        UserSingleton.addCurrentUser(userOne);
+
         TradesController tradesController = new TradesController(getActivity());
         DataManager dataManager = new DataManager(getActivity());
 
-        userOne.setUserName("dhaberst");
-        userTwo.setUserName("ccdunn");
+        dataManager.deleteUser("dhaberst");
+        dataManager.deleteUser("ccdunn");
 
         InventoryList userOneInventory = userOne.getInventory();
         InventoryList userTwoInventory = userTwo.getInventory();
@@ -100,11 +113,19 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
         User userOne = new User();
         User userTwo = new User();
 
+        userOne.setUserName("dhaberst");
+        userTwo.setUserName("ccdunn");
+
+        userOne.addFriend(userTwo.getUserName());
+        userTwo.addFriend(userOne.getUserName());
+
+        UserSingleton.addCurrentUser(userOne);
+
         TradesController tradesController = new TradesController(getActivity());
         DataManager dataManager = new DataManager(getActivity());
 
-        userOne.setUserName("dhaberst");
-        userTwo.setUserName("ccdunn");
+        dataManager.deleteUser("dhaberst");
+        dataManager.deleteUser("ccdunn");
 
         InventoryList userOneInventory = userOne.getInventory();
         InventoryList userTwoInventory = userTwo.getInventory();
@@ -149,7 +170,7 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
 
         try {
             tradesController.confirmPendingTrade(trade);
-        } catch (Exception e) {
+        } catch (InvalidTradeException e) {
             assertFalse(b);
         }
 
@@ -167,11 +188,19 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
         User userOne = new User();
         User userTwo = new User();
 
+        userOne.setUserName("dhaberst");
+        userTwo.setUserName("ccdunn");
+
+        userOne.addFriend(userTwo.getUserName());
+        userTwo.addFriend(userOne.getUserName());
+
+        UserSingleton.addCurrentUser(userOne);
+
         TradesController tradesController = new TradesController(getActivity());
         DataManager dataManager = new DataManager(getActivity());
 
-        userOne.setUserName("dhaberst1");
-        userTwo.setUserName("ccdunn1");
+        dataManager.deleteUser("dhaberst");
+        dataManager.deleteUser("ccdunn");
 
         InventoryList userOneInventory = userOne.getInventory();
         InventoryList userTwoInventory = userTwo.getInventory();
@@ -217,7 +246,8 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
 
         try {
             tradesController.confirmPendingTrade(trade);
-        } catch (Exception e) {
+        } catch (InvalidTradeException e) {
+            e.printStackTrace();
             assertTrue(b);
         }
 
@@ -227,11 +257,19 @@ public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
         User userOne = new User();
         User userTwo = new User();
 
+        userOne.setUserName("dhaberst");
+        userTwo.setUserName("ccdunn");
+
+        userOne.addFriend(userTwo.getUserName());
+        userTwo.addFriend(userOne.getUserName());
+
+        UserSingleton.addCurrentUser(userOne);
+
         TradesController tradesController = new TradesController(getActivity());
         DataManager dataManager = new DataManager(getActivity());
 
-        userOne.setUserName("dhaberst2");
-        userTwo.setUserName("ccdunn2");
+        dataManager.deleteUser("dhaberst");
+        dataManager.deleteUser("ccdunn");
 
         InventoryList userOneInventory = userOne.getInventory();
         InventoryList userTwoInventory = userTwo.getInventory();
