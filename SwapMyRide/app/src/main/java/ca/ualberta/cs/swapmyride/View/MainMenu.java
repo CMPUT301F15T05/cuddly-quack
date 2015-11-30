@@ -34,7 +34,11 @@ import java.util.List;
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
+import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
 /**
@@ -107,6 +111,24 @@ public class MainMenu extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
         return true;
+    }
+
+    /**
+     * When pausing the application from main menu, save all the data that we need to.
+     */
+    @Override
+    protected void onPause(){
+        super.onPause();
+        DataManager dataManager = new DataManager(getApplicationContext());
+        dataManager.saveUser(UserSingleton.getCurrentUser());
+        for(Vehicle vehicle : UserSingleton.getCurrentUser().getInventory().getList()){
+            for (UniqueID photoId : vehicle.getPhotoIds()){
+                if(dataManager.)
+            }
+        }
+        for (User friend: UserSingleton.getFriends()){
+            dataManager.saveUser(friend);
+        }
     }
 
     /**

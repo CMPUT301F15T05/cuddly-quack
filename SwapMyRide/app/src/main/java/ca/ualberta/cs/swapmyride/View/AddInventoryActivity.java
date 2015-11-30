@@ -45,6 +45,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;

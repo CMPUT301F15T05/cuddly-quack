@@ -84,13 +84,11 @@ public class DataManager {
 
     //TODO: FIX THIS BACK TO ACTUAL SERVER.
     public boolean searchUserServer(String username){
-        /*
         if(networkAvailable()){
             return ndm.searchUser(username);
         }
         else return false;
-        */
-        return searchUserLocal(username);
+
     }
     /**
      * updateFriends gets friends from the server based on the friends list
