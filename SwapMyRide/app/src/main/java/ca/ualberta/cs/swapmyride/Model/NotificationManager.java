@@ -43,8 +43,9 @@ public class NotificationManager {
         return true;
     }
 
-    public void removeTrade(Trade trade){
+    public Boolean removeTrade(Trade trade){
         tradesToBeNotified.remove(trade);
+        return true;
     }
 
     /**
