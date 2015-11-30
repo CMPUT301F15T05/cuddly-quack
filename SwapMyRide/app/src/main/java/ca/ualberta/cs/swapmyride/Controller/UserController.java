@@ -69,25 +69,14 @@ public class UserController {
 
     /**
      * Stores the given user into the "Active" user inside UserSingleton for access.
-     * This version takes a username, loads it from the LocalDataManager, and then stores the returned
-     * user into the Singleton.
-     * @param username
-     */
-    public void addCurrentUser(String username){
-        User user = dm.loadUser(username);
-        UserSingleton.addCurrentUser(user);
-        updateFriends();
-    }
-
-    /**
-     * Stores the given user into the "Active" user inside UserSingleton for access.
      * This version takes a user, and then stores it directly into the Singleton.
      * user into the Singleton.
      * @param user
      */
     public void addCurrentUser(User user){
+        dm.saveUser(user);
         UserSingleton.addCurrentUser(user);
-        updateFriends();
+        //updateFriends();
     }
 
     /**

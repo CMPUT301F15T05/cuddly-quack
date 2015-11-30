@@ -121,7 +121,7 @@ public class DataManager {
         for (String friendUserName : UserSingleton.getCurrentUser().getFriends().getFriendList()) {
             if(searchUserServer(friendUserName)) {
                 friend = ndm.retrieveUser(friendUserName);
-
+                ldm.saveUser(friend);
                 //if we want to download photos, do it here
                 if(UserSingleton.getDownloadPhotos()){
                     //get all vehicles from the friend
@@ -130,7 +130,7 @@ public class DataManager {
                         for (UniqueID id: vehicle.getPhotoIds()) {
                             //if they already exist, we dont need to download them
                             if (!ldm.searchPhoto(id.getID())){
-                                ndm.retrievePhoto(id.getID());
+                                ldm.savePhoto(ndm.retrievePhoto(id.getID()));
                             }
                         }
                     }

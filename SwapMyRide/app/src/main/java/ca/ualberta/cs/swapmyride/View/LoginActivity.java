@@ -29,6 +29,7 @@ import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
+import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 
@@ -90,9 +91,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String username = usernameField.getText().toString();
-
+                User user;
                 if(dm.searchUser(username)) {
-                    uController.addCurrentUser(dm.retrieveUser(username));
+                    user = dm.retrieveUser(username);
+                    uController.addCurrentUser(user);
                     dataManager.updateFriends();
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
@@ -100,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else if(ldm.searchUser(username)){
                     uController.addCurrentUser(ldm.loadUser(username));
-                    uController.updateFriends();
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
