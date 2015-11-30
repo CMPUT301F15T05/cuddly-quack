@@ -82,10 +82,20 @@ public class DataManager {
         return ldm.searchUser(username);
     }
 
-    //TODO: FIX THIS BACK TO ACTUAL SERVER.
     public boolean searchUserServer(String username){
         if(networkAvailable()){
             return ndm.searchUser(username);
+        }
+        else return false;
+
+    }
+    public boolean searchPhotoLocal(String photoId){
+        return ldm.searchPhoto(photoId);
+    }
+
+    public boolean searchPhotoServer(String photoId){
+        if(networkAvailable()){
+            return ndm.searchPhoto(photoId);
         }
         else return false;
 
