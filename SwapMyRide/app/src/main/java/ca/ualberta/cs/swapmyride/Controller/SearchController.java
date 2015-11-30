@@ -21,6 +21,7 @@ import android.location.Address;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.Model.User;
@@ -72,14 +73,15 @@ public class SearchController {
      * to the function.
      * @param vehicleName
      * @param vehicleCategory
-     * @param userVehicles
      * @return
      */
 
-    public ArrayList<Vehicle> findInventoryVehicle(String vehicleName, VehicleCategory vehicleCategory, ArrayList<Vehicle> userVehicles,
+    public ArrayList<Vehicle> findInventoryVehicle(String vehicleName, VehicleCategory vehicleCategory,
                                                    Activity activity, Context context, double distance) {
 
         ArrayList<Vehicle> foundVehicles = new ArrayList<>();
+
+        ArrayList<Vehicle> userVehicles = UserSingleton.getCurrentUser().getInventory().getList();
 
         int size = userVehicles.size();
 
@@ -128,6 +130,81 @@ public class SearchController {
                            address.getLongitude())){
                         foundVehicles.add(userVehicles.get(i));
                    }
+                }
+
+            }
+        }
+
+        // Default return value
+        return foundVehicles;
+    }
+
+    /**
+     * Returns an ArrayList of vehicles based on name and/or category that is passed
+     * to the function.
+     * @param vehicleName
+     * @param vehicleCategory
+     * @return
+     */
+
+    public ArrayList<Vehicle> findFeedVehicle(String vehicleName, VehicleCategory vehicleCategory,
+                                                   Activity activity, Context context, double distance) {
+
+
+        UserController userController = new UserController(context);
+
+        ArrayList<Vehicle> foundVehicles = new ArrayList<>();
+
+        ArrayList<Vehicle> friendsVehicles = userController.getFriendVehicles().getList();
+
+        int size = friendsVehicles.size();
+
+        Geolocation geolocation = new Geolocation();
+        Address address = geolocation.getCurrentLocation(context, activity);
+
+        // search both
+        if (!(vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))) {
+
+            for (int i = 0; i < size; i++) {
+
+                if (friendsVehicles.get(i).getName().equals(vehicleName)) {
+                    if (friendsVehicles.get(i).getCategory().equals(vehicleCategory)) {
+                        if (withinDistance(distance, friendsVehicles.get(i).getLocation().getLatitude(),
+                                friendsVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                                address.getLongitude())) {
+                            foundVehicles.add(friendsVehicles.get(i));
+                        }
+                    }
+                }
+            }
+        }
+
+        // Search string only
+        else if (!(vehicleName.equals("")) && (vehicleCategory.equals(VehicleCategory.NONE))) {
+
+            for (int i = 0; i < size; i++) {
+
+                if (friendsVehicles.get(i).getName().equals(vehicleName)) {
+                    if (withinDistance(distance, friendsVehicles.get(i).getLocation().getLatitude(),
+                            friendsVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                            address.getLongitude())) {
+                        foundVehicles.add(friendsVehicles.get(i));
+                    }
+                }
+            }
+        }
+
+        // Search category only
+        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))){
+
+            for (int i = 0; i < size; i++) {
+
+                if (friendsVehicles.get(i).getCategory().equals(vehicleCategory)){
+                    if (withinDistance(distance, friendsVehicles.get(i).getLocation().getLatitude(),
+                            friendsVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                            address.getLongitude())){
+                        foundVehicles.add(friendsVehicles.get(i));
+                    }
                 }
 
             }

@@ -34,12 +34,14 @@
         android:textSize="25sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/title"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:lines="1"
         android:layout_below="@+id/viewvehiclehorizontal"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:lines="1"
+        android:gravity="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,8 +52,7 @@
         android:id="@+id/qauntityHead"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"
-        android:layout_alignParentStart="false"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignStart="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,7 +63,7 @@
         android:id="@+id/categoryHead"
         android:layout_below="@+id/qauntityHead"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignStart="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
         android:id="@+id/qualityHead"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/categoryHead"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignStart="@+id/title" />
 
     <EditText
         android:layout_width="match_parent"
@@ -92,7 +93,8 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentEnd="true"
         android:layout_alignEnd="@+id/title"
-        android:layout_above="@+id/delete" />
+        android:layout_above="@+id/delete"
+        android:layout_alignStart="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -102,7 +104,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/quantity"
         android:layout_alignTop="@+id/qauntityHead"
-        android:layout_alignStart="@+id/delete" />
+        android:layout_alignStart="@+id/category"
+        android:layout_alignEnd="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -111,8 +114,9 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/category"
-        android:layout_above="@+id/qualityHead"
-        android:layout_alignStart="@+id/quantity" />
+        android:layout_alignTop="@+id/categoryHead"
+        android:layout_alignStart="@+id/quality"
+        android:layout_alignEnd="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -121,8 +125,9 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/quality"
-        android:layout_above="@+id/postalCode"
-        android:layout_alignStart="@+id/category" />
+        android:layout_alignTop="@+id/qualityHead"
+        android:layout_alignStart="@+id/location"
+        android:layout_alignEnd="@+id/title" />
 
     <Button
         android:layout_width="wrap_content"
@@ -156,7 +161,7 @@
         android:id="@+id/postalCode"
         android:layout_below="@+id/qualityHead"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignStart="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -166,7 +171,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/location"
         android:layout_alignTop="@+id/postalCode"
-        android:layout_alignStart="@+id/quality" />
+        android:layout_alignStart="@+id/Latitude"
+        android:layout_alignEnd="@+id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -199,7 +205,7 @@
         android:id="@+id/latLong"
         android:layout_below="@+id/postalCode"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignStart="@+id/title" />
 
 
 </RelativeLayout>

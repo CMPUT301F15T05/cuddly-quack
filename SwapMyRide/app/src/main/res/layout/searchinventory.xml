@@ -36,7 +36,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feed"
+        android:text="Search"
         android:id="@+id/feedSearch"
         android:layout_below="@+id/searchField"
         android:layout_alignParentStart="true"
@@ -44,17 +44,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="5dp"
-        />
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inventory"
-        android:id="@+id/inventorySearch"
-        android:background="@color/colorPrimary"
-        android:layout_alignTop="@+id/feedSearch"
         android:layout_alignEnd="@+id/searchField" />
+
 
     <ListView
         android:layout_width="wrap_content"
@@ -68,10 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/distanceSpinner"
-        android:layout_alignTop="@+id/inventorySearch"
         android:spinnerMode="dropdown"
         android:hint="Distance"
         android:layout_alignEnd="@+id/categorySpinner"
-        android:layout_alignStart="@+id/categorySpinner" />
+        android:layout_alignStart="@+id/categorySpinner"
+        android:layout_alignTop="@+id/feedSearch" />
 
 </RelativeLayout>

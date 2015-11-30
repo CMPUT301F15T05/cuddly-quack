@@ -15,6 +15,7 @@
  */
 package ca.ualberta.cs.swapmyride.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,7 +29,7 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Adapter.InventoryAdapter;
+import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
 import ca.ualberta.cs.swapmyride.Misc.DistanceOption;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -46,13 +47,12 @@ public class SearchInventoryActivity extends AppCompatActivity {
     Toolbar toolbar;
     EditText searchField;
     Spinner categorySpinner;
-    Button inventorySearch;
+    Button feedSearch;
     ListView searchList;
     VehicleCategory vehicleCategory;
-    ArrayList<Vehicle> inventoryList;
     SearchController searchController;
     ArrayList<Vehicle> foundVehicles;
-    InventoryAdapter adapter;
+    FeedAdapter feedAdapter;
     Spinner distance;
     DistanceOption desiredDistance;
 
@@ -78,12 +78,8 @@ public class SearchInventoryActivity extends AppCompatActivity {
         searchController = new SearchController();
 
         searchList = (ListView) findViewById(R.id.searchList);
-
-        inventoryList = UserSingleton.getCurrentUser().getInventory().getList();
-
         searchField = (EditText) findViewById(R.id.searchField);
-        inventorySearch = (Button) findViewById(R.id.inventorySearch);
-
+        feedSearch = (Button) findViewById(R.id.feedSearch);
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
 
         categorySpinner.setAdapter(new ArrayAdapter<VehicleCategory>(this, android.R.layout.simple_spinner_dropdown_item, VehicleCategory.values()));
@@ -120,22 +116,28 @@ public class SearchInventoryActivity extends AppCompatActivity {
             }
         });
 
-        // TODO setonclicklistners to get the item description
-        inventorySearch.setOnClickListener(new View.OnClickListener() {
+        feedSearch.setOnClickListener(new View.OnClickListener() {
 
-           @Override
-           public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-               foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList,
-                       SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
+                foundVehicles = searchController.findFeedVehicle(searchField.getText().toString(), vehicleCategory,
+                        SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
 
+                feedAdapter = new FeedAdapter(getApplicationContext(), foundVehicles);
 
-               adapter = new InventoryAdapter(getApplicationContext(), foundVehicles);
+                searchList.setAdapter(feedAdapter);
 
-               searchList.setAdapter(adapter);
-           }
-       });
+                searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getApplicationContext(), ViewFeedInventoryActivity.class);
+                        UserSingleton.setFeedViewVehicle(foundVehicles.get(position));
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
 
     }
-
 }

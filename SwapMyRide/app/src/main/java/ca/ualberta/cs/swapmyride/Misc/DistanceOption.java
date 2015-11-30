@@ -47,7 +47,7 @@ public enum DistanceOption {
                 name = "1KM";
                 break;
             case NONE:
-                name = "";
+                name = "NONE";
                 break;
         }
         return name;
