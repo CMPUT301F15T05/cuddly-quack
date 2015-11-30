@@ -38,7 +38,7 @@ public enum DistanceOption {
                 name = "10KM";
                 break;
             case FIVE_KM:
-                name = "10KM";
+                name = "5KM";
                 break;
             case TWO_KM:
                 name = "2KM";
