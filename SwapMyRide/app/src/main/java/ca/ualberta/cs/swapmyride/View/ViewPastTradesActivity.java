@@ -52,7 +52,7 @@ public class ViewPastTradesActivity extends AppCompatActivity {
         ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPastTrades().getTrades();
 
         for (Trade trade: tradeList) {
-            String s = String.format("%s traded %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
+            String s = String.format("%s traded %d item(s) for %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
 
             pastTradeArray.add(s);
         }

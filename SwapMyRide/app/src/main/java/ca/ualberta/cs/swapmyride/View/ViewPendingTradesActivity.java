@@ -55,7 +55,7 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
         ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
 
         for (Trade trade: tradeList) {
-            String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
+            String s = String.format("%s wants to trade %d item(s) for %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
 
             pendingTradeArray.add(s);
         }
