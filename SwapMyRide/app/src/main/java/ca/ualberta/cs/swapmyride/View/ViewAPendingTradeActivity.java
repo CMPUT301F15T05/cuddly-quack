@@ -36,6 +36,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
     FeedAdapter friendAdapter;
     FeedAdapter userAdapter;
     TradesController tradesController;
+    Button returned;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,9 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        returned = (Button) findViewById(R.id.buttonReturned);
+        returned.setVisibility(View.INVISIBLE);
 
         tradesController = new TradesController(getApplicationContext());
 
@@ -112,12 +116,12 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("The following trade has been confirmed - ");
 
-                    stringBuilder.append(tradeToDisplay.getOwner() + " has traded:");
+                    stringBuilder.append(tradeToDisplay.getOwner() + " has traded: ");
                     for (Vehicle item : tradeToDisplay.getOwnerItems()) {
                         stringBuilder.append(item.getName());
                     }
 
-                    stringBuilder.append(tradeToDisplay.getBorrower() + " has traded:");
+                    stringBuilder.append(tradeToDisplay.getBorrower() + " has traded: ");
                     for (Vehicle item : tradeToDisplay.getBorrowerItems()) {
                         stringBuilder.append(item.getName());
                     }
@@ -137,7 +141,8 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     notValidTradeDialog();
                 }
-                finish();
+                Intent intent = new Intent(ViewAPendingTradeActivity.this, MainMenu.class);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
