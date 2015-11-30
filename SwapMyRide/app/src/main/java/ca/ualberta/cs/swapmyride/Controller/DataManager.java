@@ -7,8 +7,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
+import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
 /**
  * An abstract class that manages the saving, loading, searching, and retrieving of data, from both
@@ -97,7 +99,26 @@ public class DataManager {
         UserSingleton.setFriends(new ArrayList<User>());
 
         for (String friendUserName : UserSingleton.getCurrentUser().getFriends().getFriendList()) {
-            friend = loadUser(friendUserName);
+            if(searchUserServer(friendUserName)) {
+                friend = ndm.retrieveUser(friendUserName);
+
+                //if we want to download photos, do it here
+                if(UserSingleton.getDownloadPhotos()){
+                    //get all vehicles from the friend
+                    for (Vehicle vehicle: friend.getInventory().getList()){
+                        //get all the unique id's for photos for each vehicle
+                        for (UniqueID id: vehicle.getPhotoIds()) {
+                            //if they already exist, we dont need to download them
+                            if (!ldm.searchPhoto(id.getID())){
+                                ndm.retrievePhoto(id.getID());
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                friend = ldm.loadUser(friendUserName);
+            }
             UserSingleton.addFriends(friend);
         }
     }

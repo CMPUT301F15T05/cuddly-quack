@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
 import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
@@ -47,7 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     Button signIn;
     TextView signUp;
     String username;
-    DataManager dm;
+    NetworkDataManager dm;
+    LocalDataManager ldm;
     UserController uController;
 
     /**
@@ -78,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
         signUp = (TextView) findViewById(R.id.signUp);
 
-        dm = new DataManager(LoginActivity.this);
+        dm = new NetworkDataManager();
+        ldm = new LocalDataManager(LoginActivity.this);
+
         uController = new UserController(getApplicationContext());
 
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +90,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameField.getText().toString();
 
-                if(dm.searchUserServer(username)) {
-                    uController.addCurrentUser(dm.loadUser(username));
-                    uController.updateFriends();
+                if(dm.searchUser(username)) {
+                    uController.addCurrentUser(dm.retrieveUser(username));
+
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
