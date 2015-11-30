@@ -8,7 +8,7 @@ import ca.ualberta.cs.swapmyride.Model.Photo;
  * Created by Garry on 2015-11-30.
  */
 public class DefaultPhotoSingleton {
-    private static DefaultPhotoSingleton ourInstance = new DefaultPhotoSingleton();
+    private static DefaultPhotoSingleton ourInstance = null;
     private Photo defaultPhoto;
 
     public void init(Context context){
@@ -20,6 +20,9 @@ public class DefaultPhotoSingleton {
     }
 
     public static DefaultPhotoSingleton getInstance() {
+        if(ourInstance == null){
+            ourInstance = new DefaultPhotoSingleton();
+        }
         return ourInstance;
     }
 

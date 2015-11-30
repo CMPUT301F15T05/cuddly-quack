@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 
@@ -66,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        DefaultPhotoSingleton.getInstance().init(getApplicationContext());
 
         getSupportActionBar().setTitle(R.string.title_activity_login);
 

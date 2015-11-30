@@ -32,6 +32,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ca.ualberta.cs.swapmyride.Adapter.ViewPagerAdapter;
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.R;
 
