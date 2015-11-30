@@ -86,13 +86,21 @@ public class FeedTradeUserActivity extends AppCompatActivity {
     //TODO edge case empty trade should still work / disallow it.
     public void tradeDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(FeedTradeUserActivity.this);
-        builder.setMessage("Are you SURE you want to proceed with this trade?");
+        builder.setMessage("Are you SURE you want to proceed with this trade/borrow?");
         builder.setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Trade", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 tradesController.initiateTrade();
+                finish();
+            }
+        });
+        builder.setNeutralButton("Borrow", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                tradesController.initiateBorrow();
                 finish();
             }
         });

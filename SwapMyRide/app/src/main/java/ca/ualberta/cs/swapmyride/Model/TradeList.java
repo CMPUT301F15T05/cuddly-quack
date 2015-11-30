@@ -52,6 +52,15 @@ public class TradeList {
         this.trades.remove(index);
     }
 
+    public void setAccepted(UniqueID uniqueID, Boolean isAccepted) {
+        for (Trade trade: trades) {
+            if (trade.getUniqueID().isEqualID(uniqueID)) {
+                trade.setIsAccepted(isAccepted);
+                return;
+            }
+        }
+    }
+
     public void delete(UniqueID uniqueID) {
         int length = trades.size();
         int index = 0;

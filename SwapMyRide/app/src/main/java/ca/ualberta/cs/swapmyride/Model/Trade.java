@@ -55,8 +55,8 @@ public class Trade {
         borrower = "";
     }
 
-    public void setBorrowing(){
-        isBorrowing = true;
+    public void setBorrowing(Boolean bool){
+        isBorrowing = bool;
     }
     public Boolean getIsBorrowing(){
         return isBorrowing;

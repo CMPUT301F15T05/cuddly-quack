@@ -41,8 +41,16 @@ public class TradesController {
         dataManager = new LocalDataManager(context);
     }
 
+    public void initiateBorrow() {
+        initiateTrade(true);
+    }
     public void initiateTrade() {
+        initiateTrade(false);
+    }
+
+    public void initiateTrade(Boolean isBorrowing) {
         Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
+        pendingTrade.setBorrowing(isBorrowing);
 
         User friend = dataManager.loadUser(pendingTrade.getBorrower());
 
@@ -83,7 +91,43 @@ public class TradesController {
         dataManager.saveUser(owner);
     }
 
+    public void returnedPendingTrade(Trade trade){
+        User borrower = dataManager.loadUser(trade.getBorrower());
+        User owner = dataManager.loadUser(trade.getOwner());
+
+        // remove from pendingList
+        owner.getPendingTrades().delete(trade.getUniqueID());
+        borrower.getPendingTrades().delete(trade.getUniqueID());
+
+        // add to pastTradesList
+        owner.addPastTrade(trade);
+        borrower.addPastTrade(trade);
+
+        // save users
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+
+        // save userSingleton
+        UserSingleton.addCurrentUser(owner);
+    }
+
     public void confirmPendingTrade(Trade trade) throws Exception {
+        if(!trade.getIsBorrowing()) confirmPendingTradeNotBorrowing(trade);
+
+        User borrower = dataManager.loadUser(trade.getBorrower());
+        User owner = dataManager.loadUser(trade.getOwner());
+
+        owner.getPendingTrades().setAccepted(trade.getUniqueID(), true);
+        borrower.getPendingTrades().setAccepted(trade.getUniqueID(), true);
+
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+
+        // save userSingleton
+        UserSingleton.addCurrentUser(owner);
+    }
+
+    public void confirmPendingTradeNotBorrowing(Trade trade) throws Exception {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
             throw new Exception("Trade is no longer valid");
@@ -140,12 +184,10 @@ public class TradesController {
         ArrayList<Vehicle> borrower = dataManager.loadUser(trade.getBorrower()).getInventory().getList();
         ArrayList<Vehicle> owner = dataManager.loadUser(trade.getOwner()).getInventory().getList();
 
-        Boolean o = validVehicles(trade.getOwnerItems(), owner);
-        Boolean b = validVehicles(trade.getBorrowerItems(), borrower);
+        Boolean ownerBool = validVehicles(trade.getOwnerItems(), owner);
+        Boolean borrowerBool = validVehicles(trade.getBorrowerItems(), borrower);
 
-        Boolean c = o && b;
-
-        return c;
+        return (ownerBool && borrowerBool);
     }
 
     public Boolean validVehicles(ArrayList<Vehicle> tradeVehicles, ArrayList<Vehicle> inventoryVehicles) {
