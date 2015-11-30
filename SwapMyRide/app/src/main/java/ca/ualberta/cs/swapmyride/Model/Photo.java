@@ -47,7 +47,7 @@ public class Photo{
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         int compression = 100;
         do {
-            image.compress(Bitmap.CompressFormat.PNG, compression, stream);
+            image.compress(Bitmap.CompressFormat.JPEG, compression, stream);
             temp = stream.toByteArray();
             encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
             compression -= 5;
@@ -65,7 +65,7 @@ public class Photo{
         byte temp[];
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_default_car);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         temp = stream.toByteArray();
         encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
         uid = new UniqueID();
@@ -95,7 +95,7 @@ public class Photo{
     public void setImage(Bitmap image) {
         byte temp[];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         temp = stream.toByteArray();
         encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
     }
