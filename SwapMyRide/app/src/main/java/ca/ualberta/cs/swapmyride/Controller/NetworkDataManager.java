@@ -6,6 +6,7 @@ import ca.ualberta.cs.swapmyride.Misc.DeleteUserRunnable;
 import ca.ualberta.cs.swapmyride.Misc.RetrieveUserRunnable;
 import ca.ualberta.cs.swapmyride.Misc.SaveUserRunnable;
 import ca.ualberta.cs.swapmyride.Misc.SearchUserRunnable;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 
 /*
@@ -56,6 +57,22 @@ public class NetworkDataManager {
             e.printStackTrace();
         }
         return searchUserRunnable.getExists();
+    }
+
+    public void savePhoto(Photo photo){
+
+    }
+
+    public Photo retrievePhoto(String photoId){
+        return null;
+    }
+
+    public void deletePhoto(String photoId){
+
+    }
+
+    public boolean searchPhoto(){
+        return true;
     }
 }
 
