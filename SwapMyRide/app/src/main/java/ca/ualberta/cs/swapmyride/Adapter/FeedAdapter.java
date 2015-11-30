@@ -74,9 +74,12 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         //load the picture from the first
         LocalDataManager ldm = new LocalDataManager(context);
         Photo photo;
-
-        photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
-
+        if(vehicle.getPhotoIds().size() > 0) {
+            photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
+        }
+        else{
+           photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
+        }
         image.setBackground(new BitmapDrawable(photo.getImage()));
         // Return the completed view to render on screen
         return convertView;
