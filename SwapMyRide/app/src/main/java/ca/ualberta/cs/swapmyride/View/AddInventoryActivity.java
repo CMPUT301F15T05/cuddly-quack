@@ -465,6 +465,7 @@ public class AddInventoryActivity extends AppCompatActivity {
             newImage.setImageBitmap(photo.getImage());
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             newImage.setAdjustViewBounds(true);
+            gallery.removeAllViews();
             gallery.addView(newImage);
             photos.add(photo);
         }
