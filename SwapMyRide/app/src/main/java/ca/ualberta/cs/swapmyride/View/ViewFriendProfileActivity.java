@@ -40,10 +40,7 @@ import ca.ualberta.cs.swapmyride.Controller.UserController;
 public class ViewFriendProfileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    DataManager dataManager;
-    User myself;
     User friend;
-    FriendsList friendsList;
     TextView fullName;
     TextView email;
     TextView address;
@@ -60,7 +57,6 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         uController = new UserController(getApplicationContext());
-        dataManager = new DataManager(getApplicationContext());
 
         fullName = (TextView) findViewById(R.id.fullName);
         email = (TextView) findViewById(R.id.email);
@@ -69,12 +65,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
 
         position = getIntent().getIntExtra("Position",0);
 
-        myself = uController.getCurrentUser();
-
-        friendsList = myself.getFriends();
-
-        friend = dataManager.loadUser(friendsList.getFriendList().get(position));
-
+        friend = uController.getFriends().get(0);
         getSupportActionBar().setTitle(friend.getUserName());
 
         fullName.setText(friend.getName());
@@ -110,11 +101,6 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
             }
         });
         builder.show();
-    }
-
-    public void changeUser(String username){
-        dataManager = new DataManager(getApplicationContext());
-        friend = dataManager.loadUser(username);
     }
 
     public TextView getFullName(){

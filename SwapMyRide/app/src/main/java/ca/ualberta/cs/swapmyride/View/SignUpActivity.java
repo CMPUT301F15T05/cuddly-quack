@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String myUsername = username.getText().toString();
                 String myEmail = email.getText().toString();
                 String myAddress = address.getText().toString();
-                
+
                 Boolean found = dm.searchUser(myUsername);
                 //check the username does not already exist
                 if(found){
