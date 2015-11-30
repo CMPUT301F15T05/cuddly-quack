@@ -114,6 +114,10 @@ public class ViewVehicleActivity extends AppCompatActivity {
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
         gallery.removeAllViews();
+
+        //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+        //load the picture from the first
+        /*
         for (Photo _photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setImageBitmap(_photo.getImage());
@@ -121,7 +125,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
             newImage.setAdjustViewBounds(true);
             //newImage.setMaxWidth(40);
             gallery.addView(newImage);
-        }
+        }*/
         try {
             location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
             lat.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLatitude()));

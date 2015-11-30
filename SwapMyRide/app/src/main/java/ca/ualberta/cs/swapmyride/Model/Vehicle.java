@@ -37,7 +37,7 @@ import ca.ualberta.cs.swapmyride.Model.Geolocation;
 public class Vehicle {
 
     private String belongsTo;
-    private ArrayList<Photo> photoArrayList;
+    private ArrayList<UniqueID> photoIds;
     private String name;
     private Integer quantity;
     private String comments;
@@ -53,7 +53,7 @@ public class Vehicle {
         quantity = 0;
         comments = "";
         //photoArrayList.add(new Photo(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_search)));
-        photoArrayList = new ArrayList<Photo>();
+        photoIds = new ArrayList<>();
         category = VehicleCategory.NONE;
         quality = VehicleQuality.NONE;
         isPublic = true;
@@ -109,25 +109,22 @@ public class Vehicle {
         this.isPublic = isPublic;
     }
 
-    public void setPhotoArrayList(ArrayList<Photo> photoArrayList){
-        this.photoArrayList = photoArrayList;
+    public void setPhotoIds(ArrayList<UniqueID> photoArrayList){
+        this.photoIds = photoArrayList;
     }
 
-    public ArrayList<Photo> getPhotoArrayList(){
-        return this.photoArrayList;
+    public ArrayList<UniqueID> getPhotoIds(){
+        return this.photoIds;
     }
+
 
     public void deletePhotoArrayList(Context context){
-        this.photoArrayList.clear();
-        this.photoArrayList.add(new Photo(context));
+        this.photoIds.clear();
     }
 
-    public void addPhoto(Photo photo, Context context) {
-        if (this.photoArrayList.get(0).equals(new Photo(context))) {
-            Log.i("Vehicle.addPhoto()", "Array list is default photo");
-            this.photoArrayList.clear();
-        }
-        this.photoArrayList.add(photo);
+    //TODO: FIX THIS!!!
+    public void addPhoto(UniqueID id, Context context) {
+        this.photoIds.add(id);
     }
 
     public String getBelongsTo() {
