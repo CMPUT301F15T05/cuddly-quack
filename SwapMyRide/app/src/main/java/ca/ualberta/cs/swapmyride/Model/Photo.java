@@ -42,13 +42,16 @@ public class Photo{
      * Builds a Photo object based on a given bitmap
      * @param image the image to store
      */
-
     public Photo(Bitmap image){
         byte temp[];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        temp = stream.toByteArray();
-        encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
+        int compression = 100;
+        do {
+            image.compress(Bitmap.CompressFormat.PNG, compression, stream);
+            temp = stream.toByteArray();
+            encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
+            compression -= 5;
+        }while(encodedImage.length() > 65536);
         uid = new UniqueID();
         Log.i("PhotoSize", Integer.toString(encodedImage.length()));
     }
