@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.InventoryAdapter;
 import ca.ualberta.cs.swapmyride.Misc.DistanceOption;
-import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -49,7 +48,6 @@ public class SearchInventoryActivity extends AppCompatActivity {
     Button inventorySearch;
     ListView searchList;
     VehicleCategory vehicleCategory;
-    ArrayList<Vehicle> inventoryList;
     SearchController searchController;
     ArrayList<Vehicle> foundVehicles;
     InventoryAdapter adapter;
@@ -78,8 +76,6 @@ public class SearchInventoryActivity extends AppCompatActivity {
         searchController = new SearchController();
 
         searchList = (ListView) findViewById(R.id.searchList);
-
-        inventoryList = UserSingleton.getCurrentUser().getInventory().getList();
 
         searchField = (EditText) findViewById(R.id.searchField);
         inventorySearch = (Button) findViewById(R.id.inventorySearch);
@@ -126,7 +122,7 @@ public class SearchInventoryActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
 
-               foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory, inventoryList,
+               foundVehicles = searchController.findInventoryVehicle(searchField.getText().toString(), vehicleCategory,
                        SearchInventoryActivity.this, getApplicationContext(), (double) Integer.parseInt(desiredDistance.getDistance()));
 
 
