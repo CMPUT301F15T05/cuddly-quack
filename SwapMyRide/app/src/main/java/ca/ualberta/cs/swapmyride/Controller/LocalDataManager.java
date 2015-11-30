@@ -41,7 +41,7 @@ import ca.ualberta.cs.swapmyride.Model.User;
  */
 public class LocalDataManager {
     private String userFilePath = "";
-    private String photoFilePath = "photos/";
+    private String photoFilePath = "";
     private GsonBuilder builder = new GsonBuilder();
     private Gson gson = new Gson();
     private FileOutputStream outputStream;
