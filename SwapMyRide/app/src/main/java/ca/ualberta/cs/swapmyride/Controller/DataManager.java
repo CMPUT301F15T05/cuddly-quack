@@ -33,12 +33,10 @@ public class DataManager {
         //save user on disk
         ldm.saveUser(user);
 
-        /*
         if(networkAvailable()){
             //SAVE THE USER ON SERVER
             ndm.saveUser(user);
         }
-        */
     }
 
     /**
@@ -71,6 +69,13 @@ public class DataManager {
         }
         */
         ldm.deleteUser(username);
+    }
+
+    public void deletePhoto(String photoId){
+        if(networkAvailable()){
+            ndm.deletePhoto(photoId);
+        }
+        ldm.deletePhoto(photoId);
     }
 
     public boolean searchUserLocal(String username){

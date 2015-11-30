@@ -171,6 +171,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
                 dialog.dismiss();
                 User user = uController.getCurrentUser();
                 Vehicle toDelete = user.getInventory().getList().get(position);
+                
+                //wipe all photos associated with this vehicle.
+                for(UniqueID id : toDelete.getPhotoIds()){
+                    dm.deletePhoto(id.getID());
+                }
                 user.getInventory().delete(toDelete);
                 dm.saveUser(user);
                 finish();
