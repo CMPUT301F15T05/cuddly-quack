@@ -238,7 +238,6 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
     public void testAddFriends(){
         populateTestData();
-        populateThird();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Click search button
         final ActionMenuItemView add = mainMenu.getActionAddFriend();
@@ -257,7 +256,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         //search for string
         assertNotNull(searchFriendsActivity);
         EditText searchField = searchFriendsActivity.getSearchField();
-        searchField.setText("bill");
+        searchField.setText("alicemartin", TextView.BufferType.EDITABLE);
         final ImageButton search = searchFriendsActivity.getSearch();
         searchFriendsActivity.runOnUiThread(new Runnable() {
             @Override
@@ -321,9 +320,8 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         ViewFriendProfileActivity viewFriendProfileActivity = (ViewFriendProfileActivity)
                 vfpAM.waitForActivityWithTimeout(1000);
         TextView name = viewFriendProfileActivity.getFullName();
-        assertEquals(name, "Bill");
+        assertEquals(name.getText(), "Alice Martin");
         cleanUp();
-        cleanThird();
     }
 
     public void testAddItem(){
@@ -367,15 +365,45 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         LocalDataManager ldm = new LocalDataManager(getInstrumentation().getContext());
         User user1 = new User();
         User user2 = new User();
+        User user3 = new User();
 
         user1.setUserName("janesmith");
         user2.setUserName("bobjones");
         user1.setName("Jane Smith");
         user2.setName("Bob Jones");
+        user3.setUserName("alicemartin");
+        user3.setName("Alice Martin");
+
+        UserSingleton.addCurrentUser(user1);
+        user1.addFriend("bobjones");
 
         Vehicle v1 = new Vehicle();
         v1.setName("Jeep");
         v1.setBelongsTo("janesmith");
+        v1.setCategory(VehicleCategory.SUV);
+        v1.setPublic(true);
+        v1.setQuantity(1);
+        v1.setQuality(VehicleQuality.GOOD);
+
+        Vehicle v2 = new Vehicle();
+        v2.setName("Honda");
+        v2.setBelongsTo("bobjones");
+        v1.setCategory(VehicleCategory.SUV);
+        v1.setPublic(true);
+        v1.setQuantity(1);
+        v1.setQuality(VehicleQuality.GOOD);
+
+        Vehicle v3 = new Vehicle();
+        v3.setName("Toyota");
+        v3.setBelongsTo("alicemartin");
+        v1.setCategory(VehicleCategory.SUV);
+        v1.setPublic(true);
+        v1.setQuantity(1);
+        v1.setQuality(VehicleQuality.GOOD);
+
+        ldm.saveUser(user1);
+        ldm.saveUser(user2);
+        ldm.saveUser(user3);
 
     }
 
@@ -384,14 +412,11 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      * to ensure that it will not cause other issues by sticking around
      */
     public void cleanUp(){
+        LocalDataManager ldm = new LocalDataManager(getInstrumentation().getContext());
+        ldm.deleteUser("janesmith");
+        ldm.deleteUser("bobjones");
+        ldm.deleteUser("alicemartin");
     }
 
-    public void cleanThird(){
-    }
-
-
-    public void populateThird(){
-
-    }
 
 }

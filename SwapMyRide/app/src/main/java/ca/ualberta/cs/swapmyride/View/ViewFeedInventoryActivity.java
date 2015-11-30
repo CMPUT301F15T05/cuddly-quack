@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -58,6 +60,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feedinventory);
+        LocalDataManager ldm = new LocalDataManager(getApplicationContext());
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -85,15 +88,20 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         gallery.removeAllViews();
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         //load the picture from the first
-        /*
-        for (Photo _photo : vehicle.getPhotoArrayList()) {
+        for (UniqueID uid : vehicle.getPhotoIds()){
+            Photo photo;
+            if(UserSingleton.getDownloadPhotos()){
+                photo = ldm.loadPhoto(uid.getID());
+            }
+            else{
+                photo = new Photo(getApplicationContext());
+            }
             ImageView newImage = new ImageView(getApplicationContext());
-            newImage.setAdjustViewBounds(true);
+            newImage.setImageBitmap(photo.getImage());
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            //newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
-            newImage.setImageBitmap(_photo.getImage());
+            newImage.setAdjustViewBounds(true);
             gallery.addView(newImage);
-        }*/
+        }
 
 
         title.setText(vehicle.getName());

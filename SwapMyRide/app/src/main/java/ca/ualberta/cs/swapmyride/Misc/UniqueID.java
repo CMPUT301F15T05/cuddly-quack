@@ -22,7 +22,7 @@ import java.util.UUID;
  * enabling an easy way to compare if the objects are related.
  */
 public class UniqueID {
-    private final String id;
+    private String id;
 
     public UniqueID(){
         // http://www.javacirecep.com/utility/java-ways-to-generate-unique-ids-in-java/
@@ -57,5 +57,9 @@ public class UniqueID {
      */
     public Boolean isEqualID(UniqueID other){
         return (this.getID().equals(other.getID()));
+    }
+
+    public void setId(String myid){
+        this.id = myid;
     }
 }

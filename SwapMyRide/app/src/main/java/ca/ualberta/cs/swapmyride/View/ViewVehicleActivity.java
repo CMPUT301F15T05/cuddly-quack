@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -84,6 +85,8 @@ public class ViewVehicleActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        LocalDataManager ldm = new LocalDataManager(getApplicationContext());
+
         uController = new UserController(getApplicationContext());
 
         title = (TextView) findViewById(R.id.title);
@@ -117,15 +120,15 @@ public class ViewVehicleActivity extends AppCompatActivity {
 
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         //load the picture from the first
-        /*
-        for (Photo _photo : vehicle.getPhotoArrayList()) {
+        for (UniqueID uid : vehicle.getPhotoIds()){
+            Photo photo = ldm.loadPhoto(uid.getID());
             ImageView newImage = new ImageView(getApplicationContext());
-            newImage.setImageBitmap(_photo.getImage());
+            newImage.setImageBitmap(photo.getImage());
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             newImage.setAdjustViewBounds(true);
-            //newImage.setMaxWidth(40);
             gallery.addView(newImage);
-        }*/
+        }
+
         try {
             location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
             lat.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLatitude()));

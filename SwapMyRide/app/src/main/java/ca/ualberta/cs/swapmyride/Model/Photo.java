@@ -66,6 +66,7 @@ public class Photo{
         temp = stream.toByteArray();
         encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
         uid = new UniqueID();
+        uid.setId("-1");
         Log.i("Size", Integer.toString(temp.length));
     }
 
