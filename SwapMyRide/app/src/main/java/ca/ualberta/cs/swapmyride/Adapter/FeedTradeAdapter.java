@@ -27,6 +27,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
@@ -72,7 +73,7 @@ public class FeedTradeAdapter extends ArrayAdapter<Vehicle> {
             photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
         }
         else{
-            photo = new Photo(context);
+            photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
         }
         image.setBackground(new BitmapDrawable(photo.getImage()));
         // Return the completed view to render on screen
