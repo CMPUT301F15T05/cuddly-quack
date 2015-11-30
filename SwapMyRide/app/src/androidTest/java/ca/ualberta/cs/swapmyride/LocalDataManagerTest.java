@@ -216,7 +216,7 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         dataManager.savePhoto(photo);
 
         try{
-            Thread.sleep(50);
+            Thread.sleep(100);
         }catch (Exception e){
             e.printStackTrace();
         }
