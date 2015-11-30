@@ -78,4 +78,14 @@
         android:layout_above="@+id/userInventory"
         android:layout_marginBottom="35dp"
         android:layout_below="@+id/tool_bar" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Returned"
+        android:id="@+id/buttonReturned"
+        android:background="@color/colorPrimary"
+        android:layout_alignTop="@+id/counter"
+        android:layout_alignStart="@+id/counter"
+        android:layout_alignEnd="@+id/counter" />
 </RelativeLayout>

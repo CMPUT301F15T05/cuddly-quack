@@ -28,6 +28,10 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by Conner on 15-10-08.
+ *
+ * Takes encoding information from:
+ * http://developer.android.com/reference/android/util/Base64.html
+ *
  */
 public class PhotoTest extends ActivityInstrumentationTestCase2 {
 

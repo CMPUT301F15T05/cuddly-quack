@@ -50,15 +50,12 @@ public class TradesController {
         UserSingleton.getCurrentUser().addPendingTrade(pendingTrade);
 
         friend.getNotificationManager().notifyTrade(pendingTrade);
-
-        friend.getNotificationManager().notifyTrade(pendingTrade);
         UserSingleton.getCurrentUser().getNotificationManager().notifyTrade(pendingTrade);
 
         dataManager.saveUser(friend);
         dataManager.saveUser(UserSingleton.getCurrentUser());
     }
 
-    // TODO REMOVE FROM NOTIFICATION MANAGER
     public void deletePendingTrade(Trade trade) {
         //TODO MODIFY THIS TO NOT LOAD/SAVE SO OFTEN
         User borrower = dataManager.loadUser(trade.getBorrower());

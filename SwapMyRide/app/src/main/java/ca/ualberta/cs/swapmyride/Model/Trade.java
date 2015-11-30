@@ -43,6 +43,7 @@ public class Trade {
     private Boolean isAccepted = false;
     private Boolean isDeclined = false;
     private UniqueID uniqueID = new UniqueID();
+    private Boolean isBorrowing = false;
 
     /**
      * Constructs the trade with indication of who the two users
@@ -52,6 +53,13 @@ public class Trade {
     public Trade() {
         owner = "";
         borrower = "";
+    }
+
+    public void setBorrowing(){
+        isBorrowing = true;
+    }
+    public Boolean getIsBorrowing(){
+        return isBorrowing;
     }
 
     public String getOwner() {
@@ -102,17 +110,6 @@ public class Trade {
         this.borrowerItems.clear();
     }
 
-    /**
-     * sends notifications to the borrower and owner, and then adds the trade to
-     * the pending trades of each user.
-     */
-
-    public void send(){
-        //borrowerNotified = borrower.getNotificationManager().notifyTrade(this);
-        //owner.addPendingTrade(this);
-        //borrower.addPendingTrade(this);
-    }
-
     public Boolean getOwnerNotified() {
         return ownerNotified;
     }
@@ -125,46 +122,10 @@ public class Trade {
         return isAccepted;
     }
 
-    /**
-     * Accept allows a trade to be accepted and implements the functionality
-     * to send an email with more information to all parties.
-     */
-
-    public void accept(){
-        this.isAccepted = true;
-        //here is where we would send an email
-        //// TODO: ADD EMAIL FUNCTIONALITY
-        // No? Isn't that in the Activity?
-
-    }
-
     public Boolean getIsDeclined() {
         return isDeclined;
     }
 
-    /**
-     * accept allows a user to decline a trade
-     */
-
-    public void decline(){
-        this.isDeclined = true;
-    }
-
-    /**
-     * if a trade is declined, a new trade can be initialized with
-     * the same items from both sides pending changes
-     * @return Trade with roles swapped
-     */
-
-    public Trade makeCounterTrade(){
-        Trade counterTrade = new Trade();
-        counterTrade.setOwner(this.owner);
-        counterTrade.setBorrower(this.borrower);
-        counterTrade.setBorrowerItems(this.getOwnerItems());
-        counterTrade.setOwnerItems(this.getBorrowerItems());
-        counterTrade.send();
-        return counterTrade;
-    }
 
     /**
      * Functionality to swap out vehicles in a trade if needed
