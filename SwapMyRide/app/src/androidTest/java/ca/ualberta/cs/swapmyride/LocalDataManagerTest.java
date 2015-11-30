@@ -7,8 +7,10 @@ import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
+import ca.ualberta.cs.swapmyride.View.LoginActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
@@ -29,7 +31,14 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         user.setUserEmail("gbullock@ualbert.ca");
         Log.i("FilePath", getActivity().getBaseContext().getFileStreamPath(user.getUserName()).toString());
         uController.addCurrentUser(user);
+
         dataManager.saveUser(user);
+
+        try{
+            Thread.sleep(50);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         User loadTo = dataManager.loadUser("gbullock");
 
@@ -52,6 +61,12 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dm.saveUser(user);
 
+        try{
+            Thread.sleep(50);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         //check that the file exists
         assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
 
@@ -71,10 +86,18 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         user.setUserEmail("gbullock@ualbert.ca");
         Log.i("FilePath", getActivity().getBaseContext().getFileStreamPath(user.getUserName()).toString());
 
+        dataManager.deleteUser(user.getUserName());
+
         //ensure the file does not previously exist
         assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
 
         dataManager.saveUser(user);
+
+        try{
+            Thread.sleep(50);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         //check the file exists
         assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
@@ -96,6 +119,12 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         user.addItem(car);
 
         dataManager.saveUser(user);
+
+        try{
+            Thread.sleep(50);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         loadTo = dataManager.loadUser("gbullock");
 
@@ -141,6 +170,12 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dataManager.saveUser(user);
 
+        try{
+            Thread.sleep(50);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         //ensure the file now exists
         assertTrue(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
 
@@ -150,5 +185,51 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         //ensure the file no longer exists
         assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());;
+    }
+
+    public void testSavePhoto(){
+        LocalDataManager dataManager = new LocalDataManager(getActivity());
+        Photo photo = new Photo(getActivity());
+        Log.i("PhotoTest", "PhotoID - " + photo.getUid().getID());
+
+        dataManager.savePhoto(photo);
+
+        try{
+            Thread.sleep(100);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //assertTrue(dataManager.searchPhoto(photo.getUid().getID()));
+        assertTrue(getActivity().getBaseContext().getFileStreamPath(photo.getUid().getID()).exists());
+
+        dataManager.deletePhoto(photo.getUid().getID());
+
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(photo.getUid().getID()).exists());
+    }
+
+    public void testLoadPhoto(){
+        LocalDataManager dataManager = new LocalDataManager(getActivity());
+        Photo photo = new Photo(getActivity());
+        Log.i("PhotoTest", "PhotoID - " + photo.getUid().getID());
+
+        dataManager.savePhoto(photo);
+
+        try{
+            Thread.sleep(100);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        assertTrue(getActivity().getBaseContext().getFileStreamPath(photo.getUid().getID()).exists());
+
+        Photo photo2 = dataManager.loadPhoto(photo.getUid().getID());
+
+        Log.i("TestPhoto", "First Photo ID:" +photo.getUid().getID() + " Photo 2 ID: " + photo2.getUid().getID());
+        assertTrue(photo.equals(photo2));
+
+        dataManager.deletePhoto(photo.getUid().getID());
+
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(photo.getUid().getID()).exists());
     }
 }

@@ -28,13 +28,17 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by Conner on 15-10-08.
+ *
+ * Takes encoding information from:
+ * http://developer.android.com/reference/android/util/Base64.html
+ *
  */
 public class PhotoTest extends ActivityInstrumentationTestCase2 {
 
     public PhotoTest(){
         super(MainMenu.class);
     }
-
+/*
     // Use Case 23: Add Photo
     public void testAddPhotoToItem(){
         Photo picture = new Photo(getActivity());
@@ -90,6 +94,6 @@ public class PhotoTest extends ActivityInstrumentationTestCase2 {
         Vehicle vehicle = new Vehicle();  // need to be an vehicle stored on remote
 
     }
-    
+    */
 }
 

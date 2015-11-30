@@ -33,13 +33,6 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
 
         pendingTrades = (ListView)findViewById(R.id.pendingTrades);
 
-        ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
-
-        for (Trade trade: tradeList) {
-            String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
-
-            pendingTradeArray.add(s);
-        }
 
         pendingTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
