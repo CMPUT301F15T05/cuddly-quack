@@ -76,12 +76,16 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         quantity.setText(String.format("%d", vehicle.getQuantity()));
 
         //set the image in inventory
+
+
+        //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+        /*
         try {
             image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
         } catch (IndexOutOfBoundsException e) {
             image.setBackground(new BitmapDrawable(context.getResources(), new Photo(getContext()).getImage()));
         }
-
+        */
         // Return the completed view to render on screen
         return convertView;
     }

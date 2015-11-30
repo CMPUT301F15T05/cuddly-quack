@@ -83,6 +83,9 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
         //vehiclePicture.setBackground(new BitmapDrawable(getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
         gallery.removeAllViews();
+        //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+        //load the picture from the first
+        /*
         for (Photo _photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setAdjustViewBounds(true);
@@ -90,7 +93,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
             //newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
             newImage.setImageBitmap(_photo.getImage());
             gallery.addView(newImage);
-        }
+        }*/
 
 
         title.setText(vehicle.getName());

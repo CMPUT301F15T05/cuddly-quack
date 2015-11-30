@@ -174,8 +174,11 @@ public class AddInventoryActivity extends AppCompatActivity {
         if(loadVehicle){
             position = getIntent().getIntExtra("vehiclePosition", 0);
             loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
-            vehicle.setPhotoArrayList(loaded.getPhotoArrayList());
-            //vehicleImage.setBackground(new BitmapDrawable(getResources(), loaded.getPhoto().getImage()));
+
+
+            //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+            //load the picture from the first
+            //vehicle.setPhotoArrayList(loaded.getPhotoArrayList());
 
             vehicleName.setText(loaded.getName());
             vehicleQuantity.setText(loaded.getQuantity().toString());
@@ -194,6 +197,8 @@ public class AddInventoryActivity extends AppCompatActivity {
             vehicle.deletePhotoArrayList(getApplicationContext());
         }
 
+        //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+        /*
         gallery.removeAllViews();
         for (Photo photo : vehicle.getPhotoArrayList()) {
             ImageView newImage = new ImageView(this);
@@ -203,7 +208,7 @@ public class AddInventoryActivity extends AppCompatActivity {
             //newImage.getLayoutParams().height = 100;
             gallery.addView(newImage);
         }
-
+        */
         /**
          * This onClick listener implements the function that clicking on the default
          * image box at the top of the vehicle page will open the camera and allow the
@@ -229,6 +234,9 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
                 gallery.removeAllViews();
+
+                //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+                /*
                 for (Photo photo : vehicle.getPhotoArrayList()) {
                     ImageView newImage = new ImageView(getApplicationContext());
                     //newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
@@ -237,6 +245,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                     newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                     gallery.addView(newImage);
                 }
+                */
             }
         });
 
@@ -320,12 +329,16 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
                 gallery.removeAllViews();
+
+                //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+                //load the picture from the first
+                /*
                 for (Photo photo : vehicle.getPhotoArrayList()) {
                     ImageView newImage = new ImageView(getApplicationContext());
                     //newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
                     newImage.setImageBitmap(photo.getImage());
                     gallery.addView(newImage);
-                }
+                } */
                 return true;
             }
         });
@@ -393,6 +406,9 @@ public class AddInventoryActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Photo photo = new Photo(imageBitmap);
+
+            //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
+            /*
             vehicle.addPhoto(photo,getApplicationContext());
             gallery.removeAllViews();
             for (Photo _photo : vehicle.getPhotoArrayList()) {
@@ -403,6 +419,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
                 gallery.addView(newImage);
             }
+            */
 
         }
     }
