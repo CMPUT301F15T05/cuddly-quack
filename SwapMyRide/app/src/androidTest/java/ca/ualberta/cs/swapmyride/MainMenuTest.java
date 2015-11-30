@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -254,6 +255,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         SearchFriendsActivity searchFriendsActivity = (SearchFriendsActivity)
                 sAM.waitForActivityWithTimeout(1000);
         //search for string
+        assertNotNull(searchFriendsActivity);
         EditText searchField = searchFriendsActivity.getSearchField();
         searchField.setText("bill");
         final ImageButton search = searchFriendsActivity.getSearch();
@@ -362,6 +364,18 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      */
 
     public void populateTestData(){
+        LocalDataManager ldm = new LocalDataManager(getInstrumentation().getContext());
+        User user1 = new User();
+        User user2 = new User();
+
+        user1.setUserName("janesmith");
+        user2.setUserName("bobjones");
+        user1.setName("Jane Smith");
+        user2.setName("Bob Jones");
+
+        Vehicle v1 = new Vehicle();
+        v1.setName("Jeep");
+        v1.setBelongsTo("janesmith");
 
     }
 
@@ -377,6 +391,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
 
 
     public void populateThird(){
+
     }
 
 }
