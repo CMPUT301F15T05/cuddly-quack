@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
@@ -79,13 +80,15 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
 
 
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
-        /*
-        try {
-            image.setBackground(new BitmapDrawable(context.getResources(), vehicle.getPhotoArrayList().get(0).getImage()));
-        } catch (IndexOutOfBoundsException e) {
-            image.setBackground(new BitmapDrawable(context.getResources(), new Photo(getContext()).getImage()));
+        LocalDataManager ldm = new LocalDataManager(context);
+        Photo photo;
+        if(vehicle.getPhotoIds().size() > 0) {
+            photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
         }
-        */
+        else{
+           photo = new Photo(context);
+        }
+        image.setBackground(new BitmapDrawable(photo.getImage()));
         // Return the completed view to render on screen
         return convertView;
     }

@@ -74,4 +74,8 @@ public class UserSingleton {
     public static void setCurrentTrade(Trade currentTrade) {
         UserSingleton.currentTrade = currentTrade;
     }
+
+    public static boolean getDownloadPhotos(){
+        return currentUser.getDownloadImages();
+    }
 }

@@ -45,6 +45,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
@@ -83,6 +84,8 @@ public class AddInventoryActivity extends AppCompatActivity {
     UserController uController;
     Button delete;
     EditText location;
+
+    ArrayList<Photo> photos = new ArrayList<>();
 
     int position;
 
@@ -178,7 +181,7 @@ public class AddInventoryActivity extends AppCompatActivity {
 
             //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
             //load the picture from the first
-            //vehicle.setPhotoArrayList(loaded.getPhotoArrayList());
+            vehicle.setPhotoIds(loaded.getPhotoIds());
 
             vehicleName.setText(loaded.getName());
             vehicleQuantity.setText(loaded.getQuantity().toString());
@@ -188,27 +191,50 @@ public class AddInventoryActivity extends AppCompatActivity {
             categorySpinner.setSelection(loaded.getCategory().getPosition());
             // TODO: Fix null error issue
             //location.setText(loaded.getLocation().getPostalCode());
+            LocalDataManager ldm = new LocalDataManager(getApplicationContext());
+            for(UniqueID uid : vehicle.getPhotoIds()){
+                photos.add(ldm.loadPhoto(uid.getID()));
+            }
+            for(Photo photo : photos){
+                ImageView newImage = new ImageView(getApplicationContext());
+                newImage.setImageBitmap(photo.getImage());
+                newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                newImage.setAdjustViewBounds(true);
+                gallery.addView(newImage);
+            }
+
         }
 
         //default the photo to a new photo if we are not loading a vehicle
         else{
             // TODO: Default photo? Here or set in Vehicle?
-            //vehicle.setPhoto(new Photo(getApplicationContext()));
+            Photo photo = new Photo(getApplicationContext());
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setImageBitmap(photo.getImage());
+            newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            newImage.setAdjustViewBounds(true);
+            gallery.addView(newImage);
             vehicle.deletePhotoArrayList(getApplicationContext());
         }
 
+        LocalDataManager ldm = new LocalDataManager(getApplicationContext());
+
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
-        /*
-        gallery.removeAllViews();
-        for (Photo photo : vehicle.getPhotoArrayList()) {
-            ImageView newImage = new ImageView(this);
-            newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
-            newImage.setAdjustViewBounds(true);
+        //load the picture from the first
+        for (UniqueID uid : vehicle.getPhotoIds()){
+            Photo photo;
+            if(UserSingleton.getDownloadPhotos()){
+                photo = ldm.loadPhoto(uid.getID());
+            }
+            else{
+                photo = new Photo(getApplicationContext());
+            }
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setImageBitmap(photo.getImage());
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            //newImage.getLayoutParams().height = 100;
+            newImage.setAdjustViewBounds(true);
             gallery.addView(newImage);
         }
-        */
         /**
          * This onClick listener implements the function that clicking on the default
          * image box at the top of the vehicle page will open the camera and allow the
@@ -234,18 +260,34 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
                 gallery.removeAllViews();
+                Photo photo = new Photo(getApplicationContext());
+                ImageView newImage = new ImageView(getApplicationContext());
+                newImage.setImageBitmap(photo.getImage());
+                newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                newImage.setAdjustViewBounds(true);
+                gallery.addView(newImage);
+                LocalDataManager ldm = new LocalDataManager(getApplicationContext());
+                for(Photo photo1 : photos){
+                    ldm.deletePhoto(photo1.getUid().getID());
+                }
+                photos.clear();
 
                 //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
-                /*
-                for (Photo photo : vehicle.getPhotoArrayList()) {
-                    ImageView newImage = new ImageView(getApplicationContext());
-                    //newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
+                //load the picture from the first
+                if (vehicle.getPhotoIds().size() > 0 && UserSingleton.getDownloadPhotos()){
+                    gallery.removeAllViews();
+                }
+
+                for (UniqueID uid : vehicle.getPhotoIds()){
+                    if(UserSingleton.getDownloadPhotos()){
+                        photo = ldm.loadPhoto(uid.getID());
+                    }
+                    newImage = new ImageView(getApplicationContext());
                     newImage.setImageBitmap(photo.getImage());
-                    newImage.setAdjustViewBounds(true);
                     newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    newImage.setAdjustViewBounds(true);
                     gallery.addView(newImage);
                 }
-                */
             }
         });
 
@@ -265,6 +307,7 @@ public class AddInventoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // vehicle.setPhoto(vehicleImage);
                 Geolocation geolocation1 = new Geolocation();
+                LocalDataManager ldm = new LocalDataManager(getApplicationContext());
 
                 if (vehicleName.getText().toString().equals("")) {
                     Toast.makeText(AddInventoryActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
@@ -294,6 +337,11 @@ public class AddInventoryActivity extends AppCompatActivity {
                 vehicle.setComments(vehicleComments.getText().toString());
                 vehicle.setPublic(vehiclePublic.isChecked());
                 vehicle.setBelongsTo(UserSingleton.getCurrentUser().getUserName());
+
+                for(Photo photo : photos){
+                    vehicle.addPhoto(photo.getUid());
+                    ldm.savePhoto(photo);
+                }
 
                 //add the vehicle to our current user.
                 if(loadVehicle){
@@ -325,20 +373,26 @@ public class AddInventoryActivity extends AppCompatActivity {
         gallery.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                //vehicle.getPhoto().deleteImage(getApplicationContext());
-                //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
                 gallery.removeAllViews();
+                LocalDataManager ldm = new LocalDataManager(getApplicationContext());
 
                 //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
                 //load the picture from the first
-                /*
-                for (Photo photo : vehicle.getPhotoArrayList()) {
+                for (UniqueID uid : vehicle.getPhotoIds()){
+                    Photo photo;
+                    if(UserSingleton.getDownloadPhotos()){
+                        photo = ldm.loadPhoto(uid.getID());
+                    }
+                    else{
+                        photo = new Photo(getApplicationContext());
+                    }
                     ImageView newImage = new ImageView(getApplicationContext());
-                    //newImage.setBackground(new BitmapDrawable(getResources(), photo.getImage()));
                     newImage.setImageBitmap(photo.getImage());
+                    newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    newImage.setAdjustViewBounds(true);
                     gallery.addView(newImage);
-                } */
+                }
                 return true;
             }
         });
@@ -406,22 +460,14 @@ public class AddInventoryActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             Photo photo = new Photo(imageBitmap);
-
-            //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
-            /*
-            vehicle.addPhoto(photo,getApplicationContext());
-            gallery.removeAllViews();
-            for (Photo _photo : vehicle.getPhotoArrayList()) {
-                ImageView newImage = new ImageView(getApplicationContext());
-                newImage.setImageBitmap(_photo.getImage());
-                newImage.setAdjustViewBounds(true);
-                newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                //newImage.setBackground(new BitmapDrawable(getResources(), _photo.getImage()));
-                gallery.addView(newImage);
-            }
-            */
-
+            ImageView newImage = new ImageView(getApplicationContext());
+            newImage.setImageBitmap(photo.getImage());
+            newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            newImage.setAdjustViewBounds(true);
+            gallery.addView(newImage);
+            photos.add(photo);
         }
+
     }
 
     /**

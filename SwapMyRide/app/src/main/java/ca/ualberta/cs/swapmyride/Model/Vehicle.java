@@ -123,7 +123,7 @@ public class Vehicle {
     }
 
     //TODO: FIX THIS!!!
-    public void addPhoto(UniqueID id, Context context) {
+    public void addPhoto(UniqueID id) {
         this.photoIds.add(id);
     }
 
