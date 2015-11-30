@@ -108,4 +108,8 @@ public class Photo{
     public boolean equals(Photo other) {
         return this.getImage().sameAs(other.getImage());
     }
+
+    public UniqueID getUid(){
+        return uid;
+    }
 }

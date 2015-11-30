@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
@@ -40,6 +41,7 @@ import ca.ualberta.cs.swapmyride.Model.User;
  */
 public class LocalDataManager {
     private String userFilePath = "";
+    private String photoFilePath = "photos/";
     private GsonBuilder builder = new GsonBuilder();
     private Gson gson = new Gson();
     private FileOutputStream outputStream;
@@ -138,7 +140,7 @@ public class LocalDataManager {
 
     public void deleteUser(String username){
         File dir = context.getFilesDir();
-        File file = new File(dir, username);
+        File file = new File(dir, userFilePath + username);
         file.delete();
     }
 
@@ -155,4 +157,66 @@ public class LocalDataManager {
     }
 
 
+    public void savePhoto(final Photo photo){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String photoJson = gson.toJson(photo);
+                try{
+                    //Log.i("USERFILEPATH",userFilePath+user.getUserName());
+                    Log.i("NEWDATAMANAGER", "INSIDE LOCAL SAVE - Photo: "+ photo.getUid().getID());
+                    outputStream = context.openFileOutput(photoFilePath + photo.getUid().getID(),
+                            Context.MODE_PRIVATE);
+                    outputStream.write(photoJson.getBytes());
+                    outputStream.close();
+                }
+                catch (FileNotFoundException e){
+                    e.printStackTrace();
+                }
+                catch (IOException e){
+                    throw new RuntimeException();
+                }
+            }
+        });
+
+        thread.start();
+
+    }
+
+    public Photo loadPhoto(String photoId){
+        Photo photo;
+        try {
+            FileInputStream fis = context.openFileInput(photoFilePath + photoId);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            String json = sb.toString();
+            Gson gson = new Gson();
+            photo = gson.fromJson(json, Photo.class);
+        }
+        catch (FileNotFoundException e){
+            photo = null;
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        Log.i("NEWDATAMANAGER", "INSIDE LOCAL LOAD - PHOTO: " + photoId);
+        return photo;
+    }
+
+    public void deletePhoto(String photoId){
+        File dir = context.getFilesDir();
+        File file = new File(dir, photoFilePath + photoId);
+        file.delete();
+    }
+
+    public boolean searchPhoto(String photoId) {
+        if(photoId.equals("")) return false;
+        return context.getFileStreamPath(photoFilePath + photoId).exists();
+    }
 }
