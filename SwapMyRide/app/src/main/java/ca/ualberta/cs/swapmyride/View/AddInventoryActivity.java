@@ -45,6 +45,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
@@ -208,7 +209,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         //default the photo to a new photo if we are not loading a vehicle
         else{
             // TODO: Default photo? Here or set in Vehicle?
-            Photo photo = new Photo(getApplicationContext());
+            Photo photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setImageBitmap(photo.getImage());
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -227,7 +228,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 photo = ldm.loadPhoto(uid.getID());
             }
             else{
-                photo = new Photo(getApplicationContext());
+                photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
             }
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setImageBitmap(photo.getImage());
@@ -260,7 +261,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //vehicleImage.setBackground(new BitmapDrawable(getResources(), vehicle.getPhoto().getImage()));
                 vehicle.deletePhotoArrayList(getApplicationContext());
                 gallery.removeAllViews();
-                Photo photo = new Photo(getApplicationContext());
+                Photo photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
                 ImageView newImage = new ImageView(getApplicationContext());
                 newImage.setImageBitmap(photo.getImage());
                 newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -385,7 +386,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                         photo = ldm.loadPhoto(uid.getID());
                     }
                     else{
-                        photo = new Photo(getApplicationContext());
+                        photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
                     }
                     ImageView newImage = new ImageView(getApplicationContext());
                     newImage.setImageBitmap(photo.getImage());

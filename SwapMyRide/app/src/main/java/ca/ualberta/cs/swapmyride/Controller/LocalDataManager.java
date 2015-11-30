@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import ca.ualberta.cs.swapmyride.Misc.DefaultPhotoSingleton;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 
@@ -198,7 +199,7 @@ public class LocalDataManager {
             photo = gson.fromJson(json, Photo.class);
         }
         catch (FileNotFoundException e){
-            photo = new Photo(context);
+            photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
         }
         catch (IOException e){
             throw new RuntimeException(e);
