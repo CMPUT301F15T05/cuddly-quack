@@ -315,7 +315,7 @@ public class AddInventoryActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (vehicleQuantity.getText().toString().equals("0")) {
+                if (vehicleQuantity.getText().toString().equals("0") || vehicleQuantity.getText().toString().equals("")) {
                     Toast.makeText(AddInventoryActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
                     return;
                 }
