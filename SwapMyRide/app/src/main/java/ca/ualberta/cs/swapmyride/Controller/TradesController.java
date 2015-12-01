@@ -81,10 +81,7 @@ public class TradesController {
         dataManagerLocal.saveUser(UserSingleton.getCurrentUser());
     }
 
-
-
     public void deletePendingTrade(Trade trade) {
-        //TODO MODIFY THIS TO NOT LOAD/SAVE SO OFTEN
         User borrower = dataManager.retrieveUser(trade.getBorrower());
         User owner = dataManager.retrieveUser(trade.getOwner());
 
@@ -155,6 +152,34 @@ public class TradesController {
         UserSingleton.addCurrentUser(borrower);
     }
 
+    public void returnPendingTrade(Trade trade) throws InvalidTradeException {
+        // check that items are in inventory for both parties
+        if (!(validTrade(trade))) {
+            throw new InvalidTradeException("Trade is no longer valid");
+        }
+
+        User borrower = dataManager.retrieveUser(trade.getBorrower());
+        User owner = dataManager.retrieveUser(trade.getOwner());
+
+        // remove from pendingList
+        owner.getPendingTrades().delete(trade.getUniqueID());
+        borrower.getPendingTrades().delete(trade.getUniqueID());
+
+        // add to pastTradesList
+        owner.addPastTrade(trade);
+        borrower.addPastTrade(trade);
+
+        // save users
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+
+        dataManagerLocal.saveUser(borrower);
+        dataManagerLocal.saveUser(owner);
+
+        // save userSingleton
+        UserSingleton.addCurrentUser(owner);
+    }
+
     public void counterPendingTrade(Context context, Trade trade){
 
         // Saving done in deleteTrade
@@ -209,7 +234,6 @@ public class TradesController {
         for (Vehicle tradeVehicle: tradeVehicles) {
             Boolean vehicleInInventory = false;
             for (Vehicle inventoryVehicle: inventoryVehicles) {
-                //TODO Compare vehicles
                 if (tradeVehicle.getUniqueID().isEqualID(inventoryVehicle.getUniqueID())) {
                     vehicleInInventory = true;
                     break;
