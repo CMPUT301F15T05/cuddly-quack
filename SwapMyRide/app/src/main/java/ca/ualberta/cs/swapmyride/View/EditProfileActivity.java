@@ -57,7 +57,7 @@ public class EditProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        user = userSingleton.getCurrentUser();
+        user = UserSingleton.getCurrentUser();
         dataManager = new DataManager(EditProfileActivity.this);
 
         TextView usernameTextView = (TextView) findViewById(R.id.usernameField);

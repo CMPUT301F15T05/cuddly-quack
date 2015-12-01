@@ -147,8 +147,7 @@ public class User {
         if(!this.getFriends().getFriendList().equals(test.getFriends().getFriendList())) return false;
         if(this.downloadImages != test.getDownloadImages()) return false;
         if(!this.getPendingTrades().getTrades().equals(test.getPendingTrades().getTrades())) return false;
-        if(!this.getPastTrades().getTrades().equals(test.getPastTrades().getTrades())) return false;
+        return this.getPastTrades().getTrades().equals(test.getPastTrades().getTrades());
 
-        return true;
     }
 }

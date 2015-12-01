@@ -183,7 +183,7 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         dataManager.deleteUser(user.getUserName());
 
         //ensure the file no longer exists
-        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());;
+        assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
     }
 
     public void testSavePhoto(){

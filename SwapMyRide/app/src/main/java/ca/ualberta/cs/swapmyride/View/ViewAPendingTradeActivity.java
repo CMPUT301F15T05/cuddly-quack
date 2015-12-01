@@ -134,9 +134,9 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                     sender.setData(Uri.parse("mailto:"));
                     String ownerEmail = new LocalDataManager(getApplicationContext()).loadUser(tradeToDisplay.getOwner()).getUserEmail();
                     String borrowerEmail = new LocalDataManager(getApplicationContext()).loadUser(tradeToDisplay.getBorrower()).getUserEmail();
-                    sender.putExtra(sender.EXTRA_EMAIL, new String[] {ownerEmail, borrowerEmail});
-                    sender.putExtra(sender.EXTRA_SUBJECT, "[SwapMyRide] Trade Complete");
-                    sender.putExtra(sender.EXTRA_TEXT, body);
+                    sender.putExtra(Intent.EXTRA_EMAIL, new String[] {ownerEmail, borrowerEmail});
+                    sender.putExtra(Intent.EXTRA_SUBJECT, "[SwapMyRide] Trade Complete");
+                    sender.putExtra(Intent.EXTRA_TEXT, body);
                     startActivity(Intent.createChooser(sender, "email"));
                 } catch (InvalidTradeException e) {
                     notValidTradeDialog();
