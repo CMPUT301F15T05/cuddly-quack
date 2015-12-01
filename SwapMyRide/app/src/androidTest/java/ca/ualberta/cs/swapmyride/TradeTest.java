@@ -24,8 +24,11 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  * Created by adrianomarini on 2015-10-08.
  */
 public class TradeTest extends ActivityInstrumentationTestCase2 {
-    public TradeTest(){super(MainMenu.class);}
     public Photo picture;
+
+    public TradeTest() {
+        super(MainMenu.class);
+    }
     /*
 
     public ArrayList<Photo> photoArrayList;

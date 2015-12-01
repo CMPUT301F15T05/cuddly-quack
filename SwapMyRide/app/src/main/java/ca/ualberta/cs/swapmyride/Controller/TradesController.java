@@ -78,7 +78,7 @@ public class TradesController {
         borrower.getNotificationManager().removeTrade(trade);
 
         // make sure to save the right user back to the userSingleton!
-        if(borrower.getUserName().equals(UserSingleton.getCurrentUser().getUserName())) {
+        if (borrower.getUserName().equals(UserSingleton.getCurrentUser().getUserName())) {
             UserSingleton.addCurrentUser(borrower);
         } else {
             UserSingleton.addCurrentUser(owner);
@@ -128,7 +128,7 @@ public class TradesController {
         UserSingleton.addCurrentUser(borrower);
     }
 
-    public void counterPendingTrade(Context context, Trade trade){
+    public void counterPendingTrade(Context context, Trade trade) {
 
         // Saving done in deleteTrade
         deletePendingTrade(trade);
@@ -139,11 +139,11 @@ public class TradesController {
         context.startActivity(intent);
     }
 
-    public TradeList getActiveTrades(){
+    public TradeList getActiveTrades() {
         return UserSingleton.getCurrentUser().getPendingTrades();
     }
 
-    public TradeList getPastTrades(){
+    public TradeList getPastTrades() {
         return UserSingleton.getCurrentUser().getPastTrades();
     }
 
@@ -161,9 +161,9 @@ public class TradesController {
 
     public Boolean validVehicles(ArrayList<Vehicle> tradeVehicles, ArrayList<Vehicle> inventoryVehicles) {
 
-        for (Vehicle tradeVehicle: tradeVehicles) {
+        for (Vehicle tradeVehicle : tradeVehicles) {
             Boolean vehicleInInventory = false;
-            for (Vehicle inventoryVehicle: inventoryVehicles) {
+            for (Vehicle inventoryVehicle : inventoryVehicles) {
                 //TODO Compare vehicles
                 if (tradeVehicle.getUniqueID().isEqualID(inventoryVehicle.getUniqueID())) {
                     vehicleInInventory = true;

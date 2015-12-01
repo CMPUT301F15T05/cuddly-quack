@@ -30,7 +30,7 @@ public class ViewPastTradesActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        pastTrades = (ListView)findViewById(R.id.pastTrades);
+        pastTrades = (ListView) findViewById(R.id.pastTrades);
 
         pastTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class ViewPastTradesActivity extends AppCompatActivity {
 
         ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPastTrades().getTrades();
 
-        for (Trade trade: tradeList) {
+        for (Trade trade : tradeList) {
             String s = String.format("%s traded %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
 
             pastTradeArray.add(s);

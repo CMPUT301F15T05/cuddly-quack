@@ -60,7 +60,7 @@ public class SearchInventoryActivity extends AppCompatActivity {
      * OnCreate opens the opportunity for a user to enter a string or
      * select a category. This is then put into the SearchController, and
      * the returned ArrayList is displayed.
-     *
+     * <p/>
      * The user has the option to search their own inventory, or search in general
      * -- hence the dual button interface.
      *

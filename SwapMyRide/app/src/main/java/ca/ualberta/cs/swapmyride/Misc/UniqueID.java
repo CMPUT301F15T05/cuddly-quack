@@ -24,7 +24,7 @@ import java.util.UUID;
 public class UniqueID {
     private String id;
 
-    public UniqueID(){
+    public UniqueID() {
         // http://www.javacirecep.com/utility/java-ways-to-generate-unique-ids-in-java/
         this.id = UUID.randomUUID().toString();
     }
@@ -32,14 +32,14 @@ public class UniqueID {
     /**
      * Private constructor used for copying the unique id over in duplicateID
      */
-    private UniqueID(String id){
+    private UniqueID(String id) {
         this.id = id;
     }
 
     /**
      * Returns a new UniqueID object and duplicates the id field
      */
-    public UniqueID duplicateID(){
+    public UniqueID duplicateID() {
         return new UniqueID(this.getID());
     }
 
@@ -55,11 +55,11 @@ public class UniqueID {
      *
      * @param other is the second UniqueID object to compare to
      */
-    public Boolean isEqualID(UniqueID other){
+    public Boolean isEqualID(UniqueID other) {
         return (this.getID().equals(other.getID()));
     }
 
-    public void setId(String myid){
+    public void setId(String myid) {
         this.id = myid;
     }
 }

@@ -25,30 +25,32 @@ public class RetrievePhotoRunnable implements Runnable {
     private String url;
     private Gson gson = new Gson();
 
-    public RetrievePhotoRunnable(String photoId, String url){
+    public RetrievePhotoRunnable(String photoId, String url) {
         this.url = url + "photos/" + photoId;
     }
+
     /*
      * Returns the photo if found by the retrieve function. Make sure to wait for the thread to
      * Finish first.
      */
-    public Photo getPhoto(){
+    public Photo getPhoto() {
         return this.photo;
     }
 
-    public void run(){
+    public void run() {
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
         HttpResponse response = null;
 
         SearchHit<Photo> hit = null;
-        try{
+        try {
             response = httpClient.execute(httpGet);
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Type searchHitType = new TypeToken<SearchHit<Photo>>(){}.getType();
+        Type searchHitType = new TypeToken<SearchHit<Photo>>() {
+        }.getType();
 
         try {
             hit = gson.fromJson(

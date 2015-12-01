@@ -41,7 +41,7 @@ public class Vehicle {
     private UniqueID uniqueID = new UniqueID();
     private Address location;
 
-    public Vehicle(){
+    public Vehicle() {
         //TODO: add default constructor for photo
         name = "";
         quantity = 0;
@@ -103,16 +103,15 @@ public class Vehicle {
         this.isPublic = isPublic;
     }
 
-    public void setPhotoIds(ArrayList<UniqueID> photoArrayList){
-        this.photoIds = photoArrayList;
-    }
-
-    public ArrayList<UniqueID> getPhotoIds(){
+    public ArrayList<UniqueID> getPhotoIds() {
         return this.photoIds;
     }
 
+    public void setPhotoIds(ArrayList<UniqueID> photoArrayList) {
+        this.photoIds = photoArrayList;
+    }
 
-    public void deletePhotoArrayList(Context context){
+    public void deletePhotoArrayList(Context context) {
         this.photoIds.clear();
     }
 
@@ -137,11 +136,11 @@ public class Vehicle {
         this.uniqueID = uniqueID;
     }
 
-    public void setLocation(Address address) {
-        this.location = address;
+    public Address getLocation() {
+        return this.location;
     }
 
-    public Address getLocation(){
-        return this.location;
+    public void setLocation(Address address) {
+        this.location = address;
     }
 }

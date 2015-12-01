@@ -20,26 +20,26 @@ import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
-public class ConfigurationTest extends ActivityInstrumentationTestCase2{
-    public ConfigurationTest(){
+public class ConfigurationTest extends ActivityInstrumentationTestCase2 {
+    public ConfigurationTest() {
         super(MainMenu.class);
     }
 
     // Use Case 31: Download Image Preference
     //public void testImagePreference(){
-        //User user = new User();
-        //user.setDownloadImages(false);
-        //Image image = new Image();
-        //autoDownloadImage should return true if the image downloads
-        //boolean downloaded = autoDownloadImage(image);
-        //assertFalse(downloaded);
-        //when the user selects to download an image, it should download
-        //downloaded = manualDownloadImage(image);
-        //assertTrue(downloaded);
-   // }
+    //User user = new User();
+    //user.setDownloadImages(false);
+    //Image image = new Image();
+    //autoDownloadImage should return true if the image downloads
+    //boolean downloaded = autoDownloadImage(image);
+    //assertFalse(downloaded);
+    //when the user selects to download an image, it should download
+    //downloaded = manualDownloadImage(image);
+    //assertTrue(downloaded);
+    // }
 
     // Use Case 32: Edit Profile
-    public void testEditProfile(){
+    public void testEditProfile() {
         User user = new User();
         user.setName("gbullock");
         user.setUserName("Garry");

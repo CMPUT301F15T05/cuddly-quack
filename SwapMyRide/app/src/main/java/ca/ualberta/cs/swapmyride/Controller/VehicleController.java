@@ -35,22 +35,22 @@ public class VehicleController {
     }
     */
 
-    public void addVehicle(Vehicle vehicle){
+    public void addVehicle(Vehicle vehicle) {
         UserSingleton.getCurrentUser().addItem(vehicle);
     }
 
     //I believe this method should be broken up into several methods that update specific attributes
     //of a vehicle... ie editVehicleName, editVehicleQuantity. It should also take two arguments,
     //the vehicle to edit, and what should be changed.
-    public void editVehicle(Vehicle vehicle){
+    public void editVehicle(Vehicle vehicle) {
 
     }
 
-    public void addPhoto(Drawable photo){
+    public void addPhoto(Drawable photo) {
 
     }
 
-    public void deletePhoto(Vehicle vehicle, Context context){
+    public void deletePhoto(Vehicle vehicle, Context context) {
         vehicle.deletePhotoArrayList(context);
     }
 }

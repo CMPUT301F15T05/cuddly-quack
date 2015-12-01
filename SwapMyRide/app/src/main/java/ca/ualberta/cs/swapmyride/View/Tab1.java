@@ -19,9 +19,9 @@ package ca.ualberta.cs.swapmyride.View;
  * This is the tab where the feeds of items will appear that a person can
  * browse and select from. All of the items here are items from someone else's
  * inventory.
- *
+ * <p/>
  * Has toolbar at the top with search, add friend, and settings menu functionality!
- *
+ * <p/>
  * Created by Daniel on 2015-10-24.
  */
 
@@ -84,7 +84,7 @@ public class Tab1 extends Fragment {
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),ViewFeedInventoryActivity.class);
+                Intent intent = new Intent(getActivity(), ViewFeedInventoryActivity.class);
                 UserSingleton.setFeedViewVehicle(arrayOfVehicle.get(position));
                 startActivity(intent);
             }
@@ -115,7 +115,7 @@ public class Tab1 extends Fragment {
 
     }
 
-    public ListView getInventoryList(){
+    public ListView getInventoryList() {
         return inventory;
     }
 

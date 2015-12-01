@@ -97,7 +97,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         });
     }
 
-    public void confirmDialog(){
+    public void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("Are you SURE you want to confirm this trade? It is a permanent Action!");
         builder.setCancelable(false);
@@ -134,7 +134,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                     sender.setData(Uri.parse("mailto:"));
                     String ownerEmail = new LocalDataManager(getApplicationContext()).loadUser(tradeToDisplay.getOwner()).getUserEmail();
                     String borrowerEmail = new LocalDataManager(getApplicationContext()).loadUser(tradeToDisplay.getBorrower()).getUserEmail();
-                    sender.putExtra(Intent.EXTRA_EMAIL, new String[] {ownerEmail, borrowerEmail});
+                    sender.putExtra(Intent.EXTRA_EMAIL, new String[]{ownerEmail, borrowerEmail});
                     sender.putExtra(Intent.EXTRA_SUBJECT, "[SwapMyRide] Trade Complete");
                     sender.putExtra(Intent.EXTRA_TEXT, body);
                     startActivity(Intent.createChooser(sender, "email"));
@@ -154,7 +154,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void notValidTradeDialog(){
+    public void notValidTradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("The trade is no longer valid! Do you wish to KEEP the trade for later or DELETE it.");
         builder.setCancelable(false);
@@ -175,7 +175,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void counterTradeDialog(){
+    public void counterTradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("Are you SURE you want to counter this trade? It is a permanent Action!");
         builder.setCancelable(false);

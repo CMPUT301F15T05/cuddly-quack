@@ -25,7 +25,8 @@ import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 public class TradeList {
     private ArrayList<Trade> trades = new ArrayList<Trade>();
 
-    public TradeList() {}
+    public TradeList() {
+    }
 
     public ArrayList<Trade> getTrades() {
         return trades;
@@ -35,19 +36,19 @@ public class TradeList {
         this.trades = trades;
     }
 
-    public void add(Trade trade){
+    public void add(Trade trade) {
         trades.add(trade);
     }
 
-    public int getSize(){
+    public int getSize() {
         return trades.size();
     }
 
-    public Trade get(int index){
+    public Trade get(int index) {
         return trades.get(index);
     }
 
-    public void delete(Trade trade){
+    public void delete(Trade trade) {
         int index = this.trades.indexOf(trade);
         this.trades.remove(index);
     }
@@ -55,7 +56,7 @@ public class TradeList {
     public void delete(UniqueID uniqueID) {
         int length = trades.size();
         int index = 0;
-        for (Trade trade: trades) {
+        for (Trade trade : trades) {
             if (trade.getUniqueID().isEqualID(uniqueID)) {
                 trades.remove(index);
             }
@@ -65,10 +66,11 @@ public class TradeList {
 
     /**
      * Gets all of a users past and pending trades
+     *
      * @param user
      * @return ArrayList of all trades
      */
-    public ArrayList<Trade> getUserTrades(User user){
+    public ArrayList<Trade> getUserTrades(User user) {
         TradeList pendingTrades = user.getPendingTrades();
         TradeList pastTrades = user.getPastTrades();
         ArrayList<Trade> miniTradeList = new ArrayList<>();

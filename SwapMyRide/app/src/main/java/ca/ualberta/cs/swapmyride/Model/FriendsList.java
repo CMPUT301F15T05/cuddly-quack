@@ -30,37 +30,42 @@ public class FriendsList {
     /**
      * Constructor - takes no inputs but initializes the object.
      */
-    public FriendsList(){
+    public FriendsList() {
         friendList = new ArrayList<>();
     }
 
     /**
      * Taking a username, add this person to a user's friends
+     *
      * @param username
      */
-    public void addFriend(String username){
+    public void addFriend(String username) {
         friendList.add(username);
     }
 
     /**
      * Taking a username, remove this person from a user's friends.
+     *
      * @param username
      */
-    public void removeFriend(String username){
+    public void removeFriend(String username) {
         friendList.remove(username);
     }
 
     /**
      * @return Size of FriendsList
      */
-    public int size(){return friendList.size();}
+    public int size() {
+        return friendList.size();
+    }
 
     /**
      * Taking a username, attempts to find username in list
+     *
      * @param username
      * @return True if found | False if not found
      */
-    public boolean findUser(String username){
+    public boolean findUser(String username) {
         return friendList.contains(username);
     }
 
@@ -70,12 +75,13 @@ public class FriendsList {
      *
      * @return True if found | False if not found
      */
-    public boolean hasUser(String username){
+    public boolean hasUser(String username) {
         return friendList.contains(username);
     }
 
     /**
      * Simple getter, returning the array list if it needs to be iterated through.
+     *
      * @return friendList
      */
     public ArrayList<String> getFriendList() {

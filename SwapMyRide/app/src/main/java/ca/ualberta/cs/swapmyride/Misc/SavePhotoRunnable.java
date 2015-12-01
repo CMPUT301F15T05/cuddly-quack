@@ -21,14 +21,16 @@ public class SavePhotoRunnable implements Runnable {
     private Photo photo;
     private String url;
     private Gson gson = new Gson();
+
     //private
-    public SavePhotoRunnable(final Photo photo, final String url){
+    public SavePhotoRunnable(final Photo photo, final String url) {
         this.photo = photo;
         this.url = url + "photos/" + photo.getUid().getID();
         Log.i("NetworkDataManager", this.url);
     }
+
     /* Based on https://github.com/rayzhangcl/ESDemo and https://github.com/joshua2ua/AndroidElasticSearch */
-    public  void run(){
+    public void run() {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpAdd = new HttpPost(url);
         HttpResponse response;
@@ -36,7 +38,7 @@ public class SavePhotoRunnable implements Runnable {
 
         try {
             stringEntity = new StringEntity(gson.toJson(photo));
-        } catch (UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -48,7 +50,7 @@ public class SavePhotoRunnable implements Runnable {
             response = httpClient.execute(httpAdd);
             String status = response.getStatusLine().toString();
             Log.i("NetworkDataManager", status);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

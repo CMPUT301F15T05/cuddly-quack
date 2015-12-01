@@ -11,9 +11,11 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  * Created by Garry on 2015-11-25.
  */
 public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
-    public NetworkDataManagerTest(){super(MainMenu.class);}
+    public NetworkDataManagerTest() {
+        super(MainMenu.class);
+    }
 
-    public void testSaveUser(){
+    public void testSaveUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         User user = new User();
         user.setName("Garry");
@@ -24,7 +26,7 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.saveUser(user);
     }
 
-    public void testDeleteUser(){
+    public void testDeleteUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         User user = new User();
         user.setName("Garry");
@@ -38,9 +40,9 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
 
 
         //wait a decent amount of time to ensure the save has time to happen
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -49,7 +51,7 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         Log.i("NetworkDataManager", "Deleted User!");
     }
 
-    public void testRetrieveUser(){
+    public void testRetrieveUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         User user = new User();
         User user2;
@@ -63,9 +65,9 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         Log.i("NetworkDataManager", "Saved User!");
 
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -75,9 +77,9 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         Log.i("NetworkDataManager", "Users Equal!");
         //wait a decent amount of time to ensure the save has time to happen
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -86,7 +88,7 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
         Log.i("NetworkDataManager", "Deleted User!");
     }
 
-    public void testSearchUser(){
+    public void testSearchUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         User user = new User();
         User user2;
@@ -98,21 +100,21 @@ public class NetworkDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         ndm.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        assertTrue("Could not find the user",ndm.searchUser(user.getUserName()));
+        assertTrue("Could not find the user", ndm.searchUser(user.getUserName()));
 
         assertFalse("Found a user that doesnt exist!", ndm.searchUser("NotExistingUser"));
 
         ndm.deleteUser(user.getUserName());
 
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

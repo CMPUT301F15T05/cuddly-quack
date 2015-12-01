@@ -34,8 +34,8 @@ import ca.ualberta.cs.swapmyride.View.LoginActivity;
  * Created by Daniel on 2015-11-26.
  */
 
-    public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
-    public TradeControllerTest(){
+public class TradeControllerTest extends ActivityInstrumentationTestCase2 {
+    public TradeControllerTest() {
         super(LoginActivity.class);
     }
 

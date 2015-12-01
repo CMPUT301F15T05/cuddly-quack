@@ -18,11 +18,12 @@ package ca.ualberta.cs.swapmyride.View;
 /**
  * This is the tab where a user can access their friends, their trades, and their
  * profile.
- *
+ * <p/>
  * Has toolbar at the top with search, add friend, and settings menu functionality!
- *
+ * <p/>
  * Created by Daniel on 2015-10-24.
  */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -57,7 +58,7 @@ public class Tab3 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab3,container,false);
+        View v = inflater.inflate(R.layout.tab3, container, false);
 
         viewFriends = (TextView) v.findViewById(R.id.viewFriends);
         pastTrades = (TextView) v.findViewById(R.id.pastTrades);
@@ -68,7 +69,7 @@ public class Tab3 extends Fragment {
         viewFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ViewFriendsActivity.class);
+                Intent intent = new Intent(getActivity(), ViewFriendsActivity.class);
                 startActivity(intent);
             }
         });

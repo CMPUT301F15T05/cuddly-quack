@@ -13,22 +13,26 @@ public class DefaultPhotoSingleton {
     private Bitmap image;
     private Photo photo;
 
-    public void init(Context context){
-        photo = new Photo(context);
-        image = photo.getImage();
+    private DefaultPhotoSingleton() {
     }
 
-    public Bitmap getImage(){return image;}
-
-    public Photo getDefaultPhoto(){return photo; }
-
     public static DefaultPhotoSingleton getInstance() {
-        if(ourInstance == null){
+        if (ourInstance == null) {
             ourInstance = new DefaultPhotoSingleton();
         }
         return ourInstance;
     }
 
-    private DefaultPhotoSingleton() {
+    public void init(Context context) {
+        photo = new Photo(context);
+        image = photo.getImage();
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public Photo getDefaultPhoto() {
+        return photo;
     }
 }

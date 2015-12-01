@@ -32,7 +32,9 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  */
 
 public class OfflineTest extends ActivityInstrumentationTestCase2 {
-    public OfflineTest() {super(MainMenu.class); }
+    public OfflineTest() {
+        super(MainMenu.class);
+    }
 
     // Use Case 28: Add Vehicle Offline
     public void testAddItemOffline() {

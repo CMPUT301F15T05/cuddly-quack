@@ -30,7 +30,7 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        pendingTrades = (ListView)findViewById(R.id.pendingTrades);
+        pendingTrades = (ListView) findViewById(R.id.pendingTrades);
 
 
         pendingTrades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,7 +53,7 @@ public class ViewPendingTradesActivity extends AppCompatActivity {
 
         ArrayList<Trade> tradeList = UserSingleton.getCurrentUser().getPendingTrades().getTrades();
 
-        for (Trade trade: tradeList) {
+        for (Trade trade : tradeList) {
             String s = String.format("%s wants to trade %d item(s) for your %d item(s)", trade.getOwner(), trade.getOwnerItems().size(), trade.getBorrowerItems().size());
 
             pendingTradeArray.add(s);

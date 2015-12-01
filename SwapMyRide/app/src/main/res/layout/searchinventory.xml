@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/searchField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Name"
-        android:textColorHint="@color/colorAccent"
-        android:ems="10"
-        android:id="@+id/searchField"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_below="@+id/tool_bar"
         android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/tool_bar"/>
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/colorAccent" />
 
     <Spinner
+        android:id="@+id/categorySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/categorySpinner"
-        android:layout_toEndOf="@+id/searchField"
-        android:layout_marginEnd="5dp"
-        android:layout_alignTop="@+id/searchField"
         android:layout_alignBottom="@+id/searchField"
+        android:layout_alignTop="@+id/searchField"
         android:layout_marginBottom="-5dp"
-        android:layout_marginTop="-5dp"/>
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="-5dp"
+        android:layout_toEndOf="@+id/searchField" />
 
     <Button
+        android:id="@+id/feedSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/feedSearch"
-        android:layout_below="@+id/searchField"
+        android:layout_alignEnd="@+id/searchField"
         android:layout_alignParentStart="true"
-        android:background="@color/colorPrimary"
+        android:layout_below="@+id/searchField"
+        android:layout_marginBottom="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="5dp"
-        android:layout_alignEnd="@+id/searchField" />
+        android:background="@color/colorPrimary"
+        android:text="Search" />
 
 
     <ListView
+        android:id="@+id/searchList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchList"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/distanceSpinner" />
 
     <Spinner
+        android:id="@+id/distanceSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/distanceSpinner"
-        android:spinnerMode="dropdown"
-        android:hint="Distance"
         android:layout_alignEnd="@+id/categorySpinner"
         android:layout_alignStart="@+id/categorySpinner"
-        android:layout_alignTop="@+id/feedSearch" />
+        android:layout_alignTop="@+id/feedSearch"
+        android:hint="Distance"
+        android:spinnerMode="dropdown" />
 
 </RelativeLayout>

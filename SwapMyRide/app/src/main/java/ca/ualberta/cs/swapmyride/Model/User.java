@@ -18,7 +18,6 @@ package ca.ualberta.cs.swapmyride.Model;
 /**
  * This Class stores all necessary information pertaining to the user for storage and access.
  * It provides the foundation for all functionality of the application.
- *
  */
 public class User {
     private String name;
@@ -34,7 +33,7 @@ public class User {
     //private Setting settings;
 
     //this constructor is used for creating a new name
-    public User(){
+    public User() {
         //userName = "";
         inventory = new InventoryList();
         friends = new FriendsList();
@@ -76,11 +75,11 @@ public class User {
         this.userAddress = userAddress;
     }
 
-    public void addItem(Vehicle vehicle){
+    public void addItem(Vehicle vehicle) {
         inventory.add(vehicle);
     }
 
-    public InventoryList getInventory(){
+    public InventoryList getInventory() {
         return inventory;
     }
 
@@ -96,16 +95,20 @@ public class User {
         return friends;
     }
 
-    public void addFriend(String username){
+    public void addFriend(String username) {
         friends.addFriend(username);
     }
 
-    public void removeFriend(String username){
+    public void removeFriend(String username) {
         friends.removeFriend(username);
     }
 
     public TradeList getPastTrades() {
         return pastTrades;
+    }
+
+    public void setPastTrades(TradeList pastTrades) {
+        this.pastTrades = pastTrades;
     }
 
     public void addPastTrade(Trade pastTrade) {
@@ -116,6 +119,10 @@ public class User {
         return pendingTrades;
     }
 
+    public void setPendingTrades(TradeList pendingTrades) {
+        this.pendingTrades = pendingTrades;
+    }
+
     public void addPendingTrade(Trade pendingTrade) {
         pendingTrades.add(pendingTrade);
     }
@@ -124,29 +131,23 @@ public class User {
         return notificationManager;
     }
 
-    public void setPendingTrades(TradeList pendingTrades) {
-        this.pendingTrades = pendingTrades;
-    }
-
-    public void setPastTrades(TradeList pastTrades) {
-        this.pastTrades = pastTrades;
-    }
-
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (other == null) return false;
         if (other == this) return true;
-        if (other.getClass() != this.getClass())return false;
-        User test = (User)other;
-        if(!this.name.equals(test.getName())) return false;
-        if(!this.userName.equals(test.getUserName())) return false;
-        if(!this.userEmail.equals(test.getUserEmail())) return false;
-        if(!this.userAddress.equals(test.getUserAddress())) return false;
-        if(!this.userName.equals(test.getUserName())) return false;
-        if(!this.getInventory().getList().equals(test.getInventory().getList()))return false;
-        if(!this.getFriends().getFriendList().equals(test.getFriends().getFriendList())) return false;
-        if(this.downloadImages != test.getDownloadImages()) return false;
-        if(!this.getPendingTrades().getTrades().equals(test.getPendingTrades().getTrades())) return false;
+        if (other.getClass() != this.getClass()) return false;
+        User test = (User) other;
+        if (!this.name.equals(test.getName())) return false;
+        if (!this.userName.equals(test.getUserName())) return false;
+        if (!this.userEmail.equals(test.getUserEmail())) return false;
+        if (!this.userAddress.equals(test.getUserAddress())) return false;
+        if (!this.userName.equals(test.getUserName())) return false;
+        if (!this.getInventory().getList().equals(test.getInventory().getList())) return false;
+        if (!this.getFriends().getFriendList().equals(test.getFriends().getFriendList()))
+            return false;
+        if (this.downloadImages != test.getDownloadImages()) return false;
+        if (!this.getPendingTrades().getTrades().equals(test.getPendingTrades().getTrades()))
+            return false;
         return this.getPastTrades().getTrades().equals(test.getPastTrades().getTrades());
 
     }

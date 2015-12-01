@@ -41,11 +41,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         UserSingleton.getCurrentUser().setDownloadImages(aSwitch.isChecked());
-        Log.i("Settings","User download preference: " +
-        String.valueOf(UserSingleton.getCurrentUser().getDownloadImages()));
+        Log.i("Settings", "User download preference: " +
+                String.valueOf(UserSingleton.getCurrentUser().getDownloadImages()));
     }
 
 }

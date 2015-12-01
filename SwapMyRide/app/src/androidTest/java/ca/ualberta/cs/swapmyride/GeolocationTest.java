@@ -15,7 +15,7 @@ public class GeolocationTest extends ActivityInstrumentationTestCase2 {
         super(MainMenu.class);
     }
 
-    public void testGetLocation(){
+    public void testGetLocation() {
         Address address;
         Geolocation geolocation = new Geolocation();
         address = geolocation.getCurrentLocation(getActivity(), super.getActivity());
@@ -23,7 +23,7 @@ public class GeolocationTest extends ActivityInstrumentationTestCase2 {
         assertEquals(address.getLocality().toLowerCase(), "edmonton");
     }
 
-    public void testSetCustomLocation(){
+    public void testSetCustomLocation() {
         Address address;
         Geolocation geolocation = new Geolocation();
         address = geolocation.setSpecificLocation(getActivity(), super.getActivity(), "T5Y2V8");

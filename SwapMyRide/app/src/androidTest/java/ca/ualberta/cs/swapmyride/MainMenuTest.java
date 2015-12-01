@@ -30,19 +30,19 @@ import ca.ualberta.cs.swapmyride.View.ViewVehicleActivity;
 
 /**
  * Created by adrianomarini on 2015-11-18.
- *
+ * <p/>
  * In this test, we will ensure that the main menu functions
  * correctly and that all of the intended functions are present
  * and operational
- *
- *
  */
-public class MainMenuTest extends ActivityInstrumentationTestCase2{
+public class MainMenuTest extends ActivityInstrumentationTestCase2 {
 
     ListView feed;
     ListView inventory;
 
-    public MainMenuTest() { super(MainMenu.class); }
+    public MainMenuTest() {
+        super(MainMenu.class);
+    }
 
     /**
      * This test tests the UI functionality of clicking on an item in the
@@ -50,7 +50,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      * opens and that the information that is opened is correct
      */
 
-    public void testClickItem(){
+    public void testClickItem() {
         populateTestData();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Feed of items should be active
@@ -78,7 +78,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         cleanUp();
     }
 
-    public void testClickInventory(){
+    public void testClickInventory() {
         populateTestData();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Swipe left to get to inventory screen
@@ -98,7 +98,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         Instrumentation.ActivityMonitor viewInventoryActivityMonitor =
                 getInstrumentation().addMonitor(ViewVehicleActivity.class.getName(), null, false);
         ViewVehicleActivity viewVehicleActivity = (ViewVehicleActivity)
-                    viewInventoryActivityMonitor.waitForActivityWithTimeout(10000);
+                viewInventoryActivityMonitor.waitForActivityWithTimeout(10000);
         //assertNotNull(viewVehicleActivity);
         //Assert information matches
         TextView name = viewVehicleActivity.getTheName();
@@ -143,7 +143,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         cleanUp();
     }
 
-    public void testViewFriends(){
+    public void testViewFriends() {
         populateTestData();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Tab3 should be active, tap View Friends
@@ -186,7 +186,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         cleanUp();
     }
 
-    public void testEditProfile(){
+    public void testEditProfile() {
         populateTestData();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Tab3 should be active, tap Edit Profile
@@ -233,7 +233,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
     }
 
 
-    public void testAddFriends(){
+    public void testAddFriends() {
         populateTestData();
         MainMenu mainMenu = (MainMenu) getActivity();
         //Click search button
@@ -321,7 +321,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
         cleanUp();
     }
 
-    public void testAddItem(){
+    public void testAddItem() {
         populateTestData();
         MainMenu mainMenu = (MainMenu) getActivity();
         Tab2 tab2 = mainMenu.getTab2();
@@ -352,13 +352,12 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
     }
 
 
-
     /**
      * This method populates known data into the current user area
      * to ensure that it can be tested and verified.
      */
 
-    public void populateTestData(){
+    public void populateTestData() {
         LocalDataManager ldm = new LocalDataManager(getInstrumentation().getContext());
         User user1 = new User();
         User user2 = new User();
@@ -408,7 +407,7 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2{
      * This method removes the test data that exists from the system
      * to ensure that it will not cause other issues by sticking around
      */
-    public void cleanUp(){
+    public void cleanUp() {
         LocalDataManager ldm = new LocalDataManager(getInstrumentation().getContext());
         ldm.deleteUser("janesmith");
         ldm.deleteUser("bobjones");

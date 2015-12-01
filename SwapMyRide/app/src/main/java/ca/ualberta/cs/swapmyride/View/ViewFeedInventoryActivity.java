@@ -65,8 +65,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
 
 
         //vehiclePicture = (ImageView) findViewById(R.id.picture);
-        gallery = (LinearLayout)findViewById(R.id.feedinventorygallery);
-
+        gallery = (LinearLayout) findViewById(R.id.feedinventorygallery);
 
 
         title = (TextView) findViewById(R.id.title);
@@ -86,14 +85,13 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         gallery.removeAllViews();
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         //load the picture from the first
-        for (UniqueID uid : vehicle.getPhotoIds()){
+        for (UniqueID uid : vehicle.getPhotoIds()) {
             Photo photo;
             ImageView newImage = new ImageView(getApplicationContext());
-            if(UserSingleton.getDownloadPhotos()){
+            if (UserSingleton.getDownloadPhotos()) {
                 photo = ldm.loadPhoto(uid.getID());
                 newImage.setImageBitmap(photo.getImage());
-            }
-            else {
+            } else {
                 newImage.setImageBitmap(DefaultPhotoSingleton.getInstance().getImage());
             }
             newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -107,7 +105,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         category.setText(vehicle.getCategory().getCategory());
         quality.setText(vehicle.getQuality().getQuality());
         comments.setText(vehicle.getComments());
-        postal.setText(vehicle.getLocation().getPostalCode() + ", "+vehicle.getLocation().getLocality());
+        postal.setText(vehicle.getLocation().getPostalCode() + ", " + vehicle.getLocation().getLocality());
         lat.setText(String.valueOf(vehicle.getLocation().getLatitude()));
         longit.setText(String.valueOf(vehicle.getLocation().getLongitude()));
 
@@ -124,7 +122,7 @@ public class ViewFeedInventoryActivity extends AppCompatActivity {
         });
     }
 
-    public TextView getTheName(){
+    public TextView getTheName() {
         return title;
     }
 }

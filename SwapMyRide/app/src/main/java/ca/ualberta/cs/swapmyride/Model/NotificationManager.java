@@ -37,28 +37,27 @@ public class NotificationManager {
     public NotificationManager() {
     }
 
-    public Boolean notifyTrade(Trade trade){
+    public Boolean notifyTrade(Trade trade) {
         tradesToBeNotified.add(trade);
         return true;
     }
 
-    public Boolean removeTrade(Trade trade){
+    public Boolean removeTrade(Trade trade) {
         tradesToBeNotified.remove(trade);
         return true;
     }
 
     /**
-     *
      * @param username String of username that has added the current user
      */
-    public void notifyFriendRequest(String username){
+    public void notifyFriendRequest(String username) {
         friendRequests.add(username);
     }
 
     //http://stackoverflow.com/questions/2115758/how-to-display-alert-dialog-in-android
     // Author: David Hedlund
     // Modified and Accessed 4 November 2015
-    public void showTrade(Context context){
+    public void showTrade(Context context) {
         Integer size = tradesToBeNotified.size();
         String trades = Integer.toString(size);
         if (trades == "1") {
@@ -87,7 +86,7 @@ public class NotificationManager {
         tradesToBeNotified.clear();
     }
 
-    public void showFriendRequest(final Context context, final String username){
+    public void showFriendRequest(final Context context, final String username) {
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
                 .setMessage(username + " is now following you! Click to view their profile!")
@@ -113,7 +112,7 @@ public class NotificationManager {
             showTrade(context);
         }
 
-        for(String username : friendRequests){
+        for (String username : friendRequests) {
             showFriendRequest(context, username);
         }
 

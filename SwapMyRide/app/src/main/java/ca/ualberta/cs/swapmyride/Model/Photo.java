@@ -33,16 +33,17 @@ import ca.ualberta.cs.swapmyride.R;
  *
  * @author Garry on 2015-11-03.
  */
-public class Photo{
+public class Photo {
     //private Bitmap image;
     UniqueID uid;
     private String encodedImage;
 
     /**
      * Builds a Photo object based on a given bitmap
+     *
      * @param image the image to store
      */
-    public Photo(Bitmap image){
+    public Photo(Bitmap image) {
         byte temp[];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         int compression = 100;
@@ -51,17 +52,18 @@ public class Photo{
             temp = stream.toByteArray();
             encodedImage = Base64.encodeToString(temp, Base64.DEFAULT);
             compression -= 5;
-        }while(encodedImage.length() > 65536);
+        } while (encodedImage.length() > 65536);
         uid = new UniqueID();
         Log.i("PhotoSize", Integer.toString(encodedImage.length()));
     }
 
     /**
      * Builds a default photo
+     *
      * @param context
      */
 
-    public Photo(Context context){
+    public Photo(Context context) {
         byte temp[];
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_default_car);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -75,6 +77,7 @@ public class Photo{
 
     /**
      * Decodes and returns the stored image
+     *
      * @return A bitmap of the stored image
      */
 
@@ -89,6 +92,7 @@ public class Photo{
 
     /**
      * Encodes the given bitmap and stores it in the photo object
+     *
      * @param image bitmap image to store
      */
 
@@ -102,9 +106,10 @@ public class Photo{
 
     /**
      * Removes the current image and sets it to the default
+     *
      * @param context
      */
-    public void deleteImage(Context context){
+    public void deleteImage(Context context) {
         Photo photo = new Photo(context);
         this.setImage(photo.getImage());
     }
@@ -113,7 +118,7 @@ public class Photo{
         return this.getImage().sameAs(other.getImage());
     }
 
-    public UniqueID getUid(){
+    public UniqueID getUid() {
         return uid;
     }
 }

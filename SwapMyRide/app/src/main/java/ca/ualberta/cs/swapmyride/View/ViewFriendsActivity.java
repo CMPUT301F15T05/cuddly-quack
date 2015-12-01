@@ -32,12 +32,11 @@ import ca.ualberta.cs.swapmyride.R;
 
 /**
  * Allows user to view list of friends
- *
+ * <p/>
  * Gets user list and determines list of friends
  * Displays list of friends.
- *
+ * <p/>
  * On an item click -- displays the user profile.
- *
  */
 
 public class ViewFriendsActivity extends AppCompatActivity {
@@ -88,7 +87,7 @@ public class ViewFriendsActivity extends AppCompatActivity {
         friendView.setAdapter(adapter);
     }
 
-    public ListView getFriendsList(){
+    public ListView getFriendsList() {
         return (ListView) findViewById(R.id.friendView);
     }
 }

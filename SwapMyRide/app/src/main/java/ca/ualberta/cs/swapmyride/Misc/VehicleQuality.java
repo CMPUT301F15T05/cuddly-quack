@@ -24,13 +24,13 @@ package ca.ualberta.cs.swapmyride.Misc;
  * An enumerator that represents all possible qualities a vehicle can be
  */
 public enum VehicleQuality {
-    NONE("None",0), RUSTBUCKET("Rust Bucket",1), POOR("Poor",2), OKAY("Okay",3), GOOD("Good",4),
-    PRIME("Prime",5), SHOWROOM("Show Room",6);
+    NONE("None", 0), RUSTBUCKET("Rust Bucket", 1), POOR("Poor", 2), OKAY("Okay", 3), GOOD("Good", 4),
+    PRIME("Prime", 5), SHOWROOM("Show Room", 6);
 
     private String quality;
     private int position;
 
-    VehicleQuality(String quality,int position){
+    VehicleQuality(String quality, int position) {
         this.quality = quality;
         this.position = position;
     }
@@ -38,5 +38,8 @@ public enum VehicleQuality {
     public String getQuality() {
         return quality;
     }
-    public int getPosition(){return position; }
+
+    public int getPosition() {
+        return position;
+    }
 }

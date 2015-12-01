@@ -52,6 +52,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
      * the onCreate here displays all information of the possible friend.
      * Initializes all information from the user object returned from
      * the Datamanager and pushes the information into the fields.
+     *
      * @param savedInstanceState
      */
 
@@ -100,8 +101,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
                 // Check that user is not adding friend twice
                 else if (UserSingleton.getCurrentUser().getFriends().hasUser(possibleFriend.getUserName())) {
                     Toast.makeText(getApplicationContext(), possibleFriend.getUserName() + " has already been added", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     // Save new friend to current user's friends list
                     UserSingleton.getCurrentUser().addFriend(possibleFriend.getUserName());
                     LocalDataManager ldm = new LocalDataManager(getApplicationContext());
@@ -118,7 +118,7 @@ public class AddFriendProfileActivity extends AppCompatActivity {
         });
     }
 
-    public Button getAddFriend(){
+    public Button getAddFriend() {
         return addFriend;
     }
 }

@@ -61,13 +61,13 @@ public class FeedTradeActivity extends AppCompatActivity {
 
         friendUsername = intent.getStringExtra("Username");
 
-        getSupportActionBar().setTitle(friendUsername+" Inventory");
+        getSupportActionBar().setTitle(friendUsername + " Inventory");
 
         vehicleNames = new ArrayList<>();
 
         friendInventory = userController.getFriendVehicles(friendUsername);
 
-        for (Vehicle vehicle: friendInventory.getList()) {
+        for (Vehicle vehicle : friendInventory.getList()) {
             if (vehicle.getPublic()) {
                 vehicleNames.add(vehicle.getName());
             }

@@ -35,11 +35,10 @@ import ca.ualberta.cs.swapmyride.R;
 
 /**
  * LoginActivity allows the user to enter the app as a specific username
- *
+ * <p/>
  * It takes in input through a username field, and determines if the username
  * exists. If so, it loads that user object into the UserSingleton. If not,
  * it shows an error and encourages the user to sign up
- *
  */
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,11 +55,12 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * onCreate creates the login box and the button.
-     *
+     * <p/>
      * Upon click, the username is checked against the
      * database of users to see if it exists. If so, the
      * user is added to the UserSingleton. If not, a Toast
      * message appears, and the user is encouraged to sign up.
+     *
      * @param savedInstanceState
      */
 
@@ -92,21 +92,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameField.getText().toString();
                 User user;
-                if(dm.searchUser(username)) {
+                if (dm.searchUser(username)) {
                     user = dm.retrieveUser(username);
                     uController.addCurrentUser(user);
                     dataManager.updateFriends();
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
-                }
-                else if(ldm.searchUser(username)){
+                } else if (ldm.searchUser(username)) {
                     uController.addCurrentUser(ldm.loadUser(username));
                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                     startActivity(intent);
                     finish();
-                }
-                else{
+                } else {
                     Toast.makeText(LoginActivity.this, username + " Not Found", Toast.LENGTH_LONG).show();
                 }
             }
@@ -119,28 +117,26 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dataManager.networkAvailable()) {
+                if (dataManager.networkAvailable()) {
                     Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                     startActivity(intent);
                     finish();
-                }
-
-                else{
+                } else {
                     Toast.makeText(LoginActivity.this, "You must be online to sign up!", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    public Button getSignIn(){
+    public Button getSignIn() {
         return signIn;
     }
 
-    public EditText getUsernameField(){
+    public EditText getUsernameField() {
         return usernameField;
     }
 
-    public TextView getSignUp(){
+    public TextView getSignUp() {
         return signUp;
     }
 }

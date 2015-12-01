@@ -23,25 +23,25 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2 {
     private EditText signUpField;
     private Button signUpConfirm;
 
-    public LoginActivityTest(){
+    public LoginActivityTest() {
         super(LoginActivity.class);
     }
 
     /**
      * testLogin tests functionality for logging in
-     *  and by extension signing up for use of the app.
-     *  Start an activity monitor on the main menu
-     *  click the sign in button, Verify main menu did not start.
-     *  enter text into the username box -- this text is not a valid username,
-     *  assert that the main menu didn't start.
-     *  Click the sign-in button, Check that it moves to the SignUpActivity.
-     *  Sign up with user 'Bob', Save and return to screen.
-     *  enter 'bob' into the username box
-     *  Assert login worked and we are at main menu.
-     *  delete user 'bob' for trash cleanup
+     * and by extension signing up for use of the app.
+     * Start an activity monitor on the main menu
+     * click the sign in button, Verify main menu did not start.
+     * enter text into the username box -- this text is not a valid username,
+     * assert that the main menu didn't start.
+     * Click the sign-in button, Check that it moves to the SignUpActivity.
+     * Sign up with user 'Bob', Save and return to screen.
+     * enter 'bob' into the username box
+     * Assert login worked and we are at main menu.
+     * delete user 'bob' for trash cleanup
      */
 
-    public void testLogin(){
+    public void testLogin() {
         //get the activities
         LoginActivity activity = (LoginActivity) getActivity();
 

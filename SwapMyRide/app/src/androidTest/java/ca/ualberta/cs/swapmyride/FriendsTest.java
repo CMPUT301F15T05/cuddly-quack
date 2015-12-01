@@ -24,8 +24,8 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
 /**
  * Created by Daniel on 2015-10-08.
  */
-public class FriendsTest  extends ActivityInstrumentationTestCase2 {
-    public FriendsTest(){
+public class FriendsTest extends ActivityInstrumentationTestCase2 {
+    public FriendsTest() {
         super(MainMenu.class);
     }
 
@@ -114,7 +114,7 @@ public class FriendsTest  extends ActivityInstrumentationTestCase2 {
         assertTrue(found);
 
         // Making sure that User is populated
-       // assertTrue(found.getName().equals("Carson Mclean"));
+        // assertTrue(found.getName().equals("Carson Mclean"));
     }
 
 

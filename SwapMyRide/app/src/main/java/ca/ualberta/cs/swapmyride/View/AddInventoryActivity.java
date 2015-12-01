@@ -57,7 +57,7 @@ import ca.ualberta.cs.swapmyride.R;
 
 /**
  * This class specifically works to add a vehicle to a user's inventory
- *
+ * <p/>
  * There is opportunity to input all information and a photo for the new
  * vehicle, and then it is added to the inventory list.
  */
@@ -65,15 +65,14 @@ import ca.ualberta.cs.swapmyride.R;
 public class AddInventoryActivity extends AppCompatActivity {
 
     static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
-
+    //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     Toolbar toolbar;
     Spinner categorySpinner;
     VehicleCategory vehicleCategory;
     Spinner qualitySpinner;
     VehicleQuality vehicleQuality;
-
     Vehicle vehicle;
-
     LinearLayout gallery;
     EditText vehicleName;
     EditText vehicleQuantity;
@@ -83,21 +82,16 @@ public class AddInventoryActivity extends AppCompatActivity {
     UserController uController;
     Button delete;
     EditText location;
-
     ArrayList<Photo> photos = new ArrayList<>();
-
     int position;
-
     Address current;
     Geolocation geolocation;
-
-    //TODO THIS IS FROM GOOGLE DEV PHOTOS SIMPLY PAGE
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     /**
      * In this function (prescribed by Android), we collect all information
      * about the new vehicle and input it into a vehicle object.
      * This is then saved.
+     *
      * @param savedInstanceState
      */
 
@@ -125,7 +119,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         try {
             current = geolocation.getCurrentLocation(getApplicationContext(), this);
             location.setText(current.getPostalCode());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             location.setText("Geolocation cannot be determined.");
         }
 
@@ -173,7 +167,7 @@ public class AddInventoryActivity extends AppCompatActivity {
 
         final boolean loadVehicle = getIntent().hasExtra("vehiclePosition");
         Vehicle loaded;
-        if(loadVehicle){
+        if (loadVehicle) {
             position = getIntent().getIntExtra("vehiclePosition", 0);
             loaded = UserSingleton.getCurrentUser().getInventory().getList().get(position);
 
@@ -191,10 +185,10 @@ public class AddInventoryActivity extends AppCompatActivity {
             // TODO: Fix null error issue
             //location.setText(loaded.getLocation().getPostalCode());
             LocalDataManager ldm = new LocalDataManager(getApplicationContext());
-            for(UniqueID uid : vehicle.getPhotoIds()){
+            for (UniqueID uid : vehicle.getPhotoIds()) {
                 photos.add(ldm.loadPhoto(uid.getID()));
             }
-            for(Photo photo : photos){
+            for (Photo photo : photos) {
                 ImageView newImage = new ImageView(getApplicationContext());
                 newImage.setImageBitmap(photo.getImage());
                 newImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -205,7 +199,7 @@ public class AddInventoryActivity extends AppCompatActivity {
         }
 
         //default the photo to a new photo if we are not loading a vehicle
-        else{
+        else {
             // TODO: Default photo? Here or set in Vehicle?
             Photo photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
             ImageView newImage = new ImageView(getApplicationContext());
@@ -220,12 +214,11 @@ public class AddInventoryActivity extends AppCompatActivity {
 
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         //load the picture from the first
-        for (UniqueID uid : vehicle.getPhotoIds()){
+        for (UniqueID uid : vehicle.getPhotoIds()) {
             Photo photo;
-            if(UserSingleton.getDownloadPhotos()){
+            if (UserSingleton.getDownloadPhotos()) {
                 photo = ldm.loadPhoto(uid.getID());
-            }
-            else{
+            } else {
                 photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
             }
             ImageView newImage = new ImageView(getApplicationContext());
@@ -266,19 +259,19 @@ public class AddInventoryActivity extends AppCompatActivity {
                 newImage.setAdjustViewBounds(true);
                 gallery.addView(newImage);
                 LocalDataManager ldm = new LocalDataManager(getApplicationContext());
-                for(Photo photo1 : photos){
+                for (Photo photo1 : photos) {
                     ldm.deletePhoto(photo1.getUid().getID());
                 }
                 photos.clear();
 
                 //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
                 //load the picture from the first
-                if (vehicle.getPhotoIds().size() > 0 && UserSingleton.getDownloadPhotos()){
+                if (vehicle.getPhotoIds().size() > 0 && UserSingleton.getDownloadPhotos()) {
                     gallery.removeAllViews();
                 }
 
-                for (UniqueID uid : vehicle.getPhotoIds()){
-                    if(UserSingleton.getDownloadPhotos()){
+                for (UniqueID uid : vehicle.getPhotoIds()) {
+                    if (UserSingleton.getDownloadPhotos()) {
                         photo = ldm.loadPhoto(uid.getID());
                     }
                     newImage = new ImageView(getApplicationContext());
@@ -330,26 +323,25 @@ public class AddInventoryActivity extends AppCompatActivity {
                 //we are required to catch it anyway
                 try {
                     vehicle.setQuantity(Integer.parseInt(vehicleQuantity.getText().toString()));
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
                 vehicle.setComments(vehicleComments.getText().toString());
                 vehicle.setPublic(vehiclePublic.isChecked());
                 vehicle.setBelongsTo(UserSingleton.getCurrentUser().getUserName());
 
-                for(Photo photo : photos){
+                for (Photo photo : photos) {
                     vehicle.addPhoto(photo.getUid());
                     ldm.savePhoto(photo);
                 }
 
                 //add the vehicle to our current user.
-                if(loadVehicle){
+                if (loadVehicle) {
                     //UserSingleton.getCurrentUser().getInventory().getList().add(position, vehicle);
-                    uController.getUserInventoryItems().add(position,vehicle);
+                    uController.getUserInventoryItems().add(position, vehicle);
                     //UserSingleton.getCurrentUser().getInventory().getList().remove(position+1);
-                    uController.getUserInventoryItems().remove(position+1);
-                }
-                else {
+                    uController.getUserInventoryItems().remove(position + 1);
+                } else {
                     //UserSingleton.getCurrentUser().addItem(vehicle);
                     uController.getCurrentUser().addItem(vehicle);
                 }
@@ -378,12 +370,11 @@ public class AddInventoryActivity extends AppCompatActivity {
 
                 //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
                 //load the picture from the first
-                for (UniqueID uid : vehicle.getPhotoIds()){
+                for (UniqueID uid : vehicle.getPhotoIds()) {
                     Photo photo;
-                    if(UserSingleton.getDownloadPhotos()){
+                    if (UserSingleton.getDownloadPhotos()) {
                         photo = ldm.loadPhoto(uid.getID());
-                    }
-                    else{
+                    } else {
                         photo = DefaultPhotoSingleton.getInstance().getDefaultPhoto();
                     }
                     ImageView newImage = new ImageView(getApplicationContext());
@@ -477,15 +468,15 @@ public class AddInventoryActivity extends AppCompatActivity {
      * @return true or false
      */
 
-    public boolean checkHasCamera(Context context){
+    public boolean checkHasCamera(Context context) {
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
-    public EditText getVehicleName(){
+    public EditText getVehicleName() {
         return (EditText) findViewById(R.id.vehicleField);
     }
 
-    public Button getSaveButton(){
+    public Button getSaveButton() {
         return (Button) findViewById(R.id.save);
     }
 }

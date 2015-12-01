@@ -7,220 +7,218 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        />
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Space
+            android:id="@+id/top"
             android:layout_width="0dp"
             android:layout_height="10dp"
-            android:layout_below="@+id/tool_bar"
-            android:id="@+id/top"/>
+            android:layout_below="@+id/tool_bar" />
 
         <HorizontalScrollView
+            android:id="@+id/addinventoryhorizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@+id/tool_bar"
-            android:id="@+id/addinventoryhorizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" >
+            android:layout_marginTop="5dp">
+
             <LinearLayout
                 android:id="@+id/addinventorygallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                />
+                android:orientation="horizontal" />
         </HorizontalScrollView>
 
         <Button
+            android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete Photo"
-            android:id="@+id/delete"
-            android:background="@color/colorPrimary"
             android:layout_below="@+id/addinventoryhorizontal"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:text="Delete Photo" />
 
         <TextView
+            android:id="@+id/vehicleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/delete"
-            android:text="Name:"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:paddingTop="10dp"
+            android:text="Name:"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/vehicleName"
-            android:paddingTop="10dp"/>
+            android:textSize="20sp" />
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/vehicleField"
-            android:inputType="textPersonName"
-            android:layout_alignTop="@+id/vehicleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/tool_bar"
-            android:layout_toEndOf="@+id/vehicleName"
-            android:layout_marginStart="35dp"
+            android:layout_alignTop="@+id/vehicleName"
             android:layout_marginEnd="10dp"
+            android:layout_marginStart="35dp"
+            android:layout_toEndOf="@+id/vehicleName"
             android:hint="Vehicle Name"
-            android:textColorHint="@color/colorAccent"
-            android:textColor="@color/colorAccent" />
+            android:inputType="textPersonName"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Category:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
             android:id="@+id/textView4"
-            android:layout_below="@+id/vehicleField"
-            android:layout_alignStart="@+id/vehicleName"
-            android:layout_marginTop="10dp" />
-
-        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/vehicleName"
+            android:layout_below="@+id/vehicleField"
+            android:layout_marginTop="10dp"
+            android:text="Category:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+        <Spinner
             android:id="@+id/categorySpinner"
-            android:layout_alignStart="@+id/vehicleField"
-            android:layout_alignEnd="@+id/vehicleField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView4"
+            android:layout_alignEnd="@+id/vehicleField"
+            android:layout_alignStart="@+id/vehicleField"
             android:layout_alignTop="@+id/textView4"
-            android:layout_marginStart="65dp"
             android:layout_marginBottom="-5dp"
-            android:layout_marginTop="-5dp"/>
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="-5dp" />
 
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView4"
-            android:text="Quality:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
             android:layout_alignStart="@+id/vehicleName"
+            android:layout_below="@+id/textView4"
             android:layout_marginTop="20dp"
-            android:id="@+id/textView5" />
+            android:text="Quality:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <Spinner
+            android:id="@+id/qualitySpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/qualitySpinner"
             android:layout_alignBottom="@+id/textView5"
+            android:layout_alignEnd="@+id/categorySpinner"
             android:layout_alignStart="@+id/categorySpinner"
             android:layout_alignTop="@+id/textView5"
-            android:layout_alignEnd="@+id/categorySpinner"
             android:layout_marginBottom="-5dp"
             android:layout_marginTop="-5dp" />
 
         <TextView
+            android:id="@+id/quantityHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView5"
             android:layout_alignStart="@+id/vehicleName"
-            android:text="Quantity:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
+            android:layout_below="@id/textView5"
             android:layout_marginTop="15dp"
-            android:id="@+id/quantityHead"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:text="Quantity:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/quantityField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="0"
-            android:textColorHint="@color/colorAccent"
-            android:ems="10"
-            android:id="@+id/quantityField"
-            android:layout_alignTop="@+id/quantityHead"
-            android:layout_alignStart="@+id/categorySpinner"
             android:layout_alignEnd="@+id/vehicleField"
-            />
+            android:layout_alignStart="@+id/categorySpinner"
+            android:layout_alignTop="@+id/quantityHead"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number"
+            android:textColorHint="@color/colorAccent" />
 
         <TextView
+            android:id="@+id/commentsHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comments:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/commentsHead"
-            android:layout_below="@+id/postalCodeHead"
             android:layout_alignStart="@+id/quantityHead"
-            android:layout_marginTop="20dp"/>
+            android:layout_below="@+id/postalCodeHead"
+            android:layout_marginTop="20dp"
+            android:text="Comments:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/commentsField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/commentsHead"
-            android:layout_alignStart="@+id/commentsHead"
             android:layout_alignEnd="@+id/quantityField"
-            android:id="@+id/commentsField"
+            android:layout_alignStart="@+id/commentsHead"
+            android:layout_below="@+id/commentsHead"
+            android:layout_marginTop="5dp"
             android:hint="Description Here"
             android:inputType="textMultiLine"
-            android:layout_marginTop="5dp"
-            android:textColorHint="@color/colorAccent"/>
+            android:textColorHint="@color/colorAccent" />
 
         <Switch
+            android:id="@+id/ispublic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shared:"
-            android:id="@+id/ispublic"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:checked="true"
-            android:paddingTop="10dp"
+            android:layout_alignEnd="@+id/quantityField"
+            android:layout_alignStart="@+id/commentsField"
             android:layout_below="@+id/commentsField"
             android:layout_marginTop="5dp"
-            android:layout_alignEnd="@+id/quantityField"
-            android:layout_alignStart="@+id/commentsField" />
+            android:checked="true"
+            android:paddingTop="10dp"
+            android:text="Shared:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done"
-            android:id="@+id/button"
-            android:background="@color/colorPrimary"
             android:layout_below="@+id/ispublic"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Done" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="10dp"
-            android:layout_below="@+id/button"/>
+            android:layout_below="@+id/button" />
 
         <TextView
+            android:id="@+id/postalCodeHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Postal Code:"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/postalCodeHead"
-            android:layout_below="@+id/quantityHead"
             android:layout_alignStart="@+id/commentsHead"
+            android:layout_below="@+id/quantityHead"
             android:layout_marginTop="15dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:text="Postal Code:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/locationField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/locationField"
-            android:inputType="textPersonName"
-            android:hint="Location"
-            android:textColorHint="@color/colorAccent"
-            android:textColor="@color/colorAccent"
-            android:layout_alignTop="@+id/postalCodeHead"
+            android:layout_alignEnd="@+id/quantityField"
             android:layout_alignStart="@+id/quantityField"
-            android:layout_alignEnd="@+id/quantityField" />
+            android:layout_alignTop="@+id/postalCodeHead"
+            android:hint="Location"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent" />
 
     </RelativeLayout>
 

@@ -13,21 +13,21 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class DeleteUserRunnable implements Runnable {
     private String url;
 
-    public DeleteUserRunnable(String username, String url){
-        this.url = url +  "users/" + username;
+    public DeleteUserRunnable(String username, String url) {
+        this.url = url + "users/" + username;
     }
 
     /* Based on https://github.com/rayzhangcl/ESDemo and https://github.com/joshua2ua/AndroidElasticSearch */
-    public void run(){
+    public void run() {
         HttpClient httpClient = new DefaultHttpClient();
         HttpDelete httpDelete = new HttpDelete(url);
         httpDelete.setHeader("Accept", "application/json");
 
-        try{
+        try {
             HttpResponse response = httpClient.execute(httpDelete);
             String status = response.getStatusLine().toString();
             Log.i("NetworkDataManager", status);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

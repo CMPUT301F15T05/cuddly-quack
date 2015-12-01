@@ -22,9 +22,9 @@ import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 /**
  * Trade is the major object to encapsulate all
  * information about a trade that will occur
- *
+ * <p/>
  * All relevant information to the trade will be held here.
- *
+ * <p/>
  * Owner items belong to the current user
  * Borrower items are items that belong to a friend.
  *
@@ -52,10 +52,11 @@ public class Trade {
         borrower = "";
     }
 
-    public void setBorrowing(){
+    public void setBorrowing() {
         isBorrowing = true;
     }
-    public Boolean getIsBorrowing(){
+
+    public Boolean getIsBorrowing() {
         return isBorrowing;
     }
 
@@ -91,11 +92,11 @@ public class Trade {
         this.ownerItems = ownerItems;
     }
 
-    public void addBorrowerItem(Vehicle vehicle){
+    public void addBorrowerItem(Vehicle vehicle) {
         borrowerItems.add(vehicle);
     }
 
-    public void addOwnerItem(Vehicle vehicle){
+    public void addOwnerItem(Vehicle vehicle) {
         ownerItems.add(vehicle);
     }
 
@@ -111,55 +112,56 @@ public class Trade {
         return ownerNotified;
     }
 
-    public Boolean getBorrowerNotified() {
-        return borrowerNotified;
-    }
-
-    public Boolean getIsAccepted() {
-        return isAccepted;
-    }
-
-    public Boolean getIsDeclined() {
-        return isDeclined;
-    }
-
-
-    /**
-     * Functionality to swap out vehicles in a trade if needed
-     * @param old
-     * @param newOne
-     */
-
-    public void changeOwnerVehicle(Vehicle old, Vehicle newOne){
-        this.ownerItems.remove(old);
-        ownerItems.add(newOne);
-    }
-
-    /**
-     * Functionality to swap out vehicles in a trade if needed
-     * @param old
-     * @param newOne
-     */
-
-    public void changeBorrowerVehicle(Vehicle old, Vehicle newOne){
-        this.borrowerItems.remove(old);
-        borrowerItems.add(newOne);
-    }
-
     public void setOwnerNotified(Boolean ownerNotified) {
         this.ownerNotified = ownerNotified;
+    }
+
+    public Boolean getBorrowerNotified() {
+        return borrowerNotified;
     }
 
     public void setBorrowerNotified(Boolean borrowerNotified) {
         this.borrowerNotified = borrowerNotified;
     }
 
+    public Boolean getIsAccepted() {
+        return isAccepted;
+    }
+
     public void setIsAccepted(Boolean isAccepted) {
         this.isAccepted = isAccepted;
     }
 
+    public Boolean getIsDeclined() {
+        return isDeclined;
+    }
+
     public void setIsDeclined(Boolean isDeclined) {
         this.isDeclined = isDeclined;
+    }
+
+    /**
+     * Functionality to swap out vehicles in a trade if needed
+     *
+     * @param old
+     * @param newOne
+     */
+
+    public void changeOwnerVehicle(Vehicle old, Vehicle newOne) {
+        this.ownerItems.remove(old);
+        ownerItems.add(newOne);
+    }
+
+    /**
+     * Functionality to swap out vehicles in a trade if needed
+     *
+     * @param old
+     * @param newOne
+     */
+
+    public void changeBorrowerVehicle(Vehicle old, Vehicle newOne) {
+        this.borrowerItems.remove(old);
+        borrowerItems.add(newOne);
     }
 
     public UniqueID getUniqueID() {
@@ -170,7 +172,7 @@ public class Trade {
         this.uniqueID = uniqueID;
     }
 
-    public Trade copy(){
+    public Trade copy() {
         Trade newTrade = new Trade();
 
         newTrade.setOwner(this.getOwner());
@@ -187,11 +189,11 @@ public class Trade {
     }
 
     public void swapBelongsTo() {
-        for (Vehicle vehicle: ownerItems) {
+        for (Vehicle vehicle : ownerItems) {
             vehicle.setBelongsTo(borrower);
         }
 
-        for (Vehicle vehicle: borrowerItems) {
+        for (Vehicle vehicle : borrowerItems) {
             vehicle.setBelongsTo(owner);
         }
     }

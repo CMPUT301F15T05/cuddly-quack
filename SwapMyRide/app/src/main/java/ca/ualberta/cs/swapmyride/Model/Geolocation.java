@@ -17,15 +17,14 @@ import java.util.Locale;
 
 /**
  * Created by adrianomarini on 15-11-20.
- *
+ * <p/>
  * This class deals with all functions related to location
  * of items.
- *
  */
 public class Geolocation {
     private LocationManager lm;
 
-    public Boolean getPermission(Activity activity, Context context){
+    public Boolean getPermission(Activity activity, Context context) {
         // http://developer.android.com/training/permissions/requesting.html
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(context,
@@ -89,20 +88,17 @@ public class Geolocation {
 
     /**
      * @param context
-     * @param activity
-     *
-     * This method deals with finding the device's current location
-     *
-     * This is considered the default location for items
-     *
-     * Method for providers and location adapted from:
-     * http://stackoverflow.com/questions/17591147/how-to-get-current-location-in-android
-     * User: Boris Pawlowski (& Thomas Clemensen)           Accessed: 22-11-2015
-     *
-     * Method for finding address using Geocoder adapted from
-     * http://stackoverflow.com/questions/9409195/how-to-get-complete-address-from-latitude-and-longitude
-     * User: user370305                                    Accessed: 22-11-2015
-     *
+     * @param activity This method deals with finding the device's current location
+     *                 <p/>
+     *                 This is considered the default location for items
+     *                 <p/>
+     *                 Method for providers and location adapted from:
+     *                 http://stackoverflow.com/questions/17591147/how-to-get-current-location-in-android
+     *                 User: Boris Pawlowski (& Thomas Clemensen)           Accessed: 22-11-2015
+     *                 <p/>
+     *                 Method for finding address using Geocoder adapted from
+     *                 http://stackoverflow.com/questions/9409195/how-to-get-complete-address-from-latitude-and-longitude
+     *                 User: user370305                                    Accessed: 22-11-2015
      */
 
     public Address getCurrentLocation(Context context, Activity activity) throws IllegalArgumentException {
@@ -116,7 +112,7 @@ public class Geolocation {
         Boolean network = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         Location lastKnownLocation = new Location("GPS");
 
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
             address.setPostalCode("Location Not Enabled");
             address.setLocality("No Location");
             address.setLatitude(0);
@@ -124,7 +120,7 @@ public class Geolocation {
             return address;
         }
 
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED){
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED) {
             address.setPostalCode("Location Not Enabled");
             address.setLocality("No Location");
             address.setLatitude(0);
@@ -132,7 +128,7 @@ public class Geolocation {
             return address;
         }
 
-        if (!gps && !network){
+        if (!gps && !network) {
             throw new IllegalArgumentException();
         }
 
@@ -145,7 +141,7 @@ public class Geolocation {
             lastKnownLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
 
-        if(lastKnownLocation == null){
+        if (lastKnownLocation == null) {
             address.setPostalCode("Location Error");
             address.setLocality("Location Error");
             address.setCountryName("Location Error");
@@ -155,7 +151,7 @@ public class Geolocation {
 
         //If it is not null, try to get an address from the lat/long
         // that is returned -- Using Geocoder
-        else{
+        else {
             Geocoder geocoder = new Geocoder(context, Locale.getDefault());
             double longitude = lastKnownLocation.getLongitude();
             double latitude = lastKnownLocation.getLatitude();
@@ -165,16 +161,16 @@ public class Geolocation {
 
             //Get one possible address
             List<Address> addresses;
-            try{
+            try {
                 addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            } catch (IOException e){
+            } catch (IOException e) {
                 address.setPostalCode("Location Error");
                 address.setLocality("Location Error");
                 address.setCountryName("Location Error");
                 address.setLatitude(0);
                 address.setLongitude(0);
                 return address;
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 address.setPostalCode("Location Error");
                 address.setLocality("Location Error");
                 address.setCountryName("Location Error");
@@ -184,21 +180,22 @@ public class Geolocation {
             }
 
             //set attributes from this one possible address
-            if(addresses != null && addresses.size() == 1){
+            if (addresses != null && addresses.size() == 1) {
                 address.setLocality(addresses.get(0).getLocality());
                 address.setAddressLine(0, addresses.get(0).getAddressLine(0));
                 address.setPostalCode(addresses.get(0).getPostalCode());
                 address.setAdminArea(addresses.get(0).getAdminArea());
-                address.setCountryName(addresses.get(0).getCountryName());}
+                address.setCountryName(addresses.get(0).getCountryName());
+            }
         }
         return address;
     }
 
-    public Address setSpecificLocation(Context context, Activity activity, String myLocation){
+    public Address setSpecificLocation(Context context, Activity activity, String myLocation) {
         Address address = new Address(Locale.getDefault());
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         List<Address> addresses;
-        try{
+        try {
             addresses = geocoder.getFromLocationName(myLocation, 1);
             address.setLocality(addresses.get(0).getLocality());
             address.setCountryName(addresses.get(0).getCountryName());
@@ -207,24 +204,21 @@ public class Geolocation {
             address.setPostalCode(myLocation);
             address.setLatitude(addresses.get(0).getLatitude());
             address.setLongitude(addresses.get(0).getLongitude());
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             address.setPostalCode("Location Error");
             address.setLocality("Location Error");
             address.setCountryName("Location Error");
             address.setLatitude(0);
             address.setLongitude(0);
             return address;
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             address.setPostalCode("Location Error");
             address.setLocality("Location Error");
             address.setCountryName("Location Error");
             address.setLatitude(0);
             address.setLongitude(0);
             return address;
-        }
-        catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             address.setPostalCode("Location Error");
             address.setLocality("Location Error");
             address.setCountryName("Location Error");

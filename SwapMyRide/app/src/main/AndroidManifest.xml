@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ca.ualberta.cs.swapmyride" >
+    package="ca.ualberta.cs.swapmyride">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -11,8 +11,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
     <application
@@ -20,18 +20,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".View.MainMenu"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,104 +41,87 @@
             android:name=".View.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewFriendsActivity"
             android:label="@string/title_activity_view_friends"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewVehicleActivity"
             android:label="@string/title_activity_view_vehicle"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.SettingsActivity"
             android:label="@string/action_settings"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.AddInventoryActivity"
             android:label="@string/title_activity_add_inventory"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.SearchInventoryActivity"
             android:label="@string/title_activity_search_inventory"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewFeedInventoryActivity"
             android:label="@string/title_activity_view_feed_inventory"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.FeedTradeActivity"
             android:label="@string/title_activity_feed_trade"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.SearchFriendsActivity"
             android:label="@string/title_activity_search_friends"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.AddFriendProfileActivity"
             android:label="@string/title_activity_add_friend_profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewFriendProfileActivity"
             android:label="@string/title_activity_view_friend_profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.FeedTradeUserActivity"
             android:label="@string/title_activity_feed_trade_user"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewPendingTradesActivity"
             android:label="@string/title_activity_view_pending_trades"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewAPendingTradeActivity"
             android:label="@string/title_activity_view_apending_trade"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewPastTradesActivity"
             android:label="@string/title_activity_view_past_trades"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".View.ViewAPastTradeActivity"
             android:label="@string/title_activity_view_apast_trade"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -31,7 +31,7 @@ public class UserController {
     Context context;
     LocalDataManager dm;
 
-    public UserController(Context context){
+    public UserController(Context context) {
         this.context = context;
         dm = new LocalDataManager(context);
     }
@@ -43,7 +43,7 @@ public class UserController {
      * loads the username and returns a user. This user is stored in the UserSingleton in a list
      * of users.
      */
-    public void updateFriends(){
+    public void updateFriends() {
         ArrayList<String> friends = UserSingleton.getCurrentUser().getFriends().getFriendList();
         ArrayList<User> users = new ArrayList<>();
         User newUser;
@@ -55,13 +55,15 @@ public class UserController {
     }
 
     //for the time being, these classes access the local user list to verify
+
     /**
      * userExists sends the username to LocalDataManager which checks to see if the user exists in
      * the internal file system.
+     *
      * @param username
      * @return true: User exists, false: User does not
      */
-    public boolean userExists(String username){
+    public boolean userExists(String username) {
         return dm.searchUser(username);
     }
 
@@ -69,9 +71,10 @@ public class UserController {
      * Stores the given user into the "Active" user inside UserSingleton for access.
      * This version takes a user, and then stores it directly into the Singleton.
      * user into the Singleton.
+     *
      * @param user
      */
-    public void addCurrentUser(User user){
+    public void addCurrentUser(User user) {
         dm.saveUser(user);
         UserSingleton.addCurrentUser(user);
         //updateFriends();
@@ -79,35 +82,39 @@ public class UserController {
 
     /**
      * Adds a user to the "active" user's friendlist.
+     *
      * @param user
      */
     //adds user to user list
-    public void addFriend(User user){
+    public void addFriend(User user) {
         UserSingleton.addFriends(user);
     }
 
     /**
      * Gets the "Active" users friends from the singleton
+     *
      * @return ArrayList
      */
-    public ArrayList<User> getFriends(){
+    public ArrayList<User> getFriends() {
         return UserSingleton.getFriends();
     }
 
     /**
      * Gets the "Active" user from the singleton.
+     *
      * @return
      */
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         return UserSingleton.getCurrentUser();
     }
 
     /**
      * Gets the inventory of a given user.
+     *
      * @param user
      * @return
      */
-    public InventoryList getInventory(User user){
+    public InventoryList getInventory(User user) {
         InventoryList inventory;
         User currentUser = getCurrentUser();
         inventory = currentUser.getInventory();
@@ -116,51 +123,56 @@ public class UserController {
 
     /**
      * Will change the download preferance of the "Active" user to the given boolean
+     *
      * @param preference
      */
-    public void changeDownloadPreferance(boolean preference){
+    public void changeDownloadPreferance(boolean preference) {
         UserSingleton.getCurrentUser().setDownloadImages(preference);
     }
 
 
     /**
      * Adds the user identified by the username given in toAdd.
+     *
      * @param toAdd
      */
-    public void addFriend(String toAdd){
+    public void addFriend(String toAdd) {
         UserSingleton.getCurrentUser().addFriend(toAdd);
         UserSingleton.addFriends(dm.loadUser(toAdd));
     }
 
     /**
      * deletes a friend from the "active" user, and then updates the friends in UserSingleton
+     *
      * @param toDelete
      */
-    public void deleteFriend(String toDelete){
+    public void deleteFriend(String toDelete) {
         UserSingleton.getCurrentUser().removeFriend(toDelete);
         updateFriends();
     }
 
     /**
      * Gets all vehicles from the "Active" user.
+     *
      * @return
      */
-    public ArrayList<Vehicle> getUserInventoryItems(){
+    public ArrayList<Vehicle> getUserInventoryItems() {
         return UserSingleton.getCurrentUser().getInventory().getList();
     }
 
     /**
      * Uses LocalDataManager to save the "Active" user.
      */
-    public void saveCurrentUser(){
+    public void saveCurrentUser() {
         dm.saveUser(UserSingleton.getCurrentUser());
     }
 
     /**
      * Gets all vehicles of the current friends of the "Active" user
+     *
      * @return
      */
-    public InventoryList getFriendVehicles(){
+    public InventoryList getFriendVehicles() {
         InventoryList inventoryList = new InventoryList();
         for (User friend : getFriends()) {
             InventoryList friendInventory = friend.getInventory();
@@ -176,9 +188,10 @@ public class UserController {
 
     /**
      * Gets vehicles of a specified friend of the "Active" user
+     *
      * @return
      */
-    public InventoryList getFriendVehicles(String username){
+    public InventoryList getFriendVehicles(String username) {
         InventoryList inventoryList = new InventoryList();
         for (User friend : getFriends()) {
 

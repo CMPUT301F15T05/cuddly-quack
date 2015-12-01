@@ -20,23 +20,24 @@ public class NetworkDataManager {
 
     final static String hostUrl = "http://cmput301.softwareprocess.es:8080/cmput301f15t05testing/";
 
-    public NetworkDataManager(){
+    public NetworkDataManager() {
     }
+
     /*
      * Method for saving users to the server.
      */
-    public void saveUser(User user){
+    public void saveUser(User user) {
         Log.i("NEWDATAMANAGER", "INSIDE NETWORK SAVE USER - " + user.getUserName());
         Thread saveUserThread = new Thread(new SaveUserRunnable(user, hostUrl));
         saveUserThread.start();
     }
 
-    public void deleteUser(String username){
+    public void deleteUser(String username) {
         Thread deleteUserThread = new Thread(new DeleteUserRunnable(username, hostUrl));
         deleteUserThread.start();
     }
 
-    public User retrieveUser(String username){
+    public User retrieveUser(String username) {
         User user;
         Log.i("NEWDATAMANAGER", "INSIDE NETWORK LOAD USER! - " + username);
         RetrieveUserRunnable runnable = new RetrieveUserRunnable(username, hostUrl);
@@ -44,55 +45,55 @@ public class NetworkDataManager {
         thread.start();
         try {
             thread.join();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         user = runnable.getUser();
         return user;
     }
 
-    public boolean searchUser(String username){
+    public boolean searchUser(String username) {
         SearchUserRunnable searchUserRunnable = new SearchUserRunnable(username, hostUrl);
         Thread thread = new Thread(searchUserRunnable);
         thread.start();
         try {
             thread.join();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return searchUserRunnable.getExists();
     }
 
-    public void savePhoto(Photo photo){
+    public void savePhoto(Photo photo) {
         Thread thread = new Thread(new SavePhotoRunnable(photo, hostUrl));
         thread.start();
     }
 
-    public Photo retrievePhoto(String photoId){
+    public Photo retrievePhoto(String photoId) {
         RetrievePhotoRunnable runnable = new RetrievePhotoRunnable(photoId, hostUrl);
         Thread thread = new Thread(runnable);
         thread.start();
         try {
             thread.join();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         Photo photo = runnable.getPhoto();
         return photo;
     }
 
-    public void deletePhoto(String photoId){
+    public void deletePhoto(String photoId) {
         Thread thread = new Thread(new DeletePhotoRunnable(photoId, hostUrl));
         thread.start();
     }
 
-    public boolean searchPhoto(String photoId){
-        SearchPhotoRunnable runnable = new SearchPhotoRunnable(photoId,hostUrl);
+    public boolean searchPhoto(String photoId) {
+        SearchPhotoRunnable runnable = new SearchPhotoRunnable(photoId, hostUrl);
         Thread thread = new Thread(runnable);
         thread.start();
         try {
             thread.join();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return runnable.getExists();

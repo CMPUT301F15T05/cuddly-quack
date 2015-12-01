@@ -4,78 +4,78 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="View Friends"
-        android:textSize="20sp"
         android:id="@+id/viewFriends"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="25dp"
-        android:textColor="@color/colorPrimary"/>
+        android:layout_marginTop="20dp"
+        android:text="View Friends"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <View
-        style="@style/Divider"
-        android:layout_below="@+id/viewFriends"
-        android:layout_marginTop="20dp"
         android:id="@+id/divider1"
+        style="@style/Divider"
         android:layout_alignStart="@+id/viewFriends"
-        android:layout_marginRight="25dp"/>
+        android:layout_below="@+id/viewFriends"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Past Trades"
-        android:textSize="20sp"
         android:id="@+id/pastTrades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/viewFriends"
         android:layout_below="@+id/divider1"
-        android:layout_alignStart="@+id/viewFriends"
         android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"/>
+        android:text="Past Trades"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <View
-        style="@style/Divider"
-        android:layout_below="@+id/pastTrades"
-        android:layout_marginTop="20dp"
         android:id="@+id/divider2"
+        style="@style/Divider"
         android:layout_alignStart="@+id/viewFriends"
-        android:layout_marginRight="25dp"/>
+        android:layout_below="@+id/pastTrades"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp" />
 
 
     <TextView
+        android:id="@+id/activeTrades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Pending Trades"
-        android:textSize="20sp"
-        android:id="@+id/activeTrades"
-        android:layout_below="@+id/divider2"
         android:layout_alignStart="@+id/pastTrades"
+        android:layout_below="@+id/divider2"
         android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"/>
+        android:text="Pending Trades"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <View
-        style="@style/Divider"
-        android:layout_below="@+id/activeTrades"
-        android:layout_marginTop="20dp"
         android:id="@+id/divider3"
+        style="@style/Divider"
         android:layout_alignStart="@+id/viewFriends"
-        android:layout_marginRight="25dp"/>
+        android:layout_below="@+id/activeTrades"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
+        android:id="@+id/editProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Edit Profile"
-        android:textSize="20sp"
-        android:id="@+id/editProfile"
-        android:layout_below="@+id/divider3"
         android:layout_alignStart="@+id/activeTrades"
+        android:layout_below="@+id/divider3"
         android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"/>
+        android:text="Edit Profile"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

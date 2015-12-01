@@ -25,23 +25,24 @@ public class RetrieveUserRunnable implements Runnable {
     private String url;
     private Gson gson = new Gson();
 
-    public RetrieveUserRunnable(String username, String url){
+    public RetrieveUserRunnable(String username, String url) {
         this.url = url + "users/" + username;
     }
 
-    public void run(){
+    public void run() {
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
         HttpResponse response = null;
 
         SearchHit<User> hit = null;
-        try{
+        try {
             response = httpClient.execute(httpGet);
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Type searchHitType = new TypeToken<SearchHit<User>>(){}.getType();
+        Type searchHitType = new TypeToken<SearchHit<User>>() {
+        }.getType();
 
         try {
             hit = gson.fromJson(
@@ -64,7 +65,7 @@ public class RetrieveUserRunnable implements Runnable {
      * Returns the user if found by the retrieve function. Make sure to wait for the thread to
      * Finish first.
      */
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 }

@@ -44,9 +44,10 @@ public class EditProfileActivity extends AppCompatActivity {
     /**
      * onCreate, the fields are initialized with the information that
      * is saved in the current user which is then editable.
-     *
+     * <p/>
      * In this function is an onClick Listener, which functions
      * to save the edited data if any exists at the end of the use
+     *
      * @param savedInstanceState
      */
     @Override
@@ -93,11 +94,11 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    public TextView getNameText(){
+    public TextView getNameText() {
         return (TextView) findViewById(R.id.nameField);
     }
 
-    public Button getSaveButton(){
+    public Button getSaveButton() {
         return (Button) findViewById(R.id.save);
     }
 

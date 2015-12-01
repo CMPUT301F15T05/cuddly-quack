@@ -32,9 +32,11 @@ import ca.ualberta.cs.swapmyride.View.LoginActivity;
  */
 public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
-    public DataManagerTest(){super(LoginActivity.class);}
+    public DataManagerTest() {
+        super(LoginActivity.class);
+    }
 
-    public void testSaveUser(){
+    public void testSaveUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         DataManager dm = new DataManager(getActivity());
         LocalDataManager ldm = new LocalDataManager(getActivity());
@@ -50,9 +52,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.deleteUser(user.getUserName());
         ldm.deleteUser(user.getUserName());
 
-        try{
+        try {
             Thread.sleep(200);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -63,9 +65,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         dm.saveUser(user);
 
         //wait a decent amount of time to ensure the save has time to happen
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -76,7 +78,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         ldm.deleteUser(user.getUserName());
     }
 
-    public void testDeleteUser(){
+    public void testDeleteUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         DataManager dm = new DataManager(getActivity());
         LocalDataManager ldm = new LocalDataManager(getActivity());
@@ -92,9 +94,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         ndm.deleteUser(user.getUserName());
         ldm.deleteUser(user.getUserName());
 
-        try{
+        try {
             Thread.sleep(250);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -104,9 +106,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         dm.saveUser(user);
 
         //wait a decent amount of time to ensure the save has time to happen
-        try{
+        try {
             Thread.sleep(250);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -116,9 +118,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         dm.deleteUser(user.getUserName());
 
         //wait a decent amount of time to ensure the delete has time to happen
-        try{
+        try {
             Thread.sleep(250);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -126,7 +128,7 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         assertFalse(dm.searchUserServer(user.getUserName()));
     }
 
-    public void testGetUser(){
+    public void testGetUser() {
         NetworkDataManager ndm = new NetworkDataManager();
         DataManager dm = new DataManager(getActivity());
         LocalDataManager ldm = new LocalDataManager(getActivity());
@@ -144,9 +146,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
         //save the user strictly to the server first, and make sure that it
         ndm.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(250);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -158,9 +160,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dm.deleteUser(user.getUserName());
 
-        try{
+        try {
             Thread.sleep(250);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -180,10 +182,10 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         assertTrue(user.equals(user2));
 
-        dm.deleteUser(user.getUserName() );
+        dm.deleteUser(user.getUserName());
     }
 
-    public void testSaveUserWithVehicle(){
+    public void testSaveUserWithVehicle() {
         NetworkDataManager ndm = new NetworkDataManager();
         DataManager dm = new DataManager(getActivity());
         LocalDataManager ldm = new LocalDataManager(getActivity());
@@ -201,9 +203,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dm.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(200);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -221,9 +223,9 @@ public class DataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dm.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(200);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

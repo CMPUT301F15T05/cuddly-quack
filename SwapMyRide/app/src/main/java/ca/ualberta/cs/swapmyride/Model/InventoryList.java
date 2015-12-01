@@ -32,44 +32,48 @@ public class InventoryList {
      * Creates the array of vehicles.
      */
 
-    public InventoryList(){
+    public InventoryList() {
         vehicleList = new ArrayList<>();
     }
 
     /**
      * Constructor in the case where an array has been created.
      * Takes in the array and sets it as the global vehicleList
+     *
      * @param vehicleList
      */
-    public InventoryList(ArrayList<Vehicle> vehicleList){
+    public InventoryList(ArrayList<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
     }
 
     /**
      * Returns an array list of the vehicles contained in the object
+     *
      * @return ArrayList with Vehicles
      */
 
-    public ArrayList<Vehicle> getList(){
+    public ArrayList<Vehicle> getList() {
         return vehicleList;
     }
 
     /**
      * Adds a vehicle that is passed to the inventory list
+     *
      * @param vehicle
      */
 
-    public void add(Vehicle vehicle){
+    public void add(Vehicle vehicle) {
         vehicleList.add(vehicle);
     }
 
     /**
      * Deletes specific vehicle that is passed from the
      * inventory list
+     *
      * @param vehicle
      */
 
-    public void delete(Vehicle vehicle){
+    public void delete(Vehicle vehicle) {
         for (int i = 0; i < this.vehicleList.size(); i++) {
             if (this.vehicleList.get(i).getUniqueID().isEqualID(vehicle.getUniqueID())) {
                 this.vehicleList.remove(i);
@@ -80,20 +84,22 @@ public class InventoryList {
 
     /**
      * Returns the size of the inventory
+     *
      * @return size
      */
-    public int size(){
+    public int size() {
         return vehicleList.size();
     }
 
     /**
      * Searches through the Inventory list to find which vehicles are public
+     *
      * @return an ArrayList of all public vehicles
      */
-    public ArrayList<Vehicle> getPublic(){
+    public ArrayList<Vehicle> getPublic() {
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
-        for (Vehicle vehicle: vehicleList) {
-            if(vehicle.getPublic()){
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle.getPublic()) {
                 publicVehicles.add(vehicle);
             }
         }
@@ -102,13 +108,14 @@ public class InventoryList {
 
     /**
      * Searches through the Inventory list to find which vehicles are private
+     *
      * @return an ArrayList of all private vehicles
      */
 
-    public ArrayList<Vehicle> getPrivate(){
+    public ArrayList<Vehicle> getPrivate() {
         ArrayList<Vehicle> publicVehicles = new ArrayList<>();
-        for (Vehicle vehicle: vehicleList) {
-            if(!vehicle.getPublic()){
+        for (Vehicle vehicle : vehicleList) {
+            if (!vehicle.getPublic()) {
                 publicVehicles.add(vehicle);
             }
         }
@@ -117,12 +124,13 @@ public class InventoryList {
 
     /**
      * Searches the InventoryList to find a given vehicle
+     *
      * @param vehicleName name to find
      * @return true: vehicle exists. false: vehicle does not exist
      */
-    public boolean search(String vehicleName){
-        for (Vehicle vehicle: vehicleList) {
-            if(vehicle.getName().equals(vehicleName)) {
+    public boolean search(String vehicleName) {
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle.getName().equals(vehicleName)) {
                 return true;
             }
         }
@@ -132,14 +140,15 @@ public class InventoryList {
 
     /**
      * Builds a new inventory list based on the category given
+     *
      * @param category
      * @return a new InventoryList with only vehicles of the given category
      */
 
-    public InventoryList getCategory(VehicleCategory category){
+    public InventoryList getCategory(VehicleCategory category) {
         InventoryList newInventory = new InventoryList();
-        for (Vehicle vehicle: vehicleList){
-            if(vehicle.getCategory().equals(category)){
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle.getCategory().equals(category)) {
                 newInventory.add(vehicle);
             }
         }
@@ -147,10 +156,9 @@ public class InventoryList {
     }
 
 
-
     public void deleteAll(ArrayList<Vehicle> toDelete) {
 
-        for(Vehicle toDeleteVehicle: toDelete) {
+        for (Vehicle toDeleteVehicle : toDelete) {
             this.delete(toDeleteVehicle);
         }
     }

@@ -32,12 +32,11 @@ import ca.ualberta.cs.swapmyride.R;
 
 /**
  * This activity allows users to sign up to the app
- *
+ * <p/>
  * Through the process of this, a User object is
  * created, and it is saved as well. It is given
  * its inventory and friendslist - and completely
  * instantiated  before saving
- *
  */
 
 public class SignUpActivity extends AppCompatActivity {
@@ -54,11 +53,12 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * The user here is given the option to enter their name, a username
      * their email, and then their address.
-     *
+     * <p/>
      * This is all then added to a user instance and saved.
-     *
+     * <p/>
      * The system checks if the username is already in use and displays
      * an error if an instance of the username is already found.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -88,12 +88,10 @@ public class SignUpActivity extends AppCompatActivity {
 
                 Boolean found = dm.searchUser(myUsername);
                 //check the username does not already exist
-                if(found){
-                    Toast.makeText(getApplicationContext(),"Username Already Exists", Toast.LENGTH_LONG).show();
+                if (found) {
+                    Toast.makeText(getApplicationContext(), "Username Already Exists", Toast.LENGTH_LONG).show();
                     username.setText("");
-                }
-
-                else if(!found && !myUsername.equals("")){
+                } else if (!found && !myUsername.equals("")) {
                     User newUser = new User();
                     newUser.setName(myName);
                     newUser.setUserName(myUsername);
@@ -114,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 //Do not allow a blank username
-                else if(myUsername.equals("")){
+                else if (myUsername.equals("")) {
                     Toast.makeText(SignUpActivity.this, "Username Cannot Be Blank", Toast.LENGTH_LONG).show();
                     username.setText("");
                 }
@@ -122,11 +120,11 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public EditText getUsername(){
+    public EditText getUsername() {
         return username;
     }
 
-    public Button getSave(){
+    public Button getSave() {
         return signUp;
     }
 

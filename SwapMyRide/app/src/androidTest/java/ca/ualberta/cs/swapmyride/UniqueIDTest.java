@@ -8,23 +8,23 @@ import ca.ualberta.cs.swapmyride.Misc.UniqueID;
  * Created by Conner on 2015-11-19.
  */
 public class UniqueIDTest extends ActivityInstrumentationTestCase2 {
-    public UniqueIDTest(){
+    public UniqueIDTest() {
         super(ActivityInstrumentationTestCase2.class);
     }
 
-    public void testGetID(){
+    public void testGetID() {
         UniqueID a = new UniqueID();
         assertTrue(a.getID() instanceof String);
     }
 
-    public void testDuplicateID(){
+    public void testDuplicateID() {
         UniqueID a = new UniqueID();
         UniqueID b = a.duplicateID();
 
         assertTrue(a.getID().equals(b.getID()));
     }
 
-    public void testIsEqual(){
+    public void testIsEqual() {
         UniqueID aID = new UniqueID();
         UniqueID aCopy = aID.duplicateID();
         UniqueID diffID = new UniqueID();

@@ -17,10 +17,11 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  */
 public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
-    public LocalDataManagerTest(){
+    public LocalDataManagerTest() {
         super(MainMenu.class);
     }
-    public void testSaveUser(){
+
+    public void testSaveUser() {
         LocalDataManager dataManager = new LocalDataManager(getActivity());
         UserController uController = new UserController(getActivity());
         User user = new User();
@@ -33,9 +34,9 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dataManager.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(50);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -49,8 +50,8 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         dataManager.deleteUser("gbullock");
     }
 
-    public void testDeleteUser(){
-        Log.i("WERE Here","RIGHT HERE");
+    public void testDeleteUser() {
+        Log.i("WERE Here", "RIGHT HERE");
         LocalDataManager dm = new LocalDataManager(getActivity());
         User user = new User();
         user.setName("Garry");
@@ -60,9 +61,9 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dm.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(50);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -75,7 +76,7 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
     }
 
-    public void testSaveUserWithVehicle(){
+    public void testSaveUserWithVehicle() {
         LocalDataManager dataManager = new LocalDataManager(getActivity());
 
         User user = new User();
@@ -92,9 +93,9 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dataManager.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(50);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -119,9 +120,9 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dataManager.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(50);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -150,7 +151,7 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testSearchUser(){
+    public void testSearchUser() {
         LocalDataManager dataManager = new LocalDataManager(getActivity());
 
         User user = new User();
@@ -169,9 +170,9 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         dataManager.saveUser(user);
 
-        try{
+        try {
             Thread.sleep(50);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -186,16 +187,16 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         assertFalse(getActivity().getBaseContext().getFileStreamPath(user.getUserName()).exists());
     }
 
-    public void testSavePhoto(){
+    public void testSavePhoto() {
         LocalDataManager dataManager = new LocalDataManager(getActivity());
         Photo photo = new Photo(getActivity());
         Log.i("PhotoTest", "PhotoID - " + photo.getUid().getID());
 
         dataManager.savePhoto(photo);
 
-        try{
+        try {
             Thread.sleep(100);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -207,16 +208,16 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
         assertFalse(getActivity().getBaseContext().getFileStreamPath(photo.getUid().getID()).exists());
     }
 
-    public void testLoadPhoto(){
+    public void testLoadPhoto() {
         LocalDataManager dataManager = new LocalDataManager(getActivity());
         Photo photo = new Photo(getActivity());
         Log.i("PhotoTest", "PhotoID - " + photo.getUid().getID());
 
         dataManager.savePhoto(photo);
 
-        try{
+        try {
             Thread.sleep(100);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -224,7 +225,7 @@ public class LocalDataManagerTest extends ActivityInstrumentationTestCase2 {
 
         Photo photo2 = dataManager.loadPhoto(photo.getUid().getID());
 
-        Log.i("TestPhoto", "First Photo ID:" +photo.getUid().getID() + " Photo 2 ID: " + photo2.getUid().getID());
+        Log.i("TestPhoto", "First Photo ID:" + photo.getUid().getID() + " Photo 2 ID: " + photo2.getUid().getID());
         assertTrue(photo.equals(photo2));
 
         dataManager.deletePhoto(photo.getUid().getID());

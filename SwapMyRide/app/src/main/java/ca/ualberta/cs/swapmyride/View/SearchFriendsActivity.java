@@ -54,7 +54,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
 
     /**
      * Displays a search field and accepts input to search for a username
-     *
+     * <p/>
      * Uses a SearchController to search through the
      * information stored in the disk and return any
      * found friends matching the query.
@@ -111,15 +111,15 @@ public class SearchFriendsActivity extends AppCompatActivity {
         });
     }
 
-    public EditText getSearchField(){
-        return(EditText) findViewById(R.id.searchField);
+    public EditText getSearchField() {
+        return (EditText) findViewById(R.id.searchField);
     }
 
-    public ImageButton getSearch(){
-        return(ImageButton) findViewById(R.id.searchButton);
+    public ImageButton getSearch() {
+        return (ImageButton) findViewById(R.id.searchButton);
     }
 
-    public ListView getFriendView(){
+    public ListView getFriendView() {
         return (ListView) findViewById(R.id.friendView);
     }
 }

@@ -26,27 +26,25 @@ import ca.ualberta.cs.swapmyride.View.Tab2;
 import ca.ualberta.cs.swapmyride.View.Tab3;
 
 /**
- *
  * http://www.android4devs.com/2015/01/how-to-make-material-design-sliding-tabs.html
- *
+ * <p/>
  * Imported from AndroidForDevs
- *
+ * <p/>
  * Helps the sliding behaviour of the tabs to work properly.
- *
+ * <p/>
  * Created by Daniel on 2015-10-24.
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
-    int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-
     public Tab1 tab1;
     public Tab2 tab2;
     public Tab3 tab3;
+    CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
+    int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
+    public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
         super(fm);
 
         this.Titles = mTitles;
@@ -58,18 +56,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0) // if the position is 0 we are returning the First tab
+        if (position == 0) // if the position is 0 we are returning the First tab
         {
             tab1 = new Tab1();
             return tab1;
-        }
-        else if (position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        } else if (position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             tab2 = new Tab2();
             return tab2;
-        }
-
-        else {
+        } else {
             tab3 = new Tab3();
             return tab3;
         }
@@ -90,7 +85,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return NumbOfTabs;
     }
 
-    public ListView getInventoryListView(){
+    public ListView getInventoryListView() {
         return tab1.getInventoryList();
     }
 

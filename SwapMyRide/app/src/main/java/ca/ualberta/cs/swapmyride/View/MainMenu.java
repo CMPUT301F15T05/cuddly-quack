@@ -49,13 +49,14 @@ public class MainMenu extends AppCompatActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Feed","Inventory","User"};
-    int Numboftabs =3;
+    CharSequence Titles[] = {"Feed", "Inventory", "User"};
+    int Numboftabs = 3;
     Geolocation geolocation = new Geolocation();
 
     /**
      * onCreate, the toolbars and tabs are created, and a user
      * can slide between tabs.
+     *
      * @param savedInstanceState
      */
 
@@ -72,7 +73,7 @@ public class MainMenu extends AppCompatActivity {
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -97,6 +98,7 @@ public class MainMenu extends AppCompatActivity {
     /**
      * We have the options button implemented here - this allows the menu to expand
      * and offer the settings menu
+     *
      * @param menu
      * @return
      */
@@ -112,26 +114,27 @@ public class MainMenu extends AppCompatActivity {
      * When pausing the application from main menu, save all the data that we need to.
      */
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         DataManager dataManager = new DataManager(getApplicationContext());
         LocalDataManager ldm = new LocalDataManager(getApplicationContext());
         dataManager.saveUser(UserSingleton.getCurrentUser());
-        for(Vehicle vehicle : UserSingleton.getCurrentUser().getInventory().getList()){
-            for (UniqueID photoId : vehicle.getPhotoIds()){
+        for (Vehicle vehicle : UserSingleton.getCurrentUser().getInventory().getList()) {
+            for (UniqueID photoId : vehicle.getPhotoIds()) {
                 //if the photo does not exist on the server save it... else do not
-                if(!dataManager.searchPhotoServer(photoId.getID())){
+                if (!dataManager.searchPhotoServer(photoId.getID())) {
                     dataManager.savePhoto(ldm.loadPhoto(photoId.getID()));
                 }
             }
         }
-        for (User friend: UserSingleton.getFriends()){
+        for (User friend : UserSingleton.getFriends()) {
             dataManager.saveUser(friend);
         }
     }
 
     /**
      * as above, allows access to settings menu
+     *
      * @param item
      * @return
      */
@@ -172,39 +175,39 @@ public class MainMenu extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public ListView getFeed(){
+    public ListView getFeed() {
         return (ListView) findViewById(R.id.feedView);
     }
 
-    public ListView getInventoryView(){
+    public ListView getInventoryView() {
         return adapter.getInventoryListView();
     }
 
-    public TextView getViewFriends(){
+    public TextView getViewFriends() {
         return (TextView) findViewById(R.id.viewFriends);
     }
 
-    public TextView getPastTrades(){
+    public TextView getPastTrades() {
         return (TextView) findViewById(R.id.pastTrades);
     }
 
-    public TextView getCurrentTrades(){
+    public TextView getCurrentTrades() {
         return (TextView) findViewById(R.id.activeTrades);
     }
 
-    public TextView getEditProfile(){
+    public TextView getEditProfile() {
         return (TextView) findViewById(R.id.editProfile);
     }
 
-    public SlidingTabLayout getTabs(){
+    public SlidingTabLayout getTabs() {
         return (SlidingTabLayout) findViewById(R.id.tabs);
     }
 
-    public ActionMenuItemView getActionAddFriend(){
+    public ActionMenuItemView getActionAddFriend() {
         return (ActionMenuItemView) findViewById(R.id.action_addfriend);
     }
 
-    public Tab2 getTab2(){
+    public Tab2 getTab2() {
         return adapter.tab2;
     }
 }

@@ -39,11 +39,12 @@ public class SearchController {
     /**
      * Taking a username in, searches the data located on disk for any instance
      * matching the username and returns an ArrayList with matching users.
+     *
      * @param username
      * @param context
      * @return
      */
-    public ArrayList<User> findUser(String username, Context context){
+    public ArrayList<User> findUser(String username, Context context) {
         //TODO: Search the server for a user that matches the given username
         NetworkDataManager dataManager = new NetworkDataManager();
 
@@ -59,10 +60,11 @@ public class SearchController {
     /**
      * FindVehicle takes a vehicleName and searches storage for a vehicle that
      * matches. Returns the Vehicle if found.
+     *
      * @param vehicleName
      * @return
      */
-    public Vehicle findVehicle(String vehicleName){
+    public Vehicle findVehicle(String vehicleName) {
         //TODO: Search the server for a vehicle that matches the given vehicleName
         return new Vehicle();
     }
@@ -70,6 +72,7 @@ public class SearchController {
     /**
      * Returns an ArrayList of vehicles based on name and/or category that is passed
      * to the function.
+     *
      * @param vehicleName
      * @param vehicleCategory
      * @return
@@ -95,8 +98,8 @@ public class SearchController {
                 if (userVehicles.get(i).getName().equals(vehicleName))
                     if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
                         if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
-                               userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
-                               address.getLongitude())) {
+                                userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                                address.getLongitude())) {
                             foundVehicles.add(userVehicles.get(i));
                         }
                     }
@@ -119,16 +122,16 @@ public class SearchController {
         }
 
         // Search category only
-        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))){
+        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))) {
 
             for (int i = 0; i < size; i++) {
 
-                if (userVehicles.get(i).getCategory().equals(vehicleCategory)){
-                   if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
-                           userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
-                           address.getLongitude())){
+                if (userVehicles.get(i).getCategory().equals(vehicleCategory)) {
+                    if (withinDistance(distance, userVehicles.get(i).getLocation().getLatitude(),
+                            userVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
+                            address.getLongitude())) {
                         foundVehicles.add(userVehicles.get(i));
-                   }
+                    }
                 }
 
             }
@@ -141,13 +144,14 @@ public class SearchController {
     /**
      * Returns an ArrayList of vehicles based on name and/or category that is passed
      * to the function.
+     *
      * @param vehicleName
      * @param vehicleCategory
      * @return
      */
 
     public ArrayList<Vehicle> findFeedVehicle(String vehicleName, VehicleCategory vehicleCategory,
-                                                   Activity activity, Context context, double distance) {
+                                              Activity activity, Context context, double distance) {
 
 
         UserController userController = new UserController(context);
@@ -194,14 +198,14 @@ public class SearchController {
         }
 
         // Search category only
-        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))){
+        else if ((vehicleName.equals("")) && !(vehicleCategory.equals(VehicleCategory.NONE))) {
 
             for (int i = 0; i < size; i++) {
 
-                if (friendsVehicles.get(i).getCategory().equals(vehicleCategory)){
+                if (friendsVehicles.get(i).getCategory().equals(vehicleCategory)) {
                     if (withinDistance(distance, friendsVehicles.get(i).getLocation().getLatitude(),
                             friendsVehicles.get(i).getLocation().getLongitude(), address.getLatitude(),
-                            address.getLongitude())){
+                            address.getLongitude())) {
                         foundVehicles.add(friendsVehicles.get(i));
                     }
                 }
@@ -216,22 +220,23 @@ public class SearchController {
     /**
      * Calculates to find out if a car is within the prescribed distance from the device's
      * current location
+     *
      * @param distance
      * @param latCar
      * @param longCar
      * @param lat
      * @param longit
      * @return True if vehicle is within the specified distance
-     *
+     * <p/>
      * Adapted from:
      * http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-     *
+     * <p/>
      * User: Deduplicator / Chuck        Accessed: 28/11/2015
      */
 
-    public Boolean withinDistance(double distance, double latCar, double longCar, double lat, double longit){
+    public Boolean withinDistance(double distance, double latCar, double longCar, double lat, double longit) {
 
-        if(distance == 0.0){
+        if (distance == 0.0) {
             return true;
         }
 
@@ -239,9 +244,9 @@ public class SearchController {
         double r = 6371; // Radius of the earth in KM
         double dLat = Math.toRadians(lat - latCar);
         double dLong = Math.toRadians(longit - longCar);
-        double a = Math.pow(Math.sin(dLat / 2),2) + Math.cos(Math.toRadians(latCar)) * Math.cos(Math.toRadians(lat)) *
-                Math.pow(Math.sin(dLong / 2),2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double a = Math.pow(Math.sin(dLat / 2), 2) + Math.cos(Math.toRadians(latCar)) * Math.cos(Math.toRadians(lat)) *
+                Math.pow(Math.sin(dLong / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         diff = r * c;
 
         return diff <= distance;

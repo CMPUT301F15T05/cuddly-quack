@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package ca.ualberta.cs.swapmyride.Misc;
+
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Model.Trade;
@@ -35,23 +36,27 @@ public class UserSingleton {
         return ourInstance;
     }
 
-    public static void addCurrentUser(User user){
+    public static void addCurrentUser(User user) {
         currentUser = user;
     }
 
-    public static User getCurrentUser(){
-        if(currentUser == null){
+    public static User getCurrentUser() {
+        if (currentUser == null) {
             return new User();
         }
         return currentUser;
     }
 
-    public static void addFriends(User user){
+    public static void addFriends(User user) {
         friends.add(user);
     }
 
-    public static ArrayList<User> getFriends(){
+    public static ArrayList<User> getFriends() {
         return friends;
+    }
+
+    public static void setFriends(ArrayList<User> users) {
+        friends = users;
     }
 
     public static Vehicle getFeedViewVehicle() {
@@ -62,10 +67,6 @@ public class UserSingleton {
         UserSingleton.feedViewVehicle = feedViewVehicle;
     }
 
-    public static void setFriends(ArrayList<User> users){
-        friends = users;
-    }
-
     public static Trade getCurrentTrade() {
         return currentTrade;
     }
@@ -74,7 +75,7 @@ public class UserSingleton {
         UserSingleton.currentTrade = currentTrade;
     }
 
-    public static boolean getDownloadPhotos(){
+    public static boolean getDownloadPhotos() {
         return currentUser.getDownloadImages();
     }
 }

@@ -68,7 +68,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     /**
      * Using the dataManager functionality, load details of the vehicle
      * and display all relevant information about it.
-     *
+     * <p/>
      * The user can select to delete an item from this view, which they
      * would be asked to confirm.
      *
@@ -117,7 +117,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
 
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         //load the picture from the first
-        for (UniqueID uid : vehicle.getPhotoIds()){
+        for (UniqueID uid : vehicle.getPhotoIds()) {
             Photo photo = ldm.loadPhoto(uid.getID());
             ImageView newImage = new ImageView(getApplicationContext());
             newImage.setImageBitmap(photo.getImage());
@@ -130,14 +130,14 @@ public class ViewVehicleActivity extends AppCompatActivity {
             location.setText(vehicle.getLocation().getPostalCode() + ",  " + vehicle.getLocation().getLocality());
             lat.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLatitude()));
             longit.setText(new java.text.DecimalFormat("0.0000").format(vehicle.getLocation().getLongitude()));
-        }catch (Exception e){
+        } catch (Exception e) {
             location.setText("Location Error");
             lat.setText("0");
             longit.setText("0");
         }
     }
 
-    public void initOnClickListeners(){
+    public void initOnClickListeners() {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,7 +158,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
     /**
      * Ask the user for confirmation if they would like to delete a vehicle.
      */
-    public void deleteDialog(){
+    public void deleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewVehicleActivity.this);
         builder.setMessage("Are you SURE you want to delete this vehicle? It is a permanent Action!");
         builder.setCancelable(false);
@@ -170,7 +170,7 @@ public class ViewVehicleActivity extends AppCompatActivity {
                 Vehicle toDelete = user.getInventory().getList().get(position);
 
                 //wipe all photos associated with this vehicle.
-                for(UniqueID id : toDelete.getPhotoIds()){
+                for (UniqueID id : toDelete.getPhotoIds()) {
                     dm.deletePhoto(id.getID());
                 }
                 user.getInventory().delete(toDelete);
@@ -187,11 +187,11 @@ public class ViewVehicleActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public TextView getTheName(){
+    public TextView getTheName() {
         return (TextView) findViewById(R.id.title);
     }
 
-    public Button getEditButton(){
+    public Button getEditButton() {
         return (Button) findViewById(R.id.edit);
     }
 }

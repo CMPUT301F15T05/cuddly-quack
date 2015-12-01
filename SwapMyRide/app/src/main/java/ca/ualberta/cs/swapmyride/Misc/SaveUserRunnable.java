@@ -17,18 +17,20 @@ import ca.ualberta.cs.swapmyride.Model.User;
 /**
  * Created by Garry on 2015-11-25.
  */
-public class SaveUserRunnable implements Runnable{
+public class SaveUserRunnable implements Runnable {
     private User user;
     private String url;
     private Gson gson = new Gson();
+
     //private
-    public SaveUserRunnable(final User user, final String url){
+    public SaveUserRunnable(final User user, final String url) {
         this.user = user;
         this.url = url + "users/" + user.getUserName();
         Log.i("NetworkDataManager", this.url);
     }
+
     /* Based on https://github.com/rayzhangcl/ESDemo and https://github.com/joshua2ua/AndroidElasticSearch */
-    public  void run(){
+    public void run() {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpAdd = new HttpPost(url);
         HttpResponse response;
@@ -36,7 +38,7 @@ public class SaveUserRunnable implements Runnable{
 
         try {
             stringEntity = new StringEntity(gson.toJson(user));
-        } catch (UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -48,7 +50,7 @@ public class SaveUserRunnable implements Runnable{
             response = httpClient.execute(httpAdd);
             String status = response.getStatusLine().toString();
             Log.i("NetworkDataManager", status);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

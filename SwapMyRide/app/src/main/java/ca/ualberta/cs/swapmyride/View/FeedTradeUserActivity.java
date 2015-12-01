@@ -49,7 +49,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
 
         vehicleNames = new ArrayList<>();
 
-        for (Vehicle vehicle: userInventory.getList()) {
+        for (Vehicle vehicle : userInventory.getList()) {
             vehicleNames.add(vehicle.getName());
         }
 
@@ -82,7 +82,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
     }
 
     //TODO edge case empty trade should still work / disallow it.
-    public void tradeDialog(){
+    public void tradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(FeedTradeUserActivity.this);
         builder.setMessage("Are you SURE you want to proceed with this trade?");
         builder.setCancelable(false);

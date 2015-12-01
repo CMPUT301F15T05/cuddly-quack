@@ -19,7 +19,7 @@ package ca.ualberta.cs.swapmyride.View;
  * This is the tab where the feed of the items in a user's personal inventory will appear
  * There is a button to add new items to inventory, and as well, the option to click on each
  * item and view it in more detail.
- *
+ * <p/>
  * Created by Daniel on 2015-10-24.
  */
 
@@ -70,7 +70,7 @@ public class Tab2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab2,container,false);
+        View v = inflater.inflate(R.layout.tab2, container, false);
 
         addInventory = (Button) v.findViewById(R.id.addInventory);
         uController = new UserController(getContext());
@@ -88,7 +88,7 @@ public class Tab2 extends Fragment {
         inventory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),ViewVehicleActivity.class);
+                Intent intent = new Intent(getActivity(), ViewVehicleActivity.class);
 
                 //add the vehicle that has been selected to the intent to pass
                 intent.putExtra("vehiclePosition", position);
@@ -99,13 +99,14 @@ public class Tab2 extends Fragment {
         addInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddInventoryActivity.class);
+                Intent intent = new Intent(getActivity(), AddInventoryActivity.class);
                 startActivity(intent);
             }
         });
 
         return v;
     }
+
     public void onResume() {
         super.onResume();
         inventoryList = uController.getCurrentUser().getInventory();
@@ -114,7 +115,7 @@ public class Tab2 extends Fragment {
         inventory.setAdapter(adapter);
     }
 
-    public Button getAddInventory(){
+    public Button getAddInventory() {
         return addInventory;
     }
 }

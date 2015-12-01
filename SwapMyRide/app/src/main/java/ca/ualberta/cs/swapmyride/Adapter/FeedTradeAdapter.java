@@ -68,11 +68,10 @@ public class FeedTradeAdapter extends ArrayAdapter<Vehicle> {
         //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         LocalDataManager ldm = new LocalDataManager(context);
         Photo photo;
-        if(vehicle.getPhotoIds().size() > 0) {
+        if (vehicle.getPhotoIds().size() > 0) {
             photo = ldm.loadPhoto(vehicle.getPhotoIds().get(0).getID());
             image.setBackground(new BitmapDrawable(photo.getImage()));
-        }
-        else{
+        } else {
             image.setBackground(new BitmapDrawable(DefaultPhotoSingleton.getInstance().getImage()));
         }
         // Return the completed view to render on screen

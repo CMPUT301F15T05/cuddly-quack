@@ -27,12 +27,12 @@ import ca.ualberta.cs.swapmyride.View.MainMenu;
  * Created by Garry on 2015-10-08.
  */
 public class InventoryTest extends ActivityInstrumentationTestCase2 {
-    public InventoryTest(){
+    public InventoryTest() {
         super(MainMenu.class);
     }
 
     // Use Case 1: Add Vehicle
-    public void testAddItem(){
+    public void testAddItem() {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         //list should be empty
@@ -45,7 +45,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     // Use Case 2: Browse Inventory
-    public void testBrowseInventory(){
+    public void testBrowseInventory() {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         //list should be empty
@@ -58,7 +58,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     // Use Case 3: View Vehicle
-    public void testViewItem(){
+    public void testViewItem() {
         Vehicle vehicle = new Vehicle();
         //vehicle.setPhoto(picture);
         vehicle.setName("Cadillac");
@@ -76,7 +76,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     // Use Case 4: Set Public
-    public void testSetPublic(){
+    public void testSetPublic() {
         InventoryList inventoryList = new InventoryList();
         Vehicle vehicle = new Vehicle();
         vehicle.setPublic(false);
@@ -88,7 +88,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     // Use Case 5: Modify Items
-    public void testModifyItems(){
+    public void testModifyItems() {
         Vehicle vehicle = new Vehicle();
         vehicle.setName("Vehicle");
         assertTrue(vehicle.getName().equals("Vehicle"));

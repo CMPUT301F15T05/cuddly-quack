@@ -31,7 +31,6 @@ import ca.ualberta.cs.swapmyride.R;
 /**
  * Allows the user to view a profile fo a friend. Selected from a
  * list of friends.
- *
  */
 
 public class ViewFriendProfileActivity extends AppCompatActivity {
@@ -60,7 +59,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         address = (TextView) findViewById(R.id.address);
         removeFriend = (Button) findViewById(R.id.removeFriend);
 
-        position = getIntent().getIntExtra("Position",0);
+        position = getIntent().getIntExtra("Position", 0);
 
         friend = uController.getFriends().get(0);
         getSupportActionBar().setTitle(friend.getUserName());
@@ -78,7 +77,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
 
     }
 
-    public void deleteDialog(){
+    public void deleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewFriendProfileActivity.this);
         builder.setMessage("Are you SURE you want to remove this friend? It is a permanent Action!");
         builder.setCancelable(false);
@@ -100,7 +99,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public TextView getFullName(){
+    public TextView getFullName() {
         return (TextView) findViewById(R.id.fullName);
     }
 }

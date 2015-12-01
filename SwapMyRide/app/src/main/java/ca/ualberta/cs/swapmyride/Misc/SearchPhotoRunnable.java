@@ -21,17 +21,18 @@ import ca.ualberta.cs.swapmyride.Model.SearchHit;
  * Created by Garry on 2015-11-29.
  */
 public class SearchPhotoRunnable implements Runnable {
+    Gson gson = new Gson();
     private String url;
     private boolean exists;
-    Gson gson = new Gson();
 
-    public SearchPhotoRunnable(String photoId, String url){
+    public SearchPhotoRunnable(String photoId, String url) {
         //set up the query to get just the the necessary info... no source information
         //"Source Filtering" - https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html
         //Nov 26, 2015
         this.url = url + "photos/" + photoId + "?_source=false";
     }
-    public void run(){
+
+    public void run() {
         HttpClient client = new DefaultHttpClient();
         HttpGet search = new HttpGet(url);
         search.setHeader("Accept", "application/json");
@@ -40,10 +41,11 @@ public class SearchPhotoRunnable implements Runnable {
 
         try {
             response = client.execute(search);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        Type searchHitType = new TypeToken<SearchHit<Photo>>(){}.getType();
+        Type searchHitType = new TypeToken<SearchHit<Photo>>() {
+        }.getType();
         try {
             hit = gson.fromJson(
                     new InputStreamReader(response.getEntity().getContent()),
@@ -60,7 +62,7 @@ public class SearchPhotoRunnable implements Runnable {
         exists = hit.isFound();
     }
 
-    public boolean getExists(){
+    public boolean getExists() {
         return exists;
     }
 }
