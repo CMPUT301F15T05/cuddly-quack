@@ -86,7 +86,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(FeedTradeUserActivity.this);
         builder.setMessage("Are you SURE you want to proceed with this trade?");
         builder.setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Trade", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -94,7 +94,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
                 finish();
             }
         });
-        builder.setNegativeButton("Borrow", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Borrow", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -102,7 +102,7 @@ public class FeedTradeUserActivity extends AppCompatActivity {
                 finish();
             }
         });
-        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
