@@ -28,3 +28,8 @@ proguard/
 
 # .idea directory
 .idea/
+
+
+# I've used some shell scripts to automate
+# But I should ignore them
+*.sh

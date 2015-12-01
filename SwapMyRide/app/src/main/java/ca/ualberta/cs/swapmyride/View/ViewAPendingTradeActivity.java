@@ -46,9 +46,6 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        returned = (Button) findViewById(R.id.buttonReturned);
-        returned.setVisibility(View.INVISIBLE);
-
         tradesController = new TradesController(getApplicationContext());
 
         friendInventory = (ListView) findViewById(R.id.friendInventory);
@@ -57,6 +54,8 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         delete = (Button) findViewById(R.id.delete);
         counter = (Button) findViewById(R.id.counter);
         confirm = (Button) findViewById(R.id.confirm);
+        returned = (Button) findViewById(R.id.buttonReturned);
+        returned.setVisibility(View.INVISIBLE);
 
         position = getIntent().getIntExtra("PendingTradePosition", 0);
 
@@ -66,6 +65,16 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         if (tradeToDisplay.getOwner().equals(UserSingleton.getCurrentUser().getUserName())) {
             counter.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
+            if(tradeToDisplay.getIsAccepted() && tradeToDisplay.getIsBorrowing()){
+                delete.setVisibility(View.VISIBLE);
+                returned.setVisibility(View.VISIBLE);
+            }
+        } else {
+            if(tradeToDisplay.getIsAccepted() && tradeToDisplay.getIsBorrowing()) {
+                counter.setVisibility(View.INVISIBLE);
+                confirm.setVisibility(View.INVISIBLE);
+                delete.setVisibility(View.INVISIBLE);
+            }
         }
 
         friendAdapter = new FeedAdapter(getApplicationContext(), tradeToDisplay.getBorrowerItems());
@@ -93,6 +102,13 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 confirmDialog();
+            }
+        });
+
+        returned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnedDialog();
             }
         });
     }
@@ -191,8 +207,32 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                tradesController.deletePendingTrade(tradeToDisplay);
+            }
+        });
+        builder.show();
+    }
+
+    public void returnedDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
+        builder.setMessage("Are you SURE you want to return this trade? It is a permanent Action!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Return", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                try {
+                    tradesController.returnPendingTrade(tradeToDisplay);
+                } catch (InvalidTradeException e) {
+                    notValidTradeDialog();
+                }
                 finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
         builder.show();
