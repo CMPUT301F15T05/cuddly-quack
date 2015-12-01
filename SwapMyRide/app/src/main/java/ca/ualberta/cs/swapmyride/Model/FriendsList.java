@@ -17,8 +17,6 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Model.User;
-
 /**
  * FriendsList is an object that holds a series of usernames
  * which are indicated to be friends of a certain user,

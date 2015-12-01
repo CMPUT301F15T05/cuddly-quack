@@ -24,12 +24,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
-import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
-import ca.ualberta.cs.swapmyride.Model.FriendsList;
+import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
-import ca.ualberta.cs.swapmyride.Controller.UserController;
 
 /**
  * Allows the user to view a profile fo a friend. Selected from a

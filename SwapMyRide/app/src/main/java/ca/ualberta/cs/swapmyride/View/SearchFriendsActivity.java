@@ -29,13 +29,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FriendAdapter;
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
-import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.SearchController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.FriendsList;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
-import ca.ualberta.cs.swapmyride.Controller.SearchController;
 
 /**
  * This activity is designed to search friends and display friends that match

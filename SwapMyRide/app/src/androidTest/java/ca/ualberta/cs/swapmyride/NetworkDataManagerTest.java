@@ -4,9 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
-import ca.ualberta.cs.swapmyride.Misc.SearchUserRunnable;
 import ca.ualberta.cs.swapmyride.Model.User;
-import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**

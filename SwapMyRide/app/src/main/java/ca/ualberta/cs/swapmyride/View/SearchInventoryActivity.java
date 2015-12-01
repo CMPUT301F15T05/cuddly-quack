@@ -30,12 +30,12 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
+import ca.ualberta.cs.swapmyride.Controller.SearchController;
 import ca.ualberta.cs.swapmyride.Misc.DistanceOption;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
-import ca.ualberta.cs.swapmyride.Controller.SearchController;
 
 /**
  * Using a SearchController, allows searching through inventories

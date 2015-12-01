@@ -16,9 +16,6 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-
-import java.net.UnknownServiceException;
 
 import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.TradesController;
@@ -32,7 +29,6 @@ import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.LoginActivity;
-import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
  * Created by Daniel on 2015-11-26.

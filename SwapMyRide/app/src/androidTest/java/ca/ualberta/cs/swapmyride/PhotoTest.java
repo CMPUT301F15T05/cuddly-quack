@@ -15,15 +15,8 @@
  */
 package ca.ualberta.cs.swapmyride;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
 
-import java.util.ArrayList;
-
-import ca.ualberta.cs.swapmyride.Controller.VehicleController;
-import ca.ualberta.cs.swapmyride.Model.Photo;
-import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**

@@ -10,7 +10,6 @@ import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
-import ca.ualberta.cs.swapmyride.View.LoginActivity;
 import ca.ualberta.cs.swapmyride.View.MainMenu;
 
 /**
