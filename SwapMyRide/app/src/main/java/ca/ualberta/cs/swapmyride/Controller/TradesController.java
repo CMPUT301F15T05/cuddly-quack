@@ -120,12 +120,19 @@ public class TradesController {
     }
 
     public void confirmPendingTrade(Trade trade) throws InvalidTradeException {
+        // TODO finish working with these functions
+        if(trade.getIsBorrowing()) {
+            confirmBorrowingPendingTrade(trade);
+        } else {
+            confirmNotBorrowingPendingTrade(trade);
+        }
+    }
+
+    public void confirmBorrowingPendingTrade(Trade trade) throws InvalidTradeException {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
             throw new InvalidTradeException("Trade is no longer valid");
         }
-
-        if(!trade.getIsBorrowing()) confirmPendingTradeNotBorrowing(trade);
 
         // Starting the borrowing-trade logic
         User borrower = dataManager.retrieveUser(trade.getBorrower());
@@ -141,7 +148,7 @@ public class TradesController {
         dataManager.saveUser(owner);
     }
 
-    public void confirmPendingTradeNotBorrowing(Trade trade) {
+    public void confirmNotBorrowingPendingTrade(Trade trade) throws InvalidTradeException {
         User borrower = dataManager.retrieveUser(trade.getBorrower());
         User owner = dataManager.retrieveUser(trade.getOwner());
 
@@ -162,9 +169,6 @@ public class TradesController {
         owner.addPastTrade(trade);
         borrower.addPastTrade(trade);
 
-        // save userSingleton
-        UserSingleton.addCurrentUser(borrower); // Only a borrower should be able to click 'confirm' on a trade
-
         // save users
         dataManager.saveUser(borrower);
         dataManager.saveUser(owner);
@@ -173,7 +177,7 @@ public class TradesController {
         dataManagerLocal.saveUser(owner);
 
         // save userSingleton
-        UserSingleton.addCurrentUser(borrower);
+        UserSingleton.addCurrentUser(borrower); // Only a borrower should be able to click 'confirm' on a trade
     }
 
     public void counterPendingTrade(Context context, Trade trade){
