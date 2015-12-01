@@ -14,3 +14,7 @@ App built on Android Studio 1.4.1. Runs on emulators (EG: Nexus 5, APK 18 and 23
 2. Use TDD
 3. If you didn't do (2) test the app by running it
 4. Make a best effort to ONLY push working commits to master
+
+
+## Marketing Video
+[Click Here to watch our video!](https://youtu.be/ixQVhBO8HmY)

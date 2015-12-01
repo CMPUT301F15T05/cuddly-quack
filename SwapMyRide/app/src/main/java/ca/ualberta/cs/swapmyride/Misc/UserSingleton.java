@@ -40,7 +40,6 @@ public class UserSingleton {
     }
 
     public static User getCurrentUser(){
-        //TODO temporary fix, a user should always be created through login
         if(currentUser == null){
             return new User();
         }

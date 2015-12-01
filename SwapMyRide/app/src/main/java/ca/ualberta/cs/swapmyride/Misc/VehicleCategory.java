@@ -23,8 +23,8 @@ package ca.ualberta.cs.swapmyride.Misc;
  * An enumerator that represents all possible categories a vehicle can be.
  */
 public enum VehicleCategory {
-    // TODO: add more categories
-    NONE("None",0), SEDAN("Sedan",1), COUPE("Coupe",2), SUV("SUV",3), CROSSOVER("Crossover",4), TRUCK("Truck",5);
+    NONE("None",0), SEDAN("Sedan",1), COUPE("Coupe",2), SUV("SUV",3), CROSSOVER("Crossover",4), TRUCK("Truck",5),
+    SEGWAY("Segway",6), SCOOTER("Scooter",7), BIKE("Bike", 8), TANK("Tank",9);
 
     private String category;
     private int position;
