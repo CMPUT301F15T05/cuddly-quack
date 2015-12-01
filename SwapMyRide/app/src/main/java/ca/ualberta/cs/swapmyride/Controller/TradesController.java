@@ -61,6 +61,28 @@ public class TradesController {
         dataManagerLocal.saveUser(UserSingleton.getCurrentUser());
     }
 
+    public void initiateBorrow() {
+        Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
+
+        pendingTrade.setBorrowing(true);
+
+        User friend = dataManager.retrieveUser(pendingTrade.getBorrower());
+
+        friend.addPendingTrade(pendingTrade);
+        UserSingleton.getCurrentUser().addPendingTrade(pendingTrade);
+
+        friend.getNotificationManager().notifyTrade(pendingTrade);
+        UserSingleton.getCurrentUser().getNotificationManager().notifyTrade(pendingTrade);
+
+        dataManager.saveUser(friend);
+        dataManager.saveUser(UserSingleton.getCurrentUser());
+
+        dataManagerLocal.saveUser(friend);
+        dataManagerLocal.saveUser(UserSingleton.getCurrentUser());
+    }
+
+
+
     public void deletePendingTrade(Trade trade) {
         //TODO MODIFY THIS TO NOT LOAD/SAVE SO OFTEN
         User borrower = dataManager.retrieveUser(trade.getBorrower());
@@ -95,6 +117,11 @@ public class TradesController {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
             throw new InvalidTradeException("Trade is no longer valid");
+        }
+
+        if (trade.getIsBorrowing()) {
+            confirmBorrowTrade(trade);
+            return;
         }
 
         User borrower = dataManager.retrieveUser(trade.getBorrower());
@@ -137,6 +164,24 @@ public class TradesController {
         intent.putExtra("Username", trade.getOwner());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    public void confirmBorrowTrade(Trade trade) throws InvalidTradeException {
+
+        User borrower = dataManager.retrieveUser(trade.getBorrower());
+        User owner = dataManager.retrieveUser(trade.getOwner());
+
+
+
+        // save users
+        dataManager.saveUser(borrower);
+        dataManager.saveUser(owner);
+
+        dataManagerLocal.saveUser(borrower);
+        dataManagerLocal.saveUser(owner);
+
+        // save userSingleton
+        UserSingleton.addCurrentUser(borrower);
     }
 
     public TradeList getActiveTrades(){
