@@ -24,6 +24,7 @@ package ca.ualberta.cs.swapmyride.View;
  *
  * Created by Daniel on 2015-10-24.
  */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,12 +39,12 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FeedAdapter;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
+import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
-import ca.ualberta.cs.swapmyride.Controller.UserController;
 
 public class Tab1 extends Fragment {
 

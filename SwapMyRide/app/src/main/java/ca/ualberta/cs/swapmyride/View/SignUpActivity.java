@@ -24,13 +24,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
-import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Controller.NetworkDataManager;
+import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
-import ca.ualberta.cs.swapmyride.Controller.UserController;
 
 /**
  * This activity allows users to sign up to the app

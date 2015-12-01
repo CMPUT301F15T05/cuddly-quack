@@ -1,7 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.app.Instrumentation;
-import android.content.Context;
 import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
@@ -11,12 +10,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Controller.LocalDataManager;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
-import ca.ualberta.cs.swapmyride.Model.Geolocation;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;

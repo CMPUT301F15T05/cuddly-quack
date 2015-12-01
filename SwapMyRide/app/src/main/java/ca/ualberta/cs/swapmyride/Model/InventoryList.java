@@ -17,7 +17,6 @@ package ca.ualberta.cs.swapmyride.Model;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.swapmyride.Controller.DataManager;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 
 /**

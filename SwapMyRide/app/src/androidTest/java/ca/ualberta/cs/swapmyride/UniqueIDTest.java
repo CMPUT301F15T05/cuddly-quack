@@ -1,7 +1,6 @@
 package ca.ualberta.cs.swapmyride;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 

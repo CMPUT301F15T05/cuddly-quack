@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
-import ca.ualberta.cs.swapmyride.Model.TradeList;
 import ca.ualberta.cs.swapmyride.R;
 
 public class ViewPendingTradesActivity extends AppCompatActivity {

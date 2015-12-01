@@ -4,16 +4,15 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import ca.ualberta.cs.swapmyride.Model.User;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.UnsupportedEncodingException;
+
+import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
  * Created by Garry on 2015-11-25.

@@ -26,9 +26,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Adapter.FriendAdapter;
+import ca.ualberta.cs.swapmyride.Controller.UserController;
 import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.R;
-import ca.ualberta.cs.swapmyride.Controller.UserController;
 
 /**
  * Allows user to view list of friends

@@ -16,19 +16,13 @@
 package ca.ualberta.cs.swapmyride.Model;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.location.Address;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
-import ca.ualberta.cs.swapmyride.R;
 import ca.ualberta.cs.swapmyride.Misc.VehicleCategory;
 import ca.ualberta.cs.swapmyride.Misc.VehicleQuality;
-import ca.ualberta.cs.swapmyride.Model.Geolocation;
 
 /**
  * Vehicle stores all information regarding the vehicles in the app. All data is private,

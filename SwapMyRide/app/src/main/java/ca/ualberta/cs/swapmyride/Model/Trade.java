@@ -15,9 +15,6 @@
  */
 package ca.ualberta.cs.swapmyride.Model;
 
-import android.content.Intent;
-import android.net.Uri;
-
 import java.util.ArrayList;
 
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
