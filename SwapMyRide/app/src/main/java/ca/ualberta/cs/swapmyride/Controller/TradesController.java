@@ -29,7 +29,10 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.View.FeedTradeActivity;
 
 /**
- * Created by Garry on 2015-11-01.
+ *
+ * Trade controller helps us deal with data and saving related to the creation,
+ * and actions associated with Trades in the app.
+ *
  */
 public class TradesController {
 
@@ -42,6 +45,11 @@ public class TradesController {
         dataManager = new NetworkDataManager();
         dataManagerLocal = new LocalDataManager(context);
     }
+
+    /**
+     * Creates and saves a new trade after all of the options are selected
+     * and confirmed in the UI
+     */
 
     public void initiateTrade() {
         Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
@@ -60,6 +68,11 @@ public class TradesController {
         dataManagerLocal.saveUser(friend);
         dataManagerLocal.saveUser(UserSingleton.getCurrentUser());
     }
+
+    /**
+     * Creates and saves a new borrow type trade after all of the options are selected
+     * and confirmed in the UI
+     */
 
     public void initiateBorrow() {
         Trade pendingTrade = UserSingleton.getCurrentTrade().copy();
@@ -80,6 +93,14 @@ public class TradesController {
         dataManagerLocal.saveUser(friend);
         dataManagerLocal.saveUser(UserSingleton.getCurrentUser());
     }
+
+    /**
+     *
+     * Deletes a pending trade from potential lists and makes sure no trace
+     * exists in the app.
+     *
+     * @param trade
+     */
 
     public void deletePendingTrade(Trade trade) {
         User borrower = dataManager.retrieveUser(trade.getBorrower());
@@ -109,6 +130,15 @@ public class TradesController {
         dataManagerLocal.saveUser(borrower);
         dataManagerLocal.saveUser(owner);
     }
+
+    /**
+     * Facilitates the action of accepting a pending trade and swapping items
+     * If the trade is of borrow type, it is marked as confirmed, but no items
+     * switch hands
+     *
+     * @param trade
+     * @throws InvalidTradeException
+     */
 
     public void confirmPendingTrade(Trade trade) throws InvalidTradeException {
         // check that items are in inventory for both parties
@@ -152,6 +182,15 @@ public class TradesController {
         UserSingleton.addCurrentUser(borrower);
     }
 
+    /**
+     *
+     * If a trade is accepted but still pending, this handles the return of an
+     * item to the original item, making it available for use again.
+     *
+     * @param trade
+     * @throws InvalidTradeException
+     */
+
     public void returnPendingTrade(Trade trade) throws InvalidTradeException {
         // check that items are in inventory for both parties
         if (!(validTrade(trade))) {
@@ -180,6 +219,15 @@ public class TradesController {
         UserSingleton.addCurrentUser(owner);
     }
 
+    /**
+     *
+     * Handles the case if a user does not like the terms of a trade
+     * and wishes to propose a counter trade
+     *
+     * @param context
+     * @param trade
+     */
+
     public void counterPendingTrade(Context context, Trade trade){
         // Saving done in deleteTrade
         deletePendingTrade(trade);
@@ -189,6 +237,16 @@ public class TradesController {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+
+    /**
+     *
+     * Handles the confirmation of a borrow type trade:
+     *  vehicles are private and not tradeable, and the trade
+     *  remains pending until the vehicle is returned.
+     *
+     * @param trade
+     * @throws InvalidTradeException
+     */
 
     public void confirmBorrowTrade(Trade trade) throws InvalidTradeException {
 
@@ -216,6 +274,15 @@ public class TradesController {
         return UserSingleton.getCurrentUser().getPastTrades();
     }
 
+
+    /**
+     *
+     * Checks validity of a trade.
+     *
+     * @param trade
+     * @return
+     */
+
     public boolean validTrade(Trade trade) {
         ArrayList<Vehicle> borrower = dataManager.retrieveUser(trade.getBorrower()).getInventory().getList();
         ArrayList<Vehicle> owner = dataManager.retrieveUser(trade.getOwner()).getInventory().getList();
@@ -227,6 +294,14 @@ public class TradesController {
 
         return c;
     }
+
+    /**
+     * Checks if the vehicles are valid and available.
+     *
+     * @param tradeVehicles
+     * @param inventoryVehicles
+     * @return
+     */
 
     public Boolean validVehicles(ArrayList<Vehicle> tradeVehicles, ArrayList<Vehicle> inventoryVehicles) {
 

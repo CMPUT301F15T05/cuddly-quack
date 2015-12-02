@@ -23,7 +23,10 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
 /**
  * UserSingleton is the current instance of user. That is to say, it is the User whom is currently
- * logged into the app.
+ * logged into the app. Includes getter and setter methods.
+ *
+ * The singleton is also used to ferry a vehicle from and to TradeController
+ *
  */
 public class UserSingleton {
     private static User currentUser = null;

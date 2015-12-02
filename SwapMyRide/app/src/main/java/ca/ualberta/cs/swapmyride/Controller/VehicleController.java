@@ -22,6 +22,9 @@ import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
 /**
+ *
+ * Vehicle controller helps us deal with data regarding vehicles and their use
+ *
  * Created by Garry on 2015-11-01.
  */
 public class VehicleController {

@@ -42,8 +42,9 @@ public class SearchController {
      *
      * @param username
      * @param context
-     * @return
+     * @return Array list of users that match the username
      */
+
     public ArrayList<User> findUser(String username, Context context) {
         //TODO: Search the server for a user that matches the given username
         NetworkDataManager dataManager = new NetworkDataManager();
@@ -62,7 +63,7 @@ public class SearchController {
      * matches. Returns the Vehicle if found.
      *
      * @param vehicleName
-     * @return
+     * @return Vehicle that matches the vehicle name
      */
     public Vehicle findVehicle(String vehicleName) {
         //TODO: Search the server for a vehicle that matches the given vehicleName
@@ -75,7 +76,7 @@ public class SearchController {
      *
      * @param vehicleName
      * @param vehicleCategory
-     * @return
+     * @return Array list of vehicles in an inventory.
      */
 
     public ArrayList<Vehicle> findInventoryVehicle(String vehicleName, VehicleCategory vehicleCategory,
@@ -143,11 +144,11 @@ public class SearchController {
 
     /**
      * Returns an ArrayList of vehicles based on name and/or category that is passed
-     * to the function.
+     * to the function. Looks at Geolocation of objects as well.
      *
      * @param vehicleName
      * @param vehicleCategory
-     * @return
+     * @return Array list of vehicles in a feed.
      */
 
     public ArrayList<Vehicle> findFeedVehicle(String vehicleName, VehicleCategory vehicleCategory,
@@ -227,10 +228,10 @@ public class SearchController {
      * @param lat
      * @param longit
      * @return True if vehicle is within the specified distance
-     * <p/>
+     *
      * Adapted from:
      * http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-     * <p/>
+     *
      * User: Deduplicator / Chuck        Accessed: 28/11/2015
      */
 

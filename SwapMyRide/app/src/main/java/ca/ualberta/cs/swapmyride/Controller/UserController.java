@@ -26,6 +26,7 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
 
 /**
  * UserController is the main access point between the Views and the user models.
+ *
  */
 public class UserController {
     Context context;
@@ -154,7 +155,7 @@ public class UserController {
     /**
      * Gets all vehicles from the "Active" user.
      *
-     * @return
+     * @return Array List of inventory items
      */
     public ArrayList<Vehicle> getUserInventoryItems() {
         return UserSingleton.getCurrentUser().getInventory().getList();
@@ -170,7 +171,7 @@ public class UserController {
     /**
      * Gets all vehicles of the current friends of the "Active" user
      *
-     * @return
+     * @return InventoryList of vehicles of friends
      */
     public InventoryList getFriendVehicles() {
         InventoryList inventoryList = new InventoryList();
@@ -189,7 +190,7 @@ public class UserController {
     /**
      * Gets vehicles of a specified friend of the "Active" user
      *
-     * @return
+     * @return Inventory list of friends of the active user
      */
     public InventoryList getFriendVehicles(String username) {
         InventoryList inventoryList = new InventoryList();
