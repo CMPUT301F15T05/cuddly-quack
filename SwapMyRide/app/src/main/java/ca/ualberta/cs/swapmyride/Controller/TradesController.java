@@ -195,7 +195,8 @@ public class TradesController {
         User borrower = dataManager.retrieveUser(trade.getBorrower());
         User owner = dataManager.retrieveUser(trade.getOwner());
 
-
+        owner.getPendingTrades().setAccepted(trade.getUniqueID(), true);
+        borrower.getPendingTrades().setAccepted(trade.getUniqueID(), true);
 
         // save users
         dataManager.saveUser(borrower);
@@ -237,7 +238,6 @@ public class TradesController {
                     vehicleInInventory = true;
                     break;
                 }
-
             }
             if (!(vehicleInInventory)) {
                 return false;
