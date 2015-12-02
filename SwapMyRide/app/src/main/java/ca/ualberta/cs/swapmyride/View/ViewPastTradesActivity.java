@@ -15,6 +15,9 @@ import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * This is the list view of past trades that can be viewed by clicking pending trades in the user tab
+ */
 public class ViewPastTradesActivity extends AppCompatActivity {
 
     Toolbar toolbar;

@@ -77,6 +77,10 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Dialog confirming that deletion of a friend is what we really want to happen
+     * Deleting a friend is a permanent action
+     */
     public void deleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewFriendProfileActivity.this);
         builder.setMessage("Are you SURE you want to remove this friend? It is a permanent Action!");

@@ -22,6 +22,9 @@ import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * The view to show a specific trade. Shows the two users items
+ */
 public class ViewAPendingTradeActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -113,6 +116,9 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Ask the user if they are sure that they want to confirm a trade
+     */
     public void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("Are you SURE you want to confirm this trade? It is a permanent Action!");
@@ -169,6 +175,10 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * In the event a notValidTradeException is thrown,
+     * allow the user to choose to delete the trade or not.
+     */
     public void notValidTradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("The trade is no longer valid! Do you wish to KEEP the trade for later or DELETE it.");
@@ -190,6 +200,9 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Ask the user to counter the trade
+     */
     public void counterTradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("Are you SURE you want to counter this trade? It is a permanent Action!");
@@ -211,6 +224,9 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Ask the user to confirm the returning of a trade
+     */
     public void returnedDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewAPendingTradeActivity.this);
         builder.setMessage("Are you SURE you want to return this trade? It is a permanent Action!");

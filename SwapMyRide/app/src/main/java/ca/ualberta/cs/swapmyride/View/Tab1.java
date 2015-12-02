@@ -46,6 +46,9 @@ import ca.ualberta.cs.swapmyride.Model.User;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * The view that displays friends feeds
+ */
 public class Tab1 extends Fragment {
 
     ListView inventory;

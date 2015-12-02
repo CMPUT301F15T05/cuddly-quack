@@ -12,6 +12,9 @@ import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * The view that displays already completed trades
+ */
 public class ViewAPastTradeActivity extends AppCompatActivity {
 
     Toolbar toolbar;

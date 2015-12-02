@@ -35,6 +35,9 @@ import android.widget.TextView;
 
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * The view that displays the user tab
+ */
 public class Tab3 extends Fragment {
 
     TextView viewFriends;

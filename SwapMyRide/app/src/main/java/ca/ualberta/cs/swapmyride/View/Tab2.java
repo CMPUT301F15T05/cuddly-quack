@@ -42,6 +42,9 @@ import ca.ualberta.cs.swapmyride.Model.InventoryList;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * The view that displays the user inventory
+ */
 public class Tab2 extends Fragment {
 
     Button addInventory;
