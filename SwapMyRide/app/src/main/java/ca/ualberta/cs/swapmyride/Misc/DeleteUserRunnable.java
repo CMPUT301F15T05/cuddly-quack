@@ -24,6 +24,8 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
+ * Given a username and a url the user is attempted to be deleted from the server
+ *
  * Created by Garry on 2015-11-25.
  */
 public class DeleteUserRunnable implements Runnable {

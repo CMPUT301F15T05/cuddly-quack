@@ -16,6 +16,7 @@
 package ca.ualberta.cs.swapmyride.Misc;
 
 /**
+ * A custom exception to handle is the trade requested is invalid
  * Created by Daniel on 2015-11-30.
  */
 public class InvalidTradeException extends Exception {

@@ -33,6 +33,8 @@ import ca.ualberta.cs.swapmyride.Model.SearchHit;
 import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
+ * Given a username and a url the user is attempted to be retrieved from the server
+ *
  * Created by Garry on 2015-11-26.
  */
 public class RetrieveUserRunnable implements Runnable {

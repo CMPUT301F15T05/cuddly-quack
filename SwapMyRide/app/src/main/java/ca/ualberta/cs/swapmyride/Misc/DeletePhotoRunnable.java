@@ -23,6 +23,8 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
+ * Given a photoId and a url the photo is attempted to be deleted from the server
+ *
  * Created by Garry on 2015-11-29.
  */
 public class DeletePhotoRunnable implements Runnable {

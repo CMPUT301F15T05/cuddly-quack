@@ -30,6 +30,8 @@ import java.io.UnsupportedEncodingException;
 import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
+ * Given a user and a url the user is attempted to be saved to the server
+ *
  * Created by Garry on 2015-11-25.
  */
 public class SaveUserRunnable implements Runnable {

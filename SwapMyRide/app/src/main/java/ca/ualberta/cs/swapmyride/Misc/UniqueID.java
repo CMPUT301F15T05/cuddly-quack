@@ -38,6 +38,8 @@ public class UniqueID {
 
     /**
      * Returns a new UniqueID object and duplicates the id field
+     *
+     * @return UniqueID
      */
     public UniqueID duplicateID() {
         return new UniqueID(this.getID());
@@ -54,11 +56,17 @@ public class UniqueID {
      * Returns if the the two objects has the same id
      *
      * @param other is the second UniqueID object to compare to
+     * @return are the ids equal
      */
     public Boolean isEqualID(UniqueID other) {
         return (this.getID().equals(other.getID()));
     }
 
+    /**
+     * Sets the string id
+     *
+     * @param myid
+     */
     public void setId(String myid) {
         this.id = myid;
     }

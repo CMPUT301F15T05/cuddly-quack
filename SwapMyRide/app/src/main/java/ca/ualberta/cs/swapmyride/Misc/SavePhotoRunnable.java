@@ -30,6 +30,8 @@ import java.io.UnsupportedEncodingException;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 
 /**
+ * Given a photo and a url the photo is attempted to be saved to the server
+ *
  * Created by Garry on 2015-11-29.
  */
 public class SavePhotoRunnable implements Runnable {

@@ -34,6 +34,8 @@ import ca.ualberta.cs.swapmyride.Model.Photo;
 import ca.ualberta.cs.swapmyride.Model.SearchHit;
 
 /**
+ * Given a photoId and a url the photo is attempted to be retrieved from the server
+ *
  * Created by Garry on 2015-11-29.
  */
 public class RetrievePhotoRunnable implements Runnable {

@@ -35,6 +35,8 @@ import ca.ualberta.cs.swapmyride.Model.SearchHit;
 import ca.ualberta.cs.swapmyride.Model.User;
 
 /**
+ * Given a photoId and a url the photo is searched for on the server
+ *
  * Created by Garry on 2015-11-26.
  */
 public class SearchUserRunnable implements Runnable {

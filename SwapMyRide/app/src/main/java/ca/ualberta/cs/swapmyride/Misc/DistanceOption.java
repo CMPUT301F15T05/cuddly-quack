@@ -17,6 +17,8 @@
 package ca.ualberta.cs.swapmyride.Misc;
 
 /**
+ * Our enumeration of distance options
+ *
  * Created by adrianomarini on 15-11-26.
  */
 public enum DistanceOption {

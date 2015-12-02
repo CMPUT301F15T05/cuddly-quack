@@ -21,7 +21,10 @@ import android.graphics.Bitmap;
 import ca.ualberta.cs.swapmyride.Model.Photo;
 
 /**
- * Created by Garry on 2015-11-30.
+ *  Keep the stock photo in memory so network and disk have
+ *  less reads and writes.
+ *
+ *  Created by Garry on 2015-11-30.
  */
 public class DefaultPhotoSingleton {
     private static DefaultPhotoSingleton ourInstance = null;
@@ -31,6 +34,11 @@ public class DefaultPhotoSingleton {
     private DefaultPhotoSingleton() {
     }
 
+    /**
+     * Returns the instance of the singleton
+     *
+     * @return DefaultPhotoSingleton
+     */
     public static DefaultPhotoSingleton getInstance() {
         if (ourInstance == null) {
             ourInstance = new DefaultPhotoSingleton();
@@ -38,6 +46,11 @@ public class DefaultPhotoSingleton {
         return ourInstance;
     }
 
+    /**
+     * Initialize the photo based on the current context
+     *
+     * @param context
+     */
     public void init(Context context) {
         photo = new Photo(context);
         image = photo.getImage();
