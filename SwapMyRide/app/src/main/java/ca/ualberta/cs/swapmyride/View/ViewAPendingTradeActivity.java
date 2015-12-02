@@ -66,7 +66,7 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
             counter.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
             if(tradeToDisplay.getIsAccepted() && tradeToDisplay.getIsBorrowing()){
-                delete.setVisibility(View.VISIBLE);
+                delete.setVisibility(View.INVISIBLE);
                 returned.setVisibility(View.VISIBLE);
             }
         } else {
@@ -141,7 +141,6 @@ public class ViewAPendingTradeActivity extends AppCompatActivity {
                     for (Vehicle item : tradeToDisplay.getBorrowerItems()) {
                         stringBuilder.append(item.getName());
                     }
-
 
                     String body = stringBuilder.toString();
 

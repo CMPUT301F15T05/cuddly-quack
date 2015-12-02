@@ -79,4 +79,13 @@ public class TradeList {
         return miniTradeList;
     }
 
+    public void setAccepted(UniqueID uniqueID, Boolean isAccepted) {
+        for (Trade trade: trades) {
+            if (trade.getUniqueID().isEqualID(uniqueID)) {
+                trade.setIsAccepted(isAccepted);
+                return;
+            }
+        }
+    }
+
 }
