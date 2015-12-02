@@ -111,6 +111,10 @@ public class Vehicle {
         this.photoIds = photoArrayList;
     }
 
+    /**
+     * As photos are kept as an arrayList of the photos' UniqueIDs, delete all the photos requires
+     * clearing the arrayList.
+     */
     public void deletePhotoArrayList(Context context) {
         this.photoIds.clear();
     }

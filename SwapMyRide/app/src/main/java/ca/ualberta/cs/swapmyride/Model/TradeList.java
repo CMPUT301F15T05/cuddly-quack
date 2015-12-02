@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import ca.ualberta.cs.swapmyride.Misc.UniqueID;
 
 /**
+ * Used to hold a list of trades, such as in a user's past trades and pending trades.
  * Created by adrianomarini on 2015-10-26.
  */
 public class TradeList {
@@ -79,6 +80,10 @@ public class TradeList {
         return miniTradeList;
     }
 
+    /**
+     * When a trade is accepted, the items involved are moved from pending to past tradeLists.
+     * @param uniqueID The ID of the trades which has been completed
+     */
     public void setAccepted(UniqueID uniqueID, Boolean isAccepted) {
         for (Trade trade: trades) {
             if (trade.getUniqueID().isEqualID(uniqueID)) {

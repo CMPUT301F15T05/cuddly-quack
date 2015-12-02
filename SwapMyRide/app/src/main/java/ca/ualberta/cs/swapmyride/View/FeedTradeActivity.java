@@ -34,6 +34,9 @@ import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * When trading this is the activity which displays all vehicles owned by the friend you are trading with.
+ */
 public class FeedTradeActivity extends AppCompatActivity {
 
     Toolbar toolbar;

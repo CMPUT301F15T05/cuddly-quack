@@ -438,10 +438,6 @@ public class AddInventoryActivity extends AppCompatActivity {
     /**
      * After returning from the camera activity, get the photo information
      * and send it into the structure to get it ready.
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
      */
 
     @Override
@@ -464,8 +460,7 @@ public class AddInventoryActivity extends AppCompatActivity {
     /**
      * checking if the hardware has a camera that can be used.
      *
-     * @param context
-     * @return true or false
+     * @return True if camera, false if not.
      */
 
     public boolean checkHasCamera(Context context) {
