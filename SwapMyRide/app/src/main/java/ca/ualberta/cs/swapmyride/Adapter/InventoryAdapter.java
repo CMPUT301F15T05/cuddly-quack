@@ -79,9 +79,6 @@ public class InventoryAdapter extends ArrayAdapter<Vehicle> {
         quantity.setText(String.format("%d", vehicle.getQuantity()));
 
         //set the image in inventory
-
-
-        //TODO UPDATE THIS LINE TO UPDATE THE FEED WITH THE VEHICLES FIRST PICTURE
         LocalDataManager ldm = new LocalDataManager(context);
         Photo photo;
         if (vehicle.getPhotoIds().size() > 0) {

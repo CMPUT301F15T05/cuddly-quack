@@ -16,6 +16,8 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
 /**
  * An abstract class that manages the saving, loading, searching, and retrieving of data, from both
  * the server, and local disk.
+ *
+ * @author Garry Bullock
  */
 public class DataManager {
     NetworkDataManager ndm;

@@ -33,7 +33,10 @@ import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
 /**
- * Created by Daniel on 2015-10-31.
+ *
+ * FeedAdapter is a class that allows us to list items in a feed on our main menu
+ *
+ * @author Daniel Haberstock on 2015-10-31.
  */
 
 // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
@@ -44,6 +47,17 @@ public class FeedAdapter extends ArrayAdapter<Vehicle> {
         super(context, 0, vehicle);
         this.context = context;
     }
+
+    /**
+     *
+     * getView is the central method which takes a vehicle and creates a thin view
+     * of said item for display in a feed.
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return View of vehicle
+     */
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -27,11 +27,10 @@ import ca.ualberta.cs.swapmyride.View.Tab3;
 
 /**
  * http://www.android4devs.com/2015/01/how-to-make-material-design-sliding-tabs.html
- * <p/>
+ *
  * Imported from AndroidForDevs
- * <p/>
  * Helps the sliding behaviour of the tabs to work properly.
- * <p/>
+ *
  * Created by Daniel on 2015-10-24.
  */
 
