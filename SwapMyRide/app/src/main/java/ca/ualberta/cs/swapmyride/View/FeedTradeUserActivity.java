@@ -20,6 +20,9 @@ import ca.ualberta.cs.swapmyride.Model.Trade;
 import ca.ualberta.cs.swapmyride.Model.Vehicle;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * When trading, this is the activity that displays all vehicles the current user/user who proposed the trade owns and can offer.
+ */
 public class FeedTradeUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -82,6 +85,10 @@ public class FeedTradeUserActivity extends AppCompatActivity {
     }
 
     //TODO edge case empty trade should still work / disallow it.
+
+    /**
+     * After finalizing a trade, user confirms which pops up this Dialog asking whether the user wants to trade or borrow the items they have selected.
+     */
     public void tradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(FeedTradeUserActivity.this);
         builder.setMessage("Are you SURE you want to proceed with this trade?");

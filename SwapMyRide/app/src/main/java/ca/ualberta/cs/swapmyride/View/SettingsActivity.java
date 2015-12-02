@@ -24,6 +24,9 @@ import android.widget.Switch;
 import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.R;
 
+/**
+ * View which allows user to change settings in the app. For instance, whether or not to download photos.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
