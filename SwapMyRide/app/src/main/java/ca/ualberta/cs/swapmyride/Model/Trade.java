@@ -172,6 +172,10 @@ public class Trade {
         this.uniqueID = uniqueID;
     }
 
+    /**
+     * Creates a new Trade object which is a copy of the Trade that copy() is called on, asides from a new unique ID
+     * @return Trade object identical to caller Trade object
+     */
     public Trade copy() {
         Trade newTrade = new Trade();
 
@@ -188,6 +192,9 @@ public class Trade {
         return newTrade;
     }
 
+    /**
+     * After choosing to complete a trade, the items being traded must exchange owners.
+     */
     public void swapBelongsTo() {
         for (Vehicle vehicle : ownerItems) {
             vehicle.setBelongsTo(borrower);

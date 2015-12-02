@@ -1,6 +1,8 @@
 package ca.ualberta.cs.swapmyride.Model;
 
 /*
+ * Used to hold an object retrieved from the Elastic Search server after a successful find.
+ *
  * Taken directly from
  * https://github.com/joshua2ua/AndroidElasticSearch/blob/master/app/src/main/java/ca/ualberta/ssrg/movies/es/data/SearchHit.java
  * Nov 26 2015

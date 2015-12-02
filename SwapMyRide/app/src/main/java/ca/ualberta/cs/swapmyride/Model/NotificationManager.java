@@ -27,7 +27,7 @@ import ca.ualberta.cs.swapmyride.Misc.UserSingleton;
 import ca.ualberta.cs.swapmyride.View.AddFriendProfileActivity;
 
 /**
- * Created by adrianomarini on 2015-11-04.
+ * Handles notifying users of new trades, new friends, and new borrows.
  */
 public class NotificationManager {
 
@@ -86,6 +86,10 @@ public class NotificationManager {
         tradesToBeNotified.clear();
     }
 
+    /**
+     * When logging in, called to show user who has followed them since their last login.
+     * @param username String of the username that will be displayed in the notification. ie, the user that has added a new friend, which is the current user.
+     */
     public void showFriendRequest(final Context context, final String username) {
         new AlertDialog.Builder(context)
                 .setTitle("New Friend!")
@@ -107,6 +111,11 @@ public class NotificationManager {
         friendRequests.clear();
     }
 
+
+    /**
+     * Called when a user loads the first tab of the application. This corresponds to them logging in usually.
+     * This will then check whether the user has trade and/or friend notifications to display.
+     */
     public void notifyMe(Context context) {
         if (tradesToBeNotified.size() > 0) {
             showTrade(context);

@@ -191,6 +191,10 @@ public class Geolocation {
         return address;
     }
 
+    /**
+     * @param myLocation String location to be looked up in Geocoder
+     * @return Address of current location. If error while retrieving location. sets address to error messages.
+     */
     public Address setSpecificLocation(Context context, Activity activity, String myLocation) {
         Address address = new Address(Locale.getDefault());
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());

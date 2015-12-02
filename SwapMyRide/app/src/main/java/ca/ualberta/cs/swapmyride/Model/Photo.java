@@ -58,9 +58,7 @@ public class Photo {
     }
 
     /**
-     * Builds a default photo
-     *
-     * @param context
+     * Builds a default photo*
      */
 
     public Photo(Context context) {
@@ -106,8 +104,6 @@ public class Photo {
 
     /**
      * Removes the current image and sets it to the default
-     *
-     * @param context
      */
     public void deleteImage(Context context) {
         Photo photo = new Photo(context);
